@@ -1,0 +1,168 @@
+body{padding:30px 20px;font-size:0.8em;font-family:Verdana;background:url('../images/login/back_page.gif') repeat-x 0 0 #cedeed;}
+#main_line
+{
+	position:relative;width:700px;margin:0 auto;
+}
+#main_title{height:86px;width:339px;overflow:hidden;text-indent:340px;white-space:nowrap;background:url('../images/logo_docebo.jpg') no-repeat 0 0 #ffffff;}
+#main_title a {height:86px;width:339px;float:left;}
+ul#main_menu{position:absolute;right:15px;bottom:5px;font-size:0.8em;}
+ul#main_menu li{display:inline;margin:0 0 0 10px;border-right:1px solid #3979a7;}
+ul#main_menu li.last{border:0px none;}
+ul#main_menu li a{margin:0 10px 0 0;color:#4e8bb7;font-weight:bold;text-decoration:none;}
+ul#main_menu li a.odd{color:#003466;}
+#main_container,#main_container_noh{position:relative;width:700px;height:300px;padding:8px 0;margin:0 auto;background:url('../images/login/background.jpg') no-repeat 0 0;}
+#main_container_noh{height:auto;background:url('../images/login/back.gif') repeat-x 0 0 #b4cde1;}
+#main_container_noh h1 {color:#ffffff;font-size:1.4em;font-weight:bold;margin:0.4em 1em;}
+
+#timeout h1 {color:#000000;font-size:1.4em;font-weight:bold;margin:0.4em 1em;}
+
+#main_container_noh  h1 {padding: 10px 0 12px 52px ; background-repeat: no-repeat;}
+#main_container_noh .std_block {margin: 12px;}
+#main_container_noh .home_block {margin: 12px;}
+#main_container_noh #coursecatalogue {margin-top: 0px;}
+#coursecatalogue {padding-top: 12px;}
+ul#language_selection{text-align:center;background:#cde0ee;padding:3px 3px 1px;}
+ul#language_selection li{display:inline;margin:0 0 0 10px;}
+ul#language_selection li a{text-decoration:none;}
+ul#language_selection li a img{border:1px solid #fff;}
+ul#language_selection li a.current img{border:1px solid #4e8bb7;}
+#login_form{position:relative;margin:65px 0 0 1px;color:#ffffff;width:50%;}
+#login_form h1{font-size:1.3em;font-weight:bold;padding:2px 0px 2px 75px;}
+#login_form div.keys{
+	background:url('../images/login/password.gif') no-repeat 0 0;
+	position:absolute;
+	width:71px;
+	height:71px;
+	top:-33px;
+	left:2px;
+	background-image: url(../images/login/password.gif);
+}
+#login_form form{text-align:right;padding:10px 10px 5px;line-height:2em;font-weight:bold;background:#a0c4de;}
+#login_form form div{}
+#login_form form p{display:inline;}
+#login_form form label{font-size:0.8em;letter-spacing:1px;margin:0 4px;}
+#login_form form input.textfield{width:170px;padding:2px;font-size:1em;background:#ffffff;border:1px solid #4180ac;}
+#login_form form input.button{padding:3px 8px;font-size:0.8em;color:#ffffff;background:#3979a7;letter-spacing:1px;border:0px none;}
+#link{padding:3px 5px;font-size:0.8em;position:absolute;bottom:5px;}
+#link a{color:#fff;margin:0 4px;}
+#service_msg{letter-spacing:1px;margin:8px 0 0 1px;padding:4px 0;width:50%;color:#ffffff;font-size:0.8em;background:#a0c4de;text-align:right;}
+#service_msg b{margin:0 4px;}
+#service_msg b.login_failed{color:#FF0000;}
+#service_msg b.logout{color:#285576;}
+#footer_container{position:relative;width:700px;height:auto !important;height:150px;min-height:150px;margin:0 auto;background:url('../images/login/back_footer.gif') repeat-x 0 0;border:1px solid #407ead;}
+#footer_container .box{position:relative;width:29%;margin:0 1%;float:left;}
+#footer_container .box_2{position:relative;width:60%;margin:0 1%;float:left;}
+#footer_container .box_full{position:relative;width:100%;margin:0 auto;}
+#footer_container h1{font-size:1.3em;font-weight:bold;color:#ffffff;}
+#footer_container h2{font-size:1.0em;font-weight:bold;color:#285576;}
+#footer_container h2 span{font-size:0.8em;font-weight:normal;}
+#footer_container p{margin:20px 0 0 0;font-size:0.8em;color:#666666;text-align:justify;}
+#footer_container p .intro_image{float:left;margin:4px 12px 12px 4px;}
+#footer_container p.news_text{padding:0 0 22px 0;}
+#footer_container a.news_read_all{position:absolute;font-size:0.8em;font-weight:bold;color:#285576;bottom:5px;right:5px;}
+.no_float{clear:both;}
+ul.blind_navigation {
+	position: absolute;
+	top: -990px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+/* XXX: register class ======================================*/
+	
+	.reg_note {
+		font-weight: bold;
+		margin: 1em 0 0;
+		padding: 0.20em;
+	}
+
+
+	.reg_form {
+		padding: 0.40em;
+	}
+
+	.reg_title_privacy {
+		margin: 24px auto 4px;
+		padding: 0.20em;
+		width: 70%;
+		color: #ffffff;;
+		font-weight: bold;
+	}
+
+	.privacy_box {
+		margin: 0 auto;
+		padding: 0.40em;
+		width: 90%;
+		max-height: 150px;
+		overflow: auto;
+		background: #ffffff;
+		border: 1px solid #336699;;
+	}
+
+	.reg_form_button {
+		text-align: right;
+		margin: 0 auto;
+		padding: 0.40em;
+	}
+
+		.reg_button {
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+	ul.reg_instruction {
+		color: #ffffff;
+		margin: 0.20em 0.20em 1em;
+		padding: 4px 12px 4px 24px;
+	}
+	
+	ul.reg_instruction li {
+		list-style-type: square;
+		margin: 2px;
+	}
+
+	.reg_err_data {
+		margin: 0.40em;
+		padding: 0.40em;
+		color: #ff0000;
+		font-weight: bold;
+		border: 1px solid #ff0000;
+	}
+
+	.reg_success {
+		margin: 0.40em;
+		padding: 0.40em;
+		color: #fffffff;;
+		border: 1px solid #ffffff;;
+	}
+
+
+.lostpwd_box {
+	margin: 1em;
+	padding: 0.60em 0.60em 0 0.60em;
+}
+
+.lostpwd_logo {
+	margin: 0 0.40em;
+	padding: 0;
+}
+
+.lostpwd_box span {font-weight:bold;}
+
+.form_right {
+	margin: 0.60em 0 0 0;
+	padding: 0.40em;
+	text-align: right;
+	color: #ffffff;
+	font-weight: bold;
+	background: #a0c4de;
+}
+
+	.form_right .textfield {
+		 margin : 0 14px;
+		 width: auto;
+		 padding : 0;
+		 border : 1px solid #4180ac;
+	}
+/* header bar */
+#rowHeaderLogin{margin:0; padding:0; border-bottom:5px solid #c30; padding-top:5px; padding-left:12px; padding-bottom:5px;font-size:1.5em;}

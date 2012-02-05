@@ -1,0 +1,22 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Migration_Add_usergroup extends	CI_Migration {
+	
+	function up() 
+	{	
+		//$this->migrations->verbose AND print "Adding user group...";
+		
+		$data[] = array('id' => '6', 'name' => 'Leave Administrator');
+		
+		foreach ( $data as $array)
+		{
+			$this->db->insert('user_group', $array);
+		}
+	}
+
+	function down() 
+	{
+		$this->db->where('id', 6);
+		$this->db->delete('user_group');
+	}
+}

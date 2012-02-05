@@ -1,0 +1,12 @@
+body {
+  color : #ffffff;
+  background : #000000;
+  font-family : "Times New Roman", Times, serif;
+  font-size : 12pt;
+}
+a {
+  visibility :hidden;
+}
+#list,#head,#oth,#links {
+  display : none;  
+}

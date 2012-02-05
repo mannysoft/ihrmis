@@ -1,0 +1,327 @@
+/*======================================================================*/
+/* DOCEBO CORE - Framework												*/
+/* ============================================							*/
+/*																		*/
+/* Copyright (c) 2004													*/
+/* http://www.docebo.com												*/
+/*																		*/
+/* This program is free software. You can redistribute it and/or modify	*/
+/* it under the terms of the GNU General Public License as published by	*/
+/* the Free Software Foundation; either version 2 of the License.		*/
+/*======================================================================*/
+
+.form_header {
+	margin: 8px 0 0;
+	padding: 2px 15px;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #0035ad;
+	border-bottom: 1px solid #0035ad;
+}
+
+form.std_form {
+	margin: 0;
+	padding: 0;
+}
+
+.form_elem {
+	margin: 0 0 20px;
+	padding: 15px;
+	color: #000000;
+	background: #E1EBF7;
+}
+.form_elem_button {
+	margin : 0;
+	padding: 5px 50px 15px 50px;
+	text-align : right;
+}
+
+.form_line_text {
+	clear: both;
+	margin: 0;
+	padding: 0;
+}
+
+.form_line_l {
+	clear: both;
+	margin: 16px 0 0;
+	padding: 0;
+	vertical-align: top;
+}
+	
+	.form_line_l p {
+		margin: 0 0 16px 0;
+		padding: 0;
+		width: 300px;
+		float: left;
+		vertical-align: top;
+	}
+	
+	label.floating,
+	label.label_bold,
+	label.label_normal,
+	label.label_padded,
+	.label_head,
+	.label_effect {
+		margin: 0;
+		padding: 0;
+		font-weight: bold;
+		vertical-align: top;
+	}
+	
+	label.label_normal { font-weight: normal; }
+	
+	div.label_effect {
+		margin: 0;
+		padding: 0;
+		font-weight: bold;
+		vertical-align: top;
+		width: 300px;
+		float: left;
+	}
+	
+	form .textfield_nowh,
+	form .textfield {
+		margin: 0;
+		padding: 0;
+		border: 1px solid #666666;
+	}
+
+	form .textfield { width: 230px; }
+	
+	form .dropdown_nowh,
+	form .dropdown {
+		margin : 0;
+		padding : 0;
+		border : 1px solid #666666;
+	}
+
+	form .dropdown { width: 230px; }
+	
+	form .textarea_wh_full,
+	form .textarea_nowh,
+	form .textarea {
+		margin: 0;
+		padding: 0;
+		border: 1px solid #666666;
+	}
+
+	form .textarea { width: 230px; }
+	form .textarea_wh_full { width: 98%; }
+	
+	form div.grouping_nowh,
+	form div.grouping {
+		float: left;
+		position: relative;
+		margin: 0;
+		padding: 0;
+		margin: 0 0 20px;
+	}
+	
+	div.grouping .form_line_l {
+		margin-top: 0px;
+	}
+
+	form .check {
+		margin: 0;
+		padding: 0;
+		vertical-align: middle;
+	}
+
+	form .radio {
+		margin: 0;
+		padding: 0;
+		vertical-align: middle;
+	}
+
+	option.option_with_image {
+		padding: 4px 2px 4px 26px;
+		background-position: top left;
+		background-repeat: no-repeat;
+	}
+
+	form .listbox_nowh,
+	form .listbox {
+		  margin : 0;
+		  padding : 0;
+		  border : 1px solid #666666;
+	}
+
+	form .listbox {
+		  width: 230px;
+	}
+
+.link_button {
+	margin: 0.5em 0.5em 0 0.5em;
+	padding: 0;
+	display: inline;
+}
+
+	.link_button a {
+		padding: 0.30em;
+		background: #dddddd;
+		border: 1px solid #666666;
+	}
+
+fieldset.fieldset_std {
+	clear: both;
+	margin: 1em 0;
+	padding: 0.3em 0.6em 0.6em;
+	border: 1px solid #336699;;
+}
+
+	fieldset.fieldset_std legend {
+		margin: 0 0.20em;
+		padding: 0;
+		font-weight: bold;
+	}
+
+	fieldset.fieldset_std .fieldset_content {
+		margin: 0;
+		padding: 0.40em 0 0 0;
+	}
+
+	.button,
+	.button_nowh,
+	.button_nopad {
+		margin : 0 0 0.4em 0.4em;
+		padding: 0 10px;
+		color: #000000;
+		font-size: 1em;
+		font-weight: bold;
+		
+		
+		width: auto;
+		overflow: visible;
+	}
+
+	.button_nowh {
+		margin : 0;
+	}
+
+	.button_nopad {
+		padding: 0;
+	}
+
+	.transparent_button {
+		margin: 0;
+		width: 22px;
+		height: 22px;
+		background: transparent;
+		overflow: hidden;
+		border: 0px none;
+		vertical-align: top;
+		font-weight: normal;
+		cursor: pointer;
+	}
+
+	.transparent_aslink_button {
+		margin: 0;
+		padding: 0 0.20em;
+		height: 22px;
+		background: transparent;
+		overflow: hidden;
+		border: 0px none;
+		vertical-align: top;
+		font-weight: normal;
+		cursor: pointer;
+		border-bottom: 1px solid #000000;
+	}
+
+	.transparent_add_button {
+		/* transparent add submit */
+		padding: 0px 1em 0px 25px;
+		margin: 0px;
+		height: 22px;
+		background-image: url('../images/standard/add.gif');
+		background-repeat: no-repeat;
+		background-position: left;
+		background-color: transparent;
+		border: 0px none;
+		color: #ff0000;
+		font-weight: normal;
+		cursor: pointer;
+	}
+
+	.transparent_del_button {
+		/* transparent del submit */
+		padding: 0px 1em 0px 25px;
+		margin: 0px;
+		height: 22px;
+		background-image: url('../images/standard/rem.gif');
+		background-repeat: no-repeat;
+		background-position: left;
+		background-color: transparent;
+		border: 0px none;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	.transparent_undo_button {
+		/* transparent undo submit */
+		padding: 0px 1em 0px 25px;
+		margin: 0px;
+		height: 22px;
+		background-image: url('../images/standard/undo.gif');
+		background-repeat: no-repeat;
+		background-position: left;
+		background-color: transparent;
+		border: 0px none;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	.trigger_calendar {
+		margin-left: 0.60em;
+		width: 22px;
+		height: 22px;
+		background: transparent;
+		overflow: hidden;
+		background-image: url( '../images/standard/calendar.gif' );
+		background-position: top;
+		background-repeat: no-repeat;
+		border: 0px none;
+		cursor: pointer;
+		vertical-align: top;
+	}
+
+	input.graphic_submit22,
+	.button_image,
+	.transparent_more_button,
+	.transparent_less_button {
+		/* transparent submit */
+		padding: 0px;
+		margin: 0px;
+		width: 22px;
+		height: 22px;
+		overflow: hidden;
+		border: 0px none;
+		background-repeat: no-repeat;
+		background-color: transparent;
+		vertical-align: middle;
+		cursor: pointer;
+	}
+
+fieldset.configuration {
+	margin: 0 0 1.50em 0;
+	padding: 0.40em;
+	border: 1px solid #336699;
+}
+
+	fieldset.configuration legend {
+		margin: 0 0 0 0;
+		padding: 0.20em 1.00em 0.20em 0.20em;
+		font-weight: bold;
+	}
+
+	fieldset.configuration .field_content {
+		margin: 0.80em 0 0 0;
+		padding: 0.40em 0.60em 0.60em 2.00em;
+	}
+
+form div.form_extended_file_field {
+	border-bottom: 1px dotted #9fbcf9;
+	margin-bottom: 1.5em;
+	background: url('../images/standard/attach_bar.gif') no-repeat top right;
+}
+

@@ -1,0 +1,1197 @@
+
+/*======================================================================*/
+/* DOCEBO CORE - Framework												*/
+/* ============================================							*/
+/*																		*/
+/* Copyright (c) 2004													*/
+/* http://www.docebo.com												*/
+/*																		*/
+/* This program is free software. You can redistribute it and/or modify	*/
+/* it under the terms of the GNU General Public License as published by	*/
+/* the Free Software Foundation; either version 2 of the License.		*/
+/*======================================================================*/
+
+
+/* XXX: xhtml tag style definition ================================*/
+html {
+	height: 100%;
+}
+
+body {
+	font-family: Verdana, Arial, Sans-Serif;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	color: #000000;
+	height: 100%;
+	background: #E1EBF7;
+	line-height: 1.2em;
+	position: relative;
+}
+
+a {
+	color: #336699;;
+}
+
+a:hover {
+}
+
+img {
+	vertical-align: middle;
+	border: 0px none;
+	margin: 0;
+	padding: 0;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+input, textarea, select {
+	font-size: 1.00em;
+}
+
+input.button{
+padding:3px 5px;font-size:0.8em;color:#ffffff;background:#3979a7;letter-spacing:1px;border:0px none;cursor:pointer;
+}
+/*this is for row actions*/
+input.pop_up{
+padding:1px 1px;font-size:0.8em;color:#ffffff;background:#3979a7;letter-spacing:1px;border:0px none;
+}
+
+
+input.dilaw {background-color: #FFFFCC;
+	color: #2D374D;
+}
+
+ul.blind_navigation {
+	position: absolute;
+	top: -990px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.block_hide {
+	display: none;
+}
+
+/*  XXX: Info box =================================================*/
+
+div.boxinfo_title {
+	margin: 0;
+	padding: 0.10em 0.40em;
+	font-weight: bold;
+	color: #ffffff;
+	background: #336699;;
+	border: 1px solid #666666;
+}
+
+div.boxinfo_container {
+	margin: 0;
+	padding: 0.40em;
+	border: 1px dashed #666666;
+	border-top: 0px none;
+	background: #dddddd;
+}
+
+div.box_evidence {
+	margin: 0.60em;
+	padding: 0.40em;
+	background: #dddddd;
+	border: 1px solid #336699;
+}
+
+/* XXX: common user container =====================================*/
+
+.back_container {
+	margin: 0.6em 1em;
+	padding: 0;
+	text-align: right;
+}
+
+	.back_container a {
+		font-weight: bold;
+	}
+
+.add_container_top {
+	margin: 0.50em;
+	padding: 0.20em;
+}
+
+	.add_container_top a {
+		color: #ff0000;
+		font-size: 1em;
+	}
+
+	.add_container_top a:hover {}
+
+.add_container {
+	margin: 0.50em;
+	padding: 0.20em;
+}
+
+	.add_container a {
+		font-size: 1em;
+		color: #ff0000;
+	}
+
+	.add_container a:hover {}
+
+.mod_container {
+	margin: 0.2em 1em;
+	padding: 0.1em 0;
+}
+
+	.mod_container a {
+		font-size: 1em;
+		padding: 0.1em 1em;
+		background: #E1EBF7;
+		border: 1px solid #336699;
+	}
+
+	.mod_container a:hover {
+		background: #E1EBF4;
+	}
+
+p.result_container {
+	margin: 0.20em 0.00em 1.00em 0.00em;
+	padding: 0.00em 0.00em;
+	text-align: center;
+}
+
+	p.result_container strong {
+		padding: 0.00em 2.00em;
+		font-weight: bold;
+		background: #ffff88;
+	}
+
+p.error_container {
+	margin: 1em 13% 1.4em;
+	padding: 0.00em 0.00em;
+	text-align: center;
+	background: #ffeaea;
+	border: 1px solid #bc0009;
+	width: 74%;
+}
+
+	p.error_container strong {
+		padding: 0.00em 2.00em;
+		font-weight: normal;
+		color: #000000;
+		font-size: 1em;
+	}
+
+	p.error_container img {
+		display: none;
+		vertical-align: middle;
+	}
+
+
+.confirm_container {
+	margin: 0;
+	padding: 0.20em 1.00em;
+	text-align: right;
+	border: 1px dashed #666666;
+	border-top: 0px none;
+}
+
+	.confirm_container a {
+		padding: 0 0.20em;
+	}
+
+	.confirm_container img {
+		padding: 0 0.20em;
+		vertical-align: middle;
+	}
+
+
+p.information_container {
+	margin: 8px auto;
+	padding: 2px 4px;
+	border: 1px solid #d9be09;
+	background: #fffdef url('../images/standard/messagebox_info.gif') no-repeat 6px 4px;
+	width: 80%;
+	height: auto !important;
+	height: 28px;
+	min-height: 28px;
+}
+
+	p.information_container strong {
+		display: block;
+		padding: 0.20em 32px;
+		font-weight: bold;
+		color: #000000;
+	}
+
+.del_container {
+	margin: 0;
+	padding: 0.20em 1.00em;
+	text-align: right;
+	border: 1px dashed #666666;
+	border-top: 0px none;
+}
+
+	.del_container a {
+		padding: 0 0.20em;
+	}
+
+	.del_container img {
+		padding: 0 0.20em;
+		vertical-align: middle;
+	}
+
+.instruction_container {
+	margin: 0.60em 0.20em;
+	padding: 0.20em;
+	background: #dddddd;;
+	border: 1px dashed #666666;
+}
+
+	.instruction_container span {
+		font-weight: bold;
+	}
+
+/* XXX: add link =============================================*/
+
+a.new_element_link {
+	display: block;
+	margin: 0;
+	padding: 0 0 0 26px;
+	vertical-align: middle;
+	background-image: url('../images/standard/add.gif');
+	background-repeat: no-repeat;
+	background-position: left center;
+
+	height: auto !important;
+	height: 22px;
+	min-height: 22px;
+}
+
+a.new_element_link_float {
+	float: left;
+	margin: 0;
+	padding: 0 0 0 26px;
+	vertical-align: middle;
+	background-image: url('../images/standard/add.gif');
+	background-repeat: no-repeat;
+	background-position: left center;
+	line-height: 1.3em;
+
+	height: auto !important;
+	height: 22px;
+	min-height: 22px;
+	color: #f20;
+}
+
+.new_elem_link {
+	margin: 0;
+	padding: 2px 0 0;
+	height: 22px;
+	background: url('../images/standard/add.gif') 0 0 no-repeat;
+}
+
+	.new_elem_link  a {
+		margin: 0;
+		padding: 2px 0 5px 26px;
+		color: #f20;
+	}
+
+/* XXX: Info box ==================================================*/
+
+.colum_container {
+	line-height: 1.3em;
+	margin: 0;
+	padding: 0;
+}
+
+	.colum_left {
+		float: left;
+	}
+
+	.colum_right {
+		float: right;
+	}
+	
+	div.colum_25 {
+		float: left;
+		margin: 0;
+		padding: 0;
+		width: 25%;
+	}
+	
+	div.colum_50 {
+		float: left;
+		margin: 0;
+		padding: 0;
+		width: 49%;
+	}
+	
+	div.colum_75 {
+		float: left;
+		margin: 0;
+		padding: 0;
+		width: 75% !important;		/* this is for IE 	*/
+		width: 74%;					/* 					*/
+	}
+
+/* XXX: block text ================================================*/
+
+.with_border, 
+.text_withborder {
+	padding: 0.20em;
+	border: 1px solid #336699;
+}
+
+.line_separator {
+	margin: 1em 0;
+	border-top: 1px solid #000000;
+	width: 60%;
+}
+
+em.shortcut {
+	color: #336699;
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* XXX: text transform classes ====================================*/
+
+.text_bold {
+	font-weight: bold;
+}
+
+.text_italic {
+	font-style: italic;
+}
+
+.align_left {
+	text-align: left;
+}
+
+.align_center {
+	text-align: center;
+}
+
+.align_right {
+	text-align: right;
+}
+
+.valing_middle {
+	vertical-align: middle;
+}
+
+.mandatory {
+	padding: 0 2px 0 0;
+	color: #ff0000;
+}
+
+.filter_evidence {
+	background: #ffff00;
+}
+
+.filter_evidence_2 {
+	background: #00ff22;
+}
+
+.handover {
+	cursor: pointer;
+}
+
+.font_red {
+	color: #ff0000;
+}
+
+.padding_04 {
+	padding: 0.40em;
+}
+
+/* XXX: utilities classes =========================================*/
+
+ul.unformatted_list {
+	margin: 0.40em 0;
+	padding: 0;
+	list-style: none;
+}
+
+	ul.unformatted_list li {
+		margin: 0;
+		padding: 0;
+	}
+
+ul.adjac_link {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+	ul.adjac_link li {
+		display: inline;
+		margin: 0.20em 0.30em 0.30em 0.30em;
+		padding: 0;
+	}
+
+ul.adjac_vert_link {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+	ul.adjac_vert_link li {
+		margin: 0.20em 0.30em 0.30em 0.30em;
+		padding: 0;
+	}
+
+.float_right {
+	float: right;
+}
+
+
+.float_left {
+	float: left;
+}
+
+.no_float {
+	clear: both;
+}
+
+/* XXX: Title =====================================================*/
+
+.title {
+	margin: 0 0.80em 0 0.80em;
+	font-size: 1.20em;
+	font-weight: bold;
+}
+
+.title_big {
+	margin: 0 1em 0 1.00em;
+	font-size: 1.40em;
+	font-weight: bold;
+}
+
+.textof {
+	margin: 0.40em 0.80em;
+}
+
+/*= XXX: Classes=for=tab ============================================*/
+
+.TabView_container {
+	margin: 8px  0 0 ;
+	padding: 0;
+}
+	.TabView_container form {
+		margin: 0;
+		padding: 0;
+	}
+
+	.TabView_container ul.TabView_tabspace {
+		margin: 0;
+		padding: 0 0 2px 23px;
+		list-style: none;
+	}
+
+		.TabView_container ul.TabView_tabspace li {
+			cursor: pointer;
+			display: inline;
+			margin: 0 12px 0 0 ;
+			padding: 4px 12px 4px;
+			color: #ffffff;
+			font-size: 12px;
+			line-height: 1.3em;
+			white-space: nowrap;
+			background: #C8CCD8;
+		}
+
+			.TabView_container ul.TabView_tabspace li img {
+				height: 22px;
+				width: 22px;
+				margin: 0;
+				padding: 0;
+				border-bottom: 0px none;
+				display:none;
+			}
+
+		.TabView_container ul.TabView_tabspace li.TabElemDefault_active {
+			background: #485581;			
+		}
+
+	.TabView_hotspot {
+		text-decoration: none;
+		padding: 0;
+		margin: 0;
+		cursor: pointer;
+		color: #ffffff;
+		
+		letter-spacing: 1px;
+		font-size: 1.2em;
+		font-weight: bold;
+		background: transparent;
+		border: 0px none;
+		
+		width: auto;
+		overflow: visible;
+	}
+
+	.TabView_container div.TabView_content {
+		clear: both;
+		margin: 0;
+		padding: 5px 10px;
+		background: #ffffff;
+		border: 1px solid #485581;
+	}
+
+	.TabView_container .std_block {
+		border: 0px none;
+	}
+/*
+.TabView_container {
+	margin: 0 8px 0 8px;
+	padding: 5px 0 0 0;
+}
+	.TabView_container form {
+		margin: 0;
+		padding: 0;
+	}
+
+	.TabView_container ul.TabView_tabspace {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+		.TabView_container ul.TabView_tabspace li {
+			float: left;
+			margin: 0 0 0 0.80em;
+			padding: 0 5px;
+			background: #E1EBF7;
+			border-top: 2px solid #000000;
+			border-left: 2px solid #000000;
+			border-right: 2px solid #000000;
+		}
+
+			.TabView_container ul.TabView_tabspace li img {
+				height: 22px;
+				width: 22px;
+				margin: 0;
+				padding: 0;
+				border-bottom: 0px none;
+			}
+
+		.TabView_container ul.TabView_tabspace li.TabElemDefault_active {
+			background: #ffffff;
+			margin-bottom: -3px;
+			border-bottom: 2px solid #ffffff;
+		}
+
+	.TabView_hotspot {
+		height: 22px;
+		padding: 0;
+		margin: 0;
+		font-weight: bold;
+		cursor: pointer;
+		background: transparent;
+		border: 0px none;
+		border-bottom: 1px solid #000000;
+		
+		width: auto;
+		overflow: visible;
+	}
+
+	.TabView_container div.TabView_content {
+		clear: both;
+		margin: 0;
+		padding: 5px 10px;
+		background: #ffffff;
+		border: 2px solid #000000;
+	}
+
+	.TabView_container .std_block {
+		border: 0px none;
+	}
+	*/
+	.std_block .std_block {
+		border: 0px none;
+	}
+
+/* XXX: configuration =============================================*/
+
+ul.configuration_regroup {
+	margin: 0.5em 0.8em 1em 0.8em;
+	padding: 0;
+	background: #ffffff;
+	border: 1px solid #000000;
+	list-style: none;
+}
+
+	ul.configuration_regroup li {
+		margin: 0;
+		padding: 0;
+	}
+
+		ul.configuration_regroup li img {
+			vertical-align: middle;
+		}
+
+	ul.configuration_regroup li a {
+		padding: 0.2em 0.2em;
+		display: block;
+	}
+
+		ul.configuration_regroup li a:hover {
+			background: #E1EBF7;
+		}
+
+	ul.configuration_regroup li.active a {
+		background: #E1EBF4;
+	}
+
+		ul.configuration_regroup li.active a:hover {
+			background: #E1EBF7;
+		}
+
+div.config_page {
+	margin: 0.80em;
+}
+
+div.conf_line_title {
+	margin: 0.8em 0 0.6em;
+	padding: 0.20em;
+	font-weight: bold;
+	background: #E1EBF7;
+	border-bottom: 1px solid #336699;;
+}
+
+div.conf_sms_panel {
+
+	border: 1px solid #E1EBF7;
+	margin-left: 0.4em;
+	margin-right: 0.4em;
+	margin-bottom: 0.8em;
+	padding: 0.4em;
+
+}
+
+/* XXX: login======================================================*/
+
+form#admin_box_login {
+	margin: 5em auto;
+	padding: 0;
+	width: 35%;
+}
+
+/* XXX: menu managment ============================================*/
+
+img.manmenu_symbol {
+	height: 22px;
+}
+
+img.image_preview {
+	padding: 3px;
+	border: 3px double #336699;;
+	background: #ffffff;
+}
+
+.admin_menu_perm_title {
+	margin: 0 0.40em;
+	padding: 0.40em;
+	font-weight: bold;
+	background: #336699;;
+	color: #ffffff;
+	border: 1px solid #000000;
+	border-bottom: 0px none;
+}
+
+.admin_menu_perm_modules {
+	margin: 0 0.40em 2em 0.40em;
+	border-bottom: 2px solid #000000;
+}
+
+.edit_menu_module {}
+
+	.edit_menu_module table.type-one {
+		border-top: 2px solid #000000;
+		border-bottom: 0px none;
+	}
+
+.max_user_subscribe_reach {
+	color: #ff0000;
+	font-weight: bold;
+}
+
+.directory_custom_columns {
+	width: auto;
+}
+	.directory_custom_columns .dropdown {
+		width: 150px;
+	}
+
+	.directory_custom_columns .directory_order_image {
+		vertical-align: bottom;
+	}
+	
+.directory_header_label {
+		vertical-align: middle;
+}
+
+.directory_order_image {
+		vertical-align: bottom;
+}
+
+/* XXX: register class ======================================*/
+	
+	.reg_note {
+		color: #336699;;
+		font-weight: bold;
+		margin: 1em 0 0;
+		padding: 0.20em;
+	}
+
+
+	.reg_form {
+		padding: 0.40em;
+		background: #E1EBF7;
+		border-top: 1px solid #336699;;
+		border-bottom: 1px solid #336699;;
+	}
+
+	.reg_title_privacy {
+		margin: 0 auto;
+		padding: 0.20em;
+		width: 70%;
+		color: #336699;;
+		font-weight: bold;
+	}
+
+	.privacy_box {
+		margin: 0 auto;
+		padding: 0.40em;
+		width: 70%;
+		max-height: 150px;
+		overflow: auto;
+		background: #ffffff;
+		border: 1px solid #336699;;
+	}
+
+	.reg_form_button {
+		text-align: right;
+		padding: 0.60em 0.40em 0.40em;
+	}
+
+		.reg_button {
+			color: #336699;;
+			cursor: pointer;
+			font-weight: bold;
+			background: transparent;
+			border: 1px solid #336699;;
+			border-color: #fff #336699;
+		}
+
+	ul.reg_instruction {
+		color: #666666;
+		margin: 0.20em 0.20em 1em;
+	}
+
+	.reg_err_data {
+		margin: 0.40em;
+		padding: 0.40em;
+		color: #ff0000;
+		font-weight: bold;
+		border: 1px solid #ff0000;
+	}
+
+	.reg_success {
+		margin: 0.40em;
+		padding: 0.40em;
+		color: #336699;;
+		border: 1px solid #336699;;
+	}
+
+	/* XXX: News*/
+
+	.news_short_td {
+		width: 35%;
+		color: #666666;
+	}
+
+/* XXX: report_box ============================================*/
+
+	.report_box {
+		margin: 0.4em;
+		background: #eeeeee;
+	}
+	
+	.report_box h2 {
+		font-size: 1.2em;
+		padding: 0.40em 0.40em;
+		margin: 0;
+		background: #E1EBF7;
+	}
+	
+	.report_box .std_form {
+	}
+		
+		.report_box .std_form .form_elem {
+			
+			background: transparent;
+		}
+	
+	.report_box fieldset {
+		margin: 0;
+		padding: 0;
+		border: 0px none;
+	}
+	
+	.report_box legend {
+		display: none;
+	}
+	
+	p.descr {
+		padding: 0em 0.4em;
+	}
+	
+	.report_box .form_elem_button {
+		background: transparent;
+	}
+	
+		.report_name {
+			font-weight: bold;
+			padding: 0.40em;
+			background: #E1EBF7;
+		}
+
+		.report_descr {
+			padding: 0.40em 0.60em;
+			border-top: 1px solid #000000;
+		}
+
+		.report_box span {
+			font-weight: bold;
+		}
+		
+	.report_alluser, 
+	.report_seluser {
+		margin: 0 0.5em;
+		padding: 0 0.4em;
+		font-size: 1.0em;
+		border: 1px solid #000000;
+		font-weight: bold;
+		cursor: pointer;
+		vertical-align: middle;
+		background: #E1EBF7;
+		
+		overflow: visible;
+		width: auto;
+	}
+		
+/* XXX: lost password ======================================*/
+
+.lostpwd_box {
+	margin: 1em;
+	padding: 0.60em 0.60em 0 0.60em;
+}
+
+.lostpwd_logo {
+	margin: 0 0.40em;
+	padding: 0;
+}
+
+.form_right {
+	margin: 0.60em 0 0 0;
+	padding: 0.40em;
+	text-align: right;
+	background: #E1EBF4;
+	border : 1px solid #666666;
+}
+
+	.form_right .textfield {
+		 margin : 0;
+		 padding : 0;
+		 border : 1px solid #666666;
+	}
+
+/* XXX: org chart ==========================================*/
+
+table.tree_org_table_field {
+	border: 0px none;
+}
+
+table.tree_org_table_field caption {
+	font-weight: bold;
+	padding: 0.40em;
+}
+
+	table.tree_org_table_field th {
+		text-align: left;
+		padding: 0.40em;
+	}
+
+	table.tree_org_table_field td {
+		padding: 0.40em;
+	}
+
+	table.tree_org_table_field tr.first_intest th {
+		border-top: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+	}
+
+
+	select.new_filter {
+		width: 20%;
+	}
+
+
+	h2#customize_filter {
+		margin-top: 0;
+		font-size: 1.00em;
+	}
+
+	.cancel_filter {
+
+		margin: 0 0 0 0.40em;
+	}
+
+	h2#directory_deluser {
+		margin-top: 0;
+	}
+
+	em.user_suspended {
+		font-weight: bold;
+	}
+
+/***********| Feed Reader |*********************************************/
+.feed_image {
+	max-width: 100px;
+}
+
+/* XXX: Progress bar ***************************************************/
+
+div.progress_bar {
+	margin: 0.2em;
+	padding: 0px;
+	background: #ffffff;
+	border: 1px solid #222222;
+	height: 15px;
+	overflow: hidden;
+	line-height: 1.3em;
+}
+
+div.bar_fill {
+	background: #3972a9;
+	border: 0px none;
+	border-top: 3px solid #7ba7da;
+	height: 14px;
+	margin: 0px;
+	z-index: 50;
+}
+
+div.bar_text {
+	float: left;
+	width: 100%;
+	text-align: center;
+	z-index: 100;
+	margin: 0px;
+	padding: 0px;
+	border: 0px none;
+}
+
+/***********************************************************/
+
+div.ajcom_comment {
+	margin: 10px 0 10px 0;
+	padding: 0;
+}
+
+	div.ajcom_comment h2 {
+		margin: 0;
+		padding: 2px 6px;
+		font-size: 0.8em;
+		font-weight: bold;
+		color:#fff;
+		background: #485581;
+		border: 1px solid #485581;
+		border-bottom: 0px none;
+		position: relative;
+	}
+	
+	div.ajcom_comment h2 img { margin: 0 4px 0 0; vertical-align: middle; border: 1px solid #fff; }
+		
+	div.ajcom_comment h2 span.ajcom_date {
+		margin: 0 0 0 4px;
+		padding: 0;
+		color: #fff;
+	}
+	
+	div.ajcom_comment p.ajcom_textof {
+		margin: 0;
+		padding: 2px 7px;
+		font-size: 0.8em;
+		background: #B4CDE1;
+	}
+	
+	#ajax_comment_add p {
+		text-align: center;
+	}
+	
+/* company -------------------------------------------------- */
+
+.company_idref_code {
+	margin: 2em 8px 8px;
+}
+
+	.company_idref_code a {
+		border: 1px solid #369;
+		padding: 3px 2px 3px 26px;
+		margin-left: 15px;
+		background: url('../images/standard/mod.gif') 0 50% no-repeat #abf;
+	}
+	
+	#mod_config_container {
+		padding: 0 4px;
+		margin-top: 3px;
+		background: #abf;
+		border: 1px solid #369;
+	}
+
+
+/* notice ---------------------------------------------------- */
+
+div.notice_display_default,
+div.notice_display_notice,
+div.notice_display_success,
+div.notice_display_failure,
+div.notice_display_error {
+	
+}
+
+
+div.notice_display {
+	margin: 10px auto;
+	padding: 0k;
+	z-index: 10000;
+	text-align: center;
+}
+
+	div.notice_display p {
+		position: relative;
+		width: 50%;
+		margin: 0 auto;
+		padding: 4px 32px 4px 2em;
+		font-weight: bold;
+		background: #ffff88;
+	}
+
+	div.notice_display p a.close_link {
+		position: absolute;
+		top: 3px;
+		right: 2px;
+		margin: 0px 6px;
+		width: 16px;
+		height: 16px;
+		color: #000;
+		letter-spacing: 10em;
+		text-indent: 22px;
+		text-decoration:none;
+		overflow: hidden;
+		background: url('../images/standard/close_tiny.gif') 0 0 no-repeat;
+	}
+
+
+.notice_ajax_loading {
+	position: absolute;
+	top: 0;
+	right: 50px;
+	color: #222;
+	font-size: 0.8em;
+	letter-spacing: 1px;
+	font-weight: bold;
+	font-family: Times, Arial;
+	padding: 5px 12px 5px 38px;
+	border: 1px solid #666;
+	background: url('../images/notice/loading.gif') 2px 50% no-repeat #f1f1f1;
+}
+
+/* XXX: certificate =============================================================*/
+
+h2.cert_title_action {
+	font-size: 1.2em;
+	margin: 0 1.4em 0em;
+	padding: 0;
+}
+
+	div.cert_spec_action {
+		margin: 0 0.4em 1.4em;
+		padding: 0.4em 1em;
+		border: 1px solid #ddd;
+	}
+
+
+.printable {
+}
+
+	.printable a {
+		margin: 0;
+		padding: 2px 0 2px 24px;
+		background: url('../images/standard/print.gif') 0 50% no-repeat;
+	}
+	
+.def_lang {
+	margin: 0px;
+	width: 350px;
+	border: 1px solid #369;
+	border-top: 0px none;
+	background: #fff;
+	position:absolute;
+	top: 0;
+	right: 10px;
+	font-size: 0.8em;
+	z-index: 9999;
+}
+
+.def_lang #link_container {
+	
+}
+
+.def_lang a {
+	padding: 2px 6px;
+	margin-bottom: 4px;
+	text-decoration: none;
+	color: #666;
+	background: url('../images/standard/goto.gif') 98% 50% no-repeat;
+	display: block;
+}
+
+
+.def_lang a#command {
+	padding: 2px 6px;
+	margin-bottom: 4px;
+	text-decoration: none;
+	color: #666;
+	background: none;
+	display: block;
+}
+
+.def_lang a:hover { 
+	background-color: #efefef;
+}
+
+/*this is for textbox highlight on focus*/
+input.ilaw{
+	border: 1px #3664A1 solid;
+	background: #e9f0f5;
+}
+/*footer*/
+#old-foot { font-size: 7.5pt; }
+
+/*this is for error and info*/
+.errorbox {
+	border: 1px dashed #cc0000;
+	font-weight: bold;
+	background-color: #FBEEEB;
+	text-align: center;
+	width: 90%;
+	padding: 10px;
+	color: #cc0000;
+	margin-left: auto; 
+	margin-right: auto;
+}
