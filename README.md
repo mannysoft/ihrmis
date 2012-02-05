@@ -1,4 +1,4 @@
-GitHub Markup
+Human Resource Management Information System.
 =============
 
 We use this library on GitHub when rendering your README or any other
