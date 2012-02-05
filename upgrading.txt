@@ -1,5 +1,0 @@
-http://philsturgeon.co.uk/news/2010/05/upgrading-to-codeigniter-2.0
-
-
-
-https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/wiki/Home
