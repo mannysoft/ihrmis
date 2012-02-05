@@ -8,7 +8,7 @@
  * @package		ATLMS
  * @author		Manolito Isles
  * @copyright	Copyright (c) 2008 - 2012, Charliesoft
- * @license		http://charliesoft.com/atlms/user_guide/license.html
+ * @license		GNU GPL
  * @link		http://charliesoft.com
  * @since		Version 1.0
  * @filesource
