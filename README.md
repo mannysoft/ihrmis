@@ -1,4 +1,4 @@
-Human Resource Management Information System.
+Integrated Human Resource Management Information System.
 =============
 
 Attendance monitoring, Leave administration, Personnel Management, Payroll, Recruitment, Performance Management and more..
