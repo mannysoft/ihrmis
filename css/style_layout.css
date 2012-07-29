@@ -1,0 +1,189 @@
+/*======================================================================*/
+/* DOCEBO CORE - Framework													*/
+/* ============================================							*/
+/*																			*/
+/* Copyright (c) 2004														*/
+/* http://www.docebo.com													*/
+/*																			*/
+/* This program is free software. You can redistribute it and/or modify	*/
+/* it under the terms of the GNU General Public License as published by	*/
+/* the Free Software Foundation; either version 2 of the License.		*/
+/*=======================================================================*/
+
+/* XXX: Layout classes ============================================*/
+div.layout_header {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	height: 100px;
+	background: url('../images/header_back.png') 0 0 repeat-x #fff;
+	border-bottom: 2px solid #003366;
+	position:fixed;
+	width:100%;
+}
+
+
+
+div.system_name {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-size:16px;
+	color:#FFFFFF;
+	font-style:oblique;
+	top: 10px;
+	left: 20px;
+	height: 40px;
+	border-bottom: 1px solid #003366;
+	background:#276A9C;
+	font-weight:bold;
+}
+
+.version
+{
+	font-size:9px;
+	color:#FF3;
+	font-weight:bold;
+}
+
+.integrated
+{
+	
+	color:#F90;
+	font-weight:bolder;
+}
+
+	div.layout_header .left_logo{
+		float: left;
+		margin: 0;
+		padding: 0;
+		border: 0px none;
+	}
+
+	div.layout_header .right_logo{
+		float: right;
+	}
+
+div.layout_menu_over {
+	margin: 0;
+	padding: 0;
+}
+
+div.layout_colum_container {
+	margin: 0;
+	padding: 0;
+
+}
+
+	div.layout_colum_left {
+		margin: 0;
+		padding: 0;
+	}
+
+	div.layout_colum_right {
+		margin: 0;
+		padding: 0;
+	}
+
+
+div.layout_footer {
+	clear: both;
+	margin: 0.80em 0 0 0;
+	padding: 1px 1px 3px 1px;
+	background: url('../images/footer_back.png') 0% 0% repeat-x;
+}
+	
+	div.layout_footer a {
+		color:#0000FF;
+	}
+	
+	.powered_by {
+		vertical-align: middle;
+		text-align: center;
+	}
+	
+	.powered_by a {
+		margin-middle: 8px;
+	}
+	
+	.powered_by img {
+		margin-middlet: 8px;
+	}
+	
+/* XXX: content area ==============================================*/
+
+.area_block {
+
+	margin: 1em 1em 0;
+	padding: 0.20em 0.20em 0.60em 0.20em;
+	background: #fff;
+	border: 1px solid #a4bce5;
+	border-bottom: 0px none;
+}
+
+	.area_block h1 {
+		margin: 0.40em 0.40em;
+		font-weight: bold;
+		font-size: 1.60em;
+		padding: 0.6em 4px 0.6em 56px;
+		background-repeat: no-repeat;
+		background-position: center left;
+	}
+
+	ul.navigation {
+		list-style: none;
+		padding: 0;
+		margin: -0.4em 0 0 0.2em;
+	}
+
+		ul.navigation li {
+			display: inline;
+			padding: 0;
+			margin: 0;
+		}
+
+			ul.navigation li a {
+				margin: 0 0.2em;
+			}
+
+.std_block {
+	margin: 0 1em 1em;
+	padding: 1em;
+	background: #fff;
+	border: 1px solid #a4bce5;
+	border-top: 0px none;
+}
+
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+.pagination {
+	padding: 3px;
+	margin: 3px;
+
+}
+
+.pagination a {
+	padding: 2px 5px 2px 5px;
+
+	border: 1px solid #666666;
+	text-decoration: none; /* no underline */
+	color: #4682B4;
+
+}
+.pagination a:hover,
+.pagination a:active {
+	border: 1px solid #FF0000;
+	color: #666;
+}
+.current {
+	padding: 2px 5px 2px 5px;
+	margin-left: 4px;
+	border: 1px solid #4682B4;
+	font-weight: bold;
+	background-color: #4682B4;
+	color: #FFF;
+}

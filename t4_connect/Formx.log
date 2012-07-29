@@ -1,0 +1,15 @@
+Line 15: Class zkemkeeperCtl.CZKEM of control CZKEM1 was not a loaded control class.
+Line 321: Class MSComctlLib.ListView of control lvX was not a loaded control class.
+Line 339: Class MSComctlLib.StatusBar of control StatusBar1 was not a loaded control class.
+Line 18: The property name OleObjectBlob in CZKEM1 is invalid.
+Line 327: The property name _ExtentX in lvX is invalid.
+Line 328: The property name _ExtentY in lvX is invalid.
+Line 329: The property name View in lvX is invalid.
+Line 330: The property name LabelWrap in lvX is invalid.
+Line 331: The property name HideSelection in lvX is invalid.
+Line 332: The property name _Version in lvX is invalid.
+Line 337: The property name NumItems in lvX is invalid.
+Line 346: The property name _ExtentX in StatusBar1 is invalid.
+Line 347: The property name _ExtentY in StatusBar1 is invalid.
+Line 348: The property name _Version in StatusBar1 is invalid.
+Line 355: The property name Panels in StatusBar1 is invalid.

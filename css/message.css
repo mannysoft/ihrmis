@@ -1,0 +1,35 @@
+.clean-red{
+border:solid 1px #F00;
+background:#FFC;
+color:#F00;
+padding:4px;
+text-align:left;
+font-weight:bold;
+}
+
+.clean-gray{
+border:solid 1px #DEDEDE;
+background:#EFEFEF;
+color:#222222;
+padding:4px;
+text-align:left;
+font-weight:bold;
+}
+
+.clean-yellow{
+border:solid 1px #DEDEDE;
+background:#FFC;
+color:#000000;
+padding:4px;
+text-align:left;
+font-weight:bold;
+}
+
+.clean-green{
+border:solid 1px #060;
+background:#AFE7C8;
+color:#060;
+padding:4px;
+text-align:left;
+font-weight:bold;
+}

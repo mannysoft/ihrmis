@@ -1,0 +1,43 @@
+ALTER TABLE `ats_schedule` ADD `hour_from` VARCHAR( 8 ) NOT NULL AFTER `date` ,
+ADD `hour_to` VARCHAR( 8 ) NOT NULL AFTER `hour_from` ; -- 01-14-2011
+
+ALTER TABLE `ats_schedule` CHANGE `shift_id` `shift_type` INT( 11 ) NOT NULL; -- 01-14-2011
+
+INSERT INTO `ats_settings` ( `id` , `name` , `setting_value` , `settings_group_id` )
+VALUES (
+NULL , 'allow_forty_hours', '1', ''
+); -- 01-15-2011
+
+CREATE TABLE `ats_employee_schedule` (
+`id` int( 11 ) NOT NULL AUTO_INCREMENT ,
+`employee_id` varchar( 20 ) NOT NULL ,
+`date` date NOT NULL ,
+`hour_from` varchar( 8 ) NOT NULL ,
+`hour_to` varchar( 8 ) NOT NULL ,
+`shift_type` int( 11 ) NOT NULL ,
+`office_id` int( 11 ) NOT NULL ,
+PRIMARY KEY ( `id` )
+) ENGINE = MYISAM AUTO_INCREMENT =2DEFAULT CHARSET = latin1
+
+
+ALTER TABLE `ats_leave_apps` CHANGE `details` `multiple` VARCHAR( 64 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'dates of leave'
+
+
+ALTER TABLE `ats_leave_apps` ADD `month5` VARCHAR( 2 ) NOT NULL AFTER `leave_type_id` ,
+ADD `year5` VARCHAR( 4 ) NOT NULL AFTER `month5` ,
+ADD `multiple5` VARCHAR( 64 ) NOT NULL AFTER `year5` ;
+
+INSERT INTO `ats_leave_type` ( `id` , `code` , `leave_name` , `deductable` , `deduct_to` , `allow_per_year` , `description` )
+VALUES (
+NULL , '', 'Special Leave for Women', '0', '0', '0', ''
+);
+
+CREATE TABLE IF NOT EXISTS `ats_usermeta` (
+  `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `meta_key` varchar(255) DEFAULT NULL,
+  `meta_value` longtext,
+  PRIMARY KEY (`umeta_id`),
+  KEY `user_id` (`user_id`),
+  KEY `meta_key` (`meta_key`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
