@@ -529,6 +529,15 @@ class Ajax extends MX_Controller {
 		}
 		else // Use for editing attendance ===============================================
 		{
+			$old = strip_tags($this->input->post('old'));
+			
+			// Use to trap changes in logs with late
+			if ($this->input->post('new') == $old)
+			{
+				return;
+			}
+			
+			
 			$new = $this->input->post('new');
 			
 			$new_value = str_replace(':','', $this->input->post('new'));
