@@ -2273,7 +2273,7 @@ CREATE TABLE IF NOT EXISTS `ats_users` (
 -- command split --
 
 INSERT INTO `ats_users` (`id`, `group_id`, `username`, `fname`, `mname`, `lname`, `office_id`, `user_type`, `password`, `stat`) VALUES
-(1, '{GROUP-ID}', '{USER-NAME}', '{FNAME}', '{MNAME}', '{LNAME}', 21, '1', '{PASSWORD}', 'Active');
+(1, '{GROUP-ID}', '{USER-NAME}', '{FNAME}', '{MNAME}', '{LNAME}', 1, '1', '{PASSWORD}', 'Active');
 
 -- command split --
 

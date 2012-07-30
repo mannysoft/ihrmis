@@ -18,7 +18,11 @@ Description here..
 Installation
 -----------
 
-   Description here..
+   Run http://localhost/installer to run the web-based installation script.
+
+Bugs & Feature Requests
+-----------
+[Issue tracker](https://github.com/mannysoft/ihrmis/issues)
 
 
 
