@@ -6,6 +6,8 @@ if ( ! function_exists('training_type'))
 {
 	function training_type()
 	{
+		$options = array();
+		
 		$t = new Training_type();
 		
 		$t->order_by('training_type');
@@ -27,6 +29,8 @@ if ( ! function_exists('training_course'))
 {
 	function training_course()
 	{
+		$options = array();
+		
 		$ci = &  get_instance();
 		
 		$t = new Training_course();
@@ -53,6 +57,8 @@ if ( ! function_exists('training_contact'))
 {
 	function training_contact()
 	{
+		$options = array();
+		
 		$ci = &  get_instance();
 		
 		$t = new Training_contact();
@@ -78,6 +84,8 @@ if ( ! function_exists('training_contact_type'))
 {
 	function training_contact_type()
 	{
+		$options = array();
+		
 		$ci = &  get_instance();
 		
 		$t = new training_contact_type();
@@ -103,6 +111,8 @@ if ( ! function_exists('training_event'))
 {
 	function training_event()
 	{
+		$options = array();
+		
 		$ci = &  get_instance();
 		
 		$t = new Training_event();
@@ -130,6 +140,8 @@ if ( ! function_exists('training_employees'))
 {
 	function training_employees()
 	{
+		$options = array();
+		
 		$ci = &  get_instance();
 		
 		$e = new Employee_m();
