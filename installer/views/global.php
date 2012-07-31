@@ -178,6 +178,8 @@
 			<?php endif; ?>
 
 			<?php echo $page_output . PHP_EOL; ?>
+            
+           *** Installation script from <a href="http://www.pyrocms.com">PyroCMS</a>
 
 	</div>
 
