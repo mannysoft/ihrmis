@@ -222,6 +222,8 @@ class Options extends CI_Model {
 	 */
 	function office_options($add_select = FALSE)
 	{
+		$options = array();
+		
 		$this->Office->fields = array('office_id', 'office_name');
 		
 		$offices = $this->Office->get_offices();
