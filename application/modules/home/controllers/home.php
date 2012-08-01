@@ -49,6 +49,8 @@ class Home extends MX_Controller
 		//$this->ci_alerts->set('error', 'hehe');
 		
 		//echo $this->ci_alerts->display();
+		
+		
     }  
 	
 	// --------------------------------------------------------------------
