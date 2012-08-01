@@ -714,8 +714,15 @@ class Attendance extends MX_Controller {
 						}
 						// PM Absent(no log out)
 						else if($this->am_login != '' && $this->am_logout != '' && $this->pm_login != '' && $this->pm_logout == '')
-						{
+						{							
 							$this->pm_logout= 'Undertime';
+							
+							// Check if saturday or sunday and shift_id == 1
+							// if true we dont need to put undertime to DTR
+							if ( $this->shift_type == 1 && ($this->sat_or_sun == 'Saturday' || $this->sat_or_sun == 'Sunday'))
+							{
+								$this->pm_logout = '';
+							}
 							
 							// If pm is leave
 							if ($pm_is_leave == TRUE)
