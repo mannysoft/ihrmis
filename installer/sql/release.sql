@@ -293,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `ats_dtr_temp` (
   `office_id` int(11) NOT NULL,
   `log_date` date NOT NULL,
   `logs` varchar(32) NOT NULL,
-  `log_type` tinyint(1) NOT NULL COMMENT '0-in ,1-out',
+  `log_type` tinyint(1) NULL COMMENT '0-in ,1-out',
   `date_extract` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_tbl_dtr_1` (`employee_id`)
@@ -1025,7 +1025,7 @@ CREATE TABLE IF NOT EXISTS `ats_migrations` (
 --
 
 INSERT INTO `ats_migrations` (`version`) VALUES
-(148);
+(150);
 
 -- command split --
 
@@ -2004,7 +2004,8 @@ INSERT INTO `ats_settings` (`id`, `name`, `setting_value`, `settings_group`, `de
 (97, 'leave_card_print_period_from', '', 'leave', 'Show data in leave card with range of date'),
 (98, 'leave_card_print_period_to', '', 'leave', 'Show data in leave card with range of date'),
 (99, 'enable_add_day_encode_tardy', 'no', 'leave', 'Show the day textbox in adding of tardiness.'),
-(100, 'enable_add_earn_menu', 'no', 'leave', 'Show add earn menu.');
+(100, 'enable_add_earn_menu', 'no', 'leave', 'Show add earn menu.'),
+(101, 'seconds_user_idle', '7200', 'users', 'Seconds before logout if user is idle.');
 
 -- command split --
 
