@@ -484,13 +484,14 @@ $('.click').click(function(){
 <form action="" method="post">
 <table width="100%" border="0" cellpadding="5" cellspacing="5" class="type-one">
   <tr class="type-one-header">
-    <th>Users</th>
-    <th>&nbsp;</th>
-    <th><input name="active_tabs" type="hidden" id="active_tabs" value="users" /></th>
+    <th width="30%">Users</th>
+    <th width="64%">&nbsp;</th>
+    <th width="6%"><input name="active_tabs" type="hidden" id="active_tabs" value="users" /></th>
   </tr>
   <tr>
-    <td><input name="op" type="hidden" id="op" value="1" /></td>
-    <td>&nbsp;</td>
+    <td align="right"><input name="op" type="hidden" id="op" value="1" />
+      Session Expiration in seconds(put 0 for no expiration):</td>
+    <td><input name="seconds_user_idle" type="text" id="seconds_user_idle" value="<?php echo $settings['seconds_user_idle'];?>" /></td>
     <td>&nbsp;</td>
   </tr>
   <tr>

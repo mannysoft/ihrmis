@@ -84,7 +84,21 @@ class Login extends MX_Controller
 				// Check if the user exists			
 				if ($u->exists())
 				{
-					//									
+					//
+				
+					// Lets check if the idle function is enable
+					// Seconds before logout if user is idle
+					$seconds_user_idle = $this->Settings->get_selected_field('seconds_user_idle');
+					
+					if ($seconds_user_idle != '')
+					{
+						unset($this->session->sess_expiration);
+						$this->session->sess_expiration = $seconds_user_idle;
+						
+						$this->load->library('session');
+					}
+					
+													
 					$session_data = array(
 									'username'	=> $u->username, 
 									'lname' 	=> $u->lname,
@@ -93,7 +107,7 @@ class Login extends MX_Controller
 									'user_type' => $u->user_type
 									);
 		
-					$this->session->set_userdata($session_data);
+					$this->session->set_userdata($session_data);					
 					
 					redirect('home/home_page', 'refresh');
 				}

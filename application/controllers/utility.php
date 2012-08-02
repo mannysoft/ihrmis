@@ -65,7 +65,8 @@ class Utility extends MX_Controller {
 		{
 			$error = array('error' => $this->upload->display_errors());
 			
-			print_r( $error);
+			//print_r( $error);
+			
 			
 			//$this->load->view('upload_form', $error);
 		}	
@@ -77,6 +78,8 @@ class Utility extends MX_Controller {
 			// =====================================================
 			if ($data['upload_data']['file_ext'] == '.txt')
 			{
+				set_time_limit(0);
+				
 				// Process text file
 				
 				//Read the logs file and put to db
@@ -109,9 +112,32 @@ class Utility extends MX_Controller {
 					$line = ltrim($line);
 					
 					//echo $line.'<br>';
-					list($employee_id, $date_time, $stat, $inout)  = explode("\t", $line);
 					
-					list($date, $time)  = explode(' ', $date_time);
+					if (count(explode("\t", $line)) != 6)
+					{
+						$employee_id = '';
+						$date_time = '' ;
+						$stat = '';
+						$inout = '';
+					}
+					else
+					{
+						list($employee_id, $date_time, $stat, $inout)  = explode("\t", $line);
+					}
+					
+					$employee_id  = sprintf("%03d",$employee_id); 
+					
+					
+					if (count(explode(" ", $date_time)) != 2)
+					{
+						$date = '';
+						$time = '';
+					}
+					else
+					{
+						list($date, $time)  = explode(' ', $date_time);
+					}
+					
 					
 					$time = date('H:i', strtotime($time));
 				

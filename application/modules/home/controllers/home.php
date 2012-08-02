@@ -50,9 +50,12 @@ class Home extends MX_Controller
 		
 		//echo $this->ci_alerts->display();
 		
-		$this->load->library('zkemkeeper');
+		//$this->load->library('zkemkeeper');
 		
 		//$this->zkemkeeper->connect();
+		
+		
+		//echo $this->session->sess_expiration;
 		
 		
     }  
@@ -93,6 +96,8 @@ class Home extends MX_Controller
 		//$this->mpdf->Output('mpdf.pdf','I'); 
 		
 		//print_r($dates);
+		
+		
 		
 		
 		$data = array();

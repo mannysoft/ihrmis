@@ -144,7 +144,7 @@ To:
 <div id="div4" style="display:none">
 <!--<div id="div4" style="display:block">-->
 <fieldset><legend>Manual Upload data (For administrator use only)</legend>
-<iframe name="upload_iframe" style="width: 400px; height: 100px; display: none;">
+<iframe name="upload_iframe" style="width: 400px; height: 100px; display: block;">
 </iframe>
 <table width="100%" border="0">
   <tr>
