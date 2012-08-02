@@ -50,6 +50,10 @@ class Home extends MX_Controller
 		
 		//echo $this->ci_alerts->display();
 		
+		$this->load->library('zkemkeeper');
+		
+		//$this->zkemkeeper->connect();
+		
 		
     }  
 	

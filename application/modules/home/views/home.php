@@ -178,13 +178,14 @@ function jsUpload(upload_field)
     // everything down to line
     // upload_field.form.submit();
 
-    var re_text = /\.txt|\.xml|\.zip/i;
+    //var re_text = /\.txt|\.xml|\.zip/i;
+	var re_text = /\.txt|\.dat|\.xml|\.zip/i;
     var filename = upload_field.value;
 
     /* Checking file type */
     if (filename.search(re_text) == -1)
     {
-        alert("File does not have text(txt, xml, zip) extension");
+        alert("File does not have text(txt, xml, zip, dat) extension");
         upload_field.form.reset();
         return false;
     }

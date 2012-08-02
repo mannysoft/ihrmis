@@ -46,15 +46,18 @@ class Utility extends MX_Controller {
 	
 	// --------------------------------------------------------------------
 	
-	function manual_upload_data()
+	function manual_upload_data($file_type = 'xml')
 	{
 		$config['upload_path'] 		= './logs/uploaded/';
-		$config['allowed_types'] 	= 'zip|jpg|png';
+		$config['allowed_types'] 	= 'zip|jpg|png|dat|txt';
 		$config['overwrite'] 		= TRUE;
 		$config['remove_spaces'] 	= TRUE;
 		//$config['max_size']	= '100';
 		//$config['max_width']  = '1024';
 		//$config['max_height']  = '768';
+		
+		//echo 'ok';
+			//exit;
 		
 		$this->load->library('upload', $config);
 	
@@ -62,11 +65,103 @@ class Utility extends MX_Controller {
 		{
 			$error = array('error' => $this->upload->display_errors());
 			
+			print_r( $error);
+			
 			//$this->load->view('upload_form', $error);
 		}	
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
+			
+			// Use for uploading text file
+			// =====================================================
+			if ($data['upload_data']['file_ext'] == '.txt')
+			{
+				// Process text file
+				
+				//Read the logs file and put to db
+				$TempTXT = 'logs/uploaded/'.$data['upload_data']['file_name'];
+				
+				//print_r($data);
+				if (!file_exists($TempTXT))
+				{
+					$TempTXT = 't4_connect/logs/temp.txt';
+				}
+				
+				if ($fd = fopen ($TempTXT, "r")) 
+				{
+					while (!feof ($fd)) 
+					{ 
+						$lines[] = fgets($fd, 4096); 
+					}
+				  fclose ($fd);
+				}
+				
+				sort($lines);
+				
+				$log_type 	 = '';
+				$ampm 	  	 = '';
+				$employee_id = '';
+				$log_date	 = '';
+				
+				foreach($lines as $line)
+				{
+					$line = ltrim($line);
+					
+					//echo $line.'<br>';
+					list($employee_id, $date_time, $stat, $inout)  = explode("\t", $line);
+					
+					list($date, $time)  = explode(' ', $date_time);
+					
+					$time = date('H:i', strtotime($time));
+				
+					//0 = in , 1 = out
+					
+					// get the office id of an employee
+					$office_id = $this->Employee->get_single_field('office_id', $employee_id);
+					
+					
+					
+					//INSERT to table
+					$info = array(
+								"employee_id" 	=> $employee_id,
+								"office_id"		=> $office_id,
+								"log_date" 		=> $date,
+								"logs" 			=> $time,
+								"log_type" 		=> $inout,
+								"date_extract" 	=> date('Y-m-d')
+								);
+				
+					$id = $this->Dtr_temp->insert_dtr_temp($info);
+					
+					
+					
+					//echo( $time).'<br>';
+					//echo $line.'<br>';
+				}
+				
+				//INSERT the logs to dtr table
+				$this->Stand_alone->get_logs();
+			
+				
+			}
+			
+			?>
+			<script>
+            alert("Manual uploading success!");
+			javascript:parent.change_parent_url('<?php echo base_url().'home/home_page'?>');
+            </script>
+			<?php
+			
+			exit;
+			// =====================================
+			
+			//print_r($data);
+			
+			//echo $data['file_ext'] ;
+			
+			//echo 'ok';
+			
 			
 			$file_name = $data['upload_data']['file_name'];
 			

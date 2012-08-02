@@ -30,7 +30,9 @@
  */
 class Zkemkeeper {
    
-    // ------------------------------------------------------------------------
+    private $_zkemkeeper = '';
+	
+	// ------------------------------------------------------------------------
    
     function __construct($params = array())
     {
@@ -68,31 +70,59 @@ class Zkemkeeper {
 	
 	function connect($ip = '192.168.0.201', $port = 4370)
 	{
-		$obj = new com("zkemkeeper.zkem.1") or die("Unable to create com object"); // This is the INIT METHOD
+		//try{
+		
+		//$this->_zkemkeeper = new COM("zkemkeeper.zkem.1") or die("Unable to create com object"); // This is the INIT METHOD
+		
+		// If no zkemkeeper installed
+		try 
+		{
+			$this->create_object();
+			
+		} catch (Exception $e) {
+			
+			//echo 'Error: ',  $e->getMessage(), "\n";
+			
+			echo 'Error: Cant create Zkemkeeper object. Please install the SDK';
+			
+			return;
+		}
+		
 		
 		com_load_typelib('zkemkeeper.zkem');
 			
 		$s='';
 		
-		$obj->GetSDKVersion($s);
+		$this->_zkemkeeper->GetSDKVersion($s);
 		
 		echo $s ;
 		
-		//$ip = "192.168.0.201";
-		//$port = 4370;
 		$u= true;
 		
-		$u = $obj->Connect_Net($ip,$port) ;
+		$u = $this->_zkemkeeper->Connect_Net($ip,$port) ;
 		
 		$error_code = 0;
 		
 		if ($u == false)
 		{
-			$obj->GetLastError($error_code);
+			$this->_zkemkeeper->GetLastError($error_code);
 			
 			var_dump($error_code);
 		}
 		
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	function get_logs()
+	{
+		
+			
+	}
+	
+	function create_object() {
+		
+		$this->_zkemkeeper = new COM("zkemkeeper.zkem.1") or new Exception(); // This is the INIT METHOD	
 	}
 	
 }
