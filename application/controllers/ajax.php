@@ -621,17 +621,17 @@ class Ajax extends MX_Controller {
 		$dtr->save();
 		
 			
-			$old = $this->input->post('old');
-			$new = $this->input->post('new');
-			
-			if ($this->input->post('old') == '')
-			{
-				$old = 'No Log';
-			}
-			if ($this->input->post('new') == '')
-			{
-				$new = 'No Log';
-			}
+		$old = $this->input->post('old');
+		$new = $this->input->post('new');
+		
+		if ($this->input->post('old') == '')
+		{
+			$old = 'No Log';
+		}
+		if ($this->input->post('new') == '')
+		{
+			$new = 'No Log';
+		}
 			
 		//use for use logs
 		$this->Logs->insert_logs($this->session->userdata('username'), 

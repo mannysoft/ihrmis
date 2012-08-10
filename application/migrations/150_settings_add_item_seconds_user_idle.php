@@ -11,7 +11,7 @@ class Migration_settings_add_item_seconds_user_idle extends CI_Migration {
 		
 		if ($lgu_code == '')
 		{
-			$seconds_user_idle = '0';
+			$seconds_user_idle = '72000';
 		}
 		
 		$data = array(

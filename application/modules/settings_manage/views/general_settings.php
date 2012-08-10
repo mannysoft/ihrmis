@@ -490,7 +490,7 @@ $('.click').click(function(){
   </tr>
   <tr>
     <td align="right"><input name="op" type="hidden" id="op" value="1" />
-      Session Expiration in seconds(put 0 for no expiration):</td>
+      Session Expiration in seconds:</td>
     <td><input name="seconds_user_idle" type="text" id="seconds_user_idle" value="<?php echo $settings['seconds_user_idle'];?>" /></td>
     <td>&nbsp;</td>
   </tr>

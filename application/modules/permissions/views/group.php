@@ -25,7 +25,7 @@
       </tr>
     <?php $p = new Permission_m();?>
 	<?php foreach($permissions as $module_key => $row):?>
-    <? $bg = $this->Helps->set_line_colors();?>
+    <?php $bg = $this->Helps->set_line_colors();?>
     <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
     onmouseout ="this.bgColor = '<?php echo $bg;?>';">
       <td valign="top">

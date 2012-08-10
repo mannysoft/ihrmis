@@ -315,17 +315,6 @@ class Attendance extends MX_Controller {
 			$this->period_from 	= $this->input->post('period_from');
 			$this->period_to   	= $this->input->post('period_to');
 			
-			
-			$start_date = '1';
-			
-			// If the $this->period_from is not 1
-			if ($this->period_from != '1')
-			{
-				$start_date = $this->input->post('period_from'); // Start of viewing DTR
-				
-				$this->period_from = '1'; // We will still use the first day
-			}
-			
 			// If the Multiple employee checkbox is checked
 			if($this->input->post('multi_employee'))
 			{
@@ -507,16 +496,11 @@ class Attendance extends MX_Controller {
 					$this->leave_type_id 	= $row['leave_type_id'];
 					$this->log_date 		= $row['log_date'];
 					$this->manual_log_id 	= $row['manual_log_id'];
-					
-					
 						
 					// Split the logged_date
 					// As of PHP 5.3.0 the regex extension is deprecated, 
 					// calling this function will issue an E_DEPRECATED notice.
 					list($log_year, $log_month, $log_day) = explode('-', $this->log_date);
-					
-					
-					
 					
 					// Check if the day is Sat or Sun
 					$this->sat_or_sun = $this->Helps->is_sat_sun($log_month, $log_day, $log_year);
@@ -526,23 +510,7 @@ class Attendance extends MX_Controller {
 					
 					$allow_forty_hours = $this->Settings->get_selected_field('allow_forty_hours');
 					
-					// If the $this->period_from is not 1 something like
-					// June 16-30 2012
-					if ($start_date != '1')
-					{
-						if ($log_day < $start_date)
-						{
-							$this->am_login 		= '';
-							$this->am_logout		= '';
-							$this->pm_login 		= '';
-							$this->pm_logout		= '';
-							$this->ot_login 		= '';
-							$this->ot_logout		= '';
-							$this->sat_or_sun 		= '';
-							$this->is_holiday 		= FALSE;
-
-						}
-					}
+					
 					// If regular hours (8-5)
 					// We can also use shift_type 3 here because it has
 					// 4 logs
@@ -634,7 +602,6 @@ class Attendance extends MX_Controller {
 							{
 								$this->am_login = strtoupper($this->Holiday->holiday_name($this->log_date));
 							}
-							
 						//}
 						
 						

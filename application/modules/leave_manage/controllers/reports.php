@@ -713,9 +713,12 @@ class Reports extends MX_Controller
 		
 		
 		$first_day = $name['first_day_of_service'];
-		
-		
+	
 		list($year, $month, $day) = explode('-', $name['first_day_of_service']);
+		
+		
+		//var_dump($name['first_day_of_service']);
+		//exit;
 		
 		$entrance = $year.'-'.$month.'-'.$day;
 		

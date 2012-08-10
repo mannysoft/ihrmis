@@ -84,8 +84,6 @@ class Login extends MX_Controller
 				// Check if the user exists			
 				if ($u->exists())
 				{
-					//
-				
 					// Lets check if the idle function is enable
 					// Seconds before logout if user is idle
 					$seconds_user_idle = $this->Settings->get_selected_field('seconds_user_idle');
