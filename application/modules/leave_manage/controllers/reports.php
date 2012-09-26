@@ -2246,6 +2246,19 @@ class Reports extends MX_Controller
 		$pdf->Cell(73, 4, $office['position'], '0', 0, 'C', FALSE);
 		$pdf->SetFont('Arial','B',12);
 		
+		
+		
+		$statement_certified = $this->Settings->get_selected_field('statement_certified');
+		$statement_certified_position = $this->Settings->get_selected_field('statement_certified_position');
+		
+		$pdf->SetXY(26,195);
+		$pdf->SetFillColor(255, 255, 255); 
+		
+		$pdf->Cell(65,5,strtoupper($statement_certified),'',0,'C',1);
+		$pdf->SetXY(26,199);
+		$pdf->SetFont('Arial','I',11);
+		$pdf->Cell(65,5,$statement_certified_position,'',0,'C',1);
+		
 		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
 		
 		header('Pragma: public');

@@ -23,7 +23,7 @@ if(!$this->session->userdata('username'))
 <script type="text/javascript" src="<?php echo base_url();?>js/calendar-setup.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/row_highlight.js"></script>
 <script type="text/JavaScript" src="<?php echo base_url();?>js/function.js"></script>
-<script type="text/JavaScript" src="<?php echo base_url();?>js/jquery-1.7.2.js"></script>
+<script type="text/JavaScript" src="<?php echo base_url();?>js/jquery-1.8.1.js"></script>
 <script type="text/JavaScript" src="<?php echo base_url();?>js/jquery.labelify.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/lib.js"></script>
 
