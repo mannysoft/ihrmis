@@ -1,0 +1,6 @@
+1. ten tardiness ------ 
+2. pictures ------- 
+3. change of employee id
+4. ob lock if not file after a week grace period ----
+5. dont accept leave with out balance(forced leave, spl)----
+6. leave card printing(with period) ----

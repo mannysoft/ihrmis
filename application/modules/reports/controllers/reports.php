@@ -383,9 +383,14 @@ class Reports extends MX_Controller
 			$lgu_place = 'Boac, Marinduque';
 			$first_x = 70;
 			
+			
+
 			$hrm_head 					= ' ERMA E. REYES              ';	
 			$hrm_head_position 			= ' Chief Administrative Officer      ';			   
 			$hrm_head_position_other 	=  '             ';	
+
+			$hrm_head  			= $this->Settings->get_selected_field( 'statement_certified' );
+			$hrm_head_position 	= $this->Settings->get_selected_field( 'statement_certified_position' );
 
 		}
 		
@@ -479,6 +484,10 @@ class Reports extends MX_Controller
 												  $office_id
 												  );
 		$tardis = $this->Tardiness->employees;
+
+//print_r($tardis);
+//exit;
+
 		$count_employee = $this->Helps->convert_number(count($tardis));
 		
 		$pdf->Ln(6);

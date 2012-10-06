@@ -544,6 +544,29 @@ class Ajax extends MX_Controller {
 			
 			if ($new_value == 'OB' or $new_value == 'ob')
 			{
+				// Check if allow to accept late ob
+				$accept_late_ob = $this->Settings->get_selected_field('accept_late_ob'); 
+
+				if ($accept_late_ob == 'no')
+				{
+					
+					$dtr_details = $this->Dtr->get_dtr_details($this->input->post('rowid'));
+
+					$now = time(); // or your date as well
+     				$your_date = strtotime($dtr_details['log_date']);
+				     $datediff = $now - $your_date;
+				     $datediff = floor($datediff/(60*60*24));
+
+				     if ($datediff >= 7) {
+				     	echo 'Late filing of Official Business is not allowed!';
+				     	exit;
+				     }
+
+				}
+
+				//echo $accept_late_ob;
+				
+
 				$new = 'Official Business';
 			}
 			if ($new_value == 'Leave' or $new_value == 'leave' or $new_value == 'l')
@@ -678,6 +701,28 @@ class Ajax extends MX_Controller {
 		{
 			$employee_id = str_replace('_','-',$employee_id);
 		}
+
+
+		// if SPL check if have balance
+		if($leave_type_id == 3 and $employee_id != '')
+		{
+			if ($this->Leave_card->get_mc_balance($employee_id, $year) <= 0)
+			{
+				echo 'You have no SPL balance left.';
+				exit;
+			}
+		}
+		if($leave_type_id == 7 and $employee_id != '')
+		{
+			if ($this->Leave_card->get_forced_balance($employee_id, $year) <= 0)
+			{
+				echo 'You have no Forced leave balance left.';
+				exit;
+			}
+		}
+
+		
+		
 		
 		// If $days not equal to zero meaning this one is
 		// monetize, replace dash with underscore

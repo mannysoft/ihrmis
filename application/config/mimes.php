@@ -51,7 +51,7 @@ $mimes = array(	'hqx'	=>	'application/mac-binhex40',
 				'tgz'	=>	array('application/x-tar', 'application/x-gzip-compressed'),
 				'xhtml'	=>	'application/xhtml+xml',
 				'xht'	=>	'application/xhtml+xml',
-				'zip'	=>  array('application/x-zip', 'application/zip', 'application/x-zip-compressed'),
+				'zip'	=>  array('application/x-zip', 'application/zip', 'application/x-zip-compressed', 'application/octet-stream', 'application/x-compress', 'application/x-compressed', 'multipart/x-zip'),// updated ko manny 10.4.2012 2.09 pm
 				'mid'	=>	'audio/midi',
 				'midi'	=>	'audio/midi',
 				'mpga'	=>	'audio/mpeg',

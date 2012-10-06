@@ -34,8 +34,9 @@ class Logs extends CI_Model {
 	
 	// --------------------------------------------------------------------
 	
-	var $num_rows = 0;
-	var $office_id = '';
+	public $num_rows = 0;
+	public $office_id = '';
+	public $username = '';
 	
 	// --------------------------------------------------------------------
 	
@@ -112,6 +113,11 @@ class Logs extends CI_Model {
 			$this->db->where('office_id', $office_id);
 		}
 		
+		if ($this->username != '')
+		{
+			$this->db->where('username', $this->username);
+		}
+		
 		$this->db->order_by('date', 'DESC');
 		
 		//if ( $per_page != '' and $off_set != '' )
@@ -157,7 +163,7 @@ class Logs extends CI_Model {
                'command' 				=> $command,
                'details'				=> $details,
                'employee_id_affected' 	=> $employee_id_affected,
-               'date' 					=> date('Y-m-d h:i')
+               //'date' 					=> date('Y-m-d h:i')
             );
 
 		$this->db->insert('logs', $data);

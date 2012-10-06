@@ -83,6 +83,8 @@ $allow_45mins2 = ($settings['allow_45mins'] == 'no') ? $checked : '';
 $show_incomplete_logs1 = ($settings['show_incomplete_logs'] == 'yes') ? $checked : '';
 $show_incomplete_logs2 = ($settings['show_incomplete_logs'] == 'no') ? $checked : '';
 
+$accept_late_ob1 = ($settings['accept_late_ob'] == 'yes') ? $checked : '';
+$accept_late_ob2 = ($settings['accept_late_ob'] == 'no') ? $checked : '';
 
 
 
@@ -654,6 +656,14 @@ $('.click').click(function(){
     <label>Yes</label>
     <input name="show_incomplete_logs" type="radio" id="radio" value="no" <?php echo $show_incomplete_logs2;?> />
     <label>No</label></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Accept Late OB:</td>
+    <td><input name="accept_late_ob" type="radio" value="yes" id="radiobutton" <?php echo $accept_late_ob1;?>/>
+        <label>Yes</label>
+        <input name="accept_late_ob" type="radio" id="radio" value="no" <?php echo $accept_late_ob2;?> />
+        <label>No</label></td>
     <td>&nbsp;</td>
   </tr>
   <tr>

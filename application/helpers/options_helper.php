@@ -87,3 +87,25 @@ function schedule_options( $add_blank = FALSE )
 	return $options;
 	
 }
+
+function user_options( $add_blank = FALSE )
+{
+	$u = new User_m();
+		
+	$rows = $u->order_by('username')->get();
+	
+	$minute = 0; 
+	
+	if ( $add_blank == TRUE)
+	{
+		$options[''] = '';
+	}
+	
+	foreach ($rows as $row)
+	{
+		$options[$row->id] = $row->username;	
+	}
+	
+	return $options;
+	
+}

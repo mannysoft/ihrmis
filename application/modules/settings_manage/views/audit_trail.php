@@ -1,20 +1,32 @@
 <form method="post" action="" id="myform">
-<table width="100%" border="0">
+<table width="100%" border="0" cellpadding="4" cellspacing="4">
   <tr>
-    <td><?php 
+    <td width="13%" align="right">Office:</td>
+    <td width="78%"><?php 
 		$js = 'id = "office_id" ';
 		echo form_dropdown('office_id', $options, $selected, $js); 
-		?>&nbsp;</td>
+		?></td>
+    <td width="9%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Username:	</td>
+    <td><?php 
+	$this->load->helper('options');
+	echo form_dropdown('username', user_options());?></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Module:</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
+    <td align="right">Date:</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>

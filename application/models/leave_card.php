@@ -242,7 +242,7 @@ class Leave_card extends CI_Model {
 	 * @param varchar $employee_id
 	 * @return array
 	 */
-	function get_card($employee_id)
+	function get_card($employee_id, $record_limit_date = '')
 	{
 		$rows = array();
 		
@@ -250,6 +250,13 @@ class Leave_card extends CI_Model {
 		
 		$this->db->where('employee_id', $employee_id);
 		$this->db->where('enabled', 1);
+
+		// Added 10.4.2012 11.22am
+		if ($record_limit_date != '') 
+		{
+			$this->db->where('date <=', $record_limit_date);
+		}
+
 		//$this->db->order_by('date, period'); old order by
 		$this->db->order_by('date, period DESC'); // change 5.3.2012
 		$q = $this->db->get('leave_card');
@@ -449,9 +456,9 @@ class Leave_card extends CI_Model {
 	 * @param varchar $employee_id
 	 * @return array
 	 */
-	function get_total_leave_credits($employee_id)
+	function get_total_leave_credits($employee_id, $record_limit_date = '')
 	{
-		$cards = $this->get_card($employee_id);
+		$cards = $this->get_card($employee_id, $record_limit_date);
 		
 		// --------------------------------------------------------------------
 		$this->load->helper('text');

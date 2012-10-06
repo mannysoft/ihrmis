@@ -2616,8 +2616,6 @@ class Attendance extends MX_Controller {
 																		 );
 		
 				$data['offices'] 	=  $this->Tardiness->offices_tardy;
-
-				//print_r($data['offices']);
 			}
 			
 			if ($data['month1'] == '07' && $data['month2'] == '12')
@@ -2709,10 +2707,6 @@ class Attendance extends MX_Controller {
 			
 			if($offices)
 			{
-				
-				//echo 'cool';
-				//exit;
-
 				// Create the report
 				modules::run("reports/ten_tardiness", $sem);
 													
@@ -2736,7 +2730,7 @@ class Attendance extends MX_Controller {
 			<script>openBrWindow('<?php echo base_url()."dtr/reports/all_office_tardiness.pdf";?>','','scrollbars=yes,width=800,height=700')</script>
 			<?php
 		}
-			
+				
 		$data['main_content'] = 'view_ten_tardiness';
 		
 		$this->load->view('includes/template', $data);

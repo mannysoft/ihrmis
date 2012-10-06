@@ -783,6 +783,11 @@ class Settings_Manage extends MX_Controller {
 			$data['selected'] 	= $this->input->post('office_id');
 			$office_id 			= $this->input->post('office_id');
 			
+			if ($this->input->post('username'))
+			{
+				$username = '';
+			}
+			
 		}
 		
 		$this->load->library('pagination');

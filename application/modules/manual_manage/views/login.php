@@ -623,7 +623,7 @@ $('#select_times').click(function(){
 $('#select_all_ob').click(function(){
 
 	
-	if ($('#select_all_ob').attr("checked") == true)
+	if ($('#select_all_ob').attr("checked") == "checked")
 	{
 		$("#hour1").val( "o" ).attr('selected', true);
 		$("#minute1").val( "b" ).attr('selected', true);

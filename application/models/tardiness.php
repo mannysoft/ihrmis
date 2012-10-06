@@ -178,12 +178,23 @@ class Tardiness extends CI_Model {
 	 */
 	function count_late($employee_id, $month, $year, $type1, $type2)
 	{
+		
+		$minutes_tardy 	= $this->Settings->get_selected_field('minutes_tardy');
+
 		$this->db->select('SUM(seconds) as number_seconds, COUNT(log_type) as tardi_count');
 		$this->db->where('employee_id', $employee_id);
 		$this->db->where('YEAR(date)', $year);
 		$this->db->where('MONTH(date)', $month);
 		$this->db->where("(log_type = '$type1' OR log_type = '$type2')");
 		
+		
+
+		if($minutes_tardy != 1)
+		{
+
+			$this->db->where('seconds >=', $minutes_tardy * 60);
+		}
+
 		$q = $this->db->get('tardiness');
 		//echo $this->db->last_query().'aaa<br>';
 		if ($q->num_rows() > 0)
@@ -234,7 +245,7 @@ class Tardiness extends CI_Model {
 			}
 			else
 			{
-				$this->db->where('seconds >=', 960);
+				$this->db->where('seconds >=', $minutes_tardy * 60);
 			}
 		}
 		
@@ -393,6 +404,7 @@ class Tardiness extends CI_Model {
 		}
 		
 		sort($months);
+
 		
 		$ten_tardy_ids 	= array();
 		
@@ -409,7 +421,9 @@ class Tardiness extends CI_Model {
 			// Use for quezon(15 minutes interval)
 			if($minutes_tardy != 1)
 			{
-				$this->db->where('seconds >=', 960);
+				//echo $minutes_tardy.'<br>';
+
+				$this->db->where('seconds >=', $minutes_tardy * 60);
 			}
 			
 			if($office_id != '')
@@ -444,6 +458,8 @@ class Tardiness extends CI_Model {
 			{
 				foreach ($q->result_array() as $row)
 				{
+					//echo $row['office_id'];
+
 					// Check if the employee_id commit 10 times tardy for about two times 
 					// in sem.
 					if (in_array($row['employee_id'], $ten_tardy_ids))
@@ -454,6 +470,8 @@ class Tardiness extends CI_Model {
 						if (!in_array($row['employee_id'], $employee_ids))
 						{
 							$office_id2 = $this->Employee->get_single_field('office_id', $row['employee_id']);
+
+
 							
 							if ($office_id2 != '')
 							{
@@ -542,12 +560,26 @@ class Tardiness extends CI_Model {
 			
 			
 		}
+
+		//print_r($offices);
 		
 		$offices 	= array_unique($offices);
 		
 		$this->offices_tardy = $offices;
+
+		//$employees = array_pop($employees);
+
+		
 		
 		$employees 	= array_unique($employees);
+
+		// solution for marinduque - will definitely remove this 
+		if(($key = array_search('683', $employees)) !== false) {
+    		unset($employees[$key]);
+		}
+
+
+		//print_r($employees);
 						
 		$this->employees = $employees;
 		
@@ -594,7 +626,7 @@ class Tardiness extends CI_Model {
 		// Use for quezon(15 minutes interval)
 		if($minutes_tardy != 1)
 		{
-			$this->db->where('seconds >=', 960);
+			$this->db->where('seconds >=', $minutes_tardy * 60);
 		}	  
 		
 		$q = $this->db->get('tardiness');
@@ -639,7 +671,7 @@ class Tardiness extends CI_Model {
 		// Use for quezon(15 minutes interval)
 		if($minutes_tardy != 1)
 		{
-			$this->db->where('seconds >=', 960);
+			$this->db->where('seconds >=', $minutes_tardy * 60);
 		}	 
 		
 		$q = $this->db->get('tardiness');

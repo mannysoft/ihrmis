@@ -90,7 +90,7 @@ class Leave_Manage extends MX_Controller {
 	
 	// --------------------------------------------------------------------
 	
-	function leave_card($id)
+	function leave_card($id, $print_from = '', $print_to = '')
 	{
 		$data['msg'] = '';
 	
@@ -398,6 +398,8 @@ class Leave_Manage extends MX_Controller {
 		}// end if ($auto_deduct_forced_leave == 'yes')
 		// end additional features
 		
+
+
 		
 		$data['cards'] = $this->Leave_card->get_card($id);
 		
@@ -430,7 +432,7 @@ class Leave_Manage extends MX_Controller {
 		$data['options'] 			= $this->options->office_options();
 		$data['selected'] 			= $this->session->userdata('office_id');
 		
-		//If office id is selected
+		// If office id is selected
 		if ($this->input->post('office_id') != 0)
 		{
 			$office_id = $this->input->post('office_id'); 

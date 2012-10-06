@@ -359,6 +359,20 @@ class Reports extends MX_Controller
 		
 		$pdf->MultiCell(0,6,"                ISSUED this ".date('jS')." day of ".date('F, Y')." upon request of ".
 		                    $name['salut'].' '.ucwords(strtolower(utf8_decode($name['lname'])))." for whatever legal purpose it may serve." ,0,'L',false);
+
+		$pdf->Ln(15);
+		$pdf->SetX(110);
+
+		$statement_prepared 			= $this->Settings->get_selected_field( 'statement_prepared' );
+		$statement_prepared_position 	= $this->Settings->get_selected_field( 'statement_prepared_position' );
+		$statement_certified 			= $this->Settings->get_selected_field( 'statement_certified' );
+		$statement_certified_position 	= $this->Settings->get_selected_field( 'statement_certified_position' );
+		
+		//$pdf->Cell(90,5, $statement_prepared,			'0',	0,'C',false); //4th param border
+		$pdf->Cell(90,5, $statement_certified,			'0',	1,'C',false);
+		//$pdf->Cell(90,5, $statement_prepared_position,	'0',	0,'C',false);
+		$pdf->SetX(110);
+		$pdf->Cell(90,5, $statement_certified_position,	'0',	1,'C',false);
 		
 		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
 		
@@ -2074,6 +2088,8 @@ class Reports extends MX_Controller
 		$leave_first_day = abs($leave_first_day);
 		
 		$leave_balances_as_of = date("F d, Y", strtotime($rows['year'].'-'.$rows['month'].'-'.$leave_first_day."-1 day"));
+
+		$record_limit_date = date("Y-m-d", strtotime($rows['year'].'-'.$rows['month'].'-'.$leave_first_day."-1 day"));;
 				
 		if ($rows['multiple5'] != '')
 		{
@@ -2096,18 +2112,23 @@ class Reports extends MX_Controller
 		{
 			$last_earn = date('F d, Y');
 		}
+
+		
 		
 		$vbalance =  $this->Leave_balance->get_leave_balance(1, $rows['employee_id']);
 		$sbalance =  $this->Leave_balance->get_leave_balance(2, $rows['employee_id']);
 		
-		$credits = $this->Leave_card->get_total_leave_credits($rows['employee_id']);
+		//$credits = $this->Leave_card->get_total_leave_credits($rows['employee_id'], $record_limit_date);
 		
 		$leave_type_ids = array(3, 4, 5, 6, 20);
 		
 		if (in_array($rows['leave_type_id'], $leave_type_ids))
 		{
 			$leave_balances_as_of = '';
+			$record_limit_date = '';
 		}
+
+		$credits = $this->Leave_card->get_total_leave_credits($rows['employee_id'], $record_limit_date);
 		
 		
 		$pdf->Ln(27);

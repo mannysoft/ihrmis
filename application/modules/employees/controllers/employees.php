@@ -662,7 +662,8 @@ class Employees extends MX_Controller  {
 										'salut',
 										'lname',
 										'fname',
-										'mname'
+										'mname',
+										'orig_id'
 										);
 		
 		$employee_info = $this->Employee->get_employee_info($employee_id);
@@ -752,6 +753,21 @@ class Employees extends MX_Controller  {
 			}
 			else
 			{
+				if ($this->input->post('employee_id') != $employee_info['employee_id']) {
+					
+					$em = new Employee_m();
+					$em->get_by_id($orig_id);
+					$em->orig_id = $employee_info['employee_id'];
+					$em->save();
+					# code...
+				}
+				//echo $orig_id;
+
+				//echo $this->input->post('employee_id');
+				//var_dump($employee_info['employee_id']);
+				//var_dump($employee_info['orig_id']);
+				//exit;
+
 				$info = array(
 						'employee_id' 			=> $this->input->post('employee_id'),
 						'lname' 				=> $this->input->post('lname'),

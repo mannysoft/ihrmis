@@ -49,7 +49,8 @@ class Utility extends MX_Controller {
 	function manual_upload_data($file_type = 'xml')
 	{
 		$config['upload_path'] 		= './logs/uploaded/';
-		$config['allowed_types'] 	= 'zip|jpg|png|dat|txt';
+		$config['allowed_types'] 	= 'zip|jpg|png|txt';
+		//$config['allowed_types'] = 'application/zip';
 		$config['overwrite'] 		= TRUE;
 		$config['remove_spaces'] 	= TRUE;
 		//$config['max_size']	= '100';
@@ -168,10 +169,6 @@ class Utility extends MX_Controller {
 				
 				//INSERT the logs to dtr table
 				$this->Stand_alone->get_logs();
-			
-				
-			}
-			
 			?>
 			<script>
             alert("Manual uploading success!");
@@ -180,6 +177,10 @@ class Utility extends MX_Controller {
 			<?php
 			
 			exit;
+				
+			}
+			
+			
 			// =====================================
 			
 			//print_r($data);
@@ -443,7 +444,7 @@ class Utility extends MX_Controller {
 				 
 		//delete the files
 		$this->load->helper('file');
-		delete_files('logs/uploaded/'.$office_id.'/', TRUE);		 
+		delete_files('logs/uploaded/'.$office_id.'/', TRUE);	 
 						
 		//return $this->xmlrpc->send_response($response);
 	}
@@ -468,7 +469,7 @@ class Utility extends MX_Controller {
 	{
 		$config['upload_path'] = './pics/';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['overwrite'] 		= TRUE;
+		$config['overwrite'] 		= FALSE;
 		//$config['remove_spaces'] 	= TRUE;
 		//$config['max_size']	= '100';
 		//$config['max_width']  = '1024';
@@ -654,4 +655,38 @@ class Utility extends MX_Controller {
 	}
 	
 	// --------------------------------------------------------------------
+
+	function xml_image($filename = '')
+	{
+		if (file_exists('pics/'.$filename)) {
+			
+			$success = 1;
+		}
+		else
+		{
+			$success = 0;
+
+		}
+		
+		header('Content-type: application/xml');
+		header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+		header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+		echo '<?xml version="1.0" encoding="UTF-8"?>
+		<leave>
+		  <name credits="0">
+			<success>'.$success.'</success>
+		  </name>
+		</leave>';	
+	}
+
+	function show_image_url($employee_id = '')
+	{
+		//echo '3';
+		//exit;
+
+		$e = new Employee_m();
+		$e->get_by_employee_id($employee_id);
+		//echo $this->db->last_query();
+		echo '<img src="'.base_url().'pics/'.$e->pics.'">';
+	}
 }
