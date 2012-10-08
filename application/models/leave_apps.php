@@ -33,9 +33,9 @@ class Leave_apps extends CI_Model {
 
 	// --------------------------------------------------------------------
 	
-	var $fields 		= array();
-	var $office_id 		= '';
-	var $num_rows 		= 0;
+	public $fields 		= array();
+	public $office_id 		= '';
+	public $num_rows 		= 0;
 	
 	/**
 	 * Constructor

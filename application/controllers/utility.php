@@ -236,6 +236,8 @@ class Utility extends MX_Controller {
 		
 		$office_id = $this->office_id;
 		
+		//$office_id = 21;
+		
 		// For DTR
 		$xml_data=file_get_contents('logs/uploaded/'.$office_id.'/logs/dtr.xml');
 		
@@ -293,10 +295,12 @@ class Utility extends MX_Controller {
 						$this->Dtr->edit_dtr($data, $dtr['employee_id'], $dtr['log_date']);			
 					}
 					
+					
+					
 					if($dtr['am_logout'] != '')
 					{									
 						$data = array(
-									'am_logout' => $dtr['am_logout'],
+									'am_logout' => (is_array($dtr['am_logout'])) ? '' : $dtr['am_logout'],
 									'office_id'	=> $office_id2
 									);				
 										
@@ -354,8 +358,8 @@ class Utility extends MX_Controller {
 			}
 		}
 		
-		
-		
+		echo 'ok';
+		exit;
 		//$xml_data=file_get_contents('logs/uploaded/'.$office_id.'/logs/dtr.xml');
 		
 		//For LOgs
@@ -384,7 +388,7 @@ class Utility extends MX_Controller {
 					   'date' 					=> $logs['date'] 
 					);
 					
-					$this->Logs->add_logs($data); 
+					//$this->Logs->add_logs($data); 
 				}
 				
 			}
@@ -481,7 +485,7 @@ class Utility extends MX_Controller {
 		{
 			$error = array('error' => $this->upload->display_errors());
 			//$this->load->view('upload_form', $error);
-			echo 'whahahahhaa';
+			//echo 'whahahahhaa';
 		}	
 		else
 		{

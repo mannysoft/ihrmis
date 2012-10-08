@@ -51,14 +51,7 @@ class Manual_Manage extends MX_Controller {
 		
 		$this->Leave_card->delete_pass_slip($info['employee_id'], $info['date']);
 		
-		//echo $info['employee_id'];
-		//echo $info['date'];
-		
-		//print_r($info);
-		//exit;
-		
 		$this->Office_pass->cancel_office_pass($id);
-		
 		
 		$data['msg'] =  'Office Pass set!';
 		
@@ -80,290 +73,6 @@ class Manual_Manage extends MX_Controller {
 		$this->session->set_flashdata('msg', 'Compensatory Timeoff has been cancelled!');
 		
 		redirect(base_url().'manual_manage/cto/'.$employee_id, 'refresh');
-	}
-	
-	// --------------------------------------------------------------------
-	
-	function ob()
-	{
-		$data['page_name'] = '<b>Official Business</b>';
-		
-		$data['msg'] = '';
-		
-		//Months
-		$data['month_options'] 		= $this->options->month_options();
-		$data['month_selected'] 	= date('m');
-		
-		//Days
-		$data['days_options'] 		= $this->options->days_options();
-		$data['days_selected'] 		= date('d');
-		
-		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
-		$data['year_selected'] 		= date('Y');
-		
-		
-		if($this->input->post('op') == 1)
-		{
-			
-			$log_type = 'Official Business';
-			
-			$manual_log_type = 1;	
-			
-			$employee_id = $this->input->post('employee_id');
-				
-			$is_employee_id_exists = $this->Employee->is_employee_id_exists($employee_id);
-			
-			
-			if($is_employee_id_exists == FALSE)
-			{
-				$data['msg']='<strong><font color=red>Invalid Employee ID</font></strong>';
-			}
-			else
-			{
-				$name = $this->Employee->get_employee_info($employee_id);
-				
-				$office_id		= $name['office_id'];
-				
-				$month 		= $this->input->post('month');
-				$day 		= $this->input->post('day');
-				$year 		= $this->input->post('year');
-				$month2 	= $this->input->post('month2');
-				$day2 		= $this->input->post('day2');
-				$year2 		= $this->input->post('year2');
-				
-				$month3 	= $this->input->post('month3');
-				$day3 		= $this->input->post('day3');
-				$year3 		= $this->input->post('year3');
-				
-				$hour 		= $this->input->post('hour');
-				$minute 	= $this->input->post('minute');
-				$am_or_pm 	= $this->input->post('am_or_pm');
-				
-				$notes 		= $this->input->post('notes');
-				
-				$date 		= $year.'-'.$month.'-'.$day;
-				$date2 		= $year2.'-'.$month2.'-'.$day2;
-				
-				//If the user check the this date only checkbox
-				if($this->input->post('this_date_only'))
-				{
-					$date2 = $date;
-				}
-				
-				//If the half day is selected = ========================================================
-				if($this->input->post('month3'))
-				{	
-					$half_date = $year3.'-'.$month3.'-'.$day3;
-					
-					$is_log_date_exists = $this->Dtr->is_log_date_exists($employee_id, $half_date);
-					
-					if($am_or_pm == 'AM')
-					{
-						$field = 'am_login';
-						$field2 = 'am_logout';
-					}
-					
-					if($am_or_pm=='PM')
-					{
-						$field = 'pm_login';
-						$field2 = 'pm_logout';
-					}
-					
-					//Update
-					if( $is_log_date_exists == TRUE)
-					{
-						$info  = array($field => $log_type, $field2 => $log_type);
-						
-						$this->Dtr->edit_dtr($info, $employee_id, $half_date);
-						
-						//Use for user logs
-						$this->Logs->insert_logs(
-												$this->session->userdata('username'), 
-												$this->session->userdata('office_id'), 
-												'Official Business EVENT', 
-												'', 
-												$employee_id
-												);
-												
-						//Use for messaging
-						$this->session->set_flashdata('msg', 'Official Business set! ('.$name['fname'].' '.$name['mname'].' '.$name['lname'].' '.$half_date.')');
-						
-						//Redirect to adding new employee form
-						redirect(base_url().'manual_manage/ob', 'refresh');								
-						
-						
-					}
-					else //insert
-					{
-						
-						//Insert to manual log
-						$info = array(
-									"employee_id" 			=> $employee_id, 
-									"office_id"				=> $office_id,
-									"cover_if_ob_or_leave" 	=> $half_date,
-									"cover_if_ob_or_leave2" => 'Half Day',
-									"log_type" 				=> $manual_log_type,
-									"notes" 				=> $notes
-									);
-									
-						//Get the ID of inserted values
-						$half_id = $this->Manual_log->insert_manual_log($info); 
-						
-						$info = array(
-									$field 			=> $log_type, 
-									$field2 		=> $log_type,
-									"log_date" 		=> $half_date,
-									"employee_id" 	=> $employee_id,
-									"office_id" 	=> $office_id,
-									'manual_log_id' => $half_id
-									);
-						
-						
-						$this->Dtr->insert_dtr($info); 
-						
-						//Use for user logs
-						$this->Logs->insert_logs(
-												$this->session->userdata('username'), 
-												$this->session->userdata('office_id'), 
-												$log_type.' EVENT', 
-												'', 
-												$employee_id
-												);
-												
-						//Use for messaging
-						$this->session->set_flashdata('msg', 'Official Business set! ('.$name['fname'].' '.$name['mname'].' '.$name['lname'].' '.$half_date.')');
-						
-						//Redirect to adding new employee form
-						redirect(base_url().'manual_manage/ob', 'refresh');			
-					}
-				}
-			
-				else//If the half day is not selected (Whole day)
-				{
-				
-					//if the date1 is greater that date2
-					//output the message (cannot create the OB or Leave. the second date is greater than the first date)
-					if($date>$date2)
-					{
-						$data['msg'] = 'Cannot create the OB or Leave. the second date is greater than the first date.';
-					
-					}	
-					else
-					{
-					
-						//Insert the data to manual log for easy retrieval of manual logs
-						
-						$info = array(
-									"employee_id" 			=> $employee_id, 
-									"office_id" 			=> $office_id,
-									"cover_if_ob_or_leave" 	=> $date,
-									"cover_if_ob_or_leave2" => $date2,
-									"log_type" 				=> $manual_log_type,
-									"notes" 				=> $notes
-									);
-						//get the ID of inserted values
-						$manual_log_id = $this->Manual_log->insert_manual_log($info);
-						
-						
-						//$no_record = $_POST['action'].' set! ('.$name['first'].' '.$name['middle'].' '.$name['last'].' '.$date.' to '.$date2.')';
-					
-						//first argument smaller, 2nd argument bigger
-						$dates 	= $this->Helps->days_between($date, $date2);
-			
-						$d1 	= explode("-", $date);
-						$year3 	= $d1[0];
-						$month3 = $d1[1];
-						$day3 	= $d1[2];
-					
-						//count number of days leave
-						$count_number_of_leave = 0;
-					
-						for( $i = $dates; $i >= 0; $i-- )
-						{
-							$the_date = date("Y-m-d",mktime(0, 0, 0, $month3  , $day3+$i, $year3));
-						
-							//To determine if the day is saturday or sunday
-							$sat_or_sun = date("l", mktime(0, 0, 0, $month  , $day+$i, $year));
-						
-							
-							//Get the data from holiday
-							$date_is_holiday = date("Y-m-d",mktime(0, 0, 0, $month3  , $day3+$i, $year3));
-							
-							$holiday = $this->Holiday->is_holiday($date_is_holiday);
-							
-							//If the day is saturday or sunday, dont insert the data to dtr table
-							if($sat_or_sun=='Saturday' || $sat_or_sun=='Sunday' || $holiday==TRUE)
-							{
-						
-							}
-							else //If the day is not saturday nor sunday
-							{
-						
-								//count number of days leave
-								$count_number_of_leave += 1;
-									 
-								$is_log_date_exists = $this->Dtr->is_log_date_exists($employee_id, $the_date);
-								
-								//Delete the data if the date and employee id exists
-								if($is_log_date_exists == TRUE)
-								{
-									//delete the data
-									$this->Dtr->delete_dtr($employee_id, $the_date);
-							
-									//Turn $is_log_date_exists to FALSE
-									$is_log_date_exists = FALSE;
-								}
-								
-								//If no result found
-								if($is_log_date_exists == FALSE)
-								{
-									//i will decide what data will be pass to dtr table. Is it OB or leave or the time itself
-									//insert the data to dtr if the type of leave is not
-									//commutation or monetization
-									
-									$info = array(
-												"employee_id" 	=> $employee_id, 
-												"log_date" 		=> $the_date,
-												"manual_log_id" => $manual_log_id,
-												"am_login" 		=> $log_type,
-												"am_logout" 	=> $log_type,
-												"pm_login" 		=> $log_type,
-												"pm_logout" 	=> $log_type,
-												"office_id" 	=> $office_id
-												);
-									
-									$this->Dtr->insert_dtr($info); 
-								}
-							}	
-							
-							//Use for user logs
-							$this->Logs->insert_logs(
-												$this->session->userdata('username'), 
-												$this->session->userdata('office_id'), 
-												$log_type.' EVENT', 
-												'', 
-												$employee_id
-												);
-												
-							//Use for messaging
-							$this->session->set_flashdata('msg', 'Official Business set! ('.$name['fname'].' '.$name['mname'].' '.$name['lname'].' '.$the_date.')');
-							
-							//Redirect to adding new employee form
-							redirect(base_url().'manual_manage/ob', 'refresh');						
-						}
-								
-					
-					}	
-					
-				}
-			}
-		
-		}	
-				
-		$data['main_content'] = 'ob';
-		
-		$this->load->view('includes/template', $data);
-		
 	}
 	
 	// --------------------------------------------------------------------
@@ -424,7 +133,6 @@ class Manual_Manage extends MX_Controller {
 	
 	function cto_apps()
 	{
-		
 		
 		$data['page_name'] = '<b>CTO Applications</b>';
 		$data['msg'] = '';
@@ -492,15 +200,15 @@ class Manual_Manage extends MX_Controller {
 		
 		$data['error_msg'] = '';
 		
-		//Use for office listbox
+		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
 		$data['selected'] 			= $this->session->userdata('office_id');
 		
-		//Months
+		// Months
 		$data['month_options'] 		= $this->options->month_options();
 		$data['month_selected'] 	= date('m');
 		
-		//days
+		// days
 		$data['days_options'] 		= $this->options->days_options();
 		$data['days_selected'] 		= date('d');
 		

@@ -32,7 +32,7 @@
 class Schedule_detail extends DataMapper{ 
 
 	// --------------------------------------------------------------------
-	var $has_one = array("schedule");
+	public $has_one = array("schedule");
 	
 	function __construct()
 	{

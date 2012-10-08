@@ -56,36 +56,86 @@
     <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <?php foreach($agencies as $agency):?>
     <?php 
-	$ph = new Payroll_heading();
-	$line1 = $ph->get_line();
-	?>
-    <?php foreach($line1 as $line):?>
-    	<th><?php echo $line->type;?></th>
+            // Lets count info per agency
+            $d  = new Deduction_information();
+            $infos = $d->get_by_deduction_agency_id($agency->id);
+			
+			$colspan = 0;
+			
+			foreach($infos as $info)
+			{
+				$colspan++;
+			}
+			
+			$colspan = ($colspan > 1) 
+						? 'colspan="'.$colspan.'"' 
+						: '';
+			
+        ?>
+    <th width="6%" <?php echo $colspan;?>><?php echo $agency->code.'-'.$agency->id;?></th>
     <?php endforeach;?>
-    
+    <th width="6%">&nbsp;</th>
+  </tr>
+  <tr class="type-one-header">
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>ACA</th>
-    
-    
-    
+    <th>1</th>
+    <?php foreach($agencies as $agency):?>
+		<?php 
+        // Lets count info per agency
+        $d  = new Deduction_information();
+		$d->order_by('report_order');
+        $infos = $d->get_by_deduction_agency_id($agency->id);
+        ?>
+        
+        <?php foreach($infos as $info):?>
+        	<th><?php echo $info->code.'-'.$info->id;?></th>
+        <?php endforeach;?>
+        
+        <?php if( ! $infos->exists()):?>
+        <th><?php echo 'NONE';?></th>
+        <?php endif;?>
+        
+    <?php endforeach;?>
+    <th>2</th>
   </tr>
   <tr class="type-one-header">
     <th width="2%">&nbsp;</th>
-    <th width="17%">Employee Name</th>
-    <th width="20%">Designation</th>
-    <th width="6%">Daily Rate</th>
-    <th width="16%">Days Earned</th>
-    <th width="23%">Monthly Salary</th>
-    <th width="8%">&nbsp;</th>
+    <th width="19%">Employee Name</th>
+    <th width="19%">Designation</th>
+    <th width="9%">Daily Rate</th>
+    <th width="11%">Days Earned</th>
+    <th width="6%">Monthly Salary</th>
+    <th width="5%">PERA</th>
+    <th width="5%">Gross Amount Earned</th>
     
-	<?php foreach($array as $a):?>
-    	<th><?php echo $a;?></th>
+    <?php foreach($agencies as $agency):?>
+		<?php 
+        // Lets count info per agency
+        $d  = new Deduction_information();
+		$d->order_by('report_order');
+        $infos = $d->get_by_deduction_agency_id($agency->id);
+        ?>
+        
+        <?php foreach($infos as $info):?>
+        	<th><?php echo $info->code.'-'.$info->id;?></th>
+        <?php endforeach;?>
+        
+        <?php if( ! $infos->exists()):?>
+        <th><?php echo 'NONE';?></th>
+        <?php endif;?>
+        
     <?php endforeach;?>
     
-    <th width="8%">&nbsp;</th>
-    <th width="8%">PERA</th>
-   
+    <th width="12%">Net Pay</th>
     </tr>
     
     <?php $employee_count = 1;?>
@@ -134,14 +184,12 @@
         <br />
         <input name="textfield3" type="text" id="textfield3" value="<?php echo number_format($monthly_salary, 2);?>" size="7" style="text-align:right" /></td>
         <td align="center" valign="top">&nbsp;</td>
-        
-		<?php foreach($array as $a):?>
-    	<td><?php echo $a;?></td>
-    	<?php endforeach;?>
-        
-        <td align="center" valign="top">&nbsp;</td>
-        <td align="center" valign="top">&nbsp;</td>
-        <?php foreach($agencies as $agency):?>
+        <td align="center" valign="top"><input name="textfield" type="text" id="textfield" value="<?php echo number_format($monthly_salary, 2);?>" size="7" readonly="readonly" style="text-align:right" />
+        <br />
+        <input name="textfield2" type="text" id="textfield2" value="<?php echo number_format($gross_amount_earned, 2);?>" size="7" style="text-align:right" />
+        <br />
+        <input name="textfield3" type="text" id="textfield3" value="<?php echo number_format($gross_amount_earned, 2);?>" size="7" style="text-align:right" /></td>
+     <?php foreach($agencies as $agency):?>
 		<?php 
         // Lets count info per agency
         $d  = new Deduction_information();
@@ -238,12 +286,31 @@
 			//$info->id);
 			
 			?>
-       	<?php endforeach; // end $infos foreach?>
+        	<td align="center">
+            <input name="deduct_<?php echo $info->id;?>_1" type="text" id="deduct_" value="<?php echo ($deduct != 0) ? number_format($deduct ,2): '';?>" size="5" readonly="readonly" style="text-align:right"/>
+        	<br />
+        	<input name="deduct_<?php echo $info->id;?>_2" type="text" id="textfield2" value="<?php echo ($deduct_half != 0) ? number_format($deduct_half ,2) : '';?>" size="5" style="text-align:right"/>
+        	<br />
+        	<input name="deduct_<?php echo $info->id;?>_3" type="text" id="textfield3" value="<?php echo ($deduct_half != 0) ? number_format($deduct_half ,2) : '';?>" size="5" style="text-align:right"/>
+            </td>
+        <?php endforeach; // end $infos foreach?>
         
         <?php if( ! $infos->exists()):?>
-       	<?php endif;?>
+        	<td>
+			<input name="textfield" type="text" id="textfield" value="none" size="5" readonly="readonly" />
+        	<br />
+        	<input name="textfield2" type="text" id="textfield2" value="none" size="5" />
+        	<br />
+        	<input name="textfield3" type="text" id="textfield3" value="none" size="5" />
+            </td>
+        <?php endif;?>
         
     <?php endforeach; // end $agencies foreach?>
+        <td align="right">
+		<?php echo number_format($net_pay_monthly, 2); ?><br />
+        <?php echo number_format($net_pay_15, 2); ?><br />
+        <?php echo number_format($net_pay_30, 2); ?>
+        </td>
       </tr>
       
       <?php $employee_count++;?>
@@ -257,14 +324,8 @@
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    
-    <?php foreach($array as $a):?>
-    	<td><?php echo $a;?></td>
-    <?php endforeach;?>
-    
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <?php foreach($agencies as $agency):?>
+   <?php foreach($agencies as $agency):?>
 		<?php 
         // Lets count info per agency
         $d  = new Deduction_information();
@@ -272,12 +333,15 @@
         ?>
         
         <?php foreach($infos as $info):?>
-       	<?php endforeach;?>
+        	<td></td>
+        <?php endforeach;?>
         
         <?php if( ! $infos->exists()):?>
+        <td></td>
         <?php endif;?>
         
     <?php endforeach;?>
+    <td>&nbsp;</td>
     </tr>
 </table>
 </div>

@@ -12,6 +12,7 @@ $config['deduction_type'] = array(
 							'loan' 			=> 'Loans', 
 							'premiums' 		=> 'Premiums',
 							'insurances'	=> 'Insurances',
+							'tax'			=> 'Tax',
 							);
 							
 $config['options_yes_no'] = array(

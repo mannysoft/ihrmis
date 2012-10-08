@@ -31,7 +31,7 @@
  */
 class User extends CI_Model{
 
-	var $fields = array();
+	public $fields = array();
 	
 	// --------------------------------------------------------------------
 	

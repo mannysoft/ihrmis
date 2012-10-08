@@ -214,8 +214,6 @@ class Appointment extends MX_Controller {
 		
 		$data['rows'] = $this->Office->get_offices( $config['per_page'], $this->uri->segment(3));
 		
-		//echo $this->db->last_query();
-		
 		$this->pagination->initialize($config);
 				
 		$data['main_content'] = 'view_offices';
@@ -259,7 +257,6 @@ class Appointment extends MX_Controller {
 		$data['rows'] = $divisions->get($limit, $offset);
 		
 		$data['office_id'] = $office_id;
-		//echo $this->db->last_query();
 		
 		$data['page'] = $this->uri->segment(3);
 				
@@ -283,8 +280,6 @@ class Appointment extends MX_Controller {
 		
 		$data['office_id'] = $office_id;
 		
-		//echo $this->db->last_query();
-		
 		if($this->input->post('op'))
 		{
 			$divisions->name 		= $this->input->post('name');
@@ -298,8 +293,6 @@ class Appointment extends MX_Controller {
 			
 			redirect(base_url().'office_manage/divisions/'.$office_id, 'refresh');
 		}
-		
-		//$data['selected'] = $course->training_type_id;
 		
 		$data['main_content'] = 'division_save';
 		
@@ -325,4 +318,4 @@ class Appointment extends MX_Controller {
 }	
 
 /* End of file office_manage.php */
-/* Location: ./system/application/modules/office_manage/controllers/office_manage.php */
+/* Location: ./system/application/modules/appointment/controllers/appointment.php */

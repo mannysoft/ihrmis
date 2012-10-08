@@ -1,22 +1,31 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Service_record extends DataMapper{
+class Payroll_heading extends DataMapper{
 
-	public $table  = 'service_record';
-	
+	public $table  = 'payroll_headings';
+		
 	// --------------------------------------------------------------------
 	
 	
 	function __construct()
 	{
 		parent::__construct();
-		
+	}
+	
+	// --------------------------------------------------------------------
+	function get_line($line = 1)
+	{
+		$this->where('line', $line);
+		$this->get();
+		return $this;
 	}
 	
 	// --------------------------------------------------------------------
 	
-	
-	// --------------------------------------------------------------------
+	function get_line_desc()
+	{
+		
+	}
 	
 }
 

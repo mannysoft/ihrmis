@@ -167,7 +167,6 @@ class Training_manage extends MX_Controller {
 		if ($this->input->post('training_type_id') != 0)
 		{
 			$course->where('training_type_id', $this->input->post('training_type_id'));
-			//$limit = '';
 		}
 		
 		$data['rows'] = $course->get($limit, $offset);
@@ -372,28 +371,6 @@ class Training_manage extends MX_Controller {
 		$attend->order_by('id');
 		
 		$data['rows'] = $attend->get_by_event_id($event_id);
-		
-		/*
-		foreach ($data['rows'] as $row)
-		{
-			$ids[] = $row->employee_id;
-		}
-		
-		$e = new Employee_m();
-		$e->order_by('lname');
-		$emps = $e->where_in('id', $ids)->get();
-		
-		$ids = '';
-		
-		foreach ($emps as $row)
-		{
-			$ids[] = $row->id;
-		}
-		
-		$attend->where_in('employee_id', $ids);
-		$attend->where('event_id', $event_id);
-		$data['rows'] = $attend->get();
-		*/
 		
 		$data['page'] = $this->uri->segment(3);
 		$data['event_id'] = $event_id;
@@ -755,8 +732,6 @@ class Training_manage extends MX_Controller {
 					$t->reco_remarks 	= $reco_remarks[$i];
 					
 					$t->save();
-					
-					//echo $this->db->last_query().'<br>';
 				}
 				
 				$i ++;
@@ -765,7 +740,7 @@ class Training_manage extends MX_Controller {
 						
 		}
 		
-		// actual duties
+		// Actual duties
 		if ( $this->input->post('op3'))
 		{
 			$duties_ids = $this->input->post('duties_id');
@@ -848,5 +823,5 @@ class Training_manage extends MX_Controller {
 	
 }	
 
-/* End of file office_manage.php */
-/* Location: ./system/application/modules/office_manage/controllers/office_manage.php */
+/* End of file training_manage.php */
+/* Location: ./system/application/modules/training_manage/controllers/training_manage.php */

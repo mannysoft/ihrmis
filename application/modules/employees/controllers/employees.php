@@ -38,8 +38,6 @@ class Employees extends MX_Controller  {
         parent::__construct();
 		//$this->output->enable_profiler(TRUE);
 		
-		//$this->load->add_package_path('c:/xampp/htdocs/system_common/foo_bar');
-		
 		$this->load->model('options');
 		
 		$this->load->helper('directory');

@@ -47,7 +47,7 @@ class Users extends MX_Controller  {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Enter description here...
+	 * List all users
 	 *
 	 */
 	function index()
@@ -95,7 +95,7 @@ class Users extends MX_Controller  {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Enter description here...
+	 * Add and edit users information
 	 *
 	 */
 	function save($id = '')
@@ -186,9 +186,9 @@ class Users extends MX_Controller  {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Enter description here...
+	 * Delete user
 	 *
-	 * @param unknown_type $username
+	 * @param int $id
 	 */
 	function delete($id = '')
 	{

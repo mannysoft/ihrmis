@@ -229,11 +229,6 @@ class Attendance extends MX_Controller {
 										 $this->input->post('date2'), 
 										 $this->input->post('employee_id')
 										 );
-			
-			if($this->input->post('employee_id') == '')
-			{
-				//$_POST['employee_id'] = 'Employee ID';
-			}
 		
 			$data['date'] = $this->input->post('date');
 			$data['date2'] = $this->input->post('date2');
@@ -1050,6 +1045,7 @@ class Attendance extends MX_Controller {
 				$pdf->SetX(17);
 				$pdf->Write(0, 'Under time:');
 				$pdf->SetX(40);
+				
 				if ( $lgu_code == 'marinduque_province' )
 				{
 					$pdf->Write(0, $this->undertime_final);
@@ -1165,7 +1161,7 @@ class Attendance extends MX_Controller {
 						$office['position'] = $detailed_office['position'];
 					}
 					
-					// If Employee is Department head
+					// If Employee is Department Head
 					$o = new Office_m();
 					
 					$o->get_by_employee_id($this->employee_id);
@@ -1186,7 +1182,7 @@ class Attendance extends MX_Controller {
 						
 					}
 					
-					// check if assistant
+					// Check if assistant
 					if ( $lgu_code == '' ) // puerto
 					{
 						if ( $name['assistant_dept_head'] == 1)
@@ -1496,6 +1492,7 @@ class Attendance extends MX_Controller {
 		
 		// Added 1.5.2012 for the case of rolando marciano
 		$shift_type = $this->shift_type;
+		
 		if ( $this->employee_id == '152')
 		{
 			$shift_type = 1;
@@ -1672,13 +1669,13 @@ class Attendance extends MX_Controller {
 			
 			
 			
-			// updates 7.3.2012
+			// Updates 7.3.2012
 			if ($this->am_login == '' && $this->am_logout == 'Official Business' && 
 				$this->pm_login == 'Official Business' && $this->pm_logout == 'Official Business')
 			{	
 				$this->Tardiness->check_tardiness($this->employee_id, $this->log_date, $logType = 1, $number_seconds);
 				
-				//add to late count
+				// Add to late count
 				$this->late_count += 1;
 				
 				$this->late_final += $number_seconds;
@@ -1700,7 +1697,7 @@ class Attendance extends MX_Controller {
 			******************************************
 			*****THIS IS TO CHECK FOR THE UNDERTIME**/
 				
-			//If there is a undertime in am_logout
+			// If there is a undertime in am_logout
 			if ($this->Helps->am_logout != 0)
 			{
 				$this->Tardiness->check_tardiness($this->employee_id, $this->log_date, $logType = 2, 
@@ -1717,7 +1714,7 @@ class Attendance extends MX_Controller {
 			// Undertime count (number of undertime
 			$this->undertime_count += $this->Helps->count_undertime;
 					
-			//undertime counter (minutes or hours late)
+			// Undertime counter (minutes or hours late)
 			$this->undertime_final = $this->undertime_final + $this->Helps->hours_undertime;
 					
 			/*****************************************
@@ -1952,7 +1949,7 @@ class Attendance extends MX_Controller {
 				$this->week1_late_final 		+= $this->Helps->pm_login;
 				$this->week1_undertime_final 	+= $this->Helps->pm_logout;
 			}
-			//echo $this->week1_total_tardiness.'<br>';
+			
 			// Check the day in 2nd week
 			if (in_array($log_day, $this->week2_days))
 			{
@@ -2298,11 +2295,6 @@ class Attendance extends MX_Controller {
 		{
 			//echo $this->Helps->hours_late;
 		}
-	}
-	
-	function shifting_24()
-	{
-			
 	}
 	
 	// --------------------------------------------------------------------

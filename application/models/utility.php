@@ -64,21 +64,6 @@ class Utility extends CI_Model {
 		return $bg;
 	}
 	
-	/**
-	 * Enter description here...
-	 *
-	 */
-	function session()
-	{
-		session_start();
-		
-		if(!session_is_registered("username"))
-		{
-			header("location:login.php");
-			exit;
-		}
-	
-	}
 	
 	/**
 	 * This function use for leave management
@@ -382,7 +367,7 @@ class Utility extends CI_Model {
 		
 		
 		//am login
-		if($am_login!="")
+		if($am_login != '')
 		{
 			
 			if(($am_login=="Official Business") || ($am_login=="Leave") || ($am_login=="CTO"))
@@ -405,7 +390,7 @@ class Utility extends CI_Model {
 		
 		
 		
-		if($pm_login!="")
+		if($pm_login != '')
 		{
 			//echo $time_c;
 			if(($pm_login=="Official Business") || ($pm_login=="Leave") || ($pm_login=="CTO"))
@@ -457,7 +442,7 @@ class Utility extends CI_Model {
 		$undertime['pm_logout'] = 0;
 		
 		//am logout
-		if($am_logout!="")
+		if($am_logout != '')
 		{
 			
 			if($am_logout=="Official Business" || $am_logout=="Leave" || $am_logout=="CTO")
@@ -477,7 +462,7 @@ class Utility extends CI_Model {
 		}
 		
 		//pm logout
-		if($pm_logout!="")
+		if($pm_logout != '')
 		{
 			if($pm_logout=="Official Business" || $pm_logout=="Leave" || $pm_logout=="CTO")
 			{
@@ -510,12 +495,13 @@ class Utility extends CI_Model {
 	function count_hours_work($login, $logout)
 	{
 		
-		if($login!="" && $logout!="")
+		if($login != '' && $logout != '')
 		{
 			if($login > "12:00")
 			{
 				$logout = strtotime($logout) - strtotime('00:00');
 				$login  = strtotime($login) - strtotime('12:00');
+				
 				return $logout - $login;
 				//$a=strtotime($login) - strtotime('12:00');
 				//return strtotime($logout) - $a;
@@ -547,7 +533,7 @@ class Utility extends CI_Model {
 		$late['count'] = 0;
 		
 		//am login
-		if ($time_log!="")
+		if ($time_log != '')
 		{
 			if ($time_log > $must_log)
 			{
@@ -601,7 +587,7 @@ class Utility extends CI_Model {
 		$undertime['count'] = 0;
 		
 		//LOGOUT
-		if($time_log!="")
+		if($time_log != '')
 		{
 			if($time_log < $must_log)
 			{
@@ -668,7 +654,7 @@ class Utility extends CI_Model {
 	 */
 	function count_hours_work_8hrs($login, $logout, $am_or_pm, $am_or_pm2)
 	{
-		if($login!="" && $logout!="")
+		if($login != '' && $logout != '')
 		{
 			if($logout < $login)
 			{
@@ -690,218 +676,6 @@ class Utility extends CI_Model {
 	
 	}
 	
-	/**
-	 * THIS IS FOR 8 HOURS STRAIGHT 10pm to 6am
-	 * Get the time late
-	 *
-	 * @param unknown_type $time_log
-	 * @param unknown_type $must_log
-	 * @param unknown_type $am_or_pm
-	 * @param unknown_type $must_am_or_pm
-	 * @return unknown
-	 */
-	function check_late_106( $time_log, $must_log, $am_or_pm, $must_am_or_pm )
-	{
-		$late['hours'] = 0;
-		$late['count'] = 0;
-		
-		//pm login
-		if($time_log!="")
-		{
-			if($time_log > $must_log)
-			{
-				
-				if($time_log >= '12:00')
-				{
-					$late['hours'] += strtotime($time_log) - strtotime($must_log);
-					$late['count'] += 1;
-				}
-				
-				if($time_log < '12:00' )
-				{
-					$late['hours'] += strtotime($time_log) - strtotime($must_log);
-					$late['count'] += 1;
-				}
-				
-			}
-			
-			if($time_log < $must_log)
-			{
-				if($am_or_pm!=$must_am_or_pm)
-				{
-					$late['hours'] += strtotime($time_log) - strtotime('00:00');
-					$late['hours'] += strtotime('12:00') - strtotime($must_log);
-					
-					$late['count'] += 1;
-				}
-			}
-		}
-		
-		
-		return $late;
-	}
-	
-	/**
-	 * THIS IS FOR 8 HOURS STRAIGHT 10pm to 6am
-	 * Check for under time
-	 *
-	 * @param unknown_type $time_log
-	 * @param unknown_type $must_log
-	 * @param unknown_type $am_or_pm
-	 * @param unknown_type $must_am_or_pm
-	 * @return unknown
-	 */
-	function check_undertime_106($time_log, $must_log, $am_or_pm, $must_am_or_pm)
-	{
-		$undertime['hours'] = 0;
-		$undertime['count'] = 0;
-		
-		//LOGOUT
-		if($time_log!="")
-		{
-			if($time_log < $must_log)
-			{
-				$undertime['hours'] += strtotime($must_log) - strtotime($time_log);
-				$undertime['count'] += 1;
-			
-			}
-			
-			if($time_log > $must_log)
-			{
-				
-				
-				if($time_log >= '12:00')
-				{
-					$temp = strtotime($must_log) - strtotime('00:00');
-					$temp2 = strtotime($time_log) - strtotime('12:00');
-					
-					$undertime['hours'] += $temp - $temp2;
-					$undertime['count'] += 1;
-					
-				}
-				
-			}
-		}
-		
-		
-		return $undertime;
-	}
-	
-	/**
-	 * THIS IS FOR 24 HOURS STRAIGHT
-	 * Get the time late
-	 *
-	 * @param unknown_type $time_log
-	 * @param unknown_type $must_log
-	 * @param unknown_type $am_or_pm
-	 * @param unknown_type $must_am_or_pm
-	 * @return unknown
-	 */
-	function check_late_24( $time_log, $must_log, $am_or_pm, $must_am_or_pm )
-	{
-		$late['hours'] = 0;
-		$late['count'] = 0;
-		
-		if($time_log!="")
-		{
-			if($time_log > $must_log)
-			{
-				
-				if($time_log >= '12:00')
-				{
-					$late['hours'] += strtotime($time_log) - strtotime($must_log);
-					$late['count'] += 1;
-				}
-				
-				if($time_log < '12:00' )
-				{
-					$late['hours'] += strtotime($time_log) - strtotime($must_log);
-					$late['count'] += 1;
-				}
-				
-			}
-			
-			if($time_log < $must_log)
-			{
-				if($am_or_pm!=$must_am_or_pm)
-				{
-					$late['hours'] += strtotime($time_log) - strtotime('00:00');
-					$late['hours'] += strtotime('12:00') - strtotime($must_log);
-					
-					$late['count'] += 1;
-				}
-			}
-		}
-		
-		
-		return $late;
-	}
-	
-	/**
-	 * THIS IS FOR 24 HOURS STRAIGHT
-	 * Check for under time
-	 *
-	 * @param unknown_type $time_log
-	 * @param unknown_type $must_log
-	 * @param unknown_type $am_or_pm
-	 * @param unknown_type $must_am_or_pm
-	 * @return unknown
-	 */
-	function check_undertime_24($time_log, $must_log, $am_or_pm, $must_am_or_pm)
-	{
-		$undertime['hours'] = 0;
-		$undertime['count'] = 0;
-		
-		//LOGOUT
-		if($time_log!="")
-		{
-			if($time_log < $must_log)
-			{
-				$undertime['hours'] += strtotime($must_log) - strtotime($time_log);
-				$undertime['count'] += 1;
-			
-			}
-			
-			if($time_log > $must_log)
-			{
-				
-				
-				if($time_log >= '12:00')
-				{
-					$temp = strtotime($must_log) - strtotime('00:00');
-					$temp2 = strtotime($time_log) - strtotime('12:00');
-					
-					$undertime['hours'] += $temp - $temp2;
-					$undertime['count'] += 1;
-					
-				}
-				
-			}
-		}
-		
-		
-		return $undertime;
-	}
-	
-	/**
-	 * Check if the time is verified(if not no output will be on DTR
-	 *
-	 * @param unknown_type $ver
-	 * @param unknown_type $time
-	 * @return unknown
-	 */
-	function isTimeVerified($ver,$time)
-	{
-		if($ver==0)
-		{
-			return '';
-		}
-		
-		else{
-			$time;
-		}
-	
-	}
 	
 	function is_ob($log)
 	{
@@ -917,20 +691,6 @@ class Utility extends CI_Model {
 			
 	}
 	
-	/**
-	 * Get extension of the filename
-	 *
-	 * @param unknown_type $filename
-	 * @return unknown
-	 */
-	function find_exts($filename)
-	{
-		$filename = strtolower($filename) ;
-		$exts = split("[/\\.]", $filename) ;
-		$n = count($exts)-1;
-		$exts = $exts[$n];
-		return $exts;
-	}
 	
 	/**
 	 * Compute the time(minutes) and return depending the amount of minute(hr,min,sec)
@@ -1069,383 +829,6 @@ class Utility extends CI_Model {
 	
 	}
 	
-	/**
-	 * Compute Leave
-	 *
-	 * @param unknown_type $days_leave_v
-	 * @param unknown_type $days_v
-	 * @param unknown_type $L
-	 * @return unknown
-	 */
-	function leave_compute($days_leave_v, $days_v , $L)
-	{
-		if($days_leave_v != 0)
-		{
-			$days_v = explode(",", $days_v);
-			
-			$the_same = 0;
-			
-			$start =  $days_v[0];
-			
-			$start_temp =  $days_v[0];
-						
-			$all = '';
-			
-			
-			foreach($days_v as $day)
-			{
-				
-				if( ($day - $start) == 1)
-				{
-					$temp_last = $day;
-					$last_day_temp = $day;
-					$start = $day;
-					
-				}
-				
-				else
-				{
-					
-					
-					if($day == $start)
-					{
-						$start = $day;
-						
-						$start_temp = $day;
-						
-						$last_day = $day;
-						$last_day_temp = $day;
-					}
-					
-					else{
-						
-						
-						$dash = '';
-						
-						if($temp_last != "")
-						{
-							$dash = '-';
-						}
-						
-						$all .= $start_temp.$dash.$temp_last.',';
-						
-						$start_temp = $day;
-						
-						$start = $day;
-						
-						$temp_last = '';
-					}	
-				}
-			}
-			
-			//remove the comma in the var $all 
-			$all = substr($all, 0, -1);
-			
-			$days_leave_v_and_days = $days_leave_v.$L.' '.$all;
-		}
-		
-		return $days_leave_v_and_days;
-	}
-	
-	/**
-	 * Use for copying Folders
-	 *
-	 * @param unknown_type $source
-	 * @param unknown_type $target
-	 */
-	function full_copy( $source, $target )
-    {
-        if ( is_dir( $source ) )
-        {
-            @mkdir( $target );
-           
-            $d = dir( $source );
-           
-            while ( FALSE !== ( $entry = $d->read() ) )
-            {
-                if ( $entry == '.' || $entry == '..' )
-                {
-                    continue;
-                }
-               
-                $Entry = $source . '/' . $entry;           
-                if ( is_dir( $Entry ) )
-                {
-                    full_copy( $Entry, $target . '/' . $entry );
-                    continue;
-                }
-                copy( $Entry, $target . '/' . $entry );
-            }
-           
-            $d->close();
-        }else
-        {
-            copy( $source, $target );
-        }
-    }
-    
-    /**
-     * Copying Folders
-     *
-     * @param unknown_type $srcdir
-     * @param unknown_type $dstdir
-     * @param unknown_type $offset
-     * @param unknown_type $verbose
-     * @return unknown
-     */
-    function dircopy($srcdir, $dstdir, $offset, $verbose = false) 
-    {
-		if(!isset($offset)) $offset=0;
-		  $num = 0;
-		  $fail = 0;
-		  $sizetotal = 0;
-		  $fifail = '';
-		  if(!is_dir($dstdir)) mkdir($dstdir);
-		  if($curdir = opendir($srcdir)) {
-		    while($file = readdir($curdir)) {
-		      if($file != '.' && $file != '..') {
-		        $srcfile = $srcdir . '\\' . $file;
-		        $dstfile = $dstdir . '\\' . $file;
-		        if(is_file($srcfile)) {
-		          if(is_file($dstfile)) $ow = filemtime($srcfile) - filemtime($dstfile); else $ow = 1;
-		          if($ow > 0) {
-		            if($verbose) echo "Copying '$srcfile' to '$dstfile'...";
-		            if(copy($srcfile, $dstfile)) {
-		              touch($dstfile, filemtime($srcfile)); $num++;
-		              $sizetotal = ($sizetotal + filesize($dstfile));
-		              if($verbose) echo "OK\n";
-		            }
-		            else {
-		                 echo "Error: File '$srcfile' could not be copied!\n";
-		                 $fail++;
-		                 $fifail = $fifail.$srcfile."|";
-		            }
-		          }                  
-		        }
-		        else if(is_dir($srcfile)) {
-		          $res = explode(",",$ret);
-		          $ret = dircopy($srcfile, $dstfile, $verbose);
-		          $mod = explode(",",$ret);
-		          $imp = array($res[0] + $mod[0],$mod[1] + $res[1],$mod[2] + $res[2],$mod[3].$res[3]);
-		          $ret = implode(",",$imp);
-		        }
-		      }
-		    }
-		    closedir($curdir);
-		  }
-		  $red = explode(",",$ret);
-		  $ret = ($num + $red[0]).",".(($fail-$offset) + $red[1]).",".($sizetotal + $red[2]).",".$fifail.$red[3];
-		  return $ret;
-	}
-	
-	/**
-	 * Dump data and structure from MySQL database
-	 *
-	 * @param string $database
-	 * @return string
-	 * @example
- 	 *
- 	 * $dump = new BACKUP();
- 	 * print $dump->dumpDatabase("mydb");
-	 */
-	function dumpDatabase($database) {
-
-		ini_set('max_execution_time',300);
-		// Set content-type and charset
-		header ('Content-Type: text/html; charset=iso-8859-1');
-
-		// Connect to database
-		$db = mysql_select_db($database);
-
-		if (!empty($db)) {
-
-			// Get all table names from database
-			$c = 0;
-			$result = mysql_list_tables($database);
-			for($x = 0; $x < mysql_num_rows($result); $x++) {
-			
-				$table = mysql_tablename($result, $x);
-				//echo $table.'<br>';
-				if (!empty($table)) {
-					$arr_tables[$c] = mysql_tablename($result, $x);
-					$c++;
-				}
-			}
-
-			// List tables
-			$dump = "DROP SCHEMA IF EXISTS $database; \nCREATE DATABASE $database; \nUSE $database; \n";
-			for ($y = 0; $y < count($arr_tables); $y++){
-
-				// DB Table name
-				$table = $arr_tables[$y];
-				// Structure Header
-				$structure .= "-- \n";
-				$structure .= "-- Table structure for table `{$table}` \n";
-				$structure .= "-- \n\n";
-
-				// Dump Structure
-				$structure .= "DROP TABLE IF EXISTS `{$table}`; \n";
-				$structure .= "CREATE TABLE `{$table}` (\n";
-				$result = mysql_db_query($database, "SHOW FIELDS FROM `{$table}`");
-				while($row = mysql_fetch_object($result)) {
-
-					$structure .= "  `{$row->Field}` {$row->Type}";
-					$structure .= (!empty($row->Default)) ? " DEFAULT '{$row->Default}'" : false;
-					$structure .= ($row->Null != "YES") ? " NOT NULL" : false;
-					$structure .= (!empty($row->Extra)) ? " {$row->Extra}" : false;
-					$structure .= ",\n";
-
-				}
-
-				$structure = ereg_replace(",\n$", "", $structure);
-
-				// Save all Column Indexes in array
-				unset($index);
-				$result = mysql_db_query($database, "SHOW KEYS FROM `{$table}`");
-				while($row = mysql_fetch_object($result)) {
-
-					if (($row->Key_name == 'PRIMARY') AND ($row->Index_type == 'BTREE')) {
-						$index['PRIMARY'][$row->Key_name] = $row->Column_name;
-					}
-
-					if (($row->Key_name != 'PRIMARY') AND ($row->Non_unique == '0') AND ($row->Index_type == 'BTREE')) {
-						$index['UNIQUE'][$row->Key_name] = $row->Column_name;
-					}
-
-					if (($row->Key_name != 'PRIMARY') AND ($row->Non_unique == '1') AND ($row->Index_type == 'BTREE')) {
-						$index['INDEX'][$row->Key_name] = $row->Column_name;
-					}
-
-					if (($row->Key_name != 'PRIMARY') AND ($row->Non_unique == '1') AND ($row->Index_type == 'FULLTEXT')) {
-						$index['FULLTEXT'][$row->Key_name] = $row->Column_name;
-					}
-
-				}
-				
-				//
-				// Return all Column Indexes of array
-				if (is_array($index)) {
-					foreach ($index as $xy => $columns) {
-
-						$structure .= ",\n";
-
-						$c = 0;
-						foreach ($columns as $column_key => $column_name) {
-
-							$c++;
-
-							$structure .= ($xy == "PRIMARY") ? "  PRIMARY KEY  (`{$column_name}`)" : false;
-							$structure .= ($xy == "UNIQUE") ? "  UNIQUE KEY `{$column_key}` (`{$column_name}`)" : false;
-							$structure .= ($xy == "INDEX") ? "  KEY `{$column_key}` (`{$column_name}`)" : false;
-							$structure .= ($xy == "FULLTEXT") ? "  FULLTEXT `{$column_key}` (`resolution_no`,`subject`,`series`,`author`)
-" : false;
-							//echo $column_key.'<br>';//wala ito dati
-							$structure .= ($c < (count($index[$xy]))) ? ",\n" : false;
-
-						}
-						//put here the other key 
-						//$structure .='hahaha';
-
-					}
-
-				}
-
-				$structure .= "\n) ENGINE = MYISAM ;\n\n";
-
-				// Header
-				$structure .= "-- \n";
-				$structure .= "-- Dumping data for table `$table` \n";
-				$structure .= "-- \n\n";
-
-				// Dump data
-				//$data='';
-				unset($data);//currently uncomment
-				$result     = mysql_query("SELECT * FROM `$table`");
-				$num_rows   = mysql_num_rows($result);
-				$num_fields = mysql_num_fields($result);
-
-				for ($i = 0; $i < $num_rows; $i++) {
-
-					$row = mysql_fetch_object($result);
-					$data .= "INSERT INTO `$table` (";
-
-					// Field names
-					for ($x = 0; $x < $num_fields; $x++) {
-
-						$field_name = mysql_field_name($result, $x);
-
-						$data .= "`{$field_name}`";
-						$data .= ($x < ($num_fields - 1)) ? ", " : false;
-
-					}
-
-					$data .= ") VALUES (";
-
-					// Values
-					for ($x = 0; $x < $num_fields; $x++) {
-						$field_name = mysql_field_name($result, $x);
-
-						$data .= "'" . str_replace('\"', '"', mysql_escape_string($row->$field_name)) . "'";
-						$data .= ($x < ($num_fields - 1)) ? ", " : false;
-
-					}
-
-					$data.= ");\n";
-				}
-
-				$data.= "\n";
-
-				$dump .= $structure . $data;
-				$dump .= "-- --------------------------------------------------------\n\n";
-				$structure='';
-				$the_data.=$data;
-
-			}
-
-			return $dump;
-			//return $structure;
-			//return $data;
-			//return $the_data;
-
-		}
-
-	}
-	
-	/**
-	 * Restoration of database from sql files
-	 *
-	 * @param unknown_type $filename
-	 * @example
-	 * 
-	 * $restore = new BACKUP();
- 	 * print $restore->restoreDatabase('backup/'.$file);
-	 */
-	function restoreDatabase($filename)
-	{
-		ini_set('max_execution_time',300);
-		// Temporary variable, used to store current query
-		$templine = '';
-		// Read in entire file
-		$lines = file($filename);
-		// Loop through each line
-		foreach ($lines as $line_num => $line) 
-		{
-		  // Only continue if it's not a comment
-		  if (substr($line, 0, 2) != '--' && $line != '') 
-		  {
-			// Add this line to the current segment
-			$templine .= $line;
-			// If it has a semicolon at the end, it's the end of the query
-			if (substr(trim($line), -1, 1) == ';') 
-			{
-			  // Perform the query
-			  mysql_query($templine);// or print('Error performing query \'<b>' . $templine . '</b>\': ' . mysql_error() . '<br /><br />');
-			  // Reset temp variable to empty
-			  $templine = '';
-			}
-		  }
-		}
-	}
 	
 	/**
 	 * Enter description here...

@@ -33,7 +33,7 @@ class Leave_forwarded extends CI_Model{
 
 	// --------------------------------------------------------------------
 	
-	var $fields = array(); //Fields to be selected
+	public $fields = array(); //Fields to be selected
 	
 	// --------------------------------------------------------------------
 	

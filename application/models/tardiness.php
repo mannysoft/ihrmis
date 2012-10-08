@@ -33,16 +33,16 @@ class Tardiness extends CI_Model {
 
 	// --------------------------------------------------------------------
 	
-	var $rows 			= array();
-	var $num_rows 		= 0;
-	var $minutes_tardy 	= 1;
-	var $emps 			= array();
-	var $offices_tardy 	= array();
-	var $employees 		= array();
-	var $fields 		= array();
-	var $sem			= 1;
-	var $ten_tardy_ids	= '';
-	var $all_tardiness	= FALSE;
+	public $rows 			= array();
+	public $num_rows 		= 0;
+	public $minutes_tardy 	= 1;
+	public $emps 			= array();
+	public $offices_tardy 	= array();
+	public $employees 		= array();
+	public $fields 		= array();
+	public $sem			= 1;
+	public $ten_tardy_ids	= '';
+	public $all_tardiness	= FALSE;
 	
 	// --------------------------------------------------------------------
 	

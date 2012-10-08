@@ -91,7 +91,9 @@ function schedule_options( $add_blank = FALSE )
 function user_options( $add_blank = FALSE )
 {
 	$u = new User_m();
-		
+	
+	$u->where('username !=', 'mannysoft');
+
 	$rows = $u->order_by('username')->get();
 	
 	$minute = 0; 
@@ -103,7 +105,7 @@ function user_options( $add_blank = FALSE )
 	
 	foreach ($rows as $row)
 	{
-		$options[$row->id] = $row->username;	
+		$options[$row->id] = $row->username.' -- '.$row->lname.', '.$row->fname;	
 	}
 	
 	return $options;

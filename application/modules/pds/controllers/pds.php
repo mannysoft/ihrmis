@@ -38,8 +38,6 @@ class Pds extends MX_Controller  {
         parent::__construct();
 		
 		//$this->output->enable_profiler(TRUE);
-		
-		
 		$this->load->model('options');
     }  
 	
@@ -94,8 +92,6 @@ class Pds extends MX_Controller  {
 			$p = new Personal();
 			
 			$p->get_by_employee_id($employee_id);
-			
-			
 			
 			$p->employee_id			= $employee_id;
 			$p->lname				= $this->input->post('lname');
@@ -192,9 +188,6 @@ class Pds extends MX_Controller  {
 		
 		if ( $this->input->post('op'))
 		{
-			
-			//$family->where( 'employee_id',  $this->input->post('employee_id') )->get();
-			
 			$family->get_by_employee_id($employee_id);
 			
 			$family->employee_id			= $employee_id;
@@ -257,7 +250,7 @@ class Pds extends MX_Controller  {
 		
 		$data['family'] = $family->get_by_employee_id($employee_id);
 		
-		// Children======================================================================
+		// Children===================================================
 		$children = new Children();
 		
 		$children->order_by('birth_date');
@@ -286,7 +279,7 @@ class Pds extends MX_Controller  {
 		
 		$data['selected'] = $e->office_id;
 		
-		//Use for office listbox
+		// Use for office listbox
 		$data['options'] = $this->options->office_options();
 		
 		$data['employee_id'] 		= $employee_id;
@@ -329,7 +322,6 @@ class Pds extends MX_Controller  {
 				
 				$e->where( 'level',  1);
 				$e->where( 'employee_id',  $employee_id )->get();
-				//$e->where( 'employee_id',  $this->input->post('employee_id') );
 				$e->delete_all();
 				
 				$e->employee_id 	= $employee_id;
@@ -412,7 +404,7 @@ class Pds extends MX_Controller  {
 				$e->save();
 			}
 			
-			//GRAD SCHOOL
+			// GRAD SCHOOL
 			if ($this->input->post('grad_school') != "")
 			{
 				$e = new Education();
@@ -437,7 +429,7 @@ class Pds extends MX_Controller  {
 						
 		}
 		
-		//Educational Background============================================================
+		// Educational Background======================================
 		$e = new Education();
 		
 		$data['educs1'] = $e->get_single_educ($employee_id, $level = 1);
@@ -524,7 +516,7 @@ class Pds extends MX_Controller  {
 		
 		$e = new Eligibility();
 		
-		// Service===========================================================================
+		// Service ===========================================================
 		$e->order_by('id');
 		$services = $e->get_by_employee_id($employee_id);
 		
@@ -637,7 +629,7 @@ class Pds extends MX_Controller  {
 						
 		}
 		
-		// Work=================================================================
+		// Work=============================================================
 		$work = new Work();
 		$work->order_by('inclusive_date_from', 'DESC');
 		
@@ -655,7 +647,7 @@ class Pds extends MX_Controller  {
 		
 		$data['selected'] = $e->office_id;
 		
-		//Use for office listbox
+		// Use for office listbox
 		$data['options'] = $this->options->office_options();
 		
 		$data['employee_id'] 		= $employee_id;
@@ -802,7 +794,7 @@ class Pds extends MX_Controller  {
 						
 		}
 		
-		// Training===========================================================
+		// Training=========================================================
 		$t = new Training();
 		
 		$t->order_by('date_from', 'DESC');
@@ -822,7 +814,7 @@ class Pds extends MX_Controller  {
 		
 		$data['selected'] = $e->office_id;
 		
-		//Use for office listbox
+		// Use for office listbox
 		$data['options'] = $this->options->office_options();
 		
 		$data['employee_id'] 		= $employee_id;
@@ -942,28 +934,28 @@ class Pds extends MX_Controller  {
 						
 		}
 		
-		// Other information==================================================
+		// Other information============================================
 		$o = new Other_info();
 		
 		$data['infos'] = $o->get_by_employee_id($employee_id);
 		
-		// Question ===========================================================
+		// Question ====================================================
 		$q = new Question();
 		
 		$data['question_options'] = array( '0'  => 'No', '1'  => 'Yes' );
 		
-		$data['question1'] = $q->get_question($employee_id, $question_no = 1);
-		$data['question2'] = $q->get_question($employee_id, $question_no = 2);
-		$data['question3'] = $q->get_question($employee_id, $question_no = 3);
-		$data['question4'] = $q->get_question($employee_id, $question_no = 4);
-		$data['question5'] = $q->get_question($employee_id, $question_no = 5);
-		$data['question6'] = $q->get_question($employee_id, $question_no = 6);
-		$data['question7'] = $q->get_question($employee_id, $question_no = 7);
-		$data['question8'] = $q->get_question($employee_id, $question_no = 8);
-		$data['question9'] = $q->get_question($employee_id, $question_no = 9);
-		$data['question10'] = $q->get_question($employee_id, $question_no = 10);
+		$data['question1'] = $q->get_question($employee_id, 1);
+		$data['question2'] = $q->get_question($employee_id, 2);
+		$data['question3'] = $q->get_question($employee_id, 3);
+		$data['question4'] = $q->get_question($employee_id, 4);
+		$data['question5'] = $q->get_question($employee_id, 5);
+		$data['question6'] = $q->get_question($employee_id, 6);
+		$data['question7'] = $q->get_question($employee_id, 7);
+		$data['question8'] = $q->get_question($employee_id, 8);
+		$data['question9'] = $q->get_question($employee_id, 9);
+		$data['question10'] = $q->get_question($employee_id, 10);
 		
-		// References==========================================================
+		// References=================================================
 		$r = new Reference();
 		$data['references'] = $r->get_by_employee_id($employee_id);
 		
@@ -1024,7 +1016,7 @@ class Pds extends MX_Controller  {
 						
 		}
 		
-		// profile=============================================================
+		// profile========================================================
 		$p = new Profile();
 		
 		$data['profile'] = $p->get_by_id($employee_id);
@@ -1171,7 +1163,6 @@ class Pds extends MX_Controller  {
 			}
 			if ( $this->input->post('position') != '')
 			{
-				//$e->where('position', $this->input->post('position'));
 				$e->like('position', $this->input->post('position'));
 			}
 			if ( $this->input->post('permanent') != 'all')
@@ -1197,23 +1188,21 @@ class Pds extends MX_Controller  {
 				{
 					
 				}
-				//echo date('Y-m-d', strtotime(date('Y-m-d').'- 20 years'));
+				
 				$the_year = date('Y') - $this->input->post('years_service');
 				$today = date('Y-m-d');
 				
 				$e->where('YEAR(first_day_of_service)', $the_year);
 				$e->where('MONTH(first_day_of_service) >=', date('m'));
-				//$e->where("ADDDATE(first_day_of_service, '$today') = ", $the_year);
+				
 	
 			}
 			if ( $this->input->post('eligibility') != '')
 			{
-				//$e->where('eligibility', $this->input->post('eligibility'));
 				$e->like('eligibility', $this->input->post('eligibility'), 'both'); 
 			}
 			if ( $this->input->post('course') != '')
 			{
-				//$e->like('course', $this->input->post('course'));
 				$e->like('course', $this->input->post('course'), 'both'); 
 			}
 			if ( $this->input->post('sex') != '')
@@ -1233,7 +1222,6 @@ class Pds extends MX_Controller  {
 			if ( $this->input->post('location') != '')
 			{
 				$e->like('res_address', $this->input->post('location'));
-				//$e->like('res_address', $this->input->post('res_address'), 'both'); 
 			}
 			
 			$e->order_by('lname');
@@ -1836,4 +1824,4 @@ include('sr_preview.php');
 include('search_result_preview.php');
 
 /* End of file employee_manage.php */
-/* Location: ./application/modules/employee_manage/controllers/employee_manage.php */
+/* Location: ./application/modules/pds/controllers/pds.php */

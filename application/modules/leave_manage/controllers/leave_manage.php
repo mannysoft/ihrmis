@@ -41,12 +41,6 @@ class Leave_Manage extends MX_Controller {
 		//$this->output->enable_profiler(TRUE);
     }  
 	
-	function approved_leave($leave_apps_id = '')
-	{
-		redirect(base_url().'leave_manage/leave_apps', 'refresh');
-		
-	}
-	
 	// --------------------------------------------------------------------
 	
 	function cancel_leave($id, $employee_id, $csc = '', $cpo = '')
@@ -78,14 +72,6 @@ class Leave_Manage extends MX_Controller {
 		$this->session->set_flashdata('msg', 'Undertime / Tardy Cancelled!');
 		
 		redirect(base_url().'leave_manage/undertime/'.$employee_id, 'refresh');
-	}
-	
-	// --------------------------------------------------------------------
-	
-	function disapproved_leave($leave_apps_id = '')
-	{
-		redirect(base_url().'leave_manage/leave_apps', 'refresh');
-		
 	}
 	
 	// --------------------------------------------------------------------
@@ -541,99 +527,6 @@ class Leave_Manage extends MX_Controller {
 	
 	// --------------------------------------------------------------------
 	
-	function encode_leave_card()
-	{
-		
-		$data['page_name'] 		= '<b>Employee Leave Index</b>';
-		$data['msg'] = '';
-		$data['focus_field']	= '';
-		$data['options'] 		= $this->options->office_options();
-		$data['selected'] 		= $this->session->userdata('office_id');
-		
-		$data['leave_type_options'] = $this->options->leave_type_options();
-		$data['leave_type_selected']= '';
-				
-		$l = new Leave_card_m();
-		
-		$data['rows'] = $l->get_by_employee_id('none')->order_by('listing_order');
-		
-		if( $this->input->post('op'))
-		{
-			$data['selected'] = $this->input->post('office_id');
-			
-			$data['rows'] = $l->get_by_employee_id($this->input->post('employee_id'))->order_by('listing_order');
-			
-			// Count the number of rows
-			// Temporary solutuon / no net here hehe
-			
-			$total_rows = 0;
-			
-			foreach ($data['rows'] as $row)
-			{
-				$total_rows ++;
-			}
-			
-			$add_rows = 200 - $total_rows;
-			
-			// What is the highest listing order for this emplooyee
-			$lc = new Leave_card_m();
-		
-			$lc->get_by_employee_id($this->input->post('employee_id'))->select_max('listing_order');
-			
-			$max_listing_order = $lc->listing_order;
-			
-			$max_listing_order += 1;
-			
-			// We'll add new rows if we still have to add
-			if ($add_rows >= 0)
-			{
-				while ($add_rows != 0)
-				{
-					$lc = new Leave_card_m();
-				
-					$lc->employee_id 	= $this->input->post('employee_id');
-					$lc->listing_order 	= $max_listing_order;
-					$lc->save();
-					
-					//echo $add_rows.'<br>';
-					
-					$add_rows --;
-					
-					$max_listing_order ++;
-				}
-			}
-			
-			$counter = 10;
-						
-			// Add another 10 rows
-			if ($this->input->post('add_10rows'))
-			{
-				while ($counter != 0)
-				{
-					$lc = new Leave_card_m();
-				
-					$lc->employee_id 	= $this->input->post('employee_id');
-					$lc->listing_order 	= $max_listing_order;
-					$lc->save();
-										
-					$counter --;
-					
-					$max_listing_order ++;
-				}
-			}
-						
-			$data['rows'] = $l->get_by_employee_id($this->input->post('employee_id'))->order_by('listing_order');
-			
-		}
-				
-		$data['main_content'] = 'encode_leave_card';
-		
-		$this->load->view('includes/template', $data);
-		
-	}
-	
-	// --------------------------------------------------------------------
-	
 	function leave_apps()
 	{
 		
@@ -937,9 +830,7 @@ class Leave_Manage extends MX_Controller {
 		
 			$data['year_selected'] 		= $this->input->post('year');
 			
-			//$this->form_validation->set_rules('id', 'Employee ID', 'required|callback_employee_id_check');
 			$this->form_validation->set_rules('employee_id', 'Employee ID', 'required|callback_employee_check');
-			//$this->form_validation->set_rules('stop_date', 'Stop of earnings', 'required');
 			
 			if ($this->form_validation->run($this) == TRUE)
 			{

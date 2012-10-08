@@ -412,55 +412,6 @@ class Helps extends CI_Model {
 	
 	// --------------------------------------------------------------------
 	
-	/**
-	 * THIS IS FOR 24 HOURS STRAIGHT
-	 * Get the time late
-	 *
-	 * @param string $time_log
-	 * @param string $must_log
-	 * @param string $am_or_pm
-	 * @param string $must_am_or_pm
-	 * @return double
-	 */
-	function check_late_24( $time_log, $must_log, $am_or_pm, $must_am_or_pm )
-	{
-		$late['hours'] = 0;
-		$late['count'] = 0;
-		
-		if($time_log!="")
-		{
-			if($time_log > $must_log)
-			{
-				
-				if($time_log >= '12:00')
-				{
-					$late['hours'] += strtotime($time_log) - strtotime($must_log);
-					$late['count'] += 1;
-				}
-				
-				if($time_log < '12:00' )
-				{
-					$late['hours'] += strtotime($time_log) - strtotime($must_log);
-					$late['count'] += 1;
-				}
-				
-			}
-			
-			if($time_log < $must_log)
-			{
-				if($am_or_pm!=$must_am_or_pm)
-				{
-					$late['hours'] += strtotime($time_log) - strtotime('00:00');
-					$late['hours'] += strtotime('12:00') - strtotime($must_log);
-					
-					$late['count'] += 1;
-				}
-			}
-		}
-		
-		
-		return $late;
-	}
 	
 	// --------------------------------------------------------------------
 	
@@ -648,53 +599,6 @@ class Helps extends CI_Model {
  		}
 	}
 	
-	// --------------------------------------------------------------------
-	
-	/**
-	 * THIS IS FOR 24 HOURS STRAIGHT
-	 * Check for under time
-	 *
-	 * @param unknown_type $time_log
-	 * @param unknown_type $must_log
-	 * @param unknown_type $am_or_pm
-	 * @param unknown_type $must_am_or_pm
-	 * @return unknown
-	 */
-	function check_undertime_24($time_log, $must_log, $am_or_pm, $must_am_or_pm)
-	{
-		$undertime['hours'] = 0;
-		$undertime['count'] = 0;
-		
-		//LOGOUT
-		if($time_log!="")
-		{
-			if($time_log < $must_log)
-			{
-				$undertime['hours'] += strtotime($must_log) - strtotime($time_log);
-				$undertime['count'] += 1;
-			
-			}
-			
-			if($time_log > $must_log)
-			{
-				
-				
-				if($time_log >= '12:00')
-				{
-					$temp = strtotime($must_log) - strtotime('00:00');
-					$temp2 = strtotime($time_log) - strtotime('12:00');
-					
-					$undertime['hours'] += $temp - $temp2;
-					$undertime['count'] += 1;
-					
-				}
-				
-			}
-		}
-		
-		
-		return $undertime;
-	}
 	
 	// --------------------------------------------------------------------
 	
@@ -1097,22 +1001,6 @@ class Helps extends CI_Model {
 	
 	}
 	
-	// --------------------------------------------------------------------
-	
-	/**
-	 * Get extension of the filename
-	 *
-	 * @param unknown_type $filename
-	 * @return unknown
-	 */
-	function find_exts($file_name)
-	{
-		$file_name = strtolower($file_name) ;
-		$exts = split("[/\\.]", $file_name) ;
-		$n = count($exts)-1;
-		$exts = $exts[$n];
-		return $exts;
-	}
 	
 	// --------------------------------------------------------------------
 	

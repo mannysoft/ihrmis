@@ -134,7 +134,7 @@ class Office_Manage extends MX_Controller {
 		// If exists
 		if ($e->exists())
 		{
-			$this->session->set_flashdata('error_msg', 'Unable to delete. 
+			$this->session->set_flashdata('error_msg', 'Unable to delete office. 
 														Please delete all employee associated with the office.');
 			redirect(base_url().'office_manage/view_offices', 'refresh');
 		}
@@ -189,8 +189,6 @@ class Office_Manage extends MX_Controller {
 		
 		$data['rows'] = $this->Office->get_offices( $config['per_page'], $this->uri->segment(3));
 		
-		//echo $this->db->last_query();
-		
 		$this->pagination->initialize($config);
 				
 		$data['main_content'] = 'view_offices';
@@ -234,7 +232,6 @@ class Office_Manage extends MX_Controller {
 		$data['rows'] = $divisions->get($limit, $offset);
 		
 		$data['office_id'] = $office_id;
-		//echo $this->db->last_query();
 		
 		$data['page'] = $this->uri->segment(3);
 				
@@ -258,8 +255,6 @@ class Office_Manage extends MX_Controller {
 		
 		$data['office_id'] = $office_id;
 		
-		//echo $this->db->last_query();
-		
 		if($this->input->post('op'))
 		{
 			$divisions->name 		= $this->input->post('name');
@@ -273,8 +268,6 @@ class Office_Manage extends MX_Controller {
 			
 			redirect(base_url().'office_manage/divisions/'.$office_id, 'refresh');
 		}
-		
-		//$data['selected'] = $course->training_type_id;
 		
 		$data['main_content'] = 'division_save';
 		

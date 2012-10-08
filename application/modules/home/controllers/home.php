@@ -158,14 +158,6 @@ class Home extends MX_Controller
 		
 		}
 		
-		//If the date is the last day of the month and leave earn has not been did
-		//Process the leave earnings
-		if ($isLastDayOfMonth == TRUE && $isLeaveMonthEarned == FALSE)
-		{
-			//echo '<div id="mydiv"><img src="images/progress.gif"> Please wait... Leave earning on progress...</div>';
-			//$Leave->process_leave_earnings($month, $year);
-		}
-		
 		
 		//if click the Perform leave earnings Now!
 		if (isset($_GET['perform_leave']) && $_GET['perform_leave'] == 1)

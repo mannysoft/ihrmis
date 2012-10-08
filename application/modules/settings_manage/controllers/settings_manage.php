@@ -772,7 +772,7 @@ class Settings_Manage extends MX_Controller {
 			$this->Logs->delete_all_logs();
 		}
 		
-		//Use for office listbox
+		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
 		$data['selected'] 			= $this->session->userdata('office_id');
 	
@@ -822,17 +822,15 @@ class Settings_Manage extends MX_Controller {
 		
 		if ($this->input->post('op'))
 		{
-			//We get all the POST data. $key is the field name
-			//which is the name of settings in database table.
-			//We update the settings table to a new value($val)
+			// We get all the POST data. $key is the field name
+			// which is the name of settings in database table.
+			// We update the settings table to a new value($val)
 			foreach ($_POST as $key => $val)
 			{
 				$this->Settings->update_settings($key, $val);
 			}
 			
 			$data['msg'] = 'Settings has been saved!';
-			
-			
 		}
 		
 		$data['settings'] = $this->Settings->get_settings();

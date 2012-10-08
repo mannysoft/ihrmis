@@ -30,7 +30,7 @@
  */
 class Personal_m extends DataMapper{
 
-	var $table  = 'pds_personal_info';
+	public $table  = 'pds_personal_info';
 	// --------------------------------------------------------------------
 	
 	

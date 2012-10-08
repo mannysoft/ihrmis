@@ -33,8 +33,8 @@ class Office extends CI_Model {
 
 	// --------------------------------------------------------------------
 	
-	var $num_rows = 0;
-	var $fields = array();
+	public $num_rows = 0;
+	public $fields = array();
 	
 	// --------------------------------------------------------------------
 	
