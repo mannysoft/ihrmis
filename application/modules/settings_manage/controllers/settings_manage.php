@@ -39,7 +39,7 @@ class Settings_Manage extends MX_Controller {
 		
 		$this->load->model('options');
 		
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 		
 		header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 		header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
