@@ -39,7 +39,7 @@ class Settings_Manage extends MX_Controller {
 		
 		$this->load->model('options');
 		
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 		
 		header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 		header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
@@ -785,7 +785,16 @@ class Settings_Manage extends MX_Controller {
 			
 			if ($this->input->post('username'))
 			{
-				$username = '';
+				$this->Logs->username = $this->input->post('username');
+			}
+			if ($this->input->post('module'))
+			{
+				$this->Logs->module = $this->input->post('module');
+			}
+			if ($this->input->post('date1') and $this->input->post('date2'))
+			{
+				$this->Logs->date1 = $this->input->post('date1');
+				$this->Logs->date2 = $this->input->post('date2');
 			}
 			
 		}

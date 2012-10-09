@@ -1255,8 +1255,7 @@ class Dtr extends CI_Model {
 			}
 			
 			$this->Logs->insert_logs(
-									$this->session->userdata('username'), 
-									$this->session->userdata('office_id'), 
+									'attendance', 
 									'MANUAL LOG', 
 									'', 
 									$employee_id

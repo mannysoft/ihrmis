@@ -52,6 +52,13 @@ class Leave_Manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Leave has been cancelled!');
 		
+		$this->Logs->insert_logs(
+									'leave', 
+									'CANCEL LEAVE', 
+									'Cancel Leave', 
+									$employee_id
+									);
+		
 		redirect(base_url().'leave_manage/file_leave/'.$employee_id, 'refresh');
 	}
 	

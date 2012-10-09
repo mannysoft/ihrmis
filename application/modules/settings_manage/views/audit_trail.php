@@ -17,17 +17,37 @@
   </tr>
   <tr>
     <td align="right">Module:</td>
-    <td>&nbsp;</td>
+    <td><?php echo form_dropdown('module', array('0' => 'All', 'attendance' => 'Attendance', 'leave' => 'Leave', 'employees' => 'Employees'));?></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">Date:</td>
-    <td>&nbsp;</td>
+    <td><input name="date1" type="text" id="date1" value="<?php echo set_value('date1'); ?>" size="10" />
+      <img src="<?php echo base_url(); ?>images/img.gif" width="20" height="14" align="middle" class="calimg" id="f_trigger_a" style="" title="Date selector" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" />
+      <script type="text/javascript">
+		    Calendar.setup({
+	          inputField     :    "date1",     // id of the input field
+	          ifFormat       :    "%Y-%m-%d", // format of the input field
+	          button         :    "f_trigger_a",  // trigger for the calendar (button ID)
+	          align          :    "Bl",    // alignment (defaults to "Bl")
+	          singleClick    :    true
+		    });
+		</script> to <input name="date2" type="text" id="date2" value="<?php echo set_value('date2'); ?>" size="10" />
+      <img src="<?php echo base_url(); ?>images/img.gif" width="20" height="14" align="middle" class="calimg" id="f_trigger_a1" style="" title="Date selector" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" />
+      <script type="text/javascript">
+		    Calendar.setup({
+	          inputField     :    "date2",     // id of the input field
+	          ifFormat       :    "%Y-%m-%d", // format of the input field
+	          button         :    "f_trigger_a1",  // trigger for the calendar (button ID)
+	          align          :    "Bl",    // alignment (defaults to "Bl")
+	          singleClick    :    true
+		    });
+		</script></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right">&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="right"><input type="reset" name="search_logs2" id="search_logs2" value="Reset" /></td>
+    <td><input type="submit" name="search_logs" id="search_logs" value="Search Logs" /></td>
     <td>&nbsp;</td>
   </tr>
 </table>

@@ -208,11 +208,10 @@ class Ajax extends MX_Controller {
 			
 			// Display message
 			echo '<b><font color=red>Downloading Logs Success!</font></b>';
-			$this->Logs->insert_logs(
-									$this->session->userdata('username'), 
-									$this->session->userdata('office_id'), 
+			
+			$this->Logs->insert_logs('attendance', 
 									'DOWNLOAD LOGS', 
-									'Download logs from machine', 
+									'Download logs from machine.', 
 									''
 									);
 		}
@@ -221,8 +220,7 @@ class Ajax extends MX_Controller {
 			echo '<b><font color=red>Downloading Logs Failed! Please try again.</font></b>';
 			
 			$this->Logs->insert_logs(
-									$this->session->userdata('username'), 
-									$this->session->userdata('office_id'), 
+									'attendance', 
 									'DOWNLOAD LOGS', 
 									'Download logs from machine', 
 									'');
@@ -657,8 +655,7 @@ class Ajax extends MX_Controller {
 		}
 			
 		//use for use logs
-		$this->Logs->insert_logs($this->session->userdata('username'), 
-								 $this->session->userdata('office_id'), 
+		$this->Logs->insert_logs('attendance',
 								 'EDIT LOGS', 
 								 'Edited '.$this->input->post('colid').'('.$dtr_details['log_date'].') Change from '.
 								 $old.' to '.$new, 
@@ -1471,6 +1468,8 @@ class Ajax extends MX_Controller {
 							
 			}
 			
+			$leave_logs_info = $info['particulars'];
+			
 			foreach ($this->leave->dates as $date)
 			{
 				// If half day
@@ -1534,10 +1533,9 @@ class Ajax extends MX_Controller {
 				
 						$this->Dtr->insert_dtr($info);
 						
-						//use for use logs
+						// Use for use logs
 						$this->Logs->insert_logs(
-												$this->session->userdata('username'), 
-												$this->session->userdata('office_id'), 
+												'leave', 
 												'LEAVE EVENT', 
 												'', 
 												$this->leave->employee_id
@@ -1625,6 +1623,13 @@ class Ajax extends MX_Controller {
 			}
 			
 			$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+			
+			$this->Logs->insert_logs(
+									'leave', 
+									'ENCODE LEAVE', 
+									$leave_logs_info, 
+									$this->leave->employee_id
+									);
 		
 			?>
 			<script>
@@ -2270,8 +2275,7 @@ class Ajax extends MX_Controller {
 						
 						//use for use logs
 						$this->Logs->insert_logs(
-												$this->session->userdata('username'), 
-												$this->session->userdata('office_id'), 
+												'attendance', 
 												'Compensatory Timeoff EVENT', 
 												'', 
 												$this->cto->employee_id
@@ -2911,8 +2915,7 @@ class Ajax extends MX_Controller {
 		if ($download_zip == 'true')
 		{
 			echo anchor(base_url().'logs/'.$this->session->userdata('office_id').'-'.date('Y-m-d').".zip", 'Download File');
-			$this->Logs->insert_logs($this->session->userdata('username'), 
-									 $this->session->userdata('office_id'), 
+			$this->Logs->insert_logs('attendance', 
 									 'DOWNLOAD ZIP FILE', 'Download zip file from computer', 
 									 ''
 									 );

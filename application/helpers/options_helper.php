@@ -103,9 +103,11 @@ function user_options( $add_blank = FALSE )
 		$options[''] = '';
 	}
 	
+	$options[0] = '-- All --';
+	
 	foreach ($rows as $row)
 	{
-		$options[$row->id] = $row->username.' -- '.$row->lname.', '.$row->fname;	
+		$options[$row->username] = $row->username.' -- '.$row->lname.', '.$row->fname;	
 	}
 	
 	return $options;

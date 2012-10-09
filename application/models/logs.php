@@ -37,6 +37,9 @@ class Logs extends CI_Model {
 	public $num_rows = 0;
 	public $office_id = '';
 	public $username = '';
+	public $module = '';
+	public $date1 = '';
+	public $date2 = '';
 	
 	// --------------------------------------------------------------------
 	
@@ -108,7 +111,7 @@ class Logs extends CI_Model {
 	{
 		$data = array();
 		
-		if ($office_id != '')
+		if ($office_id != '' and ! $this->input->post('office_id'))
 		{
 			$this->db->where('office_id', $office_id);
 		}
@@ -118,18 +121,21 @@ class Logs extends CI_Model {
 			$this->db->where('username', $this->username);
 		}
 		
+		if ($this->module != '')
+		{
+			$this->db->where('module', $this->module);
+		}
+		
+		if ($this->date1 != '' and $this->date2 != '')
+		{
+			$this->db->where('DATE(date) BETWEEN "'.$this->date1.'" and "'.$this->date2.'"');
+		}
+		
 		$this->db->order_by('date', 'DESC');
 		
-		//if ( $per_page != '' and $off_set != '' )
-		//{
-			$this->db->limit($per_page, $off_set);
-		//}
-		
-		
+		$this->db->limit($per_page, $off_set);
 		
 		$q = $this->db->get('logs');
-		//echo $this->db->last_query();
-		//exit;
 		
 		$this->num_rows = $q->num_rows();
 		
@@ -154,12 +160,15 @@ class Logs extends CI_Model {
 	 * @param string $command
 	 * @param varchar $employee_id_affected
 	 */
-	function insert_logs($username, $office_id, $command, $details = '1', $employee_id_affected = '1')
+	function insert_logs($module, $command, $details = '1', $employee_id_affected = '1')
 	{
 		
+		$this->load->helper('date');
+		
 		$data = array(
-               'username' 				=> $username ,
-               'office_id' 				=> $office_id ,
+               'module'					=> $module,
+			   'username' 				=> $this->session->userdata('username'),
+               'office_id' 				=> $this->session->userdata('office_id'),
                'command' 				=> $command,
                'details'				=> $details,
                'employee_id_affected' 	=> $employee_id_affected,

@@ -589,8 +589,7 @@ class Employees extends MX_Controller  {
 		
 				$id = $this->Employee->add_employee($info);
 				
-				$this->Logs->insert_logs($this->session->userdata('username'), 
-										 $this->session->userdata('office_id'), 
+				$this->Logs->insert_logs('employees', 
 										'ADD EMPLOYEE', 
 										'Add new employee ('.$id.')', 
 										$id);
@@ -799,8 +798,7 @@ class Employees extends MX_Controller  {
 				
 				$this->Employee->update_employee($info, $id);
 				
-				$this->Logs->insert_logs($this->session->userdata('username'), 
-										 $this->session->userdata('office_id'), 
+				$this->Logs->insert_logs('employees', 
 										 'EDIT EMPLOYEE', 
 										 'Edit employee ('.$id.')', 
 										 $id
@@ -832,6 +830,13 @@ class Employees extends MX_Controller  {
 		
 		// Use for messaging
 		$this->session->set_flashdata('msg', 'Employee deleted!');
+		
+		$this->Logs->insert_logs(
+									'employees', 
+									'DELETE EMPLOYEE', 
+									'', 
+									$employee_id
+									);
 		
 		redirect(base_url().'employees/index/'.$office_return.'/'.$page, 'refresh');
 	}
