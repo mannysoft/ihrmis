@@ -5,6 +5,18 @@ class Migration_modify_data_logs extends CI_Migration {
 	
 	function up() 
 	{	
+		
+		$fields = array(
+                        'date' => array(
+                                                       'name' => 'date',
+                                                       'type' => 'VARCHAR(30)',
+                                             ),
+		);
+		
+		$this->dbforge->modify_column('logs', $fields);
+		
+		
+		
 		$this->db->where('command', 'EDIT USER');
 		$this->db->update('logs', array('module' => 'users'));
 		
@@ -28,6 +40,15 @@ class Migration_modify_data_logs extends CI_Migration {
 		
 		$this->db->where('command', 'MANUAL LOG');
 		$this->db->update('logs', array('module' => 'attendance'));
+		
+		$fields = array(
+                        'date' => array(
+                                                       'name' => 'date',
+                                                       'type' => 'TIMESTAMP',
+                                             ),
+		);
+		
+		$this->dbforge->modify_column('logs', $fields);
 		
 		
 	}
