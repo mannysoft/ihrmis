@@ -254,7 +254,7 @@ to
 	
 	
 	
-	$rows = $this->Office_pass->get_office_pass();
+	$rows = $this->Office_pass->get_office_pass(50);
 	
 	
 	

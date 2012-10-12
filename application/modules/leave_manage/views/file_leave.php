@@ -86,6 +86,7 @@
         <option value="3">Filial Obligation</option>
         <option value="4">Domestic Emergency</option>
         <option value="5">Personal Transaction</option>
+        <option value="6">Hospitalization</option>
       </select>    </td>
     <td width="1" align="left">&nbsp;</td>
   </tr>

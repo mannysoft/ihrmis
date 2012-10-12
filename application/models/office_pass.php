@@ -97,11 +97,16 @@ class Office_pass extends CI_Model {
 	 *
 	 * @return array
 	 */
-	function get_office_pass()
+	function get_office_pass($limit = '')
 	{
 		$data = array();
 		
 		$this->db->order_by('date', 'DESC');
+		
+		if($limit != '')
+		{
+			$this->db->limit($limit);
+		}
 		
 		$q = $this->db->get('office_pass');
 		

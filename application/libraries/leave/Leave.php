@@ -414,6 +414,7 @@ class Leave {
 						'3'	=> 'Filial Obligation',
 						'4'	=> 'Domestic Emergency',
 						'5'	=> 'Personal Transaction',
+						'6'	=> 'Hospitalization',
 						);
 						
 		return $special_privs[$this->special_priv_id];

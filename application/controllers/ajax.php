@@ -1843,6 +1843,11 @@ class Ajax extends MX_Controller {
 				$special_priv = 'Personal Transaction';
 			}
 			
+			if($this->leave->special_priv_id == 6)
+			{
+				$special_priv = 'Hospitalization';
+			}
+			
 			$info = array(
 						"employee_id"		=> $this->leave->employee_id,
 						"particulars"		=> $this->leave->count_leave.' '.$special_priv,
