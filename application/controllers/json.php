@@ -46,11 +46,6 @@ class Json extends MX_Controller {
 		//$this->output->enable_profiler(TRUE);
     }  
 	
-	function haha()
-	{
-		echo 'haha';	
-	}
-	
 	// --------------------------------------------------------------------
 	
 	function employees($office_id = '', $employee_id = '')

@@ -80,14 +80,8 @@
       <input name="mone" type="radio" value="2" id="mone2" />
       <label for="radio">SL</label>
       <br />
-      <select name="special_priv_id" id="special_priv_id" disabled="disabled">
-        <option value="1">Personal Milestone</option>
-        <option value="2">Parental Obligation</option>
-        <option value="3">Filial Obligation</option>
-        <option value="4">Domestic Emergency</option>
-        <option value="5">Personal Transaction</option>
-        <option value="6">Hospitalization</option>
-      </select>    </td>
+      <?php echo form_dropdown('special_priv_id', $this->leave->special_priv(TRUE), '', 'id="special_priv_id" disabled="disabled"');?>
+      </td>
     <td width="1" align="left">&nbsp;</td>
   </tr>
   <tr>

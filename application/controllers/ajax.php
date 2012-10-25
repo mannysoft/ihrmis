@@ -89,19 +89,11 @@ class Ajax extends MX_Controller {
 		}
 		
 		
-		if ($com_no != 0)
-		{
-			// Change method
-			$this->Stand_alone->change_method('t4_connect/logs/method.txt', 'com');	
-			
-		}
-		else
-		{
-			// change method
-			$this->Stand_alone->change_method('t4_connect/logs/method.txt', 'net');	
-		}
-		 
+		$connect = ($com_no != 0) ? 'com' : 'net';
 		
+		// Change method
+		$this->Stand_alone->change_method('t4_connect/logs/method.txt', $connect);	
+			
 		//Sleep for 2 seconds
 		sleep(2);
 		
@@ -327,46 +319,6 @@ class Ajax extends MX_Controller {
 		
 		// --------------------------------------------------------------------
 		
-		if ($mode == 'encode_leave_card')
-		{
-			// Validation
-			//$this->form_validation->set_rules('employee_id', 'Employee ID', 'required|callback_employee_id_check');
-			$this->form_validation->set_rules('period', 'Period', 'required');
-			
-			if ($this->form_validation->run($this) == FALSE)
-			{
-				
-			}
-			
-			$this->load->model('leave_card_m');
-			
-			$l = new Leave_card_m();
-			
-			$l->where('id', $this->input->post('rowid'));
-			
-			$l->get();
-						
-			$column = $this->input->post('colid');
-			
-			$new_value = $this->input->post('new');
-			
-			if ($column == 'period')
-			{
-
-			}
-			
-			$l->$column = $new_value;
-			
-			$l->save();
-			
-			exit;
-		}
-		
-		// --------------------------------------------------------------------
-		
-		//$_POST['colid'] = 'ob_leave';
-		//$_POST['new'] = '';
-	
 		//$colid = table field, $new = new value, $rowid = table row id
 		if ($this->input->post('colid') == 'ob_leave')
 		{
@@ -442,7 +394,7 @@ class Ajax extends MX_Controller {
 				
 			}
 			
-			// this is for leave==============================================================================
+			// This is for leave===================================================================
 			$is_leave = $this->Dtr->is_leave($this->input->post('rowid'));
 			
 			if($is_leave == TRUE)
@@ -463,7 +415,7 @@ class Ajax extends MX_Controller {
 					$value_day = 0.5;
 				}
 				
-				//Tel what kind of leave
+				// Tell what kind of leave
 				if($this->input->post('new') == 'vl' or $this->input->post('new') == 'SL')
 				{
 					$notes = 'Vacation Leave';
@@ -477,7 +429,7 @@ class Ajax extends MX_Controller {
 				if($this->input->post('new') != 'sl' or $this->input->post('new') != 'VL' or 
 				   $this->input->post('new') != 'vl' or $this->input->post('new') != 'SL')
 				{
-					//echo 'Invalid input!!!';
+	
 				}
 				
 				$is_manual_log_exists = $this->Manual_log->is_manual_log_exists(
@@ -535,7 +487,6 @@ class Ajax extends MX_Controller {
 				return;
 			}
 			
-			
 			$new = $this->input->post('new');
 			
 			$new_value = str_replace(':','', $this->input->post('new'));
@@ -562,9 +513,6 @@ class Ajax extends MX_Controller {
 
 				}
 
-				//echo $accept_late_ob;
-				
-
 				$new = 'Official Business';
 			}
 			if ($new_value == 'Leave' or $new_value == 'leave' or $new_value == 'l')
@@ -583,8 +531,6 @@ class Ajax extends MX_Controller {
 					$this->Dtr->is_pm_in12 = TRUE;
 				}
 			}
-			
-			
 			
 			$this->Dtr->update_dtr($this->input->post('colid'), 
 								   $new, 
@@ -625,7 +571,7 @@ class Ajax extends MX_Controller {
 			$old = 'No Log';
 		}
 		
-		// Check if exist first//
+		// Check if exist first
 		// We need to update only if the orig log is not exists.
 		if ( ! isset($orig_dtr->$c))
 		{
@@ -654,7 +600,7 @@ class Ajax extends MX_Controller {
 			$new = 'No Log';
 		}
 			
-		//use for use logs
+		// Use for use logs
 		$this->Logs->insert_logs('attendance',
 								 'EDIT LOGS', 
 								 'Edited '.$this->input->post('colid').'('.$dtr_details['log_date'].') Change from '.
@@ -670,28 +616,6 @@ class Ajax extends MX_Controller {
 						$special_priv_id = '', $days = '', $mone = '', $process = 0, 
 						$allow_sat_sun = 0, $hospital_leave_days = '')
 	{
-		//echo $days;
-		//echo $month.'-'.$multiple.'-'.$year.'<br>';
-		//echo $month5.'-'.$multiple5.'-'.$year5.'<br>';
-		
-		//$date = '2012-03-01';// current date
-		
-		//$date = strtotime(date("Y-m-d", strtotime($date)) . " +60 days");
-		
-		//echo date("Y-m-d", $date);
-		
-		//echo date('Y-m-d', strtotime('2012-03-01'." +60 days"));
-		
-		//$d = mktime(0,0,0,$month= '03',$day = '01',$year = 2012);
-		///$end_date = date("Y-m-d",strtotime("+60 days",$d));
-		
-		
-		
-		
-		//echo $end_date.'00';
-		
-		//exit;
-		//echo $allow_sat_sun.' allow';
 		
 		// If not approved_leave replace dash with underscore
 		if ( $employee_id != 'approved_leave' )
@@ -820,14 +744,11 @@ class Ajax extends MX_Controller {
 		$dates = explode(",", $this->leave->multiple);
 	
 		$name = $this->Employee->get_employee_info($this->leave->employee_id);
-		//echo $this->leave->leave_type_id;
+		
 		if ($process != 2)
 		{
 			// Output name if exists
 			$this->leave->is_employee($name);
-			
-			//echo $this->leave->leave_type_id.'hehe';
-			
 		}
 		
 		$invalid = '';
@@ -835,16 +756,14 @@ class Ajax extends MX_Controller {
 		$this->leave->dates = $dates;
 		
 		$this->leave->process_dates();
-		//echo $this->leave->count_leave.'-'.$this->leave->mone.'-';
+		
 		$this->leave->dates = array_unique($this->leave->date_process);
 		
 		$office_id = $this->Employee->get_single_field('office_id', $this->leave->employee_id);
 		
 		$notes = $this->Leave_type->get_leave_name($this->leave->leave_type_id);
 		
-		//echo $leave_type_id.'aaa';
-		
-		//
+		// If the user manually enter the number of days in the form
 		if ($this->leave->days != '')
 		{
 			$this->leave->count_leave = $this->leave->days;
@@ -932,16 +851,9 @@ class Ajax extends MX_Controller {
 		$this->leave->max_min_date();
 		$max_date = $this->leave->max_date;
 		$min_date = $this->leave->min_date;
-		
-		
-		//var_dump($process);
-		
+				
 		if ($process || $process == 2)
 		{
-			
-			// to do:
-			// check if the application exists to avoid duplicate applications
-			//if ($this->session->userdata('user_type') == 5 && $mode != 'approved_leave')
 			if ( $this->session->userdata('user_type') == 5)
 			{	
 				// Check if the application exists
@@ -1114,9 +1026,7 @@ class Ajax extends MX_Controller {
 					
 					// Check if the day is holiday
 					$is_holiday = $this->Holiday->is_holiday($paternity_start);
-					
-					//var_dump($is_holiday);
-					
+										
 					if ( $sat_or_sun != 'Saturday' and $sat_or_sun != 'Sunday' and $is_holiday == FALSE)
 					{
 						$paternity_days ++;
@@ -1168,10 +1078,7 @@ class Ajax extends MX_Controller {
 				<?php
 				exit;
 			}
-			
-			//echo $this->leave->leave_type_id.'hehe';
-			//exit;
-			
+						
 			// VL
 			if ($this->leave->leave_type_id == 1)
 			{
@@ -1309,7 +1216,7 @@ class Ajax extends MX_Controller {
 			if ($this->leave->leave_type_id == 9)
 			{
 				
-				//monetary VL
+				// Monetary VL
 				if ($this->leave->mone == 1)
 				{
 					$info = array(
@@ -1349,7 +1256,6 @@ class Ajax extends MX_Controller {
 				
 				// Exit the script
 				?><script>
-				//show_leave_card($('#employee_id').val())
 				$('#multiple').val("");
 				$('#days').val("");
 				$('#hospital_leave_days').val("");
@@ -1496,11 +1402,11 @@ class Ajax extends MX_Controller {
 					}
 					
 					
-					//Select if log_date exist in dtr
+					// Select if log_date exist in dtr
 					$is_log_date_exists = $this->Dtr->is_log_date_exists($this->leave->employee_id, $day);
 						
 					
-					//update
+					// Update
 					if( $is_log_date_exists == TRUE)
 					{
 						$info = array(
@@ -1641,7 +1547,6 @@ class Ajax extends MX_Controller {
 				$('#month4_extra').focus();
 			<?php endif;?>
 			$('#allow_sat_sun').attr("checked", false);
-			//$('#messages').hide();
 			</script>
 			<?php
 		}
@@ -1777,13 +1682,6 @@ class Ajax extends MX_Controller {
 						$this->leave->multiple5;
 		}
 		
-		//echo $max_date;
-		
-		//echo $this->leave->leave_type_id;
-		
-		//echo $leave_apps_id;
-		//exit;
-		
 		$count_leave = '';
 		
 		// VL
@@ -1822,6 +1720,8 @@ class Ajax extends MX_Controller {
 		// Special Privilege Leave(MC#6)
 		if ($this->leave->leave_type_id == 3)
 		{
+			//$this->leave->
+			
 			if($this->leave->special_priv_id == 1)
 			{
 				$special_priv = 'Personal Milestone';

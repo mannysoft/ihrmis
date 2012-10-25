@@ -502,6 +502,8 @@ class Leave_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'file_leave';
 		
+		$this->load->library('leave/leave');
+		
 		$this->load->view('includes/template', $data);
 		
 	}

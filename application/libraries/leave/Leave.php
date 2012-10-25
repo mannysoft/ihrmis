@@ -404,7 +404,7 @@ class Leave {
 	
 	// ------------------------------------------------------------------------
 	
-	function special_priv()
+	function special_priv($drop_down = FALSE)
 	{
 		$special_priv = '';
 		
@@ -417,7 +417,8 @@ class Leave {
 						'6'	=> 'Hospitalization',
 						);
 						
-		return $special_privs[$this->special_priv_id];
+		return ($drop_down == TRUE) ? $special_privs : $special_privs[$this->special_priv_id];						
+		//return $special_privs[$this->special_priv_id];
 	}
 	
 	// ------------------------------------------------------------------------
