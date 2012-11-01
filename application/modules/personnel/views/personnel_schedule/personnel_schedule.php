@@ -14,7 +14,7 @@
         <strong>
         <?php $js = 'id= "year"';echo form_dropdown('year', $year_options, $year_selected, $js);?>
         </strong></td>
-        <td width="30%"></td>
+        <td width="30%">ok we are going to change this. the listing will come from plantilla_items then we will going to get per item id and year in plantilla table</td>
 	</tr>
 </table>
 </form>
