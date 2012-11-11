@@ -1374,6 +1374,21 @@ class Ajax extends MX_Controller {
 							
 			}
 			
+			// MC2 s.2012 special emergency leave CSC MC. No. 2 s. 2012
+			if ($this->leave->leave_type_id == 24)
+			{
+				$info = array(
+							"employee_id"		=> $this->leave->employee_id,
+							"particulars"		=> $this->leave->count_leave.' MC. No. 2 s. 2012',
+							's_abs' 			=> $this->leave->count_leave, 
+							"action_take" 		=> $this->leave->action_taken,
+							"date"				=> $max_date,
+							"leave_type_id" 	=> $this->leave->leave_type_id,
+							"manual_log_id"		=> $manual_log_id
+							);
+				$this->Leave_card->add_leave_card($info);
+			}
+			
 			$leave_logs_info = $info['particulars'];
 			
 			foreach ($this->leave->dates as $date)

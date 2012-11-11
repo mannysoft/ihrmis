@@ -440,8 +440,8 @@ class Leave {
 		$this->v_abs_wop 	= is_zero($this->v_abs_wop);
 		$this->s_earned 	= is_zero($this->s_earned);
 				
-		// If maternity, paternity or solo parent leave
-		$leave_ids = array(4, 5, 6);
+		// If maternity, paternity or solo parent leave, mc2 s. 2012
+		$leave_ids = array(4, 5, 6, 24);
 		
 		if ($this->s_abs == 0 || in_array($this->leave_type_id, $leave_ids))
 		{

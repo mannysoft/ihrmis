@@ -2021,7 +2021,7 @@ class Reports extends MX_Controller
 		
 		$leave_name = $this->Leave_type->get_leave_name($rows['leave_type_id']);
 				
-		$leave_type_ids = array(1, 3, 4, 5, 6, 7, 9, 10, 12);
+		$leave_type_ids = array(1, 3, 4, 5, 6, 7, 9, 10, 12, 24);
 		
 		if (in_array($rows['leave_type_id'], $leave_type_ids))
 		{
@@ -2178,13 +2178,17 @@ class Reports extends MX_Controller
 		$total_vacation_leave 	= $credits['vacation'] 	+ $add_to_balance;
 		$total_sick_leave 		= $credits['sick'] 		+ $add_to_balance;
 		
-		$leave_type_ids = array(3, 4, 5, 6, 20);
+		$leave_type_ids = array(3, 4, 5, 6, 20, 24);
 		
 		if (in_array($rows['leave_type_id'], $leave_type_ids))
 		{
 			if ( $rows['leave_type_id'] == 3 )
 			{
 				$total_vacation_leave 	= 'CSC MC # 6 s 1996';
+			}
+			if ( $rows['leave_type_id'] == 24 )
+			{
+				$total_vacation_leave 	= 'CSC MC. No.2 s.2012';
 			}
 			else
 			{
@@ -2204,7 +2208,7 @@ class Reports extends MX_Controller
 		
 		$total_leave_balance = $credits['vacation'] + $credits['sick'] + ($add_to_balance * 2);
 		
-		$leave_type_ids = array(3, 4, 5, 6, 20);
+		$leave_type_ids = array(3, 4, 5, 6, 20, 24);
 		
 		if (in_array($rows['leave_type_id'], $leave_type_ids))
 		{

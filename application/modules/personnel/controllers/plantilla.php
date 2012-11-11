@@ -57,7 +57,7 @@ class Plantilla extends MX_Controller
 		
 		$e = new Employee_m();
 		
-		$data['employee'] 			= $e->get_by_id ($employee_id);
+		$data['employee'] = $e->get_by_id ($employee_id);
 		
 		$data['selected'] = $e->office_id;
 		
