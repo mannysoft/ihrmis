@@ -881,7 +881,7 @@ class Ajax extends MX_Controller {
 					$('#messages').hide('slow');
 					$('#messages').removeClass();
 					$('#messages').addClass("clean-red");
-					$('#messages').html('This Leave application already exists!');
+					$('#messages').html('This Leave application already exists!!!');
 					$('#messages').slideDown('slow');
 					$('#multiple').val("");
 					$('#allow_sat_sun').attr("checked", false);
@@ -1061,7 +1061,7 @@ class Ajax extends MX_Controller {
 			$is_entry_exists = $this->Leave_card->is_entry_exists(
 									$this->leave->employee_id, 
 									$this->leave->action_taken);			
-									
+			/*						
 			if ( $is_entry_exists == TRUE )
 			{
 				?>
@@ -1078,6 +1078,7 @@ class Ajax extends MX_Controller {
 				<?php
 				exit;
 			}
+			*/
 						
 			// VL
 			if ($this->leave->leave_type_id == 1)
@@ -1483,7 +1484,8 @@ class Ajax extends MX_Controller {
 							$this->leave->leave_type_id == 16 ||  
 							$this->leave->leave_type_id == 18 ||  
 							$this->leave->leave_type_id == 19 ||
-							$this->leave->leave_type_id == 20)
+							$this->leave->leave_type_id == 20 ||
+							$this->leave->leave_type_id == 24)
 						{
 							$info = array(
 									"employee_id" 	=> $this->leave->employee_id, 
@@ -1514,7 +1516,8 @@ class Ajax extends MX_Controller {
 							$this->leave->leave_type_id == 16 || 
 							$this->leave->leave_type_id == 18 ||  
 							$this->leave->leave_type_id == 19 ||
-							$this->leave->leave_type_id == 20)
+							$this->leave->leave_type_id == 20 ||
+							$this->leave->leave_type_id == 24)
 						{
 							
 							$info = array(
