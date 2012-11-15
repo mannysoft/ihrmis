@@ -9,7 +9,7 @@
  * @package		iHRMIS
  * @author		Manolito Isles
  * @copyright	Copyright (c) 2008 - 2011, Charliesoft
- * @license		http://charliesoft.net/hrmis/user_guide/license.html
+ * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
  * @since		Version 1.0
  * @filesource

@@ -118,6 +118,11 @@ function jsUpload(upload_field)
       <td align="left"><input name="mname" type="text" id="mname" value="<?php echo set_value('mname'); ?>" size="35" class="ilaw" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';"/></td>
     </tr>
     <tr>
+      <td align="right">Name Extension:</td>
+      <td>&nbsp;</td>
+      <td align="left"><input name="extension" type="text" id="extension" value="<?php echo set_value('extension'); ?>" size="35" class="ilaw" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';"/></td>
+    </tr>
+    <tr>
       <td align="right">Type of employment: </td>
       <td>&nbsp;</td>
       <td align="left"><span class="type-one"><?php echo form_dropdown('permanent', $permanent_options, $permanent_selected); ?></span></td>

@@ -8,8 +8,8 @@
  *
  * @package		iHRMIS
  * @author		Manolito Isles
- * @copyright	Copyright (c) 2008 - 2012, Charliesoft
- * @license		http://charliesoft.net/hrmis/user_guide/license.html
+ * @copyright	Copyright (c) 2008 - 2013, Charliesoft
+ * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
  * @since		Version 1.0
  * @filesource
@@ -483,6 +483,7 @@ class Employees extends MX_Controller  {
 			$this->form_validation->set_rules('salutation', 'Salutation', 'required');
 			$this->form_validation->set_rules('lname', 'Last Name', 'required');
 			$this->form_validation->set_rules('fname', 'First Name', 'required');
+			$this->form_validation->set_rules('extension', 'First Name', '');
 			$this->form_validation->set_rules('position', 'Position', 'required');
 			$this->form_validation->set_rules('permanent', 'Type of employment', 'required');
 			//$this->form_validation->set_rules('password', 'Password', 'required|matches[repassword]');
@@ -567,6 +568,7 @@ class Employees extends MX_Controller  {
 				'lname' 				=> $this->input->post('lname'),
 				'fname' 				=> $this->input->post('fname'),
 				'mname' 				=> $this->input->post('mname'),
+				'extension' 			=> $this->input->post('extension'),
 				'position' 				=> $this->input->post('position'),
 				'assistant_dept_head' 	=> $this->input->post('assistant_dept_head'),
 				'office_id' 			=> $this->input->post('office_id'),
@@ -719,6 +721,7 @@ class Employees extends MX_Controller  {
 		$data['lname'] 		= $employee_info['lname'];
 		$data['fname'] 		= $employee_info['fname'];
 		$data['mname'] 		= $employee_info['mname'];
+		$data['extension'] 	= $employee_info['extension'];
 		
 		//The original employee id
 		$data['orig_id'] = $employee_info['id'];
@@ -738,6 +741,7 @@ class Employees extends MX_Controller  {
 			$this->form_validation->set_rules('lname', 'Last Name', 'required');
 			$this->form_validation->set_rules('fname', 'First Name', 'required');
 			$this->form_validation->set_rules('position', 'Position', 'required');
+			$this->form_validation->set_rules('extension', 'First Name', '');
 			$this->form_validation->set_rules('permanent', 'Type of employment', 'required');
 			
 			if ($this->form_validation->run($this) == FALSE)
@@ -770,6 +774,7 @@ class Employees extends MX_Controller  {
 						'lname' 				=> $this->input->post('lname'),
 						'fname' 				=> $this->input->post('fname'),
 						'mname' 				=> $this->input->post('mname'),
+						'extension' 			=> $this->input->post('extension'),
 						'office_id' 			=> $this->input->post('office_id'),
 						'division_id' 			=> $this->input->post('division_id'),
 						'section_id' 			=> $this->input->post('section_id'),

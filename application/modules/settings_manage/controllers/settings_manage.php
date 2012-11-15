@@ -8,8 +8,8 @@
  *
  * @package		iHRMIS
  * @author		Manolito Isles
- * @copyright	Copyright (c) 2008 - 2012, Charliesoft
- * @license		http://charliesoft.net/hrmis/user_guide/license.html
+ * @copyright	Copyright (c) 2008 - 2013, Charliesoft
+ * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
  * @since		Version 1.0
  * @filesource
@@ -806,8 +806,8 @@ class Settings_Manage extends MX_Controller {
 		$config['base_url'] = base_url().'settings_manage/audit_trail';
 		$config['total_rows'] = $this->Logs->num_rows;
 	    $config['per_page'] = '15';
-	    $config['full_tag_open'] = '<p>';
-	    $config['full_tag_close'] = '</p>';
+	    //$config['full_tag_open'] = '<p>';
+	    //$config['full_tag_close'] = '</p>';
 				
 		$this->pagination->initialize($config);
 		
