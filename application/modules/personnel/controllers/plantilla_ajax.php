@@ -2,9 +2,10 @@
 /**
  * Integrated Human Resource Management Information System
  *
- * An Application Software use by Government agencies for management
- * of employees Attendance, Leave Administration, Payroll, Personnel
- * Training, Service Records, Performance, Recruitment and more...
+ * An Open source Application Software use by Government agencies for 
+ * management of employees Attendance, Leave Administration, Payroll, 
+ * Personnel Training, Service Records, Performance, Recruitment,
+ * Personnel Schedule(Plantilla) and more...
  *
  * @package		iHRMIS
  * @author		Manolito Isles
@@ -56,11 +57,11 @@ class Plantilla_ajax extends MX_Controller
                                 'mname'
                                 );
         
-		$data['rows'] = $this->Employee->get_employee_list($this->session->userdata('office_id'), '');
-		
 		if ($office_id != '')
 		{
-			$data['rows'] = $this->Employee->get_employee_list($office_id, '');
+			$p = new Plantilla_item();
+
+			$data['rows'] = $p->get_by_office_id($office_id);
 		}
 		
 		//
@@ -70,7 +71,7 @@ class Plantilla_ajax extends MX_Controller
 		{
 			$c = new Plantilla();
 			
-			$c->where('employee_id', $row['id']);
+			$c->where('employee_id', $row->id);
 			$c->where('year', $year);
 			$c->get();
 			
@@ -80,10 +81,10 @@ class Plantilla_ajax extends MX_Controller
 			}
 			else// Insert blank
 			{
-				$c->employee_id 	= $row['id'];
+				$c->employee_id 	= $row->id;
 				$c->year 			= $year;
 				//$c->type 			= 'balance';
-				$c->save();
+				//$c->save();
 				//echo 'not cool';
 			}
 		}

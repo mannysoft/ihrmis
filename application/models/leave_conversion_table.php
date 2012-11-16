@@ -2,9 +2,10 @@
 /**
  * Integrated Human Resource Management Information System
  *
- * An Application Software use by Government agencies for management
- * of employees Attendance, Leave Administration, Payroll, Personnel
- * Training, Service Records, Performance, Recruitment and more...
+ * An Open source Application Software use by Government agencies for 
+ * management of employees Attendance, Leave Administration, Payroll, 
+ * Personnel Training, Service Records, Performance, Recruitment,
+ * Personnel Schedule(Plantilla) and more...
  *
  * @package		iHRMIS
  * @author		Manolito Isles

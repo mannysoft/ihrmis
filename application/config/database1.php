@@ -50,7 +50,6 @@ $db['default']['database'] = "tawa";
 $db['default']['database'] = "ihrmis_mrdq";
 //$db['default']['database'] = "ihrmis_lu";
 $db['default']['database'] = "ihrmis_puerto";
-//$db['default']['database'] = "ihrmis_nia";
 $db['default']['dbdriver'] = "mysqli";
 $db['default']['dbprefix'] = "ats_";
 $db['default']['pconnect'] = TRUE;
