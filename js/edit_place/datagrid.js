@@ -420,6 +420,13 @@ function dg_onBlur(me, n)
 		var out_value = newval
 	}
 	
+	// Use for plantilla
+	if (this.mode == "adcom")
+	{
+		
+		var out_value = newval
+	}
+	
 	// Use for salary Grade
 	if (this.mode == "salary_grade")
 	{

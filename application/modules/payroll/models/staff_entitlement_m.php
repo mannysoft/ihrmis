@@ -2,7 +2,7 @@
 
 class Staff_entitlement_m extends DataMapper{
 
-	var $table  = 'payroll_staff_entitlement';
+	public $table  = 'payroll_staff_entitlement';
 	
 	//var $has_many = array('deductions_information');
 	

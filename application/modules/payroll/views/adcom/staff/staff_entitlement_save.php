@@ -14,7 +14,7 @@
         	
 			<?php $selected = $information->id == $deduction->additional_compensation_id ? 'selected' : ''; ?>
         	
-            <option value="<?=$information->id;?>" <?php echo $selected?>><?=$information->name;?></option>
+            <option value="<?=$information->id;?>" <?php echo $selected?>><?=$information->code;?></option>
         
 		<?php endforeach; ?>
       </select>
@@ -39,7 +39,7 @@
     <tr>
       <td>&nbsp;</td>
       <td><input type="submit" name="button" id="button" value="Save" />
-        <a href="<?=base_url().'payroll/additional_compensation/staff_entitlement/'.$employee_id?>">Cancel</a><input name="op" type="hidden" id="op" value="1" />
+        <a href="<?=base_url().'payroll/adcom/staff_entitlement/'.$employee_id?>">Cancel</a><input name="op" type="hidden" id="op" value="1" />
         <input name="id" type="hidden" id="id" /></td>
       <td>&nbsp;</td>
     </tr>

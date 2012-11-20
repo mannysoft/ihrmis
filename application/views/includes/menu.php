@@ -214,8 +214,8 @@ $settings_management =  array(
   <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional Compensation</a>
   <ul>
   
-  <li><a  href="<?php echo base_url();?>payroll/additional_compensation/add_compensation"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional Compensation</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/additional_compensation/staff_entitlement"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Staff Entitlement</a></li>
+  <li><a  href="<?php echo base_url();?>payroll/adcom"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional Compensation</a></li>
+  <li><a  href="<?php echo base_url();?>payroll/adcom/staff_entitlement"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Staff Entitlement</a></li>
   </ul>
   </li>
   

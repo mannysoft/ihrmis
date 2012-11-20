@@ -2,10 +2,10 @@
 <table width="100%" border="0">
   <tr>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td>we rather list the employees with checkbox and check only the employee with additional compensation</td>
     <td>
     <?php if ( $employee_id != '' ):?>
-    <a href="<?php echo base_url().'payroll/additional_compensation/staff_entitlement_save/0/'.$employee_id;?>">Add Staff Entitlements</a>
+    <a href="<?php echo base_url().'payroll/adcom/staff_entitlement_save/0/'.$employee_id;?>">Add Staff Entitlements</a>
      <?php endif;?>
     </td>
   </tr>
@@ -16,7 +16,7 @@
     </select>
     <input type="submit" name="go" id="go" value="Go" />&nbsp;
     <input name="op" type="hidden" id="op" value="1" /></td>
-    <td width="13%"></td>
+    <td width="13%">additional compensation dropdown here</td>
   </tr>
 </table>
 </form>
@@ -45,7 +45,7 @@
         <td><?php echo $deduction->effectivity_date;?></td>
         <td><?php echo $deduction->ineffectivity_date;?></td>
         <td align="right"><?php echo number_format($deduction->amount, 2)?>&nbsp;</td>
-        <td><a href="<?php echo base_url().'payroll/additional_compensation/staff_entitlement_save/'.$deduction->id.'/'.$employee_id;?>">Edit</a> | <a href="<?php echo base_url().'payroll/additional_compensation/staff_entitlement_delete/'.$deduction->id.'/'.$employee_id;?>">Delete</a></td>
+        <td><a href="<?php echo base_url().'payroll/adcom/staff_entitlement_save/'.$deduction->id.'/'.$employee_id;?>">Edit</a> | <a href="<?php echo base_url().'payroll/adcom/staff_entitlement_delete/'.$deduction->id.'/'.$employee_id;?>">Delete</a></td>
       </tr>
   <?php endforeach; ?>
   <tr>

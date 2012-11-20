@@ -2,7 +2,7 @@
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td><a href="<?php echo base_url().'payroll/additional_compensation/add_compensation_save/';?>">Add</a></td>
+    <td><a href="<?php echo base_url().'payroll/adcom/save/';?>">Add</a></td>
   </tr>
   <tr>
     <td width="19%">&nbsp;</td>
@@ -35,7 +35,7 @@
         <td><?php echo $deduction->order;?></td>
         <td><?php echo $deduction->deductible;?></td>
         <td><?php echo $deduction->basis;?></td>
-        <td><a href="<?php echo base_url().'payroll/additional_compensation/add_compensation_save/'.$deduction->id;?>">Edit</a> | <a href="<?php echo base_url().'payroll/additional_compensation/add_compensation_delete/'.$deduction->id;?>">Delete</a></td>
+        <td><a href="<?php echo base_url().'payroll/adcom/save/'.$deduction->id;?>">Edit</a> | <a href="<?php echo base_url().'payroll/adcom/delete/'.$deduction->id;?>">Delete</a></td>
       </tr>
   <?php endforeach; ?>
   <tr>

@@ -276,9 +276,7 @@ class Ajax extends MX_Controller {
 		{
 			//echo 'schedule';
 			$new = $this->input->post('new');
-			
-			//$new_value = str_replace(':','', $this->input->post('new'));
-			
+						
 			$this->Schedule_employees->update_Schedule($this->input->post('colid'), 
 								   			 $new, 
 								   			 $this->input->post('rowid')
@@ -317,6 +315,10 @@ class Ajax extends MX_Controller {
 			$s->update_salary_grade($data, $id);
 			exit;
 		}
+		
+		// --------------------------------------------------------------------
+		
+		
 		
 		// --------------------------------------------------------------------
 		

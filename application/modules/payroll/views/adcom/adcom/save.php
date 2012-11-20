@@ -47,7 +47,7 @@
     <tr>
       <td>&nbsp;</td>
       <td><input type="submit" name="button" id="button" value="Save" />
-        <a href="<?=base_url().'payroll/additional_compensation/add_compensation'?>">Cancel</a>
+        <a href="<?=base_url().'payroll/adcom'?>">Cancel</a>
         <input name="op" type="hidden" id="op" value="1" />
         <input name="id" type="hidden" id="id" value="<?php ?>" /></td>
       <td>&nbsp;</td>
