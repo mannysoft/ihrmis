@@ -8,7 +8,7 @@
  * Personnel Schedule(Plantilla) and more...
  *
  * @package		iHRMIS
- * @author		Manolito Isles
+ * @author		Manny Isles
  * @copyright	Copyright (c) 2008 - 2013, Charliesoft
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
@@ -26,7 +26,7 @@
  * @package		iHRMIS
  * @subpackage	Payroll
  * @category	Controllers
- * @author		Manolito Isles
+ * @author		Manny Isles
  * @link		http://charliesoft.net/hrmis/user_guide/modules/payroll/controllers/payroll.html
  */
 class Payroll extends MX_Controller {

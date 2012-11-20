@@ -8,7 +8,7 @@
  * Personnel Schedule(Plantilla) and more...
  *
  * @package		iHRMIS
- * @author		Manolito Isles
+ * @author		Manny Isles
  * @copyright	Copyright (c) 2008 - 2013, Charliesoft
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
@@ -27,7 +27,7 @@
  * @package		iHRMIS
  * @subpackage	Models
  * @category	Models
- * @author		Manolito Isles and Michael Rafallo
+ * @author		Manny Isles and Michael Rafallo
  * @link		http://charliesoft.net/hrmis/user_guide/models/conversion_table.html
  */
 class Id_preview extends MX_Controller
