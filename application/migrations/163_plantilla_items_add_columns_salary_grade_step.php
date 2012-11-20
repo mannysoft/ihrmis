@@ -6,6 +6,10 @@ class Migration_plantilla_items_add_columns_salary_grade_step extends CI_Migrati
 	{			
 	
 		$fields = array(
+                        'division_id' => array('type' => 'INT (11)', 'null' => FALSE));
+		$this->dbforge->add_column('plantilla_items', $fields, 'office_id');
+		
+		$fields = array(
                         'salary_grade' => array('type' => 'TINYINT (2)', 'null' => FALSE));
 		$this->dbforge->add_column('plantilla_items', $fields, 'description');
 

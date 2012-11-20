@@ -663,6 +663,7 @@ class Employees extends MX_Controller  {
 										'lname',
 										'fname',
 										'mname',
+										'extension',
 										'orig_id'
 										);
 		

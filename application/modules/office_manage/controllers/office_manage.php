@@ -142,6 +142,11 @@ class Office_Manage extends MX_Controller {
 				
 		$this->Office->delete_office($office_id);
 		
+		// Delete the associated division
+		$d = new Division();
+		$d->where('office_id', $office_id)->get();
+		$d->delete_all();
+		
 		$this->session->set_flashdata('msg', 'Office deleted!');
 		
 		redirect(base_url().'office_manage/view_offices', 'refresh');

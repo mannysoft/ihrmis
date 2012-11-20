@@ -135,6 +135,7 @@ class Attendance extends MX_Controller {
 	public $week3_undertime_final	= 0;		
 	public $week4_undertime_final	= 0;		
 	
+	public $start_date				= 1;
 
 	// --------------------------------------------------------------------
 	
@@ -312,12 +313,12 @@ class Attendance extends MX_Controller {
 			$this->period_to   	= $this->input->post('period_to');
 			
 			
-			$start_date = '1';
+			//$start_date = '1';
 			
 			// If the $this->period_from is not 1
 			if ($this->period_from != '1')
 			{
-				$start_date = $this->input->post('period_from'); // Start of viewing DTR
+				$this->start_date = $this->input->post('period_from'); // Start of viewing DTR
 				
 				$this->period_from = '1'; // We will still use the first day
 			}
@@ -337,6 +338,8 @@ class Attendance extends MX_Controller {
 			
 			// If the request is from view attendance page===>>>>
 			$this->from_view_attendance();
+			
+			
 			
 			// Remove empty array
 			$this->employee_array = array_filter($this->employee_array);
@@ -454,14 +457,14 @@ class Attendance extends MX_Controller {
 				$pdf->SetX(43);
 				
 				// write
-				$pdf->Write(0, ucwords(strtolower($month2.' '.$this->period_from.'-'.$this->period_to.', '.$this->year)));
+				$pdf->Write(0, ucwords(strtolower($month2.' '.$this->start_date.'-'.$this->period_to.', '.$this->year)));
 				
 				
 				// go to 25 X (indent)
 				$pdf->SetX(137);
 				
 				// write
-				$pdf->Write(0, ucwords(strtolower($month2.' '.$this->period_from.'-'.$this->period_to.', '.$this->year)));
+				$pdf->Write(0, ucwords(strtolower($month2.' '.$this->start_date.'-'.$this->period_to.', '.$this->year)));
 			
 				####################################
 				#THIS IS FOR THE MONTH (END)       #
@@ -524,9 +527,9 @@ class Attendance extends MX_Controller {
 					
 					// If the $this->period_from is not 1 something like
 					// June 16-30 2012
-					if ($start_date != '1')
+					if ($this->start_date != '1')
 					{
-						if ($log_day < $start_date)
+						if ($log_day < $this->start_date)
 						{
 							$this->am_login 		= '';
 							$this->am_logout		= '';
@@ -1449,6 +1452,17 @@ class Attendance extends MX_Controller {
 		
 			list($this->year, $this->month, $this->period_from) = explode('-', $date);
 			list($this->year, $this->month, $this->period_to) 	= explode('-', $date2);
+			
+			$this->start_date = 1;
+			
+			if ($this->period_from != '1')
+			{
+				$this->start_date = $this->period_from; // Start of viewing DTR
+				
+				$this->period_from = '1'; // We will still use the first day
+			}
+			
+			//$this->start_date = $this->period_from;
 		}
 	}
 	
