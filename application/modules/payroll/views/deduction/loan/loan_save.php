@@ -38,7 +38,7 @@
     </tr>
     <tr>
       <td align="right">Monthly Due</td>
-      <td><input name="monthly_due" type="text" id="monthly_due" value="<?php echo $deduction->monthly_due;?>" size="30" /></td>
+      <td><input name="monthly_pay" type="text" id="monthly_pay" value="<?php echo $deduction->monthly_pay;?>" size="30" /></td>
       <td>&nbsp;</td>
     </tr>
     <tr>

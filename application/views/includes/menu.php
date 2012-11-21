@@ -206,6 +206,7 @@ $settings_management =  array(
   <li><a  href="<?php echo base_url();?>Administration/list_user"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Insurances</a></li>-->
   <li><a  href="<?php echo base_url();?>payroll/remittance/deduction_refund"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Deductions Refund</a></li>
   <li><a  href="<?php echo base_url();?>payroll/remittance/philhealth_sched"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Philhealth Schedule</a></li>
+  <li><a  href="<?php echo base_url();?>payroll/remittance/sss_sched"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />SSS Schedule</a></li>
   <li><a  href="<?php echo base_url();?>payroll/remittance/pae"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Personal Additional Exemption</a></li>
   <li><a  href="<?php echo base_url();?>payroll/remittance/tax_table"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Tax Table</a></li>
   </ul>

@@ -9,7 +9,7 @@
 <?php foreach($rows as $row):?>
 	<?php $bg = $this->Helps->set_line_colors();?>     
 <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
 <td><input name="ob[]" type="checkbox" id="ob[]" ONCLICK="highlightRow(this,'#ABC7E9');" value=""/>
 <?php echo $row->employee_id;?></td>
 <td><?php echo $name['fname'].' '.$name['mname'].' '.$name['lname'];?></td>

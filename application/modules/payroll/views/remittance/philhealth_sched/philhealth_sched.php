@@ -13,10 +13,10 @@
 
 <table width="100%" border="0" class="type-one">
   <tr class="type-one-header">
-    <th>ID</th>
-    <th>Range</th>
+    <th>Salary Bracket</th>
+    <th>Salary Range</th>
     <th>Salary Based</th>
-    <th>Monthly Share</th>
+    <th>Total Monthly Premium</th>
     <th>Employee Share</th>
     <th>Employer Share</th>
     <th>Actions</th>
@@ -30,8 +30,8 @@
 		
 		?>
       <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
-        <td><?php echo $deduction->id;?></td>
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
+        <td><?php echo $deduction->salary_bracket;?></td>
         <td><?php echo number_format($deduction->start_range, 2);?> to <?php echo number_format($deduction->end_range, 2);?></td>
         <td align="right"><?php echo number_format($deduction->salary_based, 2);?></td>
         <td align="right"><?php echo number_format($deduction->monthly_share, 2);?></td>

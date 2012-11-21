@@ -56,7 +56,7 @@
 		
   ?>
   <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
     <td><?php echo $row['employee_id'];?></td>
     <td><?php echo $row['lname'].', '.$row['fname'].' '.$row['mname'];?></td>
     <td><?php echo $office_name;?></td>

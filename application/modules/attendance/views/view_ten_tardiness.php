@@ -132,7 +132,7 @@ if (!empty($offices))
 		
 	  ?>
 	  <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '#ABC7E9';this.style.color='#000000';" 
-		onmouseout ="this.bgColor = '<?php echo $bg;?>';this.style.color='#000000'">
+		onmouseout ="this.bgColor = '<?php echo $bg;?>';this.style.color='#000000'" style="border-bottom: 1px solid #999999;">
 	    <td bgcolor="">&nbsp;</td>
 	    <td colspan="2" bgcolor=""><?php echo $name['fname'].' '.$name['mname'].' '.$name['lname'];?></td>
 		<td align="center" bgcolor=""><?php echo $late1['tardi_count'];?>&nbsp;</td>

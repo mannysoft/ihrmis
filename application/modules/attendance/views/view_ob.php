@@ -29,7 +29,7 @@
 		$notes = $this->Manual_log->get_notes($row['manual_log_id']);
 		?>
   <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
     <td bgcolor=""><?php echo $employee_id;?></td>
     <td bgcolor=""><?php echo $name['lname'].', '.$name['fname'].' '.$name['mname'];?></td>
     <td bgcolor=""><?php echo $notes;?></td>

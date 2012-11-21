@@ -82,7 +82,7 @@ offices.m_columns['amount']={'coltype':'text','style':''};
 	?>
 	<?php $bg = $this->Helps->set_line_colors();?>
 	<tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
 	  <td><input name="employee[]" type="checkbox" value="<?php echo $id;?>" ONCLICK="highlightRow(this,'#ABC7E9');" id="employee"/></td>
 	  <td><?php echo $row->lname.', '.$row->fname;?>&nbsp;</td>
 	  <td><?php echo $row->position;?></td>

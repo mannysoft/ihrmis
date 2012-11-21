@@ -180,7 +180,7 @@ class Remittance extends MX_Controller {
 		
 		$config['base_url'] = base_url().'payroll/remittance/philhealth_sched/';
 		$config['total_rows'] = $p->get()->count();
-		$config['per_page'] = '15';
+		$config['per_page'] = '30';
 		
 		$this->pagination->initialize($config);
 		
@@ -192,7 +192,7 @@ class Remittance extends MX_Controller {
 		
 		// Get all positions
 		//$p = new Position();
-		$p->order_by('start_range');
+		$p->order_by('salary_bracket');
 		
 		$data['deductions'] = $p->get($limit, $offset);
 		
@@ -204,12 +204,7 @@ class Remittance extends MX_Controller {
 	// --------------------------------------------------------------------
 	
 	function philhealth_sched_save( $id = '' )
-	{
-		$data['bread_crumbs'] = '<a href="'.base_url().'home/home_page/">Home</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll/">Payroll Management</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/deductions/">Deductions</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/agency/">Agency</a> / ';
-		
+	{		
 		$data['page_name'] = '<b>Add Philhealth Schedules</b>';
 		
 		if ( $id != '' )
@@ -246,6 +241,76 @@ class Remittance extends MX_Controller {
 	// --------------------------------------------------------------------
 	
 	function philhealth_sched_delete( $id = '' )
+	{
+		$p = new Philhealth_sched();
+		
+		$p->get_by_id( $id );
+		
+		$p->delete();
+		
+		redirect(base_url().'payroll/remittance/philhealth_sched', 'refresh');
+		
+	}
+	
+	function sss_sched()
+	{
+		$data['page_name'] = '<b>SSS Schedule</b>';
+		
+		$data['msg'] = '';
+		
+		$s = new Sss_table();
+				
+		// Get all positions
+		//$p = new Position();
+		$s->order_by('range_from');
+		
+		$data['deductions'] = $s->get();
+		
+		$data['main_content'] = 'remittance/sss_sched/sss_sched';
+		
+		$this->load->view('includes/template', $data);
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function sss_sched_save( $id = '' )
+	{		
+		$data['page_name'] = '<b>Add Philhealth Schedules</b>';
+		
+		if ( $id != '' )
+		{
+			$data['page_name'] = '<b>Edit Philhealth Schedules</b>';
+		}
+		
+		$data['msg'] = '';
+			
+		$p = new Philhealth_sched();
+		
+		$data['deduction'] = $p->get_by_id( $id );
+		
+		if ( $this->input->post('op'))
+		{
+			$p->start_range 	= $this->input->post('start_range');
+			$p->end_range 		= $this->input->post('end_range');
+			$p->salary_based 	= $this->input->post('salary_based');
+			$p->monthly_share 	= $this->input->post('monthly_share');
+			$p->employee_share 	= $this->input->post('employee_share');
+			$p->employer_share 	= $this->input->post('employer_share');
+			
+			$p->save();
+			
+			redirect(base_url().'payroll/remittance/philhealth_sched', 'refresh');
+			
+		}
+	
+		$data['main_content'] = 'payroll/remittance/philhealth_sched/philhealth_sched_save';
+		
+		$this->load->view('includes/template', $data);	
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function sss_sched_delete( $id = '' )
 	{
 		$p = new Philhealth_sched();
 		

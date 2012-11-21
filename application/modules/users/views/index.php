@@ -34,7 +34,7 @@
 		?>
 		 <?php $bg 	= $this->Helps->set_line_colors();?>
 		<tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
         <td bgcolor=""><input name="user[]" type="checkbox" value="<?php echo $row->id;?>" ONCLICK="highlightRow(this,'#ABC7E9');"/></td>
 		<td bgcolor=""><?php echo $row->username;?></td>
         <td bgcolor=""><strong><?php echo $row->fname.' '.$row->mname.' '.$row->lname;?></strong></td>

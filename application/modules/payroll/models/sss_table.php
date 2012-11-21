@@ -1,11 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Philhealth_sched extends DataMapper{
+class Sss_table extends DataMapper{
 
-	public $table  = 'payroll_philhealth_schedules';
-	
-	//http://www.philhealth.gov.ph/partners/employers/contri_tbl.html
-	
+	public $table  = 'payroll_sss_tables';
+		
 	// --------------------------------------------------------------------
 	
 	

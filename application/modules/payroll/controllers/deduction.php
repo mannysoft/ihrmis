@@ -49,11 +49,7 @@ class Deduction extends MX_Controller {
 	// --------------------------------------------------------------------
 	
 	function agency()
-	{		
-		$data['bread_crumbs'] = '<a href="'.base_url().'home/home_page/">Home</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll/">Payroll Management</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/deductions/">Deductions</a> / ';
-		
+	{				
 		$data['page_name'] = '<b>Agency</b>';
 		
 		$data['msg'] = '';
@@ -89,19 +85,9 @@ class Deduction extends MX_Controller {
 	// --------------------------------------------------------------------
 	
 	function agency_save( $id = '' )
-	{
-		$data['bread_crumbs'] = '<a href="'.base_url().'home/home_page/">Home</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll/">Payroll Management</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/deductions/">Deductions</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/agency/">Agency</a> / ';
-		
-		$data['page_name'] = '<b>Add Agency</b>';
-		
-		if ( $id != '' )
-		{
-			$data['page_name'] = '<b>Edit Agency</b>';
-		}
-		
+	{		
+		$data['page_name'] = '<b>Save Agency</b>';
+				
 		$data['msg'] = '';
 			
 		$p = new Deduction_agency();
@@ -142,11 +128,7 @@ class Deduction extends MX_Controller {
 	// =================================================================================
 	
 	function information()
-	{
-		$data['bread_crumbs'] = '<a href="'.base_url().'home/home_page/">Home</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll/">Payroll Management</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/deductions/">Deductions</a> / ';
-		
+	{		
 		$data['page_name'] = '<b>Deduction Information</b>';
 		
 		$data['msg'] = '';
@@ -182,10 +164,6 @@ class Deduction extends MX_Controller {
 	
 	function information_save( $id = '' )
 	{
-		$data['bread_crumbs'] = '<a href="'.base_url().'home/home_page/">Home</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll/">Payroll Management</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/deductions/">Deductions</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/information/">Deductions Information</a> / ';
 		$data['page_name'] = '<b>Add Information</b>';
 		
 		$this->config->load('deductions');
@@ -248,11 +226,7 @@ class Deduction extends MX_Controller {
 	// =================================================================================
 	
 	function optional( $employee_id = '' )
-	{
-		$data['bread_crumbs'] = '<a href="'.base_url().'home/home_page/">Home</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll/">Payroll Management</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/deductions/">Deductions</a> / ';
-		
+	{		
 		$data['page_name'] = '<b>Optional Contributions</b>';
 		
 		//Use for office listbox
@@ -311,12 +285,7 @@ class Deduction extends MX_Controller {
 	// --------------------------------------------------------------------
 	
 	function optional_save( $id = '', $employee_id = '' )
-	{
-		$data['bread_crumbs'] = '<a href="'.base_url().'home/home_page/">Home</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll/">Payroll Management</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/deductions/">Deductions</a> / ';
-		$data['bread_crumbs'].= '<a href="'.base_url().'payroll_deductions/deductions_information/">Deductions Information</a> / ';
-		
+	{		
 		$data['page_name'] = '<b>Save Optional Contributions</b>';
 		
 		$data['msg'] = '';
@@ -457,7 +426,7 @@ class Deduction extends MX_Controller {
 			$di->date_loan 					= $this->input->post('date_loan');
 			$di->loan_gross 				= $this->input->post('loan_gross');
 			$di->months_pay 				= $this->input->post('months_pay');
-			$di->monthly_due 				= $this->input->post('monthly_due');
+			$di->monthly_pay 				= $this->input->post('monthly_pay');
 			$di->date_from 					= $this->input->post('date_from');
 			$di->date_to 					= $this->input->post('date_to');
 			$di->status 					= $this->input->post('status') ? $this->input->post('status') : 'inactive';			

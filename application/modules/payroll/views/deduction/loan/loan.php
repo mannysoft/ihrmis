@@ -49,13 +49,13 @@
 		
 		?>
       <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
         <td><?php echo $deduction->id;?></td>
         <td><?php echo $agency->code;?>, <?php echo $d->desc ;?></td>
         <td><?php echo $deduction->date_loan;?></td>
         <td align="right"><?php echo $deduction->loan_gross;?></td>
         <td align="right"><?php echo $deduction->months_pay;?></td>
-        <td align="right"><?php echo $deduction->monthly_due;?></td>
+        <td align="right"><?php echo $deduction->monthly_pay;?></td>
         <td><?php echo $deduction->date_from;?></td>
         <td><?php echo $deduction->date_to;?></td>
         <td><?php echo $deduction->status?>&nbsp;</td>

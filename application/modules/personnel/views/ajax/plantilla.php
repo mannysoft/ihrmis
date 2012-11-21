@@ -42,7 +42,7 @@ offices.m_columns['amount']={'coltype':'text','style':''};
 	?>
 	<?php $bg = $this->Helps->set_line_colors();?>
 	<tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
 	  <td id="offices.0.<?php echo $i;?>" <?php echo $onclick0;?>><?php echo $row->item_no;?></td>
 	  <td id="offices.1.<?php echo $i;?>" <?php echo $onclick1;?>><?php echo $row->position_title;?></td>
 	  <td>&nbsp;</td>

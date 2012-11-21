@@ -37,7 +37,7 @@
 		
 		<?php $bg = $this->Helps->set_line_colors();?>
         <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
 	    <td bgcolor=""><?php echo $row['office_code'];?></td>
 	    <td bgcolor=""><?php echo $row['office_name'];?></td>
 	    <td bgcolor=""><?php echo $row['office_address'];?></td>

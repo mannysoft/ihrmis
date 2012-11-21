@@ -1,7 +1,8 @@
 <form action="" method="post">
 <table width="100%" border="0">
   <tr>
-    <td colspan="7"><a href="http://philippinestaxcomputation.blogspot.com/">http://philippinestaxcomputation.blogspot.com/</a></td>
+    <td colspan="7"><a href="http://philippinestaxcomputation.blogspot.com/">http://philippinestaxcomputation.blogspot.com/</a>
+    http://thecolorcure.com/taxcalculator/</td>
     <td>&nbsp;</td>
   </tr>
   <tr>

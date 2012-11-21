@@ -47,7 +47,7 @@
         $bg = $this->Helps->set_line_colors();
         ?>
         <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';" class = "row_selected" employee_id="<?php echo $id;?>">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" class = "row_selected" employee_id="<?php echo $id;?>" style="border-bottom: 1px solid #999999;">
           <td bgcolor=""><input name="employee[]" type="checkbox" class = "set_selected" value="<?php echo $id;?>" <?php echo $checked; ?>/></td>
           <td bgcolor=""><?php echo $id;?></td>
           <td bgcolor=""><?php echo $lname.' '.$fname.' '.$mname;?></td>

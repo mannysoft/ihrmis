@@ -44,7 +44,7 @@ foreach($rows as $row)
     
     ?>
         <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
           <td bgcolor=""><input name="employee[]" type="checkbox" value="<?php echo $id;?>" ONCLICK="highlightRow(this,'#ABC7E9');"/></td>
           <td bgcolor=""><?php echo $employee_id;?></td>
           <td bgcolor=""><?php echo $row['lname'].', '.$row['fname'].' '.$row['mname'];?></td>
