@@ -13,7 +13,7 @@ For the year:
   <?php foreach ($rows as $row): ?>
   	<?php $bg = $this->Helps->set_line_colors(); $date = date("F j, Y", strtotime($row['date']));?>
       <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
         <td><?php echo $date;?></td>
         <td><?php echo $row['description'];?></td>
         <td>Edit | <a href="<?php echo base_url();?>settings_manage/holiday/<?php echo $row['id']; ?>">Delete</a> </td>

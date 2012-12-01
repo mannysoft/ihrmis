@@ -70,6 +70,15 @@ class Reports extends MX_Controller
 			return;
 		}
 		
+		// Municipality of Bataraza
+		if ( $lgu_code == 'bataraza' )
+		{
+	
+			$this->leave_certification_bataraza($vl, $sl, $employee_id);
+			
+			return;
+		}
+		
 		if ( $lgu_code == 'training' )
 		{
 	
@@ -540,7 +549,142 @@ class Reports extends MX_Controller
 	}
 	
 
+	// --------------------------------------------------------------------
+	
+	function leave_certification_bataraza($vl = 0, $sl = 0, $employee_id = '1')
+	{
 		
+		$this->load->library('fpdf');
+		
+		define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+						
+		$this->load->library('fpdi');
+		
+		// initiate FPDI   
+		$pdf = new FPDI('P', 'mm', 'Letter');
+		// add a page
+		$pdf->AddPage();
+		
+		// set the sourcefile
+		$pdf->setSourceFile('dtr/template/certification/bataraza.pdf');
+		
+		// select the first page
+		$tplIdx = $pdf->importPage(1);
+		
+		// use the page we imported
+		$pdf->useTemplate($tplIdx);
+		
+		$vacation_leave =  $vl;
+		$sick_leave 	=  $sl;
+		
+		$name = $this->Employee->get_employee_info($employee_id);
+		
+		
+		$office_name = $this->Office->get_office_name($name['office_id']);
+		
+		// set font, font style, font size.
+		$pdf->SetFont('Arial','B',12);
+		
+		
+		// set initial placement
+		$pdf->SetXY(136,50.5);
+		
+		// line break
+		
+		//$pdf->Write(0, date('F').' '.date('d').', '.date('Y'));
+		
+		$pdf->Ln(37);
+		// go to 25 X (indent)
+		$pdf->SetX(35);
+		
+										  
+		$pdf->MultiCell(0,6,"                This is to certify that ".$name['salut'].' '.ucwords(strtolower(utf8_decode($name['fname']))).' '.
+										 ucwords(strtolower(utf8_decode($name['mname']))).' '.
+										  ucwords(strtolower(utf8_decode($name['lname']))).', '.$name['position'] .' of the '.$office_name.
+										  ' has accumulated leave credits as of '.date('F').' '.date('d').', '.date('Y').
+										  '.' ,0,'L',false);								  
+		
+		$pdf->Ln(5.5);
+		
+		$pdf->SetX(35);
+		
+		// set font, font style, font size.
+		$pdf->SetFont('Arial','',12);
+		//$pdf->Write(0, $name['position']);
+		
+				
+		$pdf->Ln(5.5);
+		
+		$pdf->SetX(35);
+		
+		//$pdf->Write(0, $office_name);
+		
+		$pdf->Ln(5.5);
+		
+		$pdf->SetX(35);		
+		
+		$pdf->Ln(4);
+		
+		$pdf->SetX(35);
+		
+		// set font, font style, font size.
+		$pdf->SetFont('Arial','B',12);
+		
+		//get the last month that earned leave credit
+		$last_month_last_day = date('Y-m-d',strtotime('-1 second',strtotime(date('m').'/01/'.date('Y').' 00:00:00')));
+		
+		//list($year, $month, $day) = split('[-.-]', $last_month_last_day);deprecated
+		list($year, $month, $day) = explode('-', $last_month_last_day);
+		
+		$last_month_last_day = date("F d, Y", mktime(0, 0, 0, $month, $day, $year));
+		
+		$pdf->SetX(136);
+		
+		$pdf->SetXY(62, 126);
+		
+		$pdf->Write(0, number_format($vacation_leave, 3));
+		
+		//sick		
+		$pdf->SetX(110);
+		
+		$pdf->Write(0, number_format($sick_leave, 3));
+		
+		//total		
+		$pdf->SetX(150);
+		
+		$pdf->Write(0, number_format($vacation_leave + $sick_leave, 3));
+		
+		$pdf->Ln(5);
+		$pdf->SetX(35);
+		
+		$pdf->MultiCell(0,6,"                ISSUED this ".date('jS')." day of ".date('F, Y')." upon request of ".
+		                    $name['salut'].' '.ucwords(strtolower(utf8_decode($name['lname'])))." for whatever legal purpose it may serve." ,0,'L',false);
+
+		$pdf->Ln(15);
+		$pdf->SetX(110);
+
+		$statement_prepared 			= $this->Settings->get_selected_field( 'statement_prepared' );
+		$statement_prepared_position 	= $this->Settings->get_selected_field( 'statement_prepared_position' );
+		$statement_certified 			= $this->Settings->get_selected_field( 'statement_certified' );
+		$statement_certified_position 	= $this->Settings->get_selected_field( 'statement_certified_position' );
+		
+		//$pdf->Cell(90,5, $statement_prepared,			'0',	0,'C',false); //4th param border
+		$pdf->Cell(90,5, $statement_certified,			'0',	1,'C',false);
+		//$pdf->Cell(90,5, $statement_prepared_position,	'0',	0,'C',false);
+		$pdf->SetX(110);
+		$pdf->Cell(90,5, $statement_certified_position,	'0',	1,'C',false);
+		
+		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
+		
+		header('Pragma: public');
+		
+		//$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'F'); 
+		$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'I'); 
+		
+		//redirect(base_url().'dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
+		
+		
+	}
 	// --------------------------------------------------------------------
 	
 	function leave_certification_training($vl = 0, $sl = 0, $employee_id = '1')

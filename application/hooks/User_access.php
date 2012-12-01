@@ -63,6 +63,14 @@ class User_access
 			}
 		}
 		
+		if ($lgu_code == 'bataraza')
+		{
+			if ($u->group_id == 1 or $u->group_id == 2)
+			{
+				return TRUE;
+			}
+		}
+		
 		$has_access = FALSE;
 		
 		$error = 'You are not allowed to access this section! 

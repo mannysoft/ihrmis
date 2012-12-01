@@ -338,9 +338,10 @@ class Ajax extends MX_Controller {
 			}
 		
 			$is_ob = $this->Dtr->is_ob($this->input->post('rowid'));
+			$is_to = $this->Dtr->is_to($this->input->post('rowid'));
 
 			// This is for OB
-			if($is_ob == TRUE)
+			if($is_ob == TRUE or $is_to == TRUE)
 			{
 				$dtr_details = $this->Dtr->get_dtr_details($this->input->post('rowid'));
 				//exit;
@@ -521,6 +522,11 @@ class Ajax extends MX_Controller {
 			if ($new_value == 'Leave' or $new_value == 'leave' or $new_value == 'l')
 			{
 				$new = 'Leave';
+			}
+			
+			if ($new_value == 'to' or $new_value == 'To' or $new_value == 'TO')
+			{
+				$new = 'Travel Order';
 			}
 			
 			// Check if employee PM IN is 12:00

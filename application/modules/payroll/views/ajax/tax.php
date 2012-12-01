@@ -2,6 +2,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>js/edit_place/datagrid.js"></script>
 <script type="text/javascript">
 var offices = new dataGrid('offices','<?php echo base_url();?>payroll/ajax/edit_place/tax_exempt');
+
 offices.m_columns['tax_status']={'coltype':'select'};
 
 offices.m_columns['tax_status']['selectvalues']=<?php echo json_encode($options);?>;

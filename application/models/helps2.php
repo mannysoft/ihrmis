@@ -108,10 +108,9 @@ class Helps extends CI_Model {
 	 */
 	function change_format($log, $is_pm, $format = '')
 	{
-		if($log == 'Official Business' || $log == 'Travel Order' || $log == 'TO' || $log == 'Leave' || 
+		if($log == 'Official Business' || $log == 'Leave' || 
 		   $log == 'OB' || strtolower($log) == 'offset' ||
-		   strtolower($log) == 'meeting' || strtolower($log) == 'off' ||
-		   $log == 'Travel Order'
+		   strtolower($log) == 'meeting' || strtolower($log) == 'off'
 		   )
 		{
 			return $log;
@@ -160,7 +159,6 @@ class Helps extends CI_Model {
 			
 			// If whole day leave OB or CTO exit the if statement
 			if( ($am_login=="Official Business" && $pm_login=="Official Business") || 
-				($am_login=="Travel Order" && $pm_login=="Travel Order") || 
 				($am_login=="Leave" && $pm_login=="Leave") || 
 				($am_login=="CTO" && $pm_login=="CTO") ||
 				($am_login=="offset" && $pm_login=="offset") || 
@@ -175,7 +173,7 @@ class Helps extends CI_Model {
 			}
 			
 			// If am is not leave, ob, cto and am_login is late
-			if( ($am_login > $time_a) && ($am_login !="Leave") && ($am_login !="Official Business") && ($am_login !="Travel Order") && ($am_login !="CTO") && ($am_login !="offset"))
+			if( ($am_login > $time_a) && ($am_login !="Leave") && ($am_login !="Official Business") && ($am_login !="CTO") && ($am_login !="offset"))
 			{
 				$this->hours_late += strtotime($am_login) - strtotime($time_a);
 				
@@ -224,7 +222,7 @@ class Helps extends CI_Model {
 		if($pm_login!="")
 		{
 			
-			if(($pm_login=="Official Business") || ($pm_login=="Travel Order") || ($pm_login=="Leave") || 
+			if(($pm_login=="Official Business") || ($pm_login=="Leave") || 
 			   ($pm_login=="CTO") || ($pm_login=="offset") || ($pm_login=="meeting") || strtolower($pm_login) == 'off' || strtolower($am_login) == 'off day' || strtolower($am_login) == 'off duty')
 			{	
 				
@@ -334,7 +332,7 @@ class Helps extends CI_Model {
 		
 		if ($log1 != "")
 		{
-			if(($log1=="Official Business") || ($log1=="Travel Order") || ($log1=="Leave") || 
+			if(($log1=="Official Business") || ($log1=="Leave") || 
 			   ($log1=="CTO") || ($log1=="offset") || ($log1=="meeting") || strtolower($log1) == 'off' || $pos == true || strtolower($log1) == 'off duty')
 			{	
 				
@@ -437,7 +435,7 @@ class Helps extends CI_Model {
 		if($am_logout!="")
 		{
 			
-			if($am_logout=="Official Business" || $am_logout=="Travel Order" || $am_logout=="Leave" || $am_logout=="CTO" || $am_logout=="offset" || strtolower($am_logout) == 'off' || strtolower($am_logout) == 'off duty')
+			if($am_logout=="Official Business" || $am_logout=="Leave" || $am_logout=="CTO" || $am_logout=="offset" || strtolower($am_logout) == 'off' || strtolower($am_logout) == 'off duty')
 			{
 				return 0;
 			}
@@ -466,7 +464,7 @@ class Helps extends CI_Model {
 		// pm logout
 		if($pm_logout!="")
 		{
-			if($pm_logout=="Official Business"  || $pm_logout=="Travel Order" || $pm_logout=="Leave" || $pm_logout=="CTO" || $pm_logout=="offset" || strtolower($pm_logout) == 'off' || strtolower($pm_logout) == 'off duty')
+			if($pm_logout=="Official Business" || $pm_logout=="Leave" || $pm_logout=="CTO" || $pm_logout=="offset" || strtolower($pm_logout) == 'off' || strtolower($pm_logout) == 'off duty')
 			{
 				return 0;
 			}
@@ -536,7 +534,7 @@ class Helps extends CI_Model {
 		// pm logout
 		if($log1 != "")
 		{
-			if($log1=="Official Business" || $log1=="Travel Order" || $log1=="Leave" || $log1=="CTO" || $log1=="offset" || strtolower($log1) == 'off' || $pos == true|| strtolower($log1) == 'off duty')
+			if($log1=="Official Business" || $log1=="Leave" || $log1=="CTO" || $log1=="offset" || strtolower($log1) == 'off' || $pos == true|| strtolower($log1) == 'off duty')
 			{
 				return 0;
 			}
@@ -1210,36 +1208,6 @@ class Helps extends CI_Model {
 		return $log;
 	}
 	
-	/**
-	 * Tells whether the logs in DTR has OB
-	 *
-	 * @param string $log
-	 * @return string
-	 */
-	function has_ob($am_login = '', $am_logout = '', $pm_login = '', $pm_logout = '')
-	{
-		if (
-		$am_login == 'Official Business' ||
-		$am_logout == 'Official Business' ||
-		$pm_login == 'Official Business' ||
-		$pm_logout == 'Official Business'
-		)
-		{
-			return TRUE;
-		}
-			
-		return FALSE;
-	}
-
-	function is_to($log)
-	{
-		if ($log == 'Travel Order')
-		{
-			return 'TO';
-		}
-			
-		return $log;
-	}
 	// --------------------------------------------------------------------
 	
 	/**
@@ -1291,7 +1259,7 @@ class Helps extends CI_Model {
 	 */
 	function set_font_maroon($log, $is_pm)
 	{
-		if($log == 'Official Business' || $log == 'Leave' || $log == 'OB' || $log == 'Official Business')
+		if($log == 'Official Business' || $log == 'Leave' || $log == 'OB')
 		{
 			return $log;
 		}
@@ -1315,7 +1283,7 @@ class Helps extends CI_Model {
 	 */
 	function set_font_red($log, $time, $is_pm)
 	{
-		if($log == 'Official Business' || $log == 'Leave' || $log == 'OB' || $log == 'Travel Order')
+		if($log == 'Official Business' || $log == 'Leave' || $log == 'OB')
 		{
 			return $log;
 		}

@@ -5,6 +5,9 @@ if($name['first_day_of_service'] == '')
 }
 
 $name['first_day_of_service'] = convert_long_date($name['first_day_of_service']);
+
+$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,12 +25,26 @@ $name['first_day_of_service'] = convert_long_date($name['first_day_of_service'])
 <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" onsubmit='return formValidator()'>
   <table width="100%" border="0">
     <tr>
-      <td colspan="11" align="center"><strong>Republika ng Pilipinas</strong><br />
+      <td colspan="11" align="center">
+      <?php if($lgu_code == 'bataraza'):?>
+      	<strong>Republic of the Philippines</strong><br />
+        PROVINCE OF PALAWAN<br />
+        Municipal Government of Bataraza<br />
+        <strong>BATARAZA, PALAWAN</strong><br />
+        <br />
+      <?php else:?>
+      
+        <strong>Republika ng Pilipinas</strong><br />
         KOMISYON NG SERBISYO SIBIL<br />
         (Civil Service Commission)<br />
         <strong>REGIONAL OFFICE NO. 1V</strong><br />
         Quezon City <br />
-        <br /></td> 
+        <br />
+      
+      <?php endif;?>
+    
+        
+        </td> 
     </tr>
     <tr>
       <td align="left">&nbsp;</td>

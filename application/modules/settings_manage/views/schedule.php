@@ -147,7 +147,7 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
 		?>
 		
   <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
     <td bgcolor=""><?php echo $date;?></td>
     <td bgcolor=""><?php echo $employee_id;?></td>
     <td bgcolor=""><?php echo $lname.', '.$fname;?></td>

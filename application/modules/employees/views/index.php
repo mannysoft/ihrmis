@@ -44,12 +44,13 @@ Include not active </strong></td>
 </table>
 <table width="100%" border="0" class="type-one">
       <tr class="type-one-header">
-        <th width="3%" bgcolor="#D6D6D6"><input name="checkall" type="checkbox" id="checkall" onClick="select_all('employee', '1');" value="1"/></td>
-        <th width="13%" bgcolor="#D6D6D6"><strong>Employee No.</strong></th>
-        <th width="25%" bgcolor="#D6D6D6"><strong>Employee Name</strong></th>
-        <th width="33%" bgcolor="#D6D6D6"><strong>Department / Office</strong></th>
-        <th width="7%" bgcolor="#D6D6D6"><strong>Status</strong></th>
-        <th width="19%" bgcolor="#D6D6D6"><strong>Action</strong></th>
+        <th width="2%" bgcolor="#D6D6D6"><input name="checkall" type="checkbox" id="checkall" onClick="select_all('employee', '1');" value="1"/></td>
+        <th width="7%" bgcolor="#D6D6D6"><strong>Employee No.</strong></th>
+        <th width="21%" bgcolor="#D6D6D6"><strong>Employee Name</strong></th>
+        <th width="19%" bgcolor="#D6D6D6">Designation</th>
+        <th width="27%" bgcolor="#D6D6D6"><strong>Department / Office</strong></th>
+        <th width="6%" bgcolor="#D6D6D6"><strong>Status</strong></th>
+        <th width="18%" bgcolor="#D6D6D6"><strong>Action</strong></th>
   </tr>
 	  
 	  <?php 
@@ -104,6 +105,7 @@ Include not active </strong></td>
         <td bgcolor=""><input name="employee[]" type="checkbox" value="<?php echo $id;?>" ONCLICK="highlightRow(this,'#ABC7E9');" id="employee"/></td>
 		<td bgcolor=""><?php echo $employee_id;?></td>
         <td bgcolor=""><a href="<?php echo base_url();?>pds/personal_info/<?php echo $id;?>"><?php echo $lname.', '.$fname.' '.$mname;?></a></td>
+        <td bgcolor=""><?php echo $position;?></td>
         <td bgcolor=""><?php echo $office_name;?></td>
         <td bgcolor=""><?php echo $status;?></td>
         <td align="right" bgcolor="">
@@ -113,18 +115,17 @@ Include not active </strong></td>
         </tr>
 		<?php } ?>
         <tr>
-          <td colspan="2">
+          <td colspan="7">
 		<select name="action" id="action" onchange="this.form.submit();">
           <option>With Selected:</option>
           <option value="0">Deactivate</option>
 		  <option value="1">Activate</option>
         </select>
-          <input name="op" type="hidden" id="op" value="1" /></td>
-          <td colspan="4"><?php echo $this->mi_pagination->create_links(); ?></td>
+          <input name="op" type="hidden" id="op" value="1" />          <?php echo $this->mi_pagination->create_links(); ?></td>
         </tr>
       <tr>
         <td colspan="2">&nbsp;</td>
-        <td colspan="4"></td>
+        <td colspan="5"></td>
   </tr>
 </table>
 </form>

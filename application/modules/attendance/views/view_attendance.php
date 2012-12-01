@@ -89,6 +89,8 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
 	 
 	//number of results
 	
+	$id = 1;
+	
 	$i = 1;
 	$array = '[';	
 	

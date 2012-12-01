@@ -161,8 +161,15 @@ class Leave {
 				// If the office is not equal to office id of user logged
 				if ($CI->session->userdata('office_id') != $name['office_id'])
 				{
-					echo '<font color="red">You are not allowed to view this records!</font>';
-					return ;
+					$lgu_code = $CI->Settings->get_selected_field('lgu_code'); 
+					
+					if ($lgu_code != 'bataraza')
+					{
+						echo '<font color="red">You are not allowed to view this records!</font>';
+						return ;
+					}
+					
+					
 				}
 				
 			}

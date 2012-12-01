@@ -372,6 +372,13 @@ function dg_onBlur(me, n)
 	  {
 		 out_value = 'Official Business' 
 	  }
+	  
+	  // If travel order
+	  if(newval == 'to' || newval == 'To' || newval == 'TO')
+	  {
+		 out_value = 'Travel Order' 
+	  }
+	  
 	   if(newval == 'leave' || newval == 'Leave' || newval == 'LEAVE' || newval == 'l')
 	  {
 		 out_value = 'Leave' 
@@ -505,7 +512,7 @@ function dg_onSaved(me,index)
 function dg_onSelectkeyBlur(me,n) 
 {
   var newkey = n.value;
-		
+	//alert("sss");	
   //alert("dg_saveCellKey newkey=" + newkey + " oldkey=" + me.m_oldKey);
 
   if (newkey == me.m_oldKey) 

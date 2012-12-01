@@ -667,6 +667,21 @@ $('.click').click(function(){
     <td>&nbsp;</td>
   </tr>
   <tr>
+    <td align="right">End Am Out:</td>
+    <td><input name="end_am_out" type="text" id="end_am_out" value="<?php echo $settings['end_am_out'];?>" size="5" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Start PM In</td>
+    <td><input name="start_pm_in" type="text" id="start_pm_in" value="<?php echo $settings['start_pm_in'];?>" size="5" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Minutes between Logs:</td>
+    <td><input name="minutes_between_logs" type="text" id="minutes_between_logs" value="<?php echo $settings['minutes_between_logs'];?>" size="5" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
     <td>&nbsp;</td>
     <td><input type="submit" name="button3" id="button3" value="Save" /></td>
     <td>&nbsp;</td>

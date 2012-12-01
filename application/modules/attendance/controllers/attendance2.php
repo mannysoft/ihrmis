@@ -640,24 +640,6 @@ class Attendance extends MX_Controller {
 					}
 					
 					
-					// Lets check if the logs has atleast one OB in entries
-					$has_ob = FALSE;
-					
-					$has_ob = $this->Helps->has_ob(
-									$this->am_login, 
-									$this->am_logout, 
-									$this->pm_login, 
-									$this->pm_logout
-									);
-									
-					$ob_location = '';
-					
-					if ($has_ob == TRUE)
-					{
-						$ob_location = $this->Manual_log->get_notes($this->manual_log_id);
-						
-					}
-					
 					// Check if Official Business (Change Official Business to OB)
 					$this->am_login 	= $this->Helps->is_ob($this->am_login);
 					$this->am_logout 	= $this->Helps->is_ob($this->am_logout);
@@ -668,8 +650,6 @@ class Attendance extends MX_Controller {
 					if ($this->am_login == 'OB' && $this->am_logout == 'OB' && 
 						$this->pm_login == 'OB' && $this->pm_logout == 'OB')
 					{
-						$ob_location = '';
-						
 						$notes = $this->Manual_log->get_notes($this->manual_log_id);
 						
 						if (trim($notes) == '')
@@ -684,38 +664,6 @@ class Attendance extends MX_Controller {
 							$this->am_login = 'Official Business  --';
 							$this->am_logout 	= '';
 							$this->pm_login 	= $notes;
-							$this->pm_logout 	= '';
-						}
-						
-						
-					}
-					
-					
-					
-					// Check if Travel Order (Change Travel Order to To)
-					$this->am_login 	= $this->Helps->is_to($this->am_login);
-					$this->am_logout 	= $this->Helps->is_to($this->am_logout);
-					$this->pm_login 	= $this->Helps->is_to($this->pm_login);
-					$this->pm_logout 	= $this->Helps->is_to($this->pm_logout);
-					
-					// If whole day to
-					if ($this->am_login == 'TO' && $this->am_logout == 'TO' && 
-						$this->pm_login == 'TO' && $this->pm_logout == 'TO')
-					{
-						$notes = $this->Manual_log->get_notes($this->manual_log_id);
-						
-						if (trim($notes) == '')
-						{
-							$this->am_login 	= 'TO';
-							$this->am_logout 	= 'TO';
-							$this->pm_login 	= 'TO';
-							$this->pm_logout 	= 'TO';
-						}
-						else
-						{
-							$this->am_login = 'Travel Order --';
-							$this->am_logout 	= '';
-							$this->pm_login 	= trim($notes);
 							$this->pm_logout 	= '';
 						}
 						
@@ -915,7 +863,6 @@ class Attendance extends MX_Controller {
 						// If( ($this->leave_type_id == 0 && $this->pm_login != 'Vacation Leave') ) orig
 						if( ($this->leave_type_id == 0 && $this->pm_login != 'Undertime' && $this->pm_login != 'UT') )
 						{
-							
 							$this->pm_login = $this->Helps->change_format($this->pm_login, 1, $format = '');
 						}
 						
@@ -955,22 +902,11 @@ class Attendance extends MX_Controller {
 					$pdf->Write(0, $this->pm_logout);
 					$this->Helps->font_color_pm_logout = 0;
 					$this->Helps->pm_out_bold = '';
-
-					
+				
 					//ot login A
 					$pdf->SetX(74);
 					$pdf->SetTextColor(0, 0, 0);
-					
-					
-					if ($has_ob == TRUE and trim($ob_location) != '')
-					{
-						$this->ot_login = $ob_location;
-					}
-					else
-					{
-						$this->ot_login = $this->Helps->change_format($this->ot_login, 1, $format = '');
-					}
-					
+					$this->ot_login = $this->Helps->change_format($this->ot_login, 1, $format = '');
 					$pdf->Write(0, $this->ot_login);
 					
 					//ot login B

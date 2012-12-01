@@ -60,7 +60,7 @@ if ( $hospital == 'yes')
 			$onclick8 = "onClick=\"dg_editCell(dtr,'".$row['id']."','step8','dtr.8.$i','salary_grade')\"";
 		?>
           <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
             <th align="right" bgcolor="#FFFF00"><?php echo $sg;?></th>
             <td width="11.25%" align="right" id="dtr.1.<?php echo $i;?>" <?php echo $onclick1;?>><?php echo number_format($row['step1'], 2);?></td>
             <td width="11.25%" align="right" id="dtr.2.<?php echo $i;?>" <?php echo $onclick2;?>><?php echo number_format($row['step2'], 2);?></td>

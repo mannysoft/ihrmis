@@ -1096,6 +1096,30 @@ class Dtr extends CI_Model {
 		$q->free_result();
 	}
 	
+	function is_to($id = '')
+	{
+		$this->db->select('id');
+	
+		$this->db->where('am_login', 'Travel Order');
+		
+		$this->db->or_where('am_logout', 'Travel Order');
+		$this->db->or_where('pm_login', 'Travel Order');
+		$this->db->or_where('pm_logout', 'Travel Order');
+		
+		$this->db->where('id', $id);
+		
+		$q = $this->db->get('dtr', 1);
+		
+		if ($q->num_rows() > 0)
+		{
+			return TRUE;
+		}
+		
+		return FALSE;
+		
+		$q->free_result();
+	}
+	
 	// --------------------------------------------------------------------
 	
 	/**
