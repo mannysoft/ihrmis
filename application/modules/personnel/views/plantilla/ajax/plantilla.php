@@ -1,7 +1,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>js/edit_place/sack.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/edit_place/datagrid.js"></script>
 <script type="text/javascript">
-var offices = new dataGrid('offices','<?php echo base_url();?>personnel/plantilla_ajax/edit_place/plantilla');
+var offices = new dataGrid('offices','<?php echo base_url();?>personnel/plantilla/edit_place/plantilla');
 offices.m_columns['item_no']={'coltype':'text','style':''};
 offices.m_columns['position']={'coltype':'text','style':''};
 offices.m_columns['year']={'coltype':'text','style':''};
@@ -20,7 +20,7 @@ offices.m_columns['amount']={'coltype':'text','style':''};
 	  <th width="11%" bgcolor="#D6D6D6">Amount</th>
 	</tr>
 	<?php $i = 0;?>
-	<?php $p = new Plantilla();?>
+	<?php $p = new Plantilla_m();?>
 	<?php foreach($rows as $row):?>
 	<?php 
 		

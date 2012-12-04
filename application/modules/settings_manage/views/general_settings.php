@@ -577,17 +577,11 @@ $('.click').click(function(){
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right">Time Format: </td>
-    <td><input name="time_format" type="text" id="time_format" value="<?php echo $settings['time_format'];?>" size="5" /> 
-    hour </td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
     <td align="right">Mark undertime as tardiness: </td>
     <td><input name="undertime_tardi" type="radio" value="1" id="radiobutton" <?php echo $undertime_tardi1;?>/>
-    <label>Yes</label>
-    <input name="undertime_tardi" type="radio" id="radio" value="0" <?php echo $undertime_tardi2;?> />
-    <label>No</label></td>
+      <label>Yes</label>
+      <input name="undertime_tardi" type="radio" id="radio" value="0" <?php echo $undertime_tardi2;?> />
+      <label>No</label></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -607,19 +601,11 @@ $('.click').click(function(){
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right">Overwrite existing logs in manual log: </td>
-    <td><input name="overwrite_logs" type="radio" value="1" id="radiobutton" <?php echo $overwrite_logs1;?>/>
-    <label>Yes</label>
-    <input name="overwrite_logs" type="radio" id="radio" value="0" <?php echo $overwrite_logs2;?> />
-    <label>No</label></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
     <td align="right">Print Office Head in DTR</td>
     <td><input name="print_office_head_in_dtr" type="radio" value="1" id="radiobutton" <?php echo $print_office_head_in_dtr1;?>/>
-    <label>Yes</label>
-    <input name="print_office_head_in_dtr" type="radio" id="radio" value="0" <?php echo $print_office_head_in_dtr2;?> />
-    <label>No</label>&nbsp;</td>
+      <label>Yes</label>
+      <input name="print_office_head_in_dtr" type="radio" id="radio" value="0" <?php echo $print_office_head_in_dtr2;?> />
+      <label>No</label>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>

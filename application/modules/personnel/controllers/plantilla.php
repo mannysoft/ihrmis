@@ -42,43 +42,106 @@ class Plantilla extends MX_Controller
 		//$this->output->enable_profiler(TRUE);
     }  
 	
+	
 	// --------------------------------------------------------------------
 	
-	function index($employee_id = '')
+	function index($office_id = '')
 	{
 		
 		$data['page_name'] 			= '<b>Plantilla of Personnel</b>';
 		$data['msg'] 				= '';
+				
+		$data['error_msg'] = '';
 		
+		// Use for office listbox
+		$data['options'] 			= $this->options->office_options();
+		$data['selected'] 			= $this->session->userdata('office_id');		
 		
-		if ( $this->input->post('employee_id'))
+		$data['year_options'] 		= $this->options->year_options(date('Y') - 5, date('Y') + 3);//2010 - 2020
+		$data['year_selected'] 		= date('Y');
+		
+		if($this->input->post('op'))
 		{
-			$employee_id = $this->input->post('employee_id');
+					
 		}
-		
-		$e = new Employee_m();
-		
-		$data['employee'] = $e->get_by_id ($employee_id);
-		
-		$data['selected'] = $e->office_id;
-		
-		//Use for office listbox
-		$data['options'] = $this->options->office_options();
-		
-		$data['employee_id'] 		= $employee_id;
-		
-		$data['main_content'] 		= 'assets';
+				
+		$data['main_content'] = 'plantilla/index';
 		
 		$this->load->view('includes/template', $data);
 		
 	}
 	
-	function index2()
+	// --------------------------------------------------------------------
+	
+	function ajax($office_id = '', $year = '2009' )
 	{
-		echo 'index';
+		$data 			= array();
+		
+		
+		$this->Employee->fields = array(
+                                'id',
+                                'employee_id',
+                                'office_id',
+                                'lname',
+                                'fname',
+                                'mname'
+                                );
+        
+		if ($office_id != '')
+		{
+			$p = new Plantilla_item();
+
+			$data['rows'] = $p->get_by_office_id($office_id);
+		}
+		
+		//
+		$data['year'] = $year;
+		
+		foreach ( $data['rows'] as $row)
+		{
+			$c = new Plantilla_m();
+			
+			$c->where('employee_id', $row->id);
+			$c->where('year', $year);
+			$c->get();
+			
+			if ( $c->exists())// Do nothing
+			{
+				//echo 'cool';
+			}
+			else// Insert blank
+			{
+				$c->employee_id 	= $row->id;
+				$c->year 			= $year;
+				//$c->type 			= 'balance';
+				//$c->save();
+				//echo 'not cool';
+			}
+		}
+		
+		$this->load->view('plantilla/ajax/plantilla', $data);
 	}
 	
+	// --------------------------------------------------------------------
 	
+	function edit_place($mode = '')
+	{		
+		if ($mode == 'plantilla')
+		{
+			$c = new Plantilla();
+		
+			$c->where('id', $this->input->post('rowid'));
+			
+			$c->get();
+			
+			$field = $this->input->post('colid');	
+			$c->$field = $this->input->post('new');
+			
+			$c->save();
+			
+			exit;
+		}
+	}
 }
 
 /* End of file home.php */

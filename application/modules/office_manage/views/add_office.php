@@ -41,12 +41,12 @@
     <td></td>
   </tr>
   <tr>
-    <td align="right">Employee ID:</td>
+    <td align="right">Employee ID of Office Head:</td>
     <td><input type="text" name="employee_id" id="employee_id" /></td>
     <td></td>
   </tr>
   <tr>
-    <td align="right">Position:</td>
+    <td align="right">Position of the Office Head:</td>
     <td><input type="text" name="position" id="position" /></td>
     <td></td>
   </tr>

@@ -22,7 +22,7 @@ $employee_management = array(
 						$base.'pds/personal_info">'.$image.'Personal Data Sheet</a>',
 						$base.'pds/service_record">'.$image.'Service Records</a>',
 						$base.'personnel/assets">'.$image.'Assets and Liabilities</a>',
-						$base.'personnel/personnel_schedule">'.$image.'Personnel Schedule</a>',
+						//$base.'personnel/personnel_schedule">'.$image.'Personnel Schedule</a>',
 						$base.'personnel/plantilla">'.$image.'Plantilla of Personnel</a>',
 						$base.'appointment/issued">'.$image.'Appointment Issued</a>',
 						$base.'pds/reports">'.$image.'Reports</a>'

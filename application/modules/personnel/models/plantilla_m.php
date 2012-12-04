@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Plantilla extends DataMapper{
+class Plantilla_m extends DataMapper{
 
-	var $table  = 'plantilla';
+	public $table  = 'plantilla';
 	// --------------------------------------------------------------------
 	
 	

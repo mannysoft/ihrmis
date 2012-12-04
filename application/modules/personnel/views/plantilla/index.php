@@ -28,19 +28,19 @@
 $(document).ready(function(){
 
 	$('#employee_list').html("<b>Loading...</b>");
-	$('#employee_list').load("<?php echo base_url().('personnel/plantilla_ajax/plantilla/'.$selected.'/'.$year_selected); ?>" );
+	$('#employee_list').load("<?php echo base_url().('personnel/plantilla/ajax/'.$selected.'/'.$year_selected); ?>" );
 });
 
 $('#office_id').change(function(){
 
 	$('#employee_list').html("<b>Loading...</b>");
-	$('#employee_list').load("<?php echo base_url().('personnel/plantilla_ajax/plantilla/'); ?>" +$('#office_id').val() + "/" + $('#year').val());
+	$('#employee_list').load("<?php echo base_url().('personnel/plantilla/ajax/'); ?>" +$('#office_id').val() + "/" + $('#year').val());
 });
 
 $('#year').change(function(){
 
 	$('#employee_list').html("<b>Loading...</b>");
-	$('#employee_list').load("<?php echo base_url().('personnel/plantilla_ajax/plantilla/'); ?>" +$('#office_id').val() + "/" + $('#year').val());
+	$('#employee_list').load("<?php echo base_url().('personnel/plantilla/ajax/'); ?>" +$('#office_id').val() + "/" + $('#year').val());
 });
 
 

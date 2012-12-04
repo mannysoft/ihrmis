@@ -41,12 +41,12 @@
     <td></td>
   </tr>
   <tr>
-    <td align="right">Employee ID:</td>
+    <td align="right">Employee ID of Office Head:</td>
     <td><input name="employee_id" type="text" id="employee_id" value="<?php echo set_value('employee_id', $office['employee_id']); ?>" /></td>
     <td></td>
   </tr>
   <tr>
-    <td align="right">Position:</td>
+    <td align="right">Position of the Office Head:</td>
     <td><input name="position" type="text" id="position" value="<?php echo set_value('position', $office['position']); ?>" /></td>
     <td></td>
   </tr>

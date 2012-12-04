@@ -638,16 +638,16 @@ class Ajax extends MX_Controller {
 		{
 			if ($this->Leave_card->get_mc_balance($employee_id, $year) <= 0)
 			{
-				echo 'You have no SPL balance left.';
-				exit;
+				//echo 'You have no SPL balance left.';
+				//exit;
 			}
 		}
 		if($leave_type_id == 7 and $employee_id != '')
 		{
 			if ($this->Leave_card->get_forced_balance($employee_id, $year) <= 0)
 			{
-				echo 'You have no Forced leave balance left.';
-				exit;
+				//echo 'You have no Forced leave balance left.';
+				//exit;
 			}
 		}
 
@@ -860,6 +860,10 @@ class Ajax extends MX_Controller {
 		$this->leave->max_min_date();
 		$max_date = $this->leave->max_date;
 		$min_date = $this->leave->min_date;
+		
+		// We will use this variable to count the number of SPL, 
+		// Forced leave and others
+		$max_leave_date = $max_date;
 				
 		if ($process || $process == 2)
 		{
@@ -1098,6 +1102,7 @@ class Ajax extends MX_Controller {
 							'v_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1113,6 +1118,7 @@ class Ajax extends MX_Controller {
 							's_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1134,6 +1140,7 @@ class Ajax extends MX_Controller {
 							'v_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"special_priv_id"	=> $this->leave->special_priv_id,
 							"manual_log_id"		=> $manual_log_id	
@@ -1168,6 +1175,7 @@ class Ajax extends MX_Controller {
 							's_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1184,6 +1192,7 @@ class Ajax extends MX_Controller {
 							's_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1200,6 +1209,7 @@ class Ajax extends MX_Controller {
 							's_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1215,6 +1225,7 @@ class Ajax extends MX_Controller {
 							'v_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1235,6 +1246,7 @@ class Ajax extends MX_Controller {
 							'v_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1249,6 +1261,7 @@ class Ajax extends MX_Controller {
 							's_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1284,6 +1297,7 @@ class Ajax extends MX_Controller {
 							"action_take" 		=> $this->leave->action_taken,
 							's_abs_wop' 		=> $this->leave->count_leave,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id,
 							);
@@ -1298,6 +1312,7 @@ class Ajax extends MX_Controller {
 							"particulars"		=> $this->leave->count_leave.' Compensatory Leave',
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id,
 							"enabled"			=> 0
@@ -1313,6 +1328,7 @@ class Ajax extends MX_Controller {
 							"particulars"		=> $this->leave->count_leave.' Special Leave for Women',
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1328,6 +1344,7 @@ class Ajax extends MX_Controller {
 							"particulars"		=> $this->leave->count_leave.' Terminal Leave',
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1343,6 +1360,7 @@ class Ajax extends MX_Controller {
 							"particulars"		=> $this->leave->count_leave.' Centennial Leave',
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1361,6 +1379,7 @@ class Ajax extends MX_Controller {
 							'v_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id	
 							);
@@ -1393,6 +1412,7 @@ class Ajax extends MX_Controller {
 							's_abs' 			=> $this->leave->count_leave, 
 							"action_take" 		=> $this->leave->action_taken,
 							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
 							"leave_type_id" 	=> $this->leave->leave_type_id,
 							"manual_log_id"		=> $manual_log_id
 							);
