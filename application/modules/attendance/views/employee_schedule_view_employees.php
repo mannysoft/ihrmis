@@ -6,7 +6,7 @@
 <?php endif; ?>
 <table width="100%" border="0">
   <tr>
-    <td><a href="<?php echo base_url();?>settings_manage/employee_schedule">Back</a></td>
+    <td><a href="<?php echo base_url();?>attendance/employee_schedule">Back</a></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
@@ -25,8 +25,8 @@
 <form method="post" action="" enctype="multipart/form-data">
   <table id="dtr.table" width="100%" border="0" class="type-one">
   <tr class="type-one-header">
-    <th width="56%" bgcolor="#D6D6D6">Name</th>
-    <th width="44%" bgcolor="#D6D6D6">&nbsp;</th>
+    <th width="21%" bgcolor="#D6D6D6">Name</th>
+    <th width="79%" bgcolor="#D6D6D6">&nbsp;</th>
     </tr>
     <?php $oe  = new Employee_m();?>
   <?php foreach($employees as $employee):?>
@@ -36,7 +36,7 @@
   <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
     onmouseout ="this.bgColor = '<?php echo $bg;?>';">
     <td><?php echo $oe->lname.', '.$oe->fname;?></td>
-    <td>&nbsp;</td>
+    <td><?php echo $this->Office->get_office_name($oe->office_id);?></td>
     </tr>
   <?php endforeach;?>
   <tr>

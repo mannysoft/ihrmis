@@ -8,7 +8,7 @@
   <tr>
     <td width="8%">&nbsp;</td>
     <td width="72%">&nbsp;</td>
-    <td width="20%"><a href="<?php echo base_url().'settings_manage/schedules_save'?>">Create Schedule</a></td>
+    <td width="20%"><a href="<?php echo base_url().'attendance/schedules_save'?>">Create Schedule</a></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -39,7 +39,7 @@
     <td><?php echo ($times['am_out_hour'] and $times['am_out_min']) ? $times['am_out_hour'].':'.$times['am_out_min'] : '';?></td>
     <td><?php echo ($times['pm_in_hour'] and $times['pm_in_min']) ? $times['pm_in_hour'].':'.$times['pm_in_min'] : '';?></td>
     <td><?php echo ($times['pm_out_hour'] and $times['pm_out_min']) ? $times['pm_out_hour'].':'.$times['pm_out_min'] : '';?></td>
-    <td><a href="<?php echo base_url();?>settings_manage/schedules_save/<?php echo $row->id;?>/<?php echo $page;?>">Edit</a> | <a href="<?php echo base_url();?>settings_manage/schedules_delete/<?php echo $row->id;?>/<?php echo $page;?>" class="delete_row">Delete</a></td>
+    <td><a href="<?php echo base_url();?>attendance/schedules_save/<?php echo $row->id;?>/<?php echo $page;?>">Edit</a> | <a href="<?php echo base_url();?>attendance/schedules_delete/<?php echo $row->id;?>/<?php echo $page;?>" class="delete_row">Delete</a></td>
     </tr>
   <?php endforeach;?>
   <tr>

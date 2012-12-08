@@ -1388,6 +1388,389 @@ class Attendance extends MX_Controller {
 	
 	// --------------------------------------------------------------------
 	
+	function schedules()
+	{
+		$data['page_name'] = '<b>Schedules</b>';
+		
+		$data['msg'] = '';
+		
+		$s = new Schedule();
+		
+		$data['rows'] = $s->order_by('name')->get();
+		
+		$data['page'] = $this->uri->segment(3);
+				
+		$op = $this->input->post('op');
+				
+		$data['main_content'] = 'schedules';
+		
+		$this->load->view('includes/template', $data);
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function schedules_delete( $id = '', $page = '')
+	{
+		$s = new Schedule();
+		
+		$s->get_by_id( $id );
+		
+		$s->delete();
+		
+		$this->session->set_flashdata('msg', 'Schedule deleted!');
+			
+		redirect(base_url().'attendance/schedules/'.$page, 'refresh');
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function schedules_save( $id = '', $page = '' )
+	{
+		$data['page_name'] = '<b>Save Schedule</b>';
+		$data['msg'] = '';
+		
+		$this->load->helper('options');
+		
+		$s = new Schedule();
+		
+		$data['sched'] = $s->get_by_id( $id );
+		
+		if($this->input->post('op'))
+		{
+			$all_time = array(
+					'am_in_hour' 	=> $this->input->post('am_in_hour'),
+					'am_in_min' 	=> $this->input->post('am_in_min'),
+					
+					'am_out_hour' 	=> $this->input->post('am_out_hour'),
+					'am_out_min' 	=> $this->input->post('am_out_min'),
+					
+					'pm_in_hour' 	=> $this->input->post('pm_in_hour'),
+					'pm_in_min' 	=> $this->input->post('pm_in_min'),
+					
+					'pm_out_hour' 	=> $this->input->post('pm_out_hour'),
+					'pm_out_min' 	=> $this->input->post('pm_out_min')
+					);
+					
+			
+			$s->name 		= $this->input->post('name');
+			$s->times 		= serialize($all_time);	
+			
+			$s->save();
+			
+			$this->session->set_flashdata('msg', 'Schedule saved!');
+			
+			redirect(base_url().'attendance/schedules/'.$page, 'refresh');
+		}
+		
+		$times = $s->times;
+		
+		$times  = unserialize($times);
+		
+		
+		$data['am_in_hour_selected'] 	= $times['am_in_hour'];
+		$data['am_in_min_selected'] 	= $times['am_in_min'];
+		
+		$data['am_out_hour_selected'] 	= $times['am_out_hour'];
+		$data['am_out_min_selected'] 	= $times['am_out_min'];
+		
+		$data['pm_in_hour_selected'] 	= $times['pm_in_hour'];
+		$data['pm_in_min_selected'] 	= $times['pm_in_min'];
+		
+		$data['pm_out_hour_selected'] 	= $times['pm_out_hour'];
+		$data['pm_out_min_selected'] 	= $times['pm_out_min'];
+		
+		$data['main_content'] = 'schedules_save';
+		
+		$this->load->view('includes/template', $data);
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function employee_schedule()
+	{
+		$data['page_name'] = '<b>Employee Schedules</b>';
+		
+		$data['msg'] = '';
+		
+		$s = new schedule_detail();
+		
+		$data['rows'] = $s->order_by('name')->get();
+		
+		$data['page'] = $this->uri->segment(3);
+						
+		$op = $this->input->post('op');
+				
+		$data['main_content'] = 'employee_schedule';
+		
+		$this->load->view('includes/template', $data);
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function employee_schedule_save( $id = '', $page = '' )
+	{
+		$data['page_name'] = '<b>Save Employee Schedule</b>';
+		$data['msg'] = '';
+		
+		$data['selected'] = $this->session->userdata('office_id');
+		$data['selected'] = 0;
+		
+		//Use for office listbox
+		$data['options'] = $this->options->office_options(TRUE);
+		
+		
+		
+		$this->load->helper('options');
+		
+		$sd = new Schedule_detail();
+		
+		$data['sched'] = $sd->get_by_id( $id );
+		
+		$dates = unserialize($sd->dates);
+		
+		if ( $dates == '')
+		{
+			$dates = array(
+						'year' 			=> date('Y'),
+						'period_from' 	=> 1,
+						'period_to'		=> date('d'),
+						'month' 		=> date('m'),
+						); 
+		}
+		
+		if($this->input->post('op'))
+		{
+			$employees = $this->session->userdata('employees');
+			
+			$month_year = $this->input->post('year').'-'.$this->input->post('month');
+			
+			$between_from = $month_year.'-'.$this->input->post('period_from');
+			$between_to   = $month_year.'-'.$this->input->post('period_to');
+			
+			$dates = array(
+						'year' 			=> $this->input->post('year'),
+						'period_from' 	=> $this->input->post('period_from'),
+						'period_to'		=> $this->input->post('period_to'),
+						'month' 		=> $this->input->post('month')
+						); 
+			
+			$days = $this->Helps->get_days_in_between($between_from, $between_to);
+			
+			$sd->name 			= $this->input->post('name');
+			$sd->employees 		= serialize($employees);	
+			$sd->dates 			= serialize($dates);	
+			$sd->schedule_id 	= $this->input->post('schedule_id');
+			
+			$sd->save();
+			
+			$this->session->set_flashdata('msg', 'Schedule saved!');
+			
+			// Get the schedule
+			$s = new Schedule();
+			
+			$s->get_by_id($this->input->post('schedule_id'));
+			
+			$times = unserialize($s->times);
+			
+			// Check if 2 logs or 4 logs
+			
+			if ( $times['am_in_hour'] != '' && $times['am_out_hour'] != '' && $times['pm_in_hour'] != '' && $times['pm_out_hour'] != '')
+			{
+				//echo '4 times';
+				
+				$sched_data['hour_from'] = '';
+				
+				$sched_data['hour_to'] = '';
+				
+				
+				
+				$sched_data['am_in'] = $times['am_in_hour'].':'.$times['am_in_min'];
+				
+				$sched_data['am_out'] = $times['am_out_hour'].':'.$times['am_out_min'];
+				
+				$sched_data['pm_in'] = $times['pm_in_hour'].':'.$times['pm_in_min'];
+				
+				$sched_data['pm_out'] = $times['pm_out_hour'].':'.$times['pm_out_min'];
+				
+				$shift_id = 3;
+				$shift_type = 3;
+				
+				
+			}
+			else
+			{
+				//echo '2 times';	
+				
+				// IN
+				if ( $times['am_in_hour'] != '' )
+				{
+					$sched_data['hour_from'] = $times['am_in_hour'].':'.$times['am_in_min'];
+				}
+				else if ( $times['pm_in_hour'] != '' )
+				{
+					$sched_data['hour_from'] = $times['pm_in_hour'].':'.$times['pm_in_min'];
+				}
+				
+				// OUT
+				if ( $times['am_out_hour'] != '' )
+				{
+					$sched_data['hour_to'] = $times['am_out_hour'].':'.$times['am_out_min'];
+				}
+				else if ( $times['pm_out_hour'] != '' )
+				{
+					$sched_data['hour_to'] = $times['pm_out_hour'].':'.$times['pm_out_min'];
+				}
+				
+				
+				
+				$sched_data['am_in'] = '';
+				
+				$sched_data['am_out'] = '';
+				
+				$sched_data['pm_in'] = '';
+				
+				$sched_data['pm_out'] = '';
+				
+				$shift_id = 2;
+				$shift_type = 2;
+				
+				
+				// Check if 24 hrs
+				
+				if ( $sched_data['hour_from'] == $sched_data['hour_to'] )
+				{
+					$shift_id 	= 4;
+					$shift_type = 4;
+				}
+				
+			}
+			
+			
+			foreach ($days as $day)
+			{
+				//echo $day."<br>";
+				
+				$sched_data['date'] = $day;
+				
+				$oe = new Employee_m();
+				
+				foreach ( $employees as $employee)
+				{
+					// Change the shift ID
+					$oe->get_by_employee_id( $employee );
+					
+					$oe->shift_id = $shift_id;
+					$oe->shift_type = $shift_type;
+					
+					$oe->save();
+					
+					
+					// Check if there is schedule for this date
+					
+					$sched_data['employee_id'] = $employee;
+					
+					$is_schedule_exists = $this->Schedule_employees->is_schedule_exists($employee, $day);
+					
+					// Update
+					if ( $is_schedule_exists == TRUE )
+					{
+						$this->Schedule_employees->update( $sched_data, $day, $employee);
+					}
+					else // Insert
+					{
+						$this->Schedule_employees->insert( $sched_data );
+					}
+				}
+				
+				
+			}
+			
+			//Unset the session
+			//$employees = array();
+			//$this->session->set_userdata($employees);
+			$this->session->unset_userdata('employees');
+			
+			//redirect(base_url().'settings_manage/schedules/'.$page, 'refresh');
+			$this->session->set_flashdata('msg', 'Schedule saved!');
+			$data['msg'] = 'Employee Schedule has been saved!';
+		}
+		
+		
+		// Months
+		$data['month_options'] 			= $this->options->month_options();
+		$data['month_selected'] 		= $dates['month'];
+		
+		//print_r($dates);
+		
+		// Period from
+		$data['days_options'] 			= $this->options->days_options();
+		$data['period_from_selected'] 	= $dates['period_from'];
+		
+		// Period to
+		$data['days_options'] 			= $this->options->days_options();
+		$data['period_to_selected'] 	= $dates['period_to'];
+		
+		$data['year_options'] 			= $this->options->year_options(2009, 2020);//2010 - 2020
+		$data['year_selected'] 			= $dates['year'];
+				
+		$data['main_content'] = 'employee_schedule_save';
+		
+		$this->load->view('includes/template', $data);
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function employee_schedule_view_employees($id = '')
+	{
+		$s = new Schedule_detail();
+		
+		$s->get_by_id( $id );
+		
+		$data['page_name'] = '<b>Employee Schedule ('.$s->name.')</b>';
+		
+		$data['msg'] = '';
+		
+		$employees = unserialize($s->employees);
+		
+		foreach( $employees as $key => $val)
+		{
+			if($val == 0 ) 
+			{
+				unset($employees[$key]);
+			}
+		} 
+		
+		$data['employees'] = $employees;
+				
+		$data['main_content'] = 'employee_schedule_view_employees';
+		
+		$this->load->view('includes/template', $data);
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function employee_schedule_delete( $id = '', $page = '')
+	{
+		
+		$s = new Schedule_detail();
+		
+		$s->get_by_id( $id );
+		
+		$s->delete();
+		
+		$this->session->set_flashdata('msg', 'Employee Schedule deleted!');
+			
+		redirect(base_url().'attendance/employee_schedule/'.$page, 'refresh');
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
 	function jo()
 	{
 		$data['page_name'] = '<b>Contractual / Job Order</b>';

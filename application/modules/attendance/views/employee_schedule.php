@@ -12,7 +12,7 @@
   <tr>
     <td width="8%">&nbsp;</td>
     <td width="72%">&nbsp;</td>
-    <td width="20%"><a href="<?php echo base_url().'settings_manage/employee_schedule_save'?>">Create Employee Schedule</a></td>
+    <td width="20%"><a href="<?php echo base_url().'attendance/employee_schedule_save'?>">Create Employee Schedule</a></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -42,8 +42,8 @@
     <?php $dates = unserialize($row->dates);?>
     <td><?php echo $dates['month'].'-'.$dates['period_from'].'-'.$dates['year'].' to '.$dates['month'].'-'.$dates['period_to'].'-'.$dates['year'];?></td>
     <td><?php echo $s->name;?></td>
-    <td><a href="<?php echo base_url();?>settings_manage/employee_schedule_view_employees/<?php echo $row->id;?>">View Employees</a></td>
-    <td><a href="<?php echo base_url();?>settings_manage/employee_schedule_save/<?php echo $row->id;?>/<?php echo $page;?>">Edit</a> | <a href="<?php echo base_url();?>settings_manage/employee_schedule_delete/<?php echo $row->id;?>/<?php echo $page;?>" class="delete_row">Delete</a></td>
+    <td><a href="<?php echo base_url();?>attendance/employee_schedule_view_employees/<?php echo $row->id;?>">View Employees</a></td>
+    <td><a href="<?php echo base_url();?>attendance/employee_schedule_save/<?php echo $row->id;?>/<?php echo $page;?>">Edit</a> | <a href="<?php echo base_url();?>attendance/employee_schedule_delete/<?php echo $row->id;?>/<?php echo $page;?>" class="delete_row">Delete</a></td>
     </tr>
   <?php endforeach;?>
   <tr>

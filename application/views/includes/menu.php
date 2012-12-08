@@ -29,13 +29,13 @@ $employee_management = array(
             			);
 						
 $training_management = array(
-						$base.'training_manage/employees">'.$image.'Employee\'s Record</a>',
 						$base.'training_manage/type">'.$image.'Training Type</a>',
 						$base.'training_manage/course">'.$image.'Training Course</a>',
-						$base.'training_manage/event">'.$image.'Training Event</a>',
-						$base.'training_manage/attendance">'.$image.'Training Attendance</a>',
 						$base.'training_manage/contact_type">'.$image.'Training Contact Type</a>',
 						$base.'training_manage/contact_info">'.$image.'Training Contact Info</a>',
+						$base.'training_manage/event">'.$image.'Training Event</a>',
+						$base.'training_manage/attendance">'.$image.'Training Attendance</a>',
+						$base.'training_manage/employees">'.$image.'Employee\'s Record</a>',
 						
             			);						
 
@@ -48,6 +48,8 @@ $dtr_management = 		array(
 $attendance_management = array(
 						$base.'attendance/view_attendance">'.$image.'View Attendance</a>',
 						$base.'attendance/dtr">'.$image.'View/Print DTR</a>',
+						$base.'attendance/schedules">'.$image.'Schedules</a>',
+						$base.'attendance/employee_schedule">'.$image.'Employee Schedule</a>',
 						$base.'attendance/jo">'.$image.'Contractual / Job Order</a>',
 						$base.'attendance/double_entries">'.$image.'Double Entries</a>',
 						$base.'attendance/view_absences">'.$image.'View Absences</a>',
@@ -107,10 +109,7 @@ $payroll_management = 	array(
 $settings_management =  array(
 						$base.'settings_manage/salary_grade">'.$image.'Salary Grade (Authorized)</a>',
 						$base.'settings_manage/salary_grade_proposed">'.$image.'Salary Grade (Proposed)</a>',
-						$base.'settings_manage/holiday">'.$image.'Holiday</a>',
-						$base.'settings_manage/schedules">'.$image.'Schedules</a>',
-						//$base.'settings_manage/schedule">'.$image.'Employee Schedule</a>',
-						$base.'settings_manage/employee_schedule">'.$image.'Employee Schedule</a>',
+						$base.'settings_manage/holiday">'.$image.'Holiday</a>',					
 						$base.'settings_manage/audit_trail">'.$image.'Audit Trail</a>',
 						$base.'settings_manage/general_settings">'.$image.'General Settings</a>',
 						$base.'settings_manage/backup">'.$image.'Back up/ Restore</a>',

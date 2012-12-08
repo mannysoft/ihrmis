@@ -39,13 +39,13 @@ class Plantilla extends MX_Controller
         parent::__construct();
 		
 		$this->load->model('options');
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
     }  
 	
 	
 	// --------------------------------------------------------------------
 	
-	function index($office_id = '')
+	function index($year = '2009')
 	{
 		
 		$data['page_name'] 			= '<b>Plantilla of Personnel</b>';
@@ -55,29 +55,14 @@ class Plantilla extends MX_Controller
 		
 		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');		
+		$data['selected'] 			= ($this->input->post('office_id')) ? $this->input->post('office_id') : 
+										$this->session->userdata('office_id');		
 		
 		$data['year_options'] 		= $this->options->year_options(date('Y') - 5, date('Y') + 3);//2010 - 2020
-		$data['year_selected'] 		= date('Y');
+		$data['year_selected'] 		= ($this->input->post('year')) ? $this->input->post('year') : date('Y');
 		
-		if($this->input->post('op'))
-		{
-					
-		}
+		$office_id = $data['selected'];
 				
-		$data['main_content'] = 'plantilla/index';
-		
-		$this->load->view('includes/template', $data);
-		
-	}
-	
-	// --------------------------------------------------------------------
-	
-	function ajax($office_id = '', $year = '2009' )
-	{
-		$data 			= array();
-		
-		
 		$this->Employee->fields = array(
                                 'id',
                                 'employee_id',
@@ -119,7 +104,15 @@ class Plantilla extends MX_Controller
 			}
 		}
 		
-		$this->load->view('plantilla/ajax/plantilla', $data);
+		if($this->input->post('op'))
+		{
+					
+		}
+				
+		$data['main_content'] = 'plantilla/index';
+		
+		$this->load->view('includes/template', $data);
+		
 	}
 	
 	// --------------------------------------------------------------------

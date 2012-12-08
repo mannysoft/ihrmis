@@ -59,7 +59,8 @@
   <tr>
     <td width="24%">&nbsp;</td>
     <td width="64%"><input type="submit" name="button" id="button" value="Save" />
-      <input name="op" type="hidden" id="op" value="1" /></td>
+      <input name="op" type="hidden" id="op" value="1" />
+      <a href="<?php echo base_url();?>attendance/schedules">Cancel</a></td>
     <td width="12%"></td>
   </tr>
 </table>

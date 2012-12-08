@@ -108,7 +108,7 @@ class Office extends CI_Model {
 	 */
 	function get_office_name($id)
 	{
-		$data = array();
+		$data = '';
 		
 		$this->db->limit(1);
 		
