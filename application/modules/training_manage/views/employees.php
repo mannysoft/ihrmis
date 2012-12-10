@@ -110,7 +110,7 @@ $('.click').click(function(){
 <form action="" method="post">
 <table width="100%" border="0" cellpadding="5" cellspacing="5" class="type-one" id="recommended_training">
   <tr class="type-one-header">
-    <th colspan="2" align="left">Recommended Trainings</th>
+    <th colspan="3" align="left">Recommended Trainings</th>
     <th><span style="clear: both;">
       <input name="employee_id" type="hidden" id="employee_id" value="<?php echo $employee->id;?>" />
       <input name="op2" type="hidden" id="op2" value="1" />
@@ -119,6 +119,7 @@ $('.click').click(function(){
     <th>&nbsp;</th>
   </tr>
   <tr class="type-one-header">
+    <th width="4%">Remove</th>
     <th width="4%">Year</th>
     <th width="63%">Course</th>
     <th width="13%">Relevant</th>
@@ -129,6 +130,7 @@ $('.click').click(function(){
   	<?php $t = new Training_course();?>
     <?php $t->get_by_id($recommend->course_id);?>
   <tr>
+    <td align="center"><?php echo form_checkbox('remove[]', $recommend->id, FALSE);?></td>
     <td align="right"><span style="clear: both;">
       <input name="recommend_id[]" type="hidden" id="recommend_id[]" value="<?php echo $recommend->id;?>" />
     </span>      <input name="reco_year[]" type="text" id="reco_year[]" value="<?php echo $recommend->reco_year;?>" size="6" /></td>
@@ -143,6 +145,7 @@ $('.click').click(function(){
 			 
 		<?php while($i != 10):?> 
         <tr>
+          <td align="right">&nbsp;</td>
           <td align="right"><span style="clear: both;">
             <input name="recommend_id[]" type="hidden" id="recommend_id2" value="0" />
           </span>              <input name="reco_year[]" type="text" id="reco_year[]" value="" size="6" /></td>
@@ -154,6 +157,7 @@ $('.click').click(function(){
         <?php endwhile;?>
     <?php endif;?>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td><input type="submit" name="button5" id="button5" value="Save" /></td>
     <td>&nbsp;</td>

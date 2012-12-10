@@ -4,8 +4,8 @@
 <table width="100%" border="0">
   <tr>
     <td width="27%" align="right">
-    <strong>Tracking No: 
-    <input name="tracking_no" type="text" id="tracking_no" />
+    <strong> 
+    <input name="tracking_no" type="text" id="tracking_no" placeholder="Tracking Number" />
     </strong></td>
     <td width="12%"><strong>
       <input name="search_button" type="submit" id="search_button" value="Search" class="button"/>

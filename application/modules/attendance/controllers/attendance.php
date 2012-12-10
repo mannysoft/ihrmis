@@ -286,6 +286,8 @@ class Attendance extends MX_Controller {
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
 		$data['year_selected'] 		= date('Y');
 		
+		$show_employee_number_dtr = $this->Settings->get_selected_field('show_employee_number_dtr');
+		
 		
 		//If ($op == 1) ================== START ==========================
 		if ($this->input->post('op') == 1)
@@ -419,6 +421,17 @@ class Attendance extends MX_Controller {
 				####################################
 				#THIS IS FOR THE NAME OF EMPLOYEE  #
 				####################################
+				
+				if ($show_employee_number_dtr == 'yes')
+				{
+					$pdf->SetXY(80, 10);
+				
+					$pdf->Write(0, $this->employee_id);
+					
+					$pdf->SetX(175);
+					
+					$pdf->Write(0, $this->employee_id);
+				}
 				
 				// set initial placement
 				$pdf->SetXY(30, 22.5);
@@ -1542,6 +1555,19 @@ class Attendance extends MX_Controller {
 						); 
 		}
 		
+		$db_employees = unserialize($sd->employees);
+		
+		if( ! $this->input->post('op'))
+		{
+			// if the database has value on it add the value from database to session
+			if (is_array($db_employees))
+			{
+				$employees = array_merge($this->session->userdata('employees'), $db_employees);
+				
+				$this->session->set_userdata('employees', $employees);
+			}
+		}
+		
 		if($this->input->post('op'))
 		{
 			$employees = $this->session->userdata('employees');
@@ -1560,8 +1586,19 @@ class Attendance extends MX_Controller {
 			
 			$days = $this->Helps->get_days_in_between($between_from, $between_to);
 			
+			
+			if( ! $this->input->post('op'))
+			{
+				if (is_array($db_employees))
+				{
+					$employees = array_merge($employees, $db_employees);
+				}
+			}
+			
+			$employees = array_unique($employees);
+			
 			$sd->name 			= $this->input->post('name');
-			$sd->employees 		= serialize($employees);	
+			$sd->employees 		= serialize($employees);
 			$sd->dates 			= serialize($dates);	
 			$sd->schedule_id 	= $this->input->post('schedule_id');
 			
@@ -1579,9 +1616,7 @@ class Attendance extends MX_Controller {
 			// Check if 2 logs or 4 logs
 			
 			if ( $times['am_in_hour'] != '' && $times['am_out_hour'] != '' && $times['pm_in_hour'] != '' && $times['pm_out_hour'] != '')
-			{
-				//echo '4 times';
-				
+			{				
 				$sched_data['hour_from'] = '';
 				
 				$sched_data['hour_to'] = '';

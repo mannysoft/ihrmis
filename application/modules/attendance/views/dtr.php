@@ -33,7 +33,7 @@
         <td align="right"><strong>
         <input name="op" type="hidden" id="op" value="1" />
         </strong></td>
-        <td><input name="employee_id" type="text" id="employee_id" class="ilaw" autocomplete="off" placeholder="Employee ID"/></td>
+        <td><input name="employee_id" type="text" id="employee_id" class="ilaw" autocomplete="off" placeholder="Employee Number"/></td>
       </tr>
       <tr>
         <td align="right"><strong>Period:</strong></td>

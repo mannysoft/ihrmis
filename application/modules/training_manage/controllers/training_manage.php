@@ -435,12 +435,7 @@ class Training_manage extends MX_Controller {
 		
 		$event->get_by_id( $id );
 		
-		$event->delete();
-		
-		//$this->session->set_flashdata('msg', 'Training Attendance Deleted!');
-		
-		//redirect(base_url().'training_manage/attendance/'.$page, 'refresh');
-		
+		$event->delete();		
 	}
 	
 	// --------------------------------------------------------------------
@@ -638,7 +633,7 @@ class Training_manage extends MX_Controller {
 	
 	function employees( $employee_id = '' )
 	{
-		$data['page_name'] 			= '<b>Employee\'s Record</b>';
+		$data['page_name'] 			= '<b>Employee\'s Training Record</b>';
 				
 		$data['focus_field']		= 'tra_name';
 		
@@ -725,7 +720,11 @@ class Training_manage extends MX_Controller {
 				if ($reco_year[$i] != '')
 				{
 					$t = new Training_recomended_m();
-					$t->get_by_id($r_id);
+					$t->where('course_id', $course_id[$i]);
+					$t->where('reco_year', $reco_year[$i]);
+					$t->where('employee_id', $employee_id);
+					$t->get();
+					
 					$t->employee_id 	= $employee_id;
 					$t->reco_year 		= $reco_year[$i];
 					$t->course_id 		= $course_id[$i];
@@ -737,7 +736,19 @@ class Training_manage extends MX_Controller {
 				
 				$i ++;
 				
-			}	
+			}
+			
+			// Remove checked
+			if ($this->input->post('remove'))
+			{
+				foreach ($this->input->post('remove') as $recommended_id)
+				{
+					$t = new Training_recomended_m();
+					$t->get_by_id($recommended_id);
+					$t->delete();
+				}
+			}
+			
 						
 		}
 		

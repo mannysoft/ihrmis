@@ -2608,7 +2608,8 @@ class Ajax extends MX_Controller {
 										'employee_id', 
 										'particulars', 
 										'action_take', 
-										'manual_log_id'
+										'manual_log_id',
+										'v_abs',
 										);
 		
 		$data['rows']	= $this->Leave_card->get_undertime($employee_id);

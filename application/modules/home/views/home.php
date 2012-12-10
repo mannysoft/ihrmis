@@ -6,7 +6,7 @@ $tardis =  $this->Tardiness->employees;
 
 echo $this->session->flashdata('msg');
 
-echo $msg;
+//echo $msg;
 
 ?>
 
@@ -153,7 +153,7 @@ To:
     <td></td>
   </tr>
   <tr>
-    <td><input type="hidden" name="fileframe" value="true"><input type="file" name="file" id="file" onChange="jsUpload(this)"/> (ex: 21-2009-11-26.zip)
+    <td><input type="hidden" name="fileframe" value="true"><input type="file" name="file" id="file" onChange="jsUpload(this)"/> (ex: 21-2013-12-26.zip)
       <input name="filename" type="hidden" id="filename" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

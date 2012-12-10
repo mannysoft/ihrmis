@@ -35,8 +35,8 @@ $training_management = array(
 						$base.'training_manage/contact_info">'.$image.'Training Contact Info</a>',
 						$base.'training_manage/event">'.$image.'Training Event</a>',
 						$base.'training_manage/attendance">'.$image.'Training Attendance</a>',
-						$base.'training_manage/employees">'.$image.'Employee\'s Record</a>',
-						
+						$base.'training_manage/employees">'.$image.'Employee\'s Training Record</a>',
+						$base.'training_manage/reports">'.$image.'Reports</a>',
             			);						
 
 $dtr_management = 		array(
@@ -50,7 +50,7 @@ $attendance_management = array(
 						$base.'attendance/dtr">'.$image.'View/Print DTR</a>',
 						$base.'attendance/schedules">'.$image.'Schedules</a>',
 						$base.'attendance/employee_schedule">'.$image.'Employee Schedule</a>',
-						$base.'attendance/jo">'.$image.'Contractual / Job Order</a>',
+						//$base.'attendance/jo">'.$image.'Contractual / Job Order</a>',
 						$base.'attendance/double_entries">'.$image.'Double Entries</a>',
 						$base.'attendance/view_absences">'.$image.'View Absences</a>',
 						$base.'attendance/view_late">'.$image.'View Late / Undertime</a>',
@@ -61,7 +61,7 @@ $attendance_management = array(
 						
 $manual_management = 	array(
 						//$base.'manual_manage/ob">'.$image.'Official Business</a>',
-						$base.'manual_manage/login">'.$image.'Manual Login/ Logout</a>',
+						//$base.'manual_manage/login">'.$image.'Manual Login/ Logout</a>',
 						$base.'manual_manage/cto">'.$image.'Compensatory Time off</a>',
 						$base.'manual_manage/cto_apps">'.$image.'CTO Applications</a>',
 						$base.'manual_manage/cto_forward_balance">'.$image.'CTO Forward Balance</a>',
@@ -87,7 +87,7 @@ $leave_management = 	array(
 						$base.'leave_manage/undertime">'.$image.'Encode Tardy/Undertime</a>',
 						$base.'leave_manage/wop">'.$image.'Leave WOP</a>',
 						$base.'leave_manage/stop_earning">'.$image.'Stop Leave Earnings</a>',
-						$base.'leave_manage/settings">'.$image.'Settings</a>',
+						//$base.'leave_manage/settings">'.$image.'Settings</a>',
 						$add_earn,
             			);
 						
@@ -108,7 +108,7 @@ $payroll_management = 	array(
 						
 $settings_management =  array(
 						$base.'settings_manage/salary_grade">'.$image.'Salary Grade (Authorized)</a>',
-						$base.'settings_manage/salary_grade_proposed">'.$image.'Salary Grade (Proposed)</a>',
+						//$base.'settings_manage/salary_grade_proposed">'.$image.'Salary Grade (Proposed)</a>',
 						$base.'settings_manage/holiday">'.$image.'Holiday</a>',					
 						$base.'settings_manage/audit_trail">'.$image.'Audit Trail</a>',
 						$base.'settings_manage/general_settings">'.$image.'General Settings</a>',

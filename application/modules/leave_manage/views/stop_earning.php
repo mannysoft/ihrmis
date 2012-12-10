@@ -21,8 +21,8 @@
   </tr>
   <tr>
     <td width="15" align="right">&nbsp;</td>
-    <td width="160" align="right">Emp ID/Last Name:</td>
-    <td width="455"><input name="employee_id" type="text" class="ilaw" id="employee_id" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';" value="<?php echo set_value('employee_id', $employee_id);?>" size="20" autocomplete="off"/>
+    <td width="275" align="right">Employee Number/Last Name:</td>
+    <td width="340"><input name="employee_id" type="text" class="ilaw" id="employee_id" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';" value="<?php echo set_value('employee_id', $employee_id);?>" size="20" autocomplete="off"/>
         <strong>
         <input name="op" type="hidden" id="op" value="1" />
     </strong></td>

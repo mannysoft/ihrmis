@@ -1,7 +1,7 @@
 <form method="post" action="" id="myform">
 <table width="100%" border="0">
   <tr>
-    <td align="right"><strong>Employee ID.:
+    <td align="right"><strong>Employee Number.:
     </strong></td>
     <td width="39%"><strong>
       <input name="employee_id" type="text" id="employee_id" class="ilaw" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';"/>

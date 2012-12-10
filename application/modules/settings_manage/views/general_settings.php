@@ -86,6 +86,10 @@ $show_incomplete_logs2 = ($settings['show_incomplete_logs'] == 'no') ? $checked 
 $accept_late_ob1 = ($settings['accept_late_ob'] == 'yes') ? $checked : '';
 $accept_late_ob2 = ($settings['accept_late_ob'] == 'no') ? $checked : '';
 
+$show_employee_number_dtr1 = ($settings['show_employee_number_dtr'] == 'yes') ? $checked : '';
+$show_employee_number_dtr2 = ($settings['show_employee_number_dtr'] == 'no') ? $checked : '';
+
+
 
 
 
@@ -470,7 +474,12 @@ $('.click').click(function(){
   </tr>
   <tr>
     <td align="right">Default salary grade year:</td>
-    <td><input name="default_salary_grade_year" type="text" id="default_salary_grade_year" value="<?php echo $settings['default_salary_grade_year'];?>" size="40" /></td>
+    <td><input name="default_salary_grade_year" type="text" id="default_salary_grade_year" value="<?php echo $settings['default_salary_grade_year'];?>" size="20" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Proposed salary grade year:</td>
+    <td><input name="proposed_salary_grade_year" type="text" id="proposed_salary_grade_year" value="<?php echo $settings['proposed_salary_grade_year'];?>" size="20" /></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -665,6 +674,14 @@ $('.click').click(function(){
   <tr>
     <td align="right">Minutes between Logs:</td>
     <td><input name="minutes_between_logs" type="text" id="minutes_between_logs" value="<?php echo $settings['minutes_between_logs'];?>" size="5" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Show the employee number in the printable DTR:</td>
+    <td><input name="show_employee_number_dtr" type="radio" value="yes" id="radiobutton" <?php echo $show_employee_number_dtr1;?>/>
+      <label>Yes</label>
+      <input name="show_employee_number_dtr" type="radio" id="radio" value="no" <?php echo $show_employee_number_dtr2;?> />
+      <label>No</label></td>
     <td>&nbsp;</td>
   </tr>
   <tr>

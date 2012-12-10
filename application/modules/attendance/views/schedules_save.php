@@ -12,8 +12,13 @@
     <td></td>
   </tr>
   <tr>
-    <td align="right">Time:</td>
+    <td align="right">&nbsp;</td>
     <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td align="right">Time</td>
+    <td>&nbsp;</td>
     <td></td>
   </tr>
   <tr>
@@ -57,11 +62,11 @@
     <td></td>
   </tr>
   <tr>
-    <td width="24%">&nbsp;</td>
-    <td width="64%"><input type="submit" name="button" id="button" value="Save" />
+    <td width="21%">&nbsp;</td>
+    <td width="34%"><input type="submit" name="button" id="button" value="Save" />
       <input name="op" type="hidden" id="op" value="1" />
       <a href="<?php echo base_url();?>attendance/schedules">Cancel</a></td>
-    <td width="12%"></td>
+    <td width="45%"></td>
   </tr>
 </table>
 </form>
