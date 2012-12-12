@@ -1377,7 +1377,7 @@ class Id_preview extends MX_Controller
 	{
 		$this->load->library('fpdf');
 		
-		//define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+		//define('FPDF_FONTPATH',$this->config->item('fonts_path'));//
 					
 		$this->load->library('fpdi');
 
