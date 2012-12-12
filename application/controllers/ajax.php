@@ -1288,6 +1288,23 @@ class Ajax extends MX_Controller {
 				exit;
 			}
 			
+			// Calamity leave
+			if ($this->leave->leave_type_id == 13)
+			{
+				$info = array(
+							"employee_id"		=> $this->leave->employee_id,
+							"particulars"		=> $this->leave->count_leave.' Calamamity Leave(MC #29)',
+							//'v_abs' 			=> $this->leave->count_leave, 
+							"action_take" 		=> $this->leave->action_taken,
+							"date"				=> $max_date,
+							'max_leave_date'	=> $max_leave_date,
+							"leave_type_id" 	=> $this->leave->leave_type_id,
+							"manual_log_id"		=> $manual_log_id	
+							);
+				$this->Leave_card->add_leave_card($info);
+				
+			}
+			
 			// Sick leave w/out pay // 12282011 2.44pm
 			if ($this->leave->leave_type_id == 16)
 			{
@@ -1419,6 +1436,8 @@ class Ajax extends MX_Controller {
 				$this->Leave_card->add_leave_card($info);
 			}
 			
+			//print_r($info);
+			
 			$leave_logs_info = $info['particulars'];
 			
 			foreach ($this->leave->dates as $date)
@@ -1510,6 +1529,7 @@ class Ajax extends MX_Controller {
 						// commutation or monetization
 						if( $this->leave->leave_type_id < 9  ||  
 							$this->leave->leave_type_id == 11 ||  
+							$this->leave->leave_type_id == 13 ||  
 							$this->leave->leave_type_id == 16 ||  
 							$this->leave->leave_type_id == 18 ||  
 							$this->leave->leave_type_id == 19 ||
@@ -1542,6 +1562,7 @@ class Ajax extends MX_Controller {
 						//commutation or monetization
 						if( $this->leave->leave_type_id < 9 ||  
 							$this->leave->leave_type_id == 11 ||  
+							$this->leave->leave_type_id == 13 ||  
 							$this->leave->leave_type_id == 16 || 
 							$this->leave->leave_type_id == 18 ||  
 							$this->leave->leave_type_id == 19 ||

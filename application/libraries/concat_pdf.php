@@ -2,15 +2,14 @@
 /**
  * Integrated Human Resource Management Information System
  *
- * An Open source Application Software use by Government agencies for 
- * management of employees Attendance, Leave Administration, Payroll, 
- * Personnel Training, Service Records, Performance, Recruitment,
- * Personnel Schedule(Plantilla) and more...
+ * An Application Software use by Government agencies for management
+ * of employees Attendance, Leave Administration, Payroll, Personnel
+ * Training, Service Records, Performance, Recruitment and more...
  *
  * @package		iHRMIS
- * @author		Manny Isles
- * @copyright	Copyright (c) 2008 - 2013, Charliesoft
- * @license		http://charliesoft.net/ihrmis/license
+ * @author		Manolito Isles
+ * @copyright	Copyright (c) 2008 - 2012, Charliesoft
+ * @license		http://charliesoft.net/hrmis/user_guide/license.html
  * @link		http://charliesoft.net
  * @since		Version 1.0
  * @filesource
@@ -26,7 +25,7 @@
  * @package		iHRMIS
  * @subpackage	Libraries
  * @category	PDF Utilities
- * @author		Manny Isles
+ * @author		Manolito Isles
  * @link		http://charliesoft.net/hrmis/user_guide/libraries/concat_pdf.html
  */
 require_once('fpdi.php');
@@ -36,6 +35,7 @@ class Concat_pdf extends FPDI{
 	// ------------------------------------------------------------------------
 	
 	public $orientation = array();
+	public $default_orientation = 'P';
 	
 	// ------------------------------------------------------------------------
 	
@@ -65,6 +65,11 @@ class Concat_pdf extends FPDI{
 				 if ( ! is_numeric($key) )
 				 {
 					 $orientation = $key;
+				 }
+				 
+				 if ($this->default_orientation == 'L')
+				 {
+					 $orientation = 'L';
 				 }
 				 
 				 //$this->AddPage('P', array($s['w'], $s['h'])); // orig

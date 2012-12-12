@@ -332,13 +332,24 @@ class Settings_Manage extends MX_Controller {
 	
 	// --------------------------------------------------------------------
 	
-	function offline_update()
+	function maintenance()
 	{
 		
-		$data['page_name'] = '<b>Offline Update </b>';
+		$data['page_name'] = '<b>Maintenance</b>';
 		$data['msg'] = '';
+		
+		if($this->input->post('repair'))
+		{
+			$this->load->dbutil();
+			$this->dbutil->repair_table('ats_dtr');
+			
+			$this->session->set_flashdata('msg', 'Table has been repaired.');
 				
-		$data['main_content'] = 'offline_update';
+			redirect(base_url().'settings_manage/maintenance', 'refresh');
+			
+		}
+				
+		$data['main_content'] = 'maintenance';
 		
 		$this->load->view('includes/template', $data);
 		

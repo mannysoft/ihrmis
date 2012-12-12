@@ -14,8 +14,8 @@
       <td align="left">&nbsp;</td>
     </tr>
     <tr>
-      <td width="14%" align="right" class="type-one">Username: </td>
-      <td width="32%" align="left" class="type-one"><input name="username" type="text" class="ilaw" id="username" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';" onkeyup="check_id_available(this.form)" value="<?php echo $user->username; ?>" size="35"/>
+      <td width="19%" align="right" class="type-one">Username: </td>
+      <td width="43%" align="left" class="type-one"><input name="username" type="text" class="ilaw" id="username" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';" onkeyup="check_id_available(this.form)" value="<?php echo $user->username; ?>" size="35"/>
       </td>
       <td align="left">&nbsp;</td>
     </tr>
@@ -42,7 +42,7 @@
     <tr>
       <td align="right" class="type-one">Password:</td>
       <td align="left" class="type-one"><input name="password" type="password" id="password" size="35" class="ilaw" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';"/></td>
-      <td width="54%" align="left">&nbsp;</td>
+      <td width="38%" align="left">&nbsp;</td>
     </tr>
     <tr>
       <td align="right" class="type-one">Re - type password: </td>

@@ -367,7 +367,7 @@ class Leave {
 		if ($this->is_sat_sun == 'Saturday' or $this->is_sat_sun == 'Sunday' or $this->is_holiday == TRUE)
 		{
 			// If maternity add 1 day
-			if ($this->leave_type_id == 5)
+			if ($this->leave_type_id == 5 or $this->leave_type_id == 20)
 			{
 				$this->count_leave += $days;
 			}

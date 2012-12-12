@@ -112,8 +112,8 @@ $settings_management =  array(
 						$base.'settings_manage/holiday">'.$image.'Holiday</a>',					
 						$base.'settings_manage/audit_trail">'.$image.'Audit Trail</a>',
 						$base.'settings_manage/general_settings">'.$image.'General Settings</a>',
-						$base.'settings_manage/backup">'.$image.'Back up/ Restore</a>',
-						$base.'settings_manage/offline_update">'.$image.'Offline Update</a>',
+						//$base.'settings_manage/backup">'.$image.'Back up/ Restore</a>',
+						$base.'settings_manage/maintenance">'.$image.'Maintenance</a>',
             			);																							
 ?>
 <ul id="main_menu" class="main_menu_over"><!-- Main menu -->

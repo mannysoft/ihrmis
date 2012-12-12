@@ -4,10 +4,14 @@ class Migration_dtr_add_column_orig_dtr extends CI_Migration {
 	
 	function up() 
 	{			
-		$fields = array(
-                        'orig_dtr' => array('type' => 'VARCHAR (128)', 'null' => FALSE, 'DEFAULT' => '')
-);
-		$this->dbforge->add_column('dtr', $fields, 'office_id');		
+		if ( ! $this->db->field_exists('orig_dtr', 'dtr'))
+		{
+		
+			$fields = array(
+							'orig_dtr' => array('type' => 'VARCHAR (128)', 'null' => FALSE, 'DEFAULT' => '')
+	);
+			$this->dbforge->add_column('dtr', $fields, 'office_id');		
+		}
 	}
 
 	function down() 

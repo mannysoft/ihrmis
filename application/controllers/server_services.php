@@ -4,13 +4,13 @@ class Server_services extends Controller  {
 
 	// --------------------------------------------------------------------
 	
-	var $xml				='';
-	var $office_id 			= 1;
+	public $xml				='';
+	public $office_id 			= 1;
 	
-	var $system_name		= '';
-	var $installed_version	= '';
-	var $latest_version		= '';
-	var $license			= '';
+	public $system_name		= '';
+	public $installed_version	= '';
+	public $latest_version		= '';
+	public $license			= '';
 	
 	// --------------------------------------------------------------------
 	
