@@ -15,7 +15,7 @@ For the year:
       <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
     onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
         <td><?php echo $date;?></td>
-        <td><?php echo $row['description'];?></td>
+        <td><?php echo $row['description'].''; echo ($row['half_day'] == 'yes') ? ' (Half Day - '.$row['am_pm'].')' : '';?></td>
         <td>Edit | <a href="<?php echo base_url();?>settings_manage/holiday/<?php echo $row['id']; ?>">Delete</a> </td>
         <td>&nbsp;</td>
       </tr>
@@ -43,6 +43,21 @@ For the year:
   <tr>
     <td>Description
     <input name="description" type="text" id="description" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input name="half_day" type="checkbox" id="half_day" value="yes" />
+      <label for="half_day">Half day</label></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="radio" name="am_pm" id="radio" value="am" />
+      <label for="am_pm">AM</label> <input type="radio" name="am_pm" id="radio2" value="pm" />
+      <label for="am_pm">PM</label></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

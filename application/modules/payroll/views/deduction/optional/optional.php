@@ -2,7 +2,7 @@
 <table width="100%" border="0">
   <tr>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td>just do like staff entitlement</td>
     <td>
     <?php if ( $employee_id != '' ):?>
     <a href="<?php echo base_url().'payroll/deduction/optional_save/0/'.$employee_id;?>">Add</a>

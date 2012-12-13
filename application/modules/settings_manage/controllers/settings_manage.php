@@ -194,6 +194,8 @@ class Settings_Manage extends MX_Controller {
 					$info = array(
 							'date' 			=> $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('day'),
 							'description' 	=> $this->input->post('description'),
+							'half_day' 		=> $this->input->post('half_day'),
+							'am_pm' 		=> $this->input->post('am_pm'),
 							);
 					
 					$this->Holiday->add_holiday($info);	

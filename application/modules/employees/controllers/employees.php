@@ -503,63 +503,6 @@ class Employees extends MX_Controller  {
 				$shift_id 				= $this->input->post('shift2');
 				$shift_type 			= $this->input->post('shift2');
 	
-				//If other shift if selected
-				if($this->input->post('hour1'))
-				{
-					$hour1 		= $this->input->post('hour1');
-					$minute1 	= $this->input->post('minute1');
-					$am_pm1 	= $this->input->post('am_pm1');
-					$hour2 		= $this->input->post('hour2');
-					$minute2 	= $this->input->post('minute2');
-					$am_pm2 	= $this->input->post('am_pm2');
-					
-					$times = $hour1.':'.$minute1.','.$am_pm1.',';
-					$times.= $hour2.':'.$minute2.','.$am_pm2;
-					
-					$row = $this->Shift->shift_details($times);
-					
-					if (!empty($row))
-					{
-						$shift_id 	= $row['shift_id'];
-						$shift_type = $row['shift_type'];
-					}
-					else
-					{
-						if($am_pm1 == 'AM' && $am_pm2 == 'PM')
-						{
-							$shift_type 	= 2;
-						}
-						
-						if($am_pm1 == 'PM' && $am_pm2 == 'PM')
-						{
-							$shift_type 	= 2;
-						}
-						
-						if($am_pm1 == 'PM' && $am_pm2 == 'AM')
-						{
-							$shift_type 	= 3;
-						}
-						
-						
-						$hour1 = $hour1.':'.$minute1.','.$am_pm1;
-						$hour2 = $hour2.':'.$minute2.','.$am_pm2;
-						
-						if($hour1 == $hour2)
-						{
-							$shift_type = 4;
-						}
-						
-						//insert to table shift
-						
-						//insert to table shift and get the ID
-						$shift_id = $this->Shift->add_shift($this->session->userdata('office_id'), $shift_type, $times);
-						
-						$shift_type = $shift_type;
-					
-					}
-			
-				}
-				
 				//File name of the photo
 				$file_register = $this->session->userdata('file_register');
 				$finger_pics = '/../'.current_work_dir().'/pics/'.$this->session->userdata('file_register');
@@ -734,9 +677,7 @@ class Employees extends MX_Controller  {
 		
 		$data['emergency_contact'] = $employee_info['emergency_contact'];
 		$data['emergency_contact_no'] = $employee_info['emergency_contact_no'];
-		
-		//emergency_contact
-				
+						
 		if ($this->input->post('op'))
 		{			
 			$orig_id 		= $this->input->post('orig_id');
