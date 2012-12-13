@@ -36,7 +36,7 @@
     </tr>
     <tr>
       <td align="right" class="type-one">Middle Name: </td>
-      <td align="left" class="type-one"><input name="middle" type="text" id="middle" value="<?php echo $user->middle; ?>" size="35" class="ilaw" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';"/></td>
+      <td align="left" class="type-one"><input name="middle" type="text" id="middle" value="<?php echo $user->mname; ?>" size="35" class="ilaw" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';"/></td>
       <td align="left">&nbsp;</td>
     </tr>
     <tr>

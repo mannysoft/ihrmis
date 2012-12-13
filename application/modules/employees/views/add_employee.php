@@ -340,6 +340,20 @@ function jsUpload(upload_field)
     
     <?php endif; ?>
     
+    <?php $enable_id_maker = $this->Settings->get_selected_field( 'enable_id_maker' );?>
+    <?php if($enable_id_maker == 'yes'):?>
+    <tr>
+      <td align="right">Emergency Contact Name:</td>
+      <td>&nbsp;</td>
+      <td align="left"><input name="emergency_contact" type="text" id="emergency_contact" value="<?php echo set_value('emergency_contact'); ?>" size="35" class="ilaw" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';"/></td>
+    </tr>
+    <tr>
+      <td align="right">Emergency Contact Number:</td>
+      <td>&nbsp;</td>
+      <td align="left"><input name="emergency_contact_no" type="text" id="emergency_contact_no" value="<?php echo set_value('emergency_contact_no'); ?>" size="35" class="ilaw" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';"/></td>
+    </tr>
+    
+    <?php endif;?>
     <tr>
       <td align="right">&nbsp;</td>
       <td>&nbsp;</td>

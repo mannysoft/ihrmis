@@ -587,7 +587,9 @@ class Employees extends MX_Controller  {
 				'salary_grade' 			=> $this->input->post('sg'),
 				'step'					=> $this->input->post('step'),
 				'newly_added' 			=> 1,
-				'updated'				=> 1
+				'updated'				=> 1,
+				'emergency_contact'		=> $this->input->post('emergency_contact'),
+				'emergency_contact_no'	=> $this->input->post('emergency_contact_no'),
 				);
 		
 				$id = $this->Employee->add_employee($info);
@@ -664,7 +666,9 @@ class Employees extends MX_Controller  {
 										'fname',
 										'mname',
 										'extension',
-										'orig_id'
+										'orig_id',
+										'emergency_contact',
+										'emergency_contact_no'
 										);
 		
 		$employee_info = $this->Employee->get_employee_info($employee_id);
@@ -727,6 +731,11 @@ class Employees extends MX_Controller  {
 		
 		//The original employee id
 		$data['orig_id'] = $employee_info['id'];
+		
+		$data['emergency_contact'] = $employee_info['emergency_contact'];
+		$data['emergency_contact_no'] = $employee_info['emergency_contact_no'];
+		
+		//emergency_contact
 				
 		if ($this->input->post('op'))
 		{			
@@ -790,8 +799,13 @@ class Employees extends MX_Controller  {
 						'assistant_dept_head' 	=> $this->input->post('assistant_dept_head'),
 						'shift_id' 				=> $this->input->post('shift2'),
 						'shift_type' 			=> $this->input->post('shift2'),
-						'updated' 				=> 1
+						'updated' 				=> 1,
+						'emergency_contact'		=> $this->input->post('emergency_contact'),
+						'emergency_contact_no'	=> $this->input->post('emergency_contact_no'),
+						
 						);
+				
+				//$data['emergency_contact'] = $employee_info['emergency_contact'];
 				
 				//File name of the photo
 				$file_register = $this->session->userdata('file_register');
