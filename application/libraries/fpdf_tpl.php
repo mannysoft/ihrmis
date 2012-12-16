@@ -1,8 +1,8 @@
 <?php
 //
-//  FPDF_TPL - Version 1.2
+//  FPDF_TPL - Version 1.2.1
 //
-//    Copyright 2004-2010 Setasign - Jan Slabon
+//    Copyright 2004-2012 Setasign - Jan Slabon
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -104,6 +104,10 @@ class FPDF_TPL extends FPDF {
             'o_rMargin' => $this->rMargin,
             'o_h' => $this->h,
             'o_w' => $this->w,
+            'o_FontFamily' => $this->FontFamily,
+            'o_FontStyle' => $this->FontStyle,
+            'o_FontSizePt' => $this->FontSizePt,
+            'o_FontSize' => $this->FontSize,
             'buffer' => '',
             'x' => $x,
             'y' => $y,
@@ -121,6 +125,9 @@ class FPDF_TPL extends FPDF {
         $this->SetXY($x + $this->lMargin, $y + $this->tMargin);
         $this->SetRightMargin($this->w - $w + $this->rMargin);
 
+        if ($this->CurrentFont)
+        	$this->_out(sprintf('BT /F%d %.2f Tf ET', $this->CurrentFont['i'], $this->FontSizePt));
+        
         return $this->tpl;
     }
     
@@ -147,6 +154,15 @@ class FPDF_TPL extends FPDF {
             $this->h = $tpl['o_h'];
             $this->w = $tpl['o_w'];
             $this->SetAutoPageBreak($tpl['o_AutoPageBreak'], $tpl['o_bMargin']);
+            
+            $this->FontFamily = $tpl['o_FontFamily'];
+			$this->FontStyle = $tpl['o_FontStyle'];
+			$this->FontSizePt = $tpl['o_FontSizePt'];
+			$this->FontSize = $tpl['o_FontSize'];
+        	
+			$fontkey = $this->FontFamily . $this->FontStyle;
+			if ($fontkey)
+            	$this->CurrentFont =& $this->fonts[$fontkey];
             
             return $this->tpl;
         } else {
@@ -213,13 +229,6 @@ class FPDF_TPL extends FPDF {
         $this->_out(sprintf('q %.4F 0 0 %.4F %.4F %.4F cm', $tData['scaleX'], $tData['scaleY'], $tData['tx'] * $this->k, $tData['ty'] * $this->k)); // Translate 
         $this->_out(sprintf('%s%d Do Q', $this->tplprefix, $tplidx));
 
-        // reset font in the outer graphic state
-        if ($this->FontFamily) {
-	        $family = $this->FontFamily;
-	        $this->FontFamily = '';
-	        $this->SetFont($family);
-        }
-        
         $this->lastUsedTemplateData = $tData;
         
         return array('w' => $_w, 'h' => $_h);
@@ -236,7 +245,7 @@ class FPDF_TPL extends FPDF {
      * @return array The height and width of the template
      */
     function getTemplateSize($tplidx, $_w = 0, $_h = 0) {
-        if (!$this->tpls[$tplidx])
+        if (!isset($this->tpls[$tplidx]))
             return false;
 
         $tpl =& $this->tpls[$tplidx];
@@ -265,12 +274,6 @@ class FPDF_TPL extends FPDF {
         	return call_user_func_array(array($this, 'TCPDF::SetFont'), $args);
         }
         
-        /**
-         * force the resetting of font changes in a template
-         */
-        if ($this->_intpl)
-            $this->FontFamily = '';
-            
         parent::SetFont($family, $style, $size);
        
         $fontkey = $this->FontFamily . $this->FontStyle;
