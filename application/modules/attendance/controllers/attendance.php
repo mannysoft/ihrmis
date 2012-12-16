@@ -623,6 +623,25 @@ class Attendance extends MX_Controller {
 						$this->pm_logout 	!= "" 	or $this->ot_login 	!= "" or $this->ot_logout 	!= "")
 					{
 						//Do nothing
+						
+						// If the date is holiday
+						if ($this->is_holiday == TRUE)
+						{
+							// Lets check if the holiday is half day
+							if ($this->Holiday->half_day == TRUE)
+							{
+								if ($this->Holiday->am_pm == 'am')
+								{
+									$this->am_login = strtoupper($this->Holiday->holiday_name($this->log_date));
+								}
+								else
+								{
+									$this->pm_login = strtoupper($this->Holiday->holiday_name($this->log_date));
+								}
+								
+							}
+						}
+								
 					}
 					
 					// Put data to DTR
@@ -644,6 +663,7 @@ class Attendance extends MX_Controller {
 							// If the date is holiday
 							if ($this->is_holiday == TRUE)
 							{
+								
 								$this->am_login = strtoupper($this->Holiday->holiday_name($this->log_date));
 							}
 							
@@ -782,8 +802,8 @@ class Attendance extends MX_Controller {
 						// AM Absent
 						if ($this->am_login == '' && $this->am_logout == '' && $this->pm_login != '' && $this->pm_logout != '')
 						{
-							$this->am_login = 'Vacation Leave';
-							$this->am_login = 'Late';
+							//$this->am_login = 'Vacation Leave';
+							//$this->am_login = 'Late';
 							$this->am_login = 'Tardy';
 							$this->am_logout= '';
 							
@@ -794,7 +814,7 @@ class Attendance extends MX_Controller {
 						// PM Absent
 						if ($this->am_login != '' && $this->am_logout != '' && $this->pm_login == '' && $this->pm_logout == '')
 						{
-							$this->pm_login = 'Vacation Leave';
+							//$this->pm_login = 'Vacation Leave';
 							$this->pm_login = 'Undertime';
 							$this->pm_logout= '';
 							
@@ -808,11 +828,38 @@ class Attendance extends MX_Controller {
 							// Change font color
 							$this->Helps->font_color_pm_login = 200;
 							
+							
+							// add this lines 12.14.2012 8.37am
+							/*
+							if (
+								$this->Holiday->is_holiday($this->log_date) and 
+								$this->Holiday->half_day == TRUE and
+								$this->Holiday->am_pm == 'pm'
+								)
+							{
+			
+								$this->pm_logout = '';
+							}
+							*/
+							// end add 12.14.2012 8.37am
+							
 						}
 						// PM Absent(no log out)
 						else if($this->am_login != '' && $this->am_logout != '' && $this->pm_login != '' && $this->pm_logout == '')
 						{							
-							$this->pm_logout= 'Undertime';
+							$this->pm_logout = 'Undertime';
+							
+							// add this lines 12.14.2012 8.37am
+							if (
+								$this->Holiday->is_holiday($this->log_date) and 
+								$this->Holiday->half_day == TRUE and
+								$this->Holiday->am_pm == 'pm'
+								)
+							{
+			
+								$this->pm_logout = '';
+							}
+							// end add 12.14.2012 8.37am
 							
 							// Check if saturday or sunday and shift_id == 1
 							// if true we dont need to put undertime to DTR
@@ -930,6 +977,21 @@ class Attendance extends MX_Controller {
 						{
 							
 							$this->pm_login = $this->Helps->change_format($this->pm_login, 1, $format = '');
+							
+							
+							// add this lines 12.14.2012 8.37am
+							
+							if (
+								$this->Holiday->is_holiday($this->log_date) and 
+								$this->Holiday->half_day == TRUE and
+								$this->Holiday->am_pm == 'pm'
+								)
+							{
+			
+								$this->pm_login = $this->Holiday->holiday_name($this->log_date);
+							}
+							
+							// end add 12.14.2012 8.37am
 						}
 						
 						// If leave in the pm and pm_login is not equal to leave code(VL, SPL)
@@ -2097,7 +2159,7 @@ class Attendance extends MX_Controller {
 				
 				$this->Tardiness->check_tardiness($this->employee_id, $this->log_date, $logType = 1, $number_seconds);
 				
-				//add to late count
+				// add to late count
 				$this->late_count += 1;
 				
 				$this->late_final += $number_seconds;
@@ -2118,10 +2180,29 @@ class Attendance extends MX_Controller {
 				
 				$this->Tardiness->check_tardiness($this->employee_id, $this->log_date, $logType = 4, $number_seconds);
 				
-				// Add to undertime count
-				$this->undertime_count += 1;
 				
-				$this->undertime_final += $number_seconds;
+				
+				// add this lines 12.14.2012 8.37am	
+				// this block of codes dont compute the undertime in PM if
+				// the employee has no logs in PM if the holiday is PM half day
+				
+				if (
+					$this->Holiday->is_holiday($this->log_date) and 
+					$this->Holiday->half_day == TRUE and
+					$this->Holiday->am_pm == 'pm'
+					)
+				{
+
+					//$this->pm_logout = '';
+				}
+				else
+				{
+					// Add to undertime count
+					$this->undertime_count += 1;
+					
+					$this->undertime_final += $number_seconds;
+				}	
+				// end add 12.14.2012 8.37am
 				
 				
 			}

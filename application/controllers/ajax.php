@@ -21,7 +21,7 @@
 /**
  * iHRMIS Ajax Class
  *
- * This class use for migrating database.
+ * This class use for ajax request.
  *
  * @package		iHRMIS
  * @subpackage	Controllers
@@ -56,8 +56,6 @@ class Ajax extends MX_Controller {
 		$this->Leave_card->add_leave_card($data);
 		
 		echo '<b>Added!</b>';
-		
-		//echo $employee_id.$month.$day.$year.$v_earned.$s_earned;
 	}
 	
 	// --------------------------------------------------------------------
@@ -297,25 +295,7 @@ class Ajax extends MX_Controller {
 			$this->Salary_grade->update_salary_grade($data, $id);
 			exit;
 		}
-		
-		// --------------------------------------------------------------------
-		
-		if ($mode == 'salary_grade_proposed')
-		{			
-			$this->load->model('salary_grade_proposed_m');
-			
-			$s = new Salary_grade_proposed_m();
-			
-			$id = $this->input->post('rowid');
-						
-			$data	= array(
-					$this->input->post('colid') => $this->input->post('new') 
-					);
-			
-			$s->update_salary_grade($data, $id);
-			exit;
-		}
-		
+				
 		// --------------------------------------------------------------------
 		
 		

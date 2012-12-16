@@ -1,8 +1,8 @@
 <?php
 //
-//  FPDI - Version 1.4.2
+//  FPDI - Version 1.4.3
 //
-//    Copyright 2004-2011 Setasign - Jan Slabon
+//    Copyright 2004-2012 Setasign - Jan Slabon
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ if (!class_exists('pdf_context', false)) {
     	function increase_length($l = 100) {
 			if ($this->_mode == 0 && feof($this->file)) {
 				return false;
-			} else if ($this->_mode == 0) {
+			} elseif ($this->_mode == 0) {
 			    $totalLength = $this->length + $l;
 			    do {
 			    	$toRead = $totalLength - $this->length;

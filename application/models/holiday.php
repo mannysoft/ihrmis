@@ -34,7 +34,10 @@ class Holiday extends CI_Model{
 
 	// --------------------------------------------------------------------
 	
-	var $fields = array();
+	public $fields 		= array();
+	public $date		= '';
+	public $half_day 	= FALSE;
+	public $am_pm		= 'pm';
 	
 	function __construct()
 	{
@@ -137,10 +140,14 @@ class Holiday extends CI_Model{
 	function is_holiday($date)
 	{
 		$this->db->where('date', $date);
+		
 		$q = $this->db->get('holiday');
 		
 		if ($q->num_rows() > 0)
 		{
+			// Lets check if half day
+			$this->is_holiday_half($date);
+			
 			return TRUE;
 		}
 		else
@@ -148,6 +155,33 @@ class Holiday extends CI_Model{
 			return FALSE;
 		}
 		
+		$q->free_result();
+		
+	}
+	
+	function is_holiday_half($date = '')
+	{
+		$half_day = 'no';
+		
+		$this->db->where('date', $date);
+		
+		$this->db->limit(1);
+		
+		$q = $this->db->get('holiday');
+		
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result_array() as $row)
+			{
+				if ($row['half_day'] == 'yes')
+				{
+					$this->half_day = TRUE;
+				}
+				
+				$this->am_pm = $row['am_pm'];
+			}
+		}
+				
 		$q->free_result();
 		
 	}
