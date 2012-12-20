@@ -9,12 +9,12 @@
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td><a href="<?php echo base_url();?>training_manage/event_save">Add Training Event</a></td>
+    <td align="right"><a href="<?php echo base_url();?>training_manage/event_save">Add Training Event</a></td>
   </tr>
   <tr>
     <td width="9%"><?php echo $msg;?></td>
-    <td width="79%">&nbsp;</td>
-    <td width="12%"></td>
+    <td width="67%">&nbsp;</td>
+    <td width="24%"></td>
   </tr>
 </table>
 <table width="97%" border="0" class="type-one">

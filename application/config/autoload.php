@@ -142,6 +142,7 @@ $autoload['model'] = array(
 							'Logs',
 							'Manual_log',
 							'Migrations',
+							'Options',
 							'Office',
 							'Office_pass',
 							'Stand_alone',

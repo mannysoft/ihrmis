@@ -51,7 +51,7 @@ class Settings_Manage extends MX_Controller {
 	function salary_grade()
 	{
 		
-		$data['page_name'] = '<b>Salary Grade (Authorized)</b>';
+		$data['page_name'] = '<b>Salary Grade</b>';
 		$data['msg'] = '';
 		
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020

@@ -112,7 +112,7 @@ function JSFX_FloatDiv(id, sx, sy)
 	return el;
 }
 //JSFX_FloatDiv("divTopLeft", 100,30).floatIt();
-JSFX_FloatDiv("divTopLeft", 750,300).floatIt();
+JSFX_FloatDiv("divTopLeft", 600,300).floatIt();
 
 
 
@@ -127,7 +127,7 @@ $('#office_id').change(function(){
 $(document).ready(function() {
 	
    $('#div15').html("Loading... Please wait...");
-   $('#div15').load("<?php echo base_url().('ajax/manual_log_employees/'); ?>" + <?php echo $this->session->userdata('office_id');?>);
+   $('#div15').load("<?php echo base_url().('ajax/manual_log_employees/'); ?>" + $('#office_id').val());
    
     //Display name in the yellow box if there is names selected
 	$('#divTopLeft').load("<?php echo base_url().('ajax/set_selected/'); ?>" + "0/1");

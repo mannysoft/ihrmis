@@ -577,6 +577,9 @@ class Leave_card extends CI_Model {
 		// Not SPL
 		$this->db->where('leave_type_id !=', 3);
 		
+		// Not MC 2 s.2012
+		$this->db->where('leave_type_id !=', 24);
+		
 		//$this->db->where('YEAR(period)', $year);
 		$this->db->where('YEAR(date)', $year);
 		

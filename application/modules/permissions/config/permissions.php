@@ -46,6 +46,7 @@ $config['permissions'] = array(
 															'add_cart' 			=> 'Add Employees to ID Maker',
 															'remove_cart' 		=> 'Remove Employees to ID Maker',
 															'id_request' 		=> 'ID Request',
+															'step_increment' 	=> 'Employee Step Increment',
 															),
 												),
 												

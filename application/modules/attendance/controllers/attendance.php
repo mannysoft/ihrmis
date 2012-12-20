@@ -1570,6 +1570,8 @@ class Attendance extends MX_Controller {
 		
 		$data['msg'] = '';
 		
+		$this->session->unset_userdata('employees');
+		
 		$s = new schedule_detail();
 		
 		$data['rows'] = $s->order_by('name')->get();
@@ -1592,7 +1594,16 @@ class Attendance extends MX_Controller {
 		$data['msg'] = '';
 		
 		$data['selected'] = $this->session->userdata('office_id');
-		$data['selected'] = 0;
+		
+		if ($id != '')
+		{
+			$sd = new Schedule_detail();
+			$sd->get_by_id( $id );
+			
+			$data['selected'] = $sd->office_id;
+		}
+		
+		
 		
 		//Use for office listbox
 		$data['options'] = $this->options->office_options(TRUE);
@@ -1624,6 +1635,11 @@ class Attendance extends MX_Controller {
 			// if the database has value on it add the value from database to session
 			if (is_array($db_employees))
 			{
+				if (! is_array($this->session->userdata('employees')))
+				{
+					$this->session->set_userdata('employees', array());
+				}
+				
 				$employees = array_merge($this->session->userdata('employees'), $db_employees);
 				
 				$this->session->set_userdata('employees', $employees);
@@ -1663,6 +1679,7 @@ class Attendance extends MX_Controller {
 			$sd->employees 		= serialize($employees);
 			$sd->dates 			= serialize($dates);	
 			$sd->schedule_id 	= $this->input->post('schedule_id');
+			$sd->office_id 		= $this->input->post('office_id');
 			
 			$sd->save();
 			

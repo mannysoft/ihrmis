@@ -25,6 +25,7 @@ $employee_management = array(
 						//$base.'personnel/personnel_schedule">'.$image.'Personnel Schedule</a>',
 						$base.'personnel/plantilla">'.$image.'Plantilla of Personnel</a>',
 						$base.'appointment/issued">'.$image.'Appointment Issued</a>',
+						$base.'employees/step_increment">'.$image.'Employee Step Increment</a>',
 						$base.'pds/reports">'.$image.'Reports</a>'
             			);
 						
@@ -107,7 +108,7 @@ $payroll_management = 	array(
             			);
 						
 $settings_management =  array(
-						$base.'settings_manage/salary_grade">'.$image.'Salary Grade (Authorized)</a>',
+						$base.'settings_manage/salary_grade">'.$image.'Salary Grade</a>',
 						//$base.'settings_manage/salary_grade_proposed">'.$image.'Salary Grade (Proposed)</a>',
 						$base.'settings_manage/holiday">'.$image.'Holiday</a>',					
 						$base.'settings_manage/audit_trail">'.$image.'Audit Trail</a>',
@@ -182,6 +183,7 @@ $settings_management =  array(
   
   <li><a  href="<?php echo base_url();?>payroll/monthly"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Monthly</a></li>
   <li><a  href="<?php echo base_url();?>payroll/additional"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional</a></li>
+  <li><a  href="<?php echo base_url();?>payroll/cos"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />COS</a></li>
   </ul>
   </li>
   

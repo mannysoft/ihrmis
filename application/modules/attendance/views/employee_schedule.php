@@ -24,11 +24,11 @@
 <table id="dtr.table" width="100%" border="0" class="type-one">
   <tr class="type-one-header">
     <th width="5%" bgcolor="#D6D6D6">ID</th>
-    <th width="21%" bgcolor="#D6D6D6"><strong>Description</strong></th>
-    <th width="15%" bgcolor="#D6D6D6">Date</th>
-    <th width="16%" bgcolor="#D6D6D6">Schedule</th>
+    <th width="24%" bgcolor="#D6D6D6"><strong>Description</strong></th>
+    <th width="24%" bgcolor="#D6D6D6">Date</th>
+    <th width="22%" bgcolor="#D6D6D6">Schedule</th>
     <th width="15%" bgcolor="#D6D6D6">Employees</th>
-    <th width="28%" bgcolor="#D6D6D6">Actions</th>
+    <th width="10%" bgcolor="#D6D6D6">Actions</th>
     </tr>
     <?php $s = new Schedule();?>
   <?php foreach($rows as $row):?>

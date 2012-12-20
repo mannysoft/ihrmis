@@ -1,5 +1,4 @@
 <?php 
-
 //http://jquery.com/demo/thickbox/
 
 if ($pop_up == 1){
@@ -117,6 +116,9 @@ if ($pop_up == 1){
   </tr>
 </table>
 </form>
+<?php if($records_found != ''):?>
+<div class="clean-green"><?php echo $records_found.' Record(s) found.';?></div><br />
+<?php endif;?>
 <table width="100%" border="0" class="type-one">
   <tr>
     <th width="6%">Emp ID</th>
@@ -148,7 +150,7 @@ if ($pop_up == 1){
     <td><?php echo $row->salary_grade.'-'.$row->step;?></td>
     <td><?php echo $row->eligibility;?></td>
     <td><?php echo $row->course;?></td>
-    <td><?php echo $row->birth_date;?></td>
+    <td><?php echo ($row->birth_date == '0000-00-00') ? '' :$row->birth_date ;?></td>
     <td><?php echo $row->res_address;?></td>
   </tr>
   <?php endforeach;?>

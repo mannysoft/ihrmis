@@ -43,7 +43,7 @@
       </tr>
       <tr>
         <td align="right">Birthday:</td>
-        <td><?php echo $employee->birth_date;?></td>
+        <td><?php echo ($employee->birth_date == '0000-00-00') ? '' : $employee->birth_date;?></td>
         <td align="right" valign="middle">Educational Attainment:</td>
         <td align="left" valign="middle"><?php echo $employee->course;?></td>
       </tr>

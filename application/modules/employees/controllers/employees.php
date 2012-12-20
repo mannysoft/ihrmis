@@ -805,6 +805,40 @@ class Employees extends MX_Controller  {
 	
 	// --------------------------------------------------------------------
 	
+	function step_increment()
+	{
+		$data['page_name'] = '<b>Employee Step Increment</b>';
+		
+		$data['msg'] 				= '';
+		
+		$data['options'] 			= $this->options->office_options();
+		$data['selected'] 			= (	$this->input->post('office_id') ) ? 
+										$this->input->post('office_id') : 
+										$this->session->userdata('office_id');
+		
+		$data['month_options'] 		= $this->options->month_options();
+		$data['month_selected'] 	= (	$this->input->post('month') ) ? 
+										$this->input->post('month') :
+										date('m');
+		
+		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
+		$data['year_selected'] 		= (	$this->input->post('year') ) ? 
+										$this->input->post('year') :
+										date('Y');
+										
+		if ($this->input->post('op'))
+		{
+			echo 'ok';
+		}								
+			
+		
+		$data['main_content'] = 'step_increment';
+		
+		$this->load->view('includes/template', $data);
+	}
+	
+	// --------------------------------------------------------------------
+	
 	/**
 	 * Check if emmployee id exists
 	 *

@@ -1003,6 +1003,7 @@ class Pds extends MX_Controller  {
 			$p->step 			= $this->input->post('step');
 			$p->permanent	  	= $this->input->post('permanent');
 			$p->last_promotion 	= $this->input->post('last_promotion');
+			$p->last_increment 	= $this->input->post('last_increment');
 			$p->level			= $this->input->post('level');
 			$p->eligibility 	= $this->input->post('eligibility');
 			$p->first_day_of_service= $this->input->post('first_day_of_service');
@@ -1150,6 +1151,8 @@ class Pds extends MX_Controller  {
 		
 		$data['rows'] = array();
 		
+		$data['records_found'] = '';
+		
 		if ( $this->input->post('op'))
 		{
 			$e = new Employee_m();
@@ -1229,6 +1232,8 @@ class Pds extends MX_Controller  {
 			
 			$data['rows'] = $e->get();
 			
+			$data['records_found'] = $e->result_count();
+						
 			// if search and print preview
 			if ( $this->input->post('search_preview'))
 			{
