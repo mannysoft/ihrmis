@@ -204,63 +204,6 @@ class Manual_Manage extends MX_Controller {
 		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
 		$data['selected'] 			= $this->session->userdata('office_id');
-		
-		// Months
-		$data['month_options'] 		= $this->options->month_options();
-		$data['month_selected'] 	= date('m');
-		
-		// days
-		$data['days_options'] 		= $this->options->days_options();
-		$data['days_selected'] 		= date('d');
-		
-		
-		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
-		$data['year_selected'] 		= date('Y');
-		
-		if($this->input->post('op'))
-		{
-			$is_employee_id_exists = $this->Employee->is_employee_id_exists($this->input->post('employee_id'));
-		
-			if($is_employee_id_exists == FALSE)
-			{
-				$data['error_msg'] = 'Invalid Employee No.';
-			}
-			
-			$date_cutoff = $this->input->post('year2').'-'.
-						   $this->input->post('month2').'-'.
-						   $this->input->post('day2');
-			
-			$forwarded_note = 'Bal. forwarded as of '.
-							$this->input->post('month2').'-'.
-							$this->input->post('day2').'-'.
-							$this->input->post('year2');
-			
-			$data['msg'] = $this->Leave_forwarded->add_forwarded_leave( $this->input->post('employee_id'), 
-																 		$this->input->post('vacation'), 
-																 		$this->input->post('sick'),
-																 		$forwarded_note,
-																		$date_cutoff
-																		);
-			
-			// Remove balance forwarded
-			$this->Leave_card->delete_balance_forwarded($this->input->post('employee_id'));
-			
-			// Delete all entry less than the date forwarded
-			$this->Leave_card->delete_less_forwarded($this->input->post('employee_id'), $date_cutoff);
-					
-			// Put to leave card			
-			$info = array(
-						"employee_id"	=> $this->input->post('employee_id'),
-						"particulars"	=> $forwarded_note,
-						"v_balance" 	=> $this->input->post('vacation'),
-						"s_balance" 	=> $this->input->post('sick'),
-						"date"			=> $this->input->post('year2').'-'.
-										   $this->input->post('month2').'-'.
-										   $this->input->post('day2')
-						);
-						
-			$this->Leave_card->add_leave_card($info);				
-		}
 				
 		$data['main_content'] = 'cto_forward_balance';
 		

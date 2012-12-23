@@ -872,6 +872,8 @@ class Reports extends MX_Controller
 		
 		
 		$first_day = $name['first_day_of_service'];
+		
+		
 	
 		list($year, $month, $day) = explode('-', $name['first_day_of_service']);
 		
@@ -1267,7 +1269,7 @@ class Reports extends MX_Controller
 		$pdf->Write(0, number_format($vacation_spent_total, 3));
 		
 		$pdf->SetX(115);
-		$pdf->Write(0, number_format($sick_spent_total, 3));
+		$pdf->Write(0, number_format(($sick_spent_total == '0.000') ? '' : $sick_spent_total, 3));
 		
 		$pdf->SetX(135);
 		$pdf->Write(0, number_format($vacation_balance, 3));

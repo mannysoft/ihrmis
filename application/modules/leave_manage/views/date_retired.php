@@ -11,19 +11,9 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right">&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right">&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td width="25%" align="right">Date Retired(YYYY-MM-DD):</td>
-    <td width="38%"><input name="date_retired" type="text" id="date_retired" value="<?php echo $date_retired;?>" /></td>
-    <td width="37%">&nbsp;</td>
+    <td width="41%" align="right">Date Retired(YYYY-MM-DD):</td>
+    <td width="28%"><input name="date_retired" type="text" id="date_retired" value="<?php echo $date_retired;?>" /></td>
+    <td width="31%">&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;</td>

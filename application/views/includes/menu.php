@@ -183,18 +183,21 @@ $settings_management =  array(
   
   <li><a  href="<?php echo base_url();?>payroll/monthly"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Monthly</a></li>
   <li><a  href="<?php echo base_url();?>payroll/additional"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional</a></li>
+  
   <li><a  href="<?php echo base_url();?>payroll/cos"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />COS</a></li>
+  <li><a  href="<?php echo base_url();?>payroll/cos/rates"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Rate per day</a></li>
+  <li><a  href="<?php echo base_url();?>payroll/cos/jo"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Job Order</a></li>
   </ul>
   </li>
   
   <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Reports</a>
   <ul>
   
-  <li><a  href="<?php echo base_url();?>payroll/report/payslip"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Payslip</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/report/salary_index"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Salary Index</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/report/loan_balance"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Loan Balance</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/report/income_tax"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Income Tax</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/report/signatory"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Signatory</a></li>
+  <li><a href="<?php echo base_url();?>payroll/report/payslip"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Payslip</a></li>
+  <li><a href="<?php echo base_url();?>payroll/report/salary_index"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Salary Index</a></li>
+  <li><a href="<?php echo base_url();?>payroll/report/loan_balance"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Loan Balance</a></li>
+  <li><a href="<?php echo base_url();?>payroll/report/income_tax"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Income Tax</a></li>
+  <li><a href="<?php echo base_url();?>payroll/report/signatory"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Signatory</a></li>
   </ul>
   </li>
   
@@ -231,6 +234,15 @@ $settings_management =  array(
   <li><a  href="<?php echo base_url();?>payroll/deduction/tax"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Tax Exemption</a></li>
   </ul>
   </li>
+  
+  
+  <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Disbursing</a>
+  <ul>
+  <li><a  href="<?php echo base_url();?>payroll/disbursing"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Disbursing Officers</a></li>
+  <li><a  href="<?php echo base_url();?>payroll/disbursing/offices"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Offices</a></li>
+  </ul>
+  </li>
+  
   
   
   </ul></li>

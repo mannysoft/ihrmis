@@ -44,7 +44,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost";
 $db['default']['username'] = "root";
-$db['default']['password'] = "admin";
+$db['default']['password'] = "pCt7DRVAqw6ENnVc";
 $db['default']['database'] = "tawa";
 $db['default']['database'] = "ihrmis_laguna";
 $db['default']['database'] = "ihrmis_mrdq";

@@ -580,6 +580,9 @@ class Leave_card extends CI_Model {
 		// Not MC 2 s.2012
 		$this->db->where('leave_type_id !=', 24);
 		
+		// Not Solo parent
+		$this->db->where('leave_type_id !=', 6);
+		
 		//$this->db->where('YEAR(period)', $year);
 		$this->db->where('YEAR(date)', $year);
 		

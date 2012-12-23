@@ -390,7 +390,7 @@ $leave_earn2 = ($settings['leave_earn'] != 15) ? $checked : '';
 <?php else: ?>
 <table width="100%" border="0">
   <tr>
-    <td><a href="#" tab="general" class="click">General</a> | <a href="#" tab="users" class="click">Users</a> | <a href="#" tab="employees" class="click">Employees</a> | <a href="#" tab="attendance" class="click">Attendance</a> | <a href="#" tab="leave" class="click">Leave</a> | <a href="#" tab="signatories" class="click">Signatories</a></td>
+    <td><a href="#" tab="general" class="click">General</a> | <a href="#" tab="users" class="click">Users</a> | <a href="#" tab="employees" class="click">Employees</a> | <a href="#" tab="attendance" class="click">Attendance</a> | <a href="#" tab="leave" class="click">Leave</a> | <a href="#" tab="payroll" class="click">Payroll</a> | <a href="#" tab="signatories" class="click">Signatories</a></td>
     <td>&nbsp;</td>
     <td><input name="active_tab" type="hidden" id="active_tab" 
     value="<?php echo ($this->input->post('active_tabs')) ? $this->input->post('active_tabs'): 'general'?>" /></td>
@@ -845,6 +845,62 @@ $('.click').click(function(){
       <label>Yes</label>
       <input name="enable_add_earn_menu" type="radio" value="no" <?php echo $enable_add_earn_menu2;?> />
       <label>No</label></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button4" id="button4" value="Save" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+</div>
+
+
+<div id="payroll" class="settings_tab">
+<form action="" method="post">
+<table width="100%" border="0" cellpadding="5" cellspacing="5" class="type-one">
+  <tr class="type-one-header">
+    <th width="28%">Payroll</th>
+    <th width="27%"><input name="active_tabs" type="hidden" id="active_tabs" value="payroll" /></th>
+    <th width="16%">&nbsp;</th>
+    <th width="29%">&nbsp;</th>
+  </tr>
+  <tr>
+    <td><input name="op" type="hidden" id="op" value="1" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Chief Accountant/Head, Accounting Unit:</td>
+    <td><input name="agency_accountant" type="text" id="agency_accountant" value="<?php echo $settings['agency_accountant'];?>" size="30" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Position:</td>
+    <td><input name="agency_accountant_position" type="text" id="agency_accountant_position" value="<?php echo $settings['agency_accountant_position'];?>" size="30" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>

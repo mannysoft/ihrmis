@@ -45,7 +45,7 @@
 			//Tell if log is pm or not
 			$isLogPm = TRUE;
 			
-			$pmLogin = $this->Helps->set_font_red($pmLogin, "01:00", $isLogPm);
+			$pmLogin = $this->Helps->set_font_red($pmLogin, "13:00", $isLogPm);
 		}
 
 	 	//bg

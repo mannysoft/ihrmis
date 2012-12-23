@@ -2,13 +2,15 @@
 <div class="clean-green" style="display:none">Compensatory Timeoff has been saved!</div><br />
 <table width="100%" border="0" class="type-one">
   <tr class="type-one-header">
-    <th colspan="6" bgcolor="#D6D6D6">
-    <?php //echo $no_record;?></th>
+    <th bgcolor="#D6D6D6">&nbsp;</th>
+    <th bgcolor="#D6D6D6">&nbsp;</th>
+    <th width="243" bgcolor="#D6D6D6">&nbsp;</th>
+    <th width="305" bgcolor="#D6D6D6">&nbsp;</th>
+    <th bgcolor="#D6D6D6">&nbsp;</th>
   </tr>
   <tr>
-    <td width="15" align="right">&nbsp;</td>
-    <td width="160" align="right"><strong>Emp ID/Last Name:</strong></td>
-    <td width="455"><input name="employee_id" type="text" class="ilaw" id="employee_id" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';" value="<?php echo $employee_id;?>" size="20" autocomplete="off"/>
+    <td width="216" align="right"><strong>Emp ID/Last Name:</strong></td>
+    <td width="486"><input name="employee_id" type="text" class="ilaw" id="employee_id" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';" value="<?php echo $employee_id;?>" size="20" autocomplete="off"/>
         <strong>
         <input name="op" type="hidden" id="op" value="1" />
     </strong></td>
@@ -20,7 +22,6 @@
   </tr>
   <tr>
     <td align="right">&nbsp;</td>
-    <td align="right">&nbsp;</td>
     <td>
       <?php $js = 'id= "month4"';echo form_dropdown('month4', $month_options, $month_selected, $js);?>
 <input name="multiple" type="text" class="ilaw" id="multiple" size="20" autocomplete="off"/>
@@ -30,7 +31,6 @@
     <td align="left">&nbsp;</td>
   </tr>
   <tr>
-    <td align="right">&nbsp;</td>
     <td align="right"><strong>Allow Sat. or Sun.:</strong></td>
     <td><input name="allow_sat_sun" type="checkbox" id="allow_sat_sun" value="1" /></td>
     <td width="57" align="left">&nbsp;</td>
@@ -38,48 +38,40 @@
   
   <tr>
     <td align="right">&nbsp;</td>
-    <td align="right">&nbsp;</td>
     <td><input name="set_leave" type="button" class="button" id="set_leave" value="Set CTO"/></td>
     <td width="57" align="left">&nbsp;</td>
   </tr>
   <tr>
     <td align="right">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="left">&nbsp;</td>
+  </tr>
+  <tr>
     <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
     <td align="left">&nbsp;</td>
   </tr>
   <tr>
     <td align="right">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="left">&nbsp;</td>
+  </tr>
+  <tr>
     <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
     <td align="left">&nbsp;</td>
   </tr>
   <tr>
     <td align="right">&nbsp;</td>
-    <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
     <td align="left">&nbsp;</td>
   </tr>
   <tr>
     <td align="right">&nbsp;</td>
-    <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
     <td align="left">&nbsp;</td>
   </tr>
   <tr>
-    <td align="right">&nbsp;</td>
-    <td align="right">&nbsp;</td>
-    <td>&nbsp;</td>
-    <td align="left">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right">&nbsp;</td>
-    <td align="right">&nbsp;</td>
-    <td>&nbsp;</td>
-    <td align="left">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right">&nbsp;</td>
     <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
     <td width="57" align="left">&nbsp;</td>

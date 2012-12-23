@@ -2945,7 +2945,7 @@ class Ajax extends MX_Controller {
 			if(count($name) != 0)
 			{
 				
-				echo '<img src="'.base_url().'pics/'.$name['pics'].'" id="employee_image"/>'.
+				echo '<img src="'.base_url().'pics/'.$name['pics'].'" id="employee_image"  height="120"/>'.
 				 '<br><strong>'.$name['fname'].' '.$name['mname'].' '.$name['lname'].'</strong>';
 				 
 				 ?>
