@@ -404,7 +404,7 @@
         </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="6">paid the amount stated opposite his name after identifying himselp</td>
+        <td colspan="6">paid the amount stated opposite his name after identifying himself</td>
       </tr>
       <tr>
         <td>&nbsp;</td>

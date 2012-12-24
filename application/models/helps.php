@@ -898,34 +898,6 @@ class Helps extends CI_Model {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Get the dates between two dates
-	 *
-	 * @param string(date) $date1
-	 * @param string(date) $date2
-	 * @return unknown
-	 */
-	function days_between($date1, $date2)
-	{
-	    $d1 = explode("-", $date1);
-	    $d2 = explode("-", $date2);
-	  
-	    $year1 = $d1[0];
-	    $month1 = $d1[1];
-	    $day1 = $d1[2];
-	
-	    $year2 =  $d2[0];
-	    $month2 = $d2[1];
-	    $day2 = $d2[2];
-	   
-	    $deadline1 = mktime(0, 0, 0, $month1, $day1, $year1, 0);
-	    $deadline2 = mktime(0, 0, 0, $month2, $day2, $year2, 0);
-	    $res = round( ($deadline2 - $deadline1) / (60 * 60 * 24) );
-	    return $res;
-	}
-	
-	// --------------------------------------------------------------------
-	
-	/**
 	 * Difference between to time
 	 *
 	 * @param string $bigTime

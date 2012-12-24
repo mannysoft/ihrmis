@@ -297,6 +297,8 @@ class Settings_Manage extends MX_Controller {
 		$data['page_name'] = '<b>Settings</b>';
 		$data['msg'] = '';
 		
+		$this->load->helper('string');
+		
 		if ($this->input->post('op'))
 		{
 			// We get all the POST data. $key is the field name
@@ -304,6 +306,12 @@ class Settings_Manage extends MX_Controller {
 			// We update the settings table to a new value($val)
 			foreach ($_POST as $key => $val)
 			{
+				// This fixed if the name has quote("") Like Gov. "E.R."
+				if ($key == 'head_of_office')
+				{
+					$val  = quotes_to_entities($val);
+				}
+				
 				$this->Settings->update_settings($key, $val);
 			}
 			

@@ -183,7 +183,7 @@ $settings_management =  array(
   
   <li><a  href="<?php echo base_url();?>payroll/monthly"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Monthly</a></li>
   <li><a  href="<?php echo base_url();?>payroll/additional"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional</a></li>
-  
+  <li><a  href="<?php echo base_url();?>payroll/cos/status"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />COS Status</a></li>
   <li><a  href="<?php echo base_url();?>payroll/cos"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />COS</a></li>
   <li><a  href="<?php echo base_url();?>payroll/cos/rates"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Rate per day</a></li>
   <li><a  href="<?php echo base_url();?>payroll/cos/jo"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Job Order</a></li>
@@ -235,13 +235,13 @@ $settings_management =  array(
   </ul>
   </li>
   
-  
+  <!--
   <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Disbursing</a>
   <ul>
   <li><a  href="<?php echo base_url();?>payroll/disbursing"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Disbursing Officers</a></li>
   <li><a  href="<?php echo base_url();?>payroll/disbursing/offices"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Offices</a></li>
   </ul>
-  </li>
+  </li>-->
   
   
   

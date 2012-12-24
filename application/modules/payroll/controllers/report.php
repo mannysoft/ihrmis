@@ -178,6 +178,8 @@ class Report extends MX_Controller {
 		
 		$o->get_by_office_id($office_id);
 		
+		$disbursing_officer = $o->disbursing_officer;
+		
 		$str = $o->office_name;
 				
 		if ((strlen($str) % 2) == 1)
@@ -213,6 +215,9 @@ class Report extends MX_Controller {
 		
 		$agency_accountant = $this->Settings->get_selected_field('agency_accountant');
 		$agency_accountant_position = $this->Settings->get_selected_field('agency_accountant_position');
+		
+		$head_of_office = $this->Settings->get_selected_field('head_of_office');
+		$head_of_office_position = $this->Settings->get_selected_field('head_of_office_position');
 						
 		$heading = '<table width="100%" border="0">
   <tr>
@@ -392,7 +397,7 @@ class Report extends MX_Controller {
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td><strong>DR. BONIFACIO E. UMACLAP, PME/ GILBERT G. LOZADA</strong></td>
+        <td><strong>'.strtoupper($o->office_head).'</strong></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -401,7 +406,7 @@ class Report extends MX_Controller {
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="5" style="font-size:11px">Vice President for Academic Affairs/ Vice President for Administration</td>
+        <td colspan="5" style="font-size:11px">'.$o->position.'</td>
         <td>&nbsp;</td>
       </tr>
       <tr>
@@ -656,7 +661,7 @@ $page2 = '<table width="100%" border="0">
       <tr>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
-        <td align="center"><strong>JEORGE &quot;E.R.&quot; EJERCITO ESTREGAN</strong></td>
+        <td align="center"><strong>'.$head_of_office.'</strong></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td align="center">Date</td>
@@ -665,7 +670,7 @@ $page2 = '<table width="100%" border="0">
       <tr>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
-        <td align="center">Governor</td>
+        <td align="center">'.$head_of_office_position.'</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -690,7 +695,7 @@ $page2 = '<table width="100%" border="0">
         </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="6">paid the amount stated opposite his name after identifying himselp</td>
+        <td colspan="6">paid the amount stated opposite his name after identifying himself</td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -713,7 +718,7 @@ $page2 = '<table width="100%" border="0">
       <tr>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
-        <td align="center"><strong>AVEGAIL CLAVATON</strong></td>
+        <td align="center"><strong>'.$disbursing_officer.'</strong></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td align="center">_______________________</td>

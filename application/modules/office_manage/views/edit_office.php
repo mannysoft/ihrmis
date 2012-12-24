@@ -5,7 +5,7 @@
 <?php else: ?>
 <?php endif; ?>
 <form action="" method="post">
-<table width="100%" border="0">
+<table width="100%" border="0" cellpadding="5" cellspacing="5">
   <tr>
     <td colspan="2" align="center"></td>
     <td></td>
@@ -59,6 +59,11 @@
                 );
 	$js = 'id= "office_location"';echo form_dropdown('office_location', $options, $office['office_location'], $js);?></td>
     <td></td>
+  </tr>
+  <tr>
+    <td align="right">Disbursing Officer:</td>
+    <td><input name="disbursing_officer" type="text" id="disbursing_officer" value="<?php echo set_value('disbursing_officer', $office['disbursing_officer']); ?>" /></td>
+    <td>Use for payroll</td>
   </tr>
   <tr>
     <td width="25%">&nbsp;</td>

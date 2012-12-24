@@ -893,14 +893,14 @@ $('.click').click(function(){
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="right">Head of Office:</td>
+    <td><input name="head_of_office" type="text" id="head_of_office" value="<?php echo $settings['head_of_office'];?>" size="30" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="right">Position</td>
+    <td><input name="head_of_office_position" type="text" id="head_of_office_position" value="<?php echo $settings['head_of_office_position'];?>" size="30" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>

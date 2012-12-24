@@ -67,6 +67,7 @@ class Office_Manage extends MX_Controller {
 								'employee_id' 		=> $this->input->post('employee_id'),
 								'position'	  		=> $this->input->post('position'),
 								'office_location' 	=> $this->input->post('office_location'),
+								'disbursing_officer'=> $this->input->post('disbursing_officer'),
 							);
 							
 				$this->Office->add_office($data);
@@ -107,6 +108,7 @@ class Office_Manage extends MX_Controller {
 								'employee_id' 		=> $this->input->post('employee_id'),
 								'position'	  		=> $this->input->post('position'),
 								'office_location' 	=> $this->input->post('office_location'),
+								'disbursing_officer'=> $this->input->post('disbursing_officer'),
 							);
 							
 				$this->Office->update_office($data, $office_id);	

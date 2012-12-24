@@ -2,7 +2,7 @@
 
 class Tax_table extends DataMapper{
 
-	var $table  = 'payroll_tax_table';
+	var $table  = 'payroll_tax_table2';
 	
 	//var $has_many = array('deductions_information');
 	

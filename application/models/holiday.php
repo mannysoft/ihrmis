@@ -159,6 +159,8 @@ class Holiday extends CI_Model{
 		
 	}
 	
+	// --------------------------------------------------------------------
+	
 	function is_holiday_half($date = '')
 	{
 		$half_day = 'no';
@@ -185,6 +187,36 @@ class Holiday extends CI_Model{
 		$q->free_result();
 		
 	}
+	
+	// --------------------------------------------------------------------
+	
+	function count_working_days($date1 = '2012-11-01', $date2 = '2012-11-15')
+	{
+		$count = 0;
+		
+		$days = $this->Helps->get_days_in_between($date1, $date2);
+		
+		foreach ($days as $date)
+		{
+			
+			list($year, $month, $day) = explode('-', $date);
+			
+			$is_sat_sun = $this->Helps->is_sat_sun($month, $day, $year);
+			
+			if ($this->is_holiday($date) or $is_sat_sun == 'Saturday' or $is_sat_sun == 'Sunday')
+			{
+				
+			}
+			else
+			{
+				$count ++;
+			}
+		}
+		
+		return $count;
+	}
+	
+	// --------------------------------------------------------------------
 }
 
 /* End of file holiday.php */
