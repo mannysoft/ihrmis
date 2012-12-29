@@ -58,6 +58,27 @@ class Home extends MX_Controller
 		
 		//echo $this->session->sess_expiration;
 		
+		/*
+		$date = new ExpressiveDate;
+		
+		$date->minusOneDay();
+
+		echo $date->getRelativeDate(); // 1 day ago
+		
+		$date->addOneWeek();
+		
+		echo $date->getShortDate(); // Jan 31, 2012
+		
+		$a = new Illuminate\Container;
+		
+		var_dump($a);*/
+		
+		
+		
+		
+		
+		
+		
 		
     }  
 	
@@ -67,12 +88,6 @@ class Home extends MX_Controller
 	{
 		
 		$this->is_user_logged($isUserLogged);
-	}
-	
-	function sample()
-	{
-		echo 'sample';
-		echo '<input type="button" onclick="parent.close()"></input>';
 	}
 	
 	// --------------------------------------------------------------------

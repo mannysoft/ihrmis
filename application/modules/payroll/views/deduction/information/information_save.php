@@ -76,8 +76,25 @@
       <td>&nbsp;</td>
     </tr>
     <tr>
+      <td align="right">Amount:</td>
+      <td><input name="amount" type="text" id="amount" value="<?php echo $deduction->amount;?>" size="8" /></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
       <td align="right">Max. Amount Exempted:</td>
       <td><input name="amount_exempted" type="text" id="amount_exempted" value="<?php echo $deduction->amount_exempted;?>" size="30" /></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right">Reference Table:</td>
+      <td><?php echo form_dropdown('reference_table', array(
+	  													'' 				=> '', 
+	  													'philhealth' 	=> 'Phil Health',
+														'pagibig'		=> 'Pagibig',
+														'gsis'			=> 'GSIS',
+														'sss'			=> 'SSS'
+														), 
+														$deduction->reference_table);?>&nbsp;the table where deduction will base</td>
       <td>&nbsp;</td>
     </tr>
     <tr>

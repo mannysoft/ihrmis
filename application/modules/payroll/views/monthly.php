@@ -46,7 +46,6 @@
 </table>
 </form>
 
-<?php $array =array(1,2,3,4);?>
 <div id="payroll_sheet" style="border:thin inset; padding:6px;overflow:auto;">
 <table width="100%" border="0" class="type-one">
   <tr class="type-one-header">
@@ -56,17 +55,22 @@
     <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
-    <th>&nbsp;</th>
+    <th>Extra1</th>
+    <th>extra2</th>
     <?php 
 	$ph = new Payroll_heading();
 	$line1 = $ph->get_line();
+	
+	$ph2 = new Payroll_heading();
+		
+	$lines2 = $ph2->get_line(2);
 	?>
     <?php foreach($line1 as $line):?>
-    	<th><?php echo $line->type;?></th>
+    	<th><?php echo $line->caption;?></th>
     <?php endforeach;?>
     
     <th>&nbsp;</th>
-    <th>ACA</th>
+    <th>extra3</th>
     
     
     
@@ -78,173 +82,98 @@
     <th width="6%">Daily Rate</th>
     <th width="16%">Days Earned</th>
     <th width="23%">Monthly Salary</th>
-    <th width="8%">&nbsp;</th>
+    <th width="8%">extra1</th>
+    <th width="8%">extra2</th>
     
-	<?php foreach($array as $a):?>
-    	<th><?php echo $a;?></th>
+	<?php 
+	$ph = new Payroll_heading();
+	$line2 = $ph->get_line(2);
+	?>
+    <?php foreach($line2 as $line):?>
+    	<th><?php echo $line->caption;?></th>
     <?php endforeach;?>
+        
+    <!--Just add additional column if the first line is greater than 2nd line
+    Lets practice that the first line is always greater than or equal to
+    2nd line. Cheers!-->
+    <?php if($line1->result_count() > $line2->result_count()):?>
+    	<?php $rows = $line1->result_count() - $line2->result_count();?>
+        <?php //while($rows != 0):?>
+        	<th></th>
+            <?php //$rows --;?>
+        <?php //endwhile;?>
+    <?php endif;?>
     
     <th width="8%">&nbsp;</th>
-    <th width="8%">PERA</th>
+    <th width="8%">extra3</th>
    
     </tr>
     
-    <?php $employee_count = 1;?>
+    <?php $employee_count = 1;
+	$this->load->library('payroll_lib');
+	?>
   <?php foreach ($employees as $employee): ?>
   		<?php $bg = $this->Helps->set_line_colors();?>
         <?php
-		//$d = new Additional_compensation_m();
-		
-		//$d->get_by_id( $deduction->additional_compensation_id );
-		
-		$monthly_salary = $this->Salary_grade->get_monthly_salary($employee->salary_grade, $employee->step);
-		
-		//echo $this->db->last_query();
-		//echo $employee->step;
-		
-		$daily_rate = $monthly_salary / 22;
-		
-		$gross_amount_earned = $monthly_salary / 2;
-		
-		$net_pay_monthly = $monthly_salary;
-		$net_pay_15 = $gross_amount_earned;
-		$net_pay_30 = $gross_amount_earned;
-		
-		//echo $net_pay_monthly;
-		
-				
+		$this->payroll_lib->salary_grade 	= $employee->salary_grade;
+		$this->payroll_lib->step 			= $employee->step;
+		$this->payroll_lib->tax_status 		= $employee->tax_status;
+		$this->payroll_lib->dependents 		= $employee->dependents;
 		?>
       <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
     onmouseout ="this.bgColor = '<?php echo $bg;?>';">
         <td align="right" valign="top"><?php echo $employee_count;?></td>
         <td valign="top"><?php echo $employee->lname.', '.$employee->fname;?></td>
         <td valign="top"><?php echo $employee->position;?></td>
-        <td><input name="daily_rate[]" type="text" id="daily_rate[]" value="<?php echo number_format($daily_rate, 2);?>" size="6" readonly="readonly" style="text-align:right;font-weight:bold;text-emphasis:dot"/>
-        <br />
-        <input name="daily_rate[]" type="text" id="daily_rate[]" value="<?php echo number_format($daily_rate, 2);?>" size="6" style="text-align:right" />
-        <br />
-        <input name="daily_rate[]" type="text" id="daily_rate[]" value="<?php echo number_format($daily_rate, 2);?>" size="6" style="text-align:right"/></td>
-        <td><input name="days_earned[]" type="text" id="days_earned[]" value="22" size="3" readonly="readonly" style="text-align:right" />
-        <br />
-        <input name="days_earned[]" type="text" id="days_earned[]" value="11" size="3" style="text-align:right" />
-        <br />
-        <input name="days_earned[]" type="text" id="days_earned[]" value="11" size="3" style="text-align:right"/></td>
-        <td align="center" valign="top"><input name="textfield" type="text" id="textfield" value="<?php echo number_format($monthly_salary, 2);?>" size="7" readonly="readonly" style="text-align:right" />
-        <br />
-        <input name="textfield2" type="text" id="textfield2" value="<?php echo number_format($monthly_salary, 2);?>" size="7" style="text-align:right" />
-        <br />
-        <input name="textfield3" type="text" id="textfield3" value="<?php echo number_format($monthly_salary, 2);?>" size="7" style="text-align:right" /></td>
+        <td><br />
+          <br /></td>
+        <td><br />
+          <br /></td>
+        <td align="center" valign="top"><br />
+          <br /></td>
+        <td align="center" valign="top">&nbsp;</td>
         <td align="center" valign="top">&nbsp;</td>
         
-		<?php foreach($array as $a):?>
-    	<td><?php echo $a;?></td>
-    	<?php endforeach;?>
-        
-        <td align="center" valign="top">&nbsp;</td>
-        <td align="center" valign="top">&nbsp;</td>
-        <?php foreach($agencies as $agency):?>
 		<?php 
-        // Lets count info per agency
-        $d  = new Deduction_information();
-		$d->order_by('report_order');
-        $infos = $d->get_by_deduction_agency_id($agency->id);
-        ?>
-        
-        <?php foreach($infos as $info):?>
-        	
-            <?php 
-			// To do: we are going to check for active deductions per employee
-			$dl = new Deduction_loan();
-			$dl->where('employee_id', $employee->id);
-			$dl->where('deduction_information_id', $info->id);
-			$dl->get();
-			
-			$deduct = 0;
-			
-			if ($dl->exists())
-			{
-				$deduct = $dl->monthly_due;
+		
+		
+		
+		$lines = $ph->get_line();
+		
+		$i = 0;
+		
+		?>
+		<?php foreach($line1 as $line):?>
+			<td align="center">
+				<?php 
+				$this->payroll_lib->deduction_compensation($line, $employee->id); 
+				echo $this->payroll_lib->amount().'<br><br>';
 				
-				// Deduct from salary
-				$net_pay_monthly = $net_pay_monthly - $dl->monthly_due;
-			}
-			
-			// If tax
-			if ($info->code == 'Tax Withheld')
-			{
-				$tt = new Tax_table();
-				$tt->where('start_range <', $monthly_salary);
-				$tt->order_by('start_range', 'DESC');
-				$tt->get(1);
+				// This is not a good idea code but I need technical debt now
+				$j = 0;
 				
-				
-				
-				// The tax fix amount
-				// If fix amount is not equal to zero meaning the
-				// salary is more than 10,000.00
-				if ($tt->fix_amount != 0)
+				foreach ($lines2 as $line2)
 				{
-					$tax_with_held = $tt->fix_amount;
+					if ($i == $j)
+					{
+						$this->payroll_lib->amount = 0;
+						$this->payroll_lib->deduction_compensation($line2, $employee->id); 
+						echo $this->payroll_lib->amount();
+					}
 					
-					//echo $tax_with_held;
-										
-					// Well lets check how much excess
-					$excess = $monthly_salary - $tt->start_range;
-					
-					$percentage = intval($tt->percentage);
-					
-					// Add the excess to tax with held
-					$tax_percentage = ($excess / 100) * $percentage;
-					
-					$tax_with_held = $tax_with_held + $tax_percentage;
-					
-					//echo $tax_percentage;
-					
-					
-					//echo $excess;
+					$j ++;
 				}
-				// If the salary is below 10,000.00
-				// We will get the percentage only
-				else 
-				{
-					$this->load->helper('percent');
-					
-					$percentage = intval($tt->percentage);
-					
-					$tax_with_held = ($monthly_salary / 100) * $percentage;
-				}
-				
-				$deduct = $tax_with_held;
-				
-				$net_pay_monthly = $net_pay_monthly - $deduct;
-			}
-			
-			$deduct_half = 0;
-			
-			if ($deduct != 0)
-			{
-				$deduct_half = $deduct / 2;
-				
-				$net_pay_15 = $net_pay_15 - $deduct_half;
-				$net_pay_30 = $net_pay_30 - $deduct_half;
-			}
-			
-			//var_dump($deduct);
-			
-			//echo $employee->id.', ';
-			//echo $net_pay_monthly.', ';
-			//echo $deduct;
-			//echo $this->db->last_query();
-			//echo $employee->id;
-			//$info->id);
-			
-			?>
-       	<?php endforeach; // end $infos foreach?>
+				// Not good idea end
+				?>
+                
+            </td>
+            <?php $i ++;?>
+		<?php endforeach;?>
         
-        <?php if( ! $infos->exists()):?>
-       	<?php endif;?>
         
-    <?php endforeach; // end $agencies foreach?>
+        
+        <td align="center" valign="top">&nbsp;</td>
+        <td align="center" valign="top">&nbsp;</td>
       </tr>
       
       <?php $employee_count++;?>
@@ -258,9 +187,14 @@
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
     
-    <?php foreach($array as $a):?>
-    	<td><?php echo $a;?></td>
+    <?php 
+	$ph = new Payroll_heading();
+	$line1 = $ph->get_line();
+	?>
+    <?php foreach($line1 as $line):?>
+    	<td><?php //echo $line->type;?></td>
     <?php endforeach;?>
     
     <td>&nbsp;</td>

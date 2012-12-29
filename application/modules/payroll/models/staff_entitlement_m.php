@@ -18,6 +18,21 @@ class Staff_entitlement_m extends DataMapper{
 	
 	// --------------------------------------------------------------------
 	
+	function get_add_com($employee_id, $additional_compensation_id, $date = '')
+	{
+		$this->where('employee_id', $employee_id);
+		$this->where('additional_compensation_id', $additional_compensation_id);
+		$this->get();
+		//echo $this->db->last_query();
+		
+		return $this->amount;
+	}
+	
+	function get_amount()
+	{
+		
+	}
+	
 }
 
 /* End of file user.php */

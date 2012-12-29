@@ -80,16 +80,17 @@ offices.m_columns['days']={'coltype':'text','style':''};
 	$this->tax->days 				= $j->days;
 	$this->tax->hours 				= $j->hours;
 	$this->tax->count_working_days 	= $count_working_days;
-	//$this->tax->tax_table_status	
 	
+	$this->tax->tax_exemption = ($row['tax_status'] != 'Single' ) ? 'ME' : 'S';
+	$this->tax->tax_exemption .= $row['dependents'];
+			
 	$this->tax->initialize();
 	
 	$this->tax->grand_total_salary += $this->tax->total_salary;
 	
 	?>
     <?php 
-        
-       // $total_salary = 0;
+     
 		//$grand_total_salary += $total_salary;
 		
 		//$total_amount_due = $total_salary - $deduction;
@@ -115,9 +116,9 @@ onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px soli
       <td align="right" id="offices.0.<?php echo $i;?>" <?php echo $onclick0;?>><?php echo $this->tax->hours?></td>
       <td align="right" id="offices.1.<?php echo $i;?>" <?php echo $onclick1;?>><?php echo $this->tax->days?></td>
       <td align="right"><?php echo number_format($this->tax->total_salary, 2);?></td>
-      <td align="right">&nbsp;</td>
-      <td align="right"><?php echo $deduction?></td>
-      <td align="right"><?php //echo number_format($total_amount_due, 2);?></td>
+      <td align="right"><?php echo number_format($this->tax->wtax, 2);?></td>
+      <td align="right"><?php echo number_format($this->tax->total_deduction, 2);?></td>
+      <td align="right"><?php echo number_format($this->tax->amount_paid(), 2);?></td>
       <td><?php //echo $r->dates;?></td>
     </tr>
     <?php $i ++;?>

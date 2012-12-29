@@ -190,6 +190,8 @@ class Deduction extends MX_Controller {
 			$di->er_share 				= $this->input->post('er_share');
 			$di->official 				= $this->input->post('official');
 			$di->optional_amount 		= $this->input->post('optional_amount');
+			$di->amount 				= $this->input->post('amount');
+			$di->reference_table 		= $this->input->post('reference_table');
 			$di->amount_exempted 		= $this->input->post('amount_exempted');
 			$di->report_order 			= $this->input->post('report_order');
 			$di->line_no 				= $this->input->post('line_no');

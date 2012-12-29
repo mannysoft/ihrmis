@@ -203,6 +203,18 @@ if (defined('ENVIRONMENT'))
 
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
+
+
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE COMPOSER AUTOLOAD FILE
+ * -------------------------------------------------------------------- *
+ */
+
+require 'vendor/autoload.php';
+
+	
 /*
  * --------------------------------------------------------------------
  * LOAD THE DATAMAPPER BOOTSTRAP FILE

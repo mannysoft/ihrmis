@@ -639,6 +639,8 @@ class Attendance extends MX_Controller {
 									$this->pm_login = strtoupper($this->Holiday->holiday_name($this->log_date));
 								}
 								
+								
+								
 							}
 						}
 								
@@ -663,8 +665,12 @@ class Attendance extends MX_Controller {
 							// If the date is holiday
 							if ($this->is_holiday == TRUE)
 							{
-								
 								$this->am_login = strtoupper($this->Holiday->holiday_name($this->log_date));
+								
+								if ($this->Holiday->am_pm == 'pm')
+								{
+									//$this->am_login = '';
+								}
 							}
 							
 						//}
@@ -1066,6 +1072,8 @@ class Attendance extends MX_Controller {
 					
 					$this->line_number++ ;
 					
+					$this->Holiday->half_day = FALSE; // reset
+					
 					//echo $this->log_date.' '.$this->late_final.'<br>';
 					//exit;
 					
@@ -1381,6 +1389,8 @@ class Attendance extends MX_Controller {
 				$this->overtime				= 0;
 				
 				$this->number_of_hours_work = 0;
+				
+				
 				
 				
 				header('Cache-Control: maxage=3600'); //Adjust maxage appropriately

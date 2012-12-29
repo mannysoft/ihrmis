@@ -37,6 +37,7 @@ class Tax {
 	public $step				= 1;
 	public $hour_rate 			= 0;
 	public $monthly_salary 		= 0;
+	public $taxable_amount		= 0;
 	public $daily_rate 			= 0;
 	public $total_salary 		= 0;
 	public $deduct_day 			= 0;
@@ -51,12 +52,16 @@ class Tax {
 	public $tax_exemption		= 'S/ME';
 	public $bracket_amount		= 0;
 	public $column				= '';
+	public $total_deduction		= 0;
+	public $devided_by			= 2; // devide the monthly salary;
 	
 	 // ------------------------------------------------------------------------
    
     function __construct($params = array())
     {
-        if (count($params) > 0)
+       	//$this->CI = & get_instance();
+	   
+	    if (count($params) > 0)
 		{
 			$this->initialize($params);
 		}
@@ -84,9 +89,9 @@ class Tax {
 			}
 		}
 		
-		$this->CI = & get_instance();
-		
 		$this->set_monthly_salary();
+		
+		$this->is_monthly(); // Use for tax deduction
 		
 		if ($this->status == 'FT')
 		{
@@ -96,21 +101,28 @@ class Tax {
 		{
 			$this->part_time();
 		}
-		
-		//echo $this->total_salary;exit;
-		
+				
 		$this->get_bracket();
 		
 		$this->compute_tax();
-		
-		
-		
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	function is_monthly()
+	{
+		if ($this->tax_table_status == 'monthly')
+		{
+			$this->devided_by = 1;
+		}
 	}
 	
 	// ------------------------------------------------------------------------
 	
 	function set_monthly_salary()
 	{
+		$this->CI = & get_instance();
+		
 		$this->monthly_salary = $this->CI->Salary_grade->get_monthly_salary($this->salary_grade, $this->step);
 	}
 	
@@ -122,14 +134,12 @@ class Tax {
 		
 		if ($this->days >= $this->count_working_days)
 		{
-			$this->total_salary = $this->monthly_salary / 2;
-			
-			
-			
+			$this->total_salary 	= $this->monthly_salary / $this->devided_by;
+			$this->taxable_amount 	= $this->total_salary;
 		}
 		else
 		{
-			$this->total_salary = ($this->monthly_salary / 2);
+			$this->total_salary = ($this->monthly_salary / $this->devided_by);
 				
 			$this->deduct_day = $this->count_working_days - $this->days;
 					
@@ -137,7 +147,7 @@ class Tax {
 							
 			$this->total_salary = $this->total_salary - $this->deduct_amount;
 			
-			//echo $this->total_salary;exit;//echo $this->deduct_amount;
+			$this->taxable_amount 	= $this->total_salary;
 		}
 	}
 	
@@ -145,30 +155,50 @@ class Tax {
 	
 	function part_time()
 	{
-		$this->monthly_salary = $this->monthly_salary / 2;
+		$this->monthly_salary = $this->monthly_salary / 2; // for part time
+		
+		$this->total_salary = $this->monthly_salary / $this->devided_by;
 		
 		$this->hour_rate = ($this->monthly_salary / 11) / 8;
 								
 		if ($this->hours >= 40)
 		{
-			$this->total_salary = $this->monthly_salary / 2;
+			$this->taxable_amount 	= $this->total_salary;
 		}
 		else
-		{
-			$this->total_salary = ($this->monthly_salary / 2);
-			
+		{			
 			$this->deduct_time = 40 - $this->hours;
 			
 			$this->deduct_amount = ($this->deduct_time * $this->hour_rate);
 						
 			$this->total_salary = $this->total_salary - $this->deduct_amount;
+			
+			$this->taxable_amount 	= $this->total_salary;
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	function set_tax_exemption()
+	{
+		$last_char = substr($this->tax_exemption, -1, 1);
+		
+		if (is_numeric($last_char))
+		{
+			$this->tax_exemption = 'ME' . $last_char . ' / S'.$last_char;
+		}
+		else
+		{
+			$this->tax_exemption = 'S/ME';
 		}
 	}
 	
 	// ------------------------------------------------------------------------
 	
 	function get_bracket()
-	{
+	{		
+		$this->set_tax_exemption();
+		
 		$t = new Tax_table();
 		$t->where('monthly', $this->tax_table_status);
 		$t->where('status', $this->tax_exemption);
@@ -186,19 +216,14 @@ class Tax {
 		
 		foreach ($brackets as $key => $bracket)
 		{
-			echo number_format($bracket, 2).'--'.number_format($this->total_salary, 2).var_dump((number_format($bracket, 2) > number_format($this->total_salary, 2))).'<br>';
-			
-			if (number_format($bracket, 2) > number_format($this->total_salary, 2))
+			if (floatval($bracket) > $this->taxable_amount)
 			{
 				break;
 			}
 			
-			$this->bracket_amount 	= number_format($bracket, 2);
+			$this->bracket_amount 	= floatval($bracket);
 			$this->column 			= $key;
 		}
-		
-		//echo $this->column;
-		
 	}
 	
 	// ------------------------------------------------------------------------
@@ -210,32 +235,42 @@ class Tax {
 		$t->where('monthly', $this->tax_table_status);
 		$t->where('status', 'percent_over');
 		$t->get();
+				
+		$tax = ($this->taxable_amount - $this->bracket_amount);
 		
-		
-		//var_dump(($this->bracket_amount));
-		//var_dump($this->total_salary);
-		//$tax = (number_format($this->total_salary) - (floatval($this->bracket_amount)));
-		//
-		//echo ($tax);
-		
-		
-		//exit;
+		// The column in tax table like bracket7
 		$column = $this->column;
 		
-		//echo $t->$column;
+		$int = intval($t->$column);
+		
+		$decimal = floatval($int."%") / 100; // like 30% to 0.3
+		
+		$tax = $tax * $decimal;
+		
+		$t->where('monthly', $this->tax_table_status);
+		$t->where('status', 'exemption');
+		$t->get();
+		
+		$add_exemption = $t->$column;
+		
+		$tax = $tax + $add_exemption;
+		
+		$this->wtax = $tax;
+		
+		$this->total_deduction += $this->wtax;
 	}
 	
 	// ------------------------------------------------------------------------
 	
 	function total_deduction()
 	{
-		
+		return $this->total_deduction;
 	}
 	
 	// ------------------------------------------------------------------------
 	
 	function amount_paid()
 	{
-		
+		return $this->total_salary - $this->total_deduction;
 	}
 }

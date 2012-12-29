@@ -96,7 +96,7 @@ class Salary_grade extends CI_Model {
 			}
 		}
 		
-		return $monthly_salary;
+		return floatval($monthly_salary);
 		
 		$q->free_result();
 	}

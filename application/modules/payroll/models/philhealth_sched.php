@@ -18,6 +18,15 @@ class Philhealth_sched extends DataMapper{
 	
 	// --------------------------------------------------------------------
 	
+	function get_amount($salary = 0, $share = 'employee_share')
+	{
+		$this->where('start_range <=', $salary);
+		$this->order_by('start_range', 'DESC');
+		$this->limit(1);
+		$this->get();
+		return $this->$share;
+	}
+	
 }
 
 /* End of file user.php */

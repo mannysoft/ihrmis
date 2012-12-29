@@ -260,8 +260,8 @@ class Cos extends MX_Controller {
 			if ($this->input->post('print'))
 			{
 				$data['pop_up'] = 1;
-				$data['pop_up_office_id'] = $this->office_id;
-				$data['pop_up_period'] = $period;
+				$data['pop_up_office_id'] 	= $this->office_id;
+				$data['pop_up_period'] 		= $this->period;
 			}
 			
 			

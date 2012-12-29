@@ -15,7 +15,7 @@ class Migration_create_payroll_headings extends CI_Migration {
 			$this->dbforge->add_field(array(
 				'id' => array('type' => 'INT', 'constraint' => 11, 'unsigned' => TRUE, 'auto_increment' => TRUE),
 				'line' => array('type' => 'INT', 'constraint' => '2', 'null' => FALSE),
-				'type' => array('type' => 'ENUM', 'constraint' => "'additioal','deductions'", 'null' => FALSE),
+				'type' => array('type' => 'ENUM', 'constraint' => "'additional','deductions'", 'null' => FALSE),
 				'deduction_id' => array('type' => 'INT', 'constraint' => '16', 'null' => FALSE, 'comment' => 'record from additional or deduct info'),
 				'order' => array('type' => 'INT', 'constraint' => '16', 'null' => FALSE),
 				'status' => array('type' => 'VARCHAR', 'constraint' => '32', 'null' => FALSE),

@@ -16,7 +16,9 @@ class Payroll_heading extends DataMapper{
 	function get_line($line = 1)
 	{
 		$this->where('line', $line);
+		$this->order_by('order');
 		$this->get();
+		
 		return $this;
 	}
 	

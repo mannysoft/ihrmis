@@ -5,7 +5,7 @@ class Deduction_information extends DataMapper{
 	public $table  = 'payroll_deduction_informations';
 	
 	//var $has_one = array('deductions_agency');
-	var $has_many = array('deduction_optional');
+	public $has_many = array('deduction_optional');
 
 	
 	// --------------------------------------------------------------------

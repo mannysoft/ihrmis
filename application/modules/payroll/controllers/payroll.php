@@ -103,6 +103,7 @@ class Payroll extends MX_Controller {
 			$e = new Employee_m();
 			
 			$e->where('office_id', $this->input->post('office_id'));
+			$e->where('permanent', 1);
 			$e->order_by('lname');
 			
 			$data['employees'] = $e->get($limit, $offset);
@@ -119,6 +120,7 @@ class Payroll extends MX_Controller {
 		$e = new Employee_m();
 			
 		$e->where('office_id', ($this->input->post('office_id')) ? $this->input->post('office_id') : $this->session->userdata('office_id'));
+		$e->where('permanent', 1);
 		$e->order_by('lname');
 		
 		//$data['employees'] = $e->get($limit, $offset);
