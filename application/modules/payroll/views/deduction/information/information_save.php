@@ -52,7 +52,7 @@
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td align="right">ER Share:</td>
+      <td align="right">Government Share:</td>
       <td><?php 
 		$js = 'id = "er_share"';
 		echo form_dropdown('er_share', $this->config->item('options_yes_no'), $deduction->er_share); 

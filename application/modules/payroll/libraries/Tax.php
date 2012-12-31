@@ -58,9 +58,7 @@ class Tax {
 	 // ------------------------------------------------------------------------
    
     function __construct($params = array())
-    {
-       	//$this->CI = & get_instance();
-	   
+    {	   
 	    if (count($params) > 0)
 		{
 			$this->initialize($params);

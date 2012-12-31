@@ -96,16 +96,45 @@ $leave_management = 	array(
 
 
 // Payroll Module
-$payroll_management = 	array(
-						$base.'payroll_manage/records">'.$image.'Leave Card/Certification</a>',
-						$base.'payroll_manage/file_leave">'.$image.'File Leave</a>',
-						$base.'payroll_manage/leave_apps">'.$image.'Leave Application</a>',
-						$base.'payroll_manage/forwarded">'.$image.'Leave Forwarded</a>',
-						$base.'payroll_manage/undertime">'.$image.'Encode Tardy/Undertime</a>',
-						$base.'payroll_manage/wop">'.$image.'Leave WOP</a>',
-						$base.'payroll_manage/stop_earning">'.$image.'Stop Leave Earnings</a>',
-						$base.'payroll_manage/settings">'.$image.'Settings</a>',
+$payroll_general_payroll = 	array(
+						$base.'payroll/monthly">'.$image.'Monthly</a>',
+						$base.'payroll/additional">'.$image.'Additional</a>',
+						$base.'payroll/cos/status">'.$image.'COS Status</a>',
+						$base.'payroll/cos">'.$image.'COS</a>',
+						$base.'payroll/cos/rates">'.$image.'Rate per day</a>',
+						$base.'payroll/cos/jo">'.$image.'Job Order</a>',
             			);
+						
+$payroll_reports = 	array(
+						$base.'payroll/report/payslip">'.$image.'Payslip</a>',
+						$base.'payroll/report/salary_index">'.$image.'Salary Index</a>',
+						$base.'payroll/report/loan_balance">'.$image.'Loan Balance</a>',
+						$base.'payroll/report/income_tax">'.$image.'Income Tax</a>',
+						$base.'payroll/report/signatory">'.$image.'Signatory</a>',
+						$base.'payroll/report/signatory">'.$image.'Payroll Heading</a>',
+            			);
+						
+$payroll_remittances = 	array(
+						$base.'payroll/remittance/deduction_refund">'.$image.'Deductions Refund</a>',
+						$base.'payroll/remittance/philhealth_sched">'.$image.'Philhealth Schedule</a>',
+						$base.'payroll/remittance/sss_sched">'.$image.'SSS Schedule</a>',
+						$base.'payroll/remittance/pae">'.$image.'Personal Additional Exemption</a>',
+						$base.'payroll/remittance/tax_table">'.$image.'Tax Table</a>',
+            			);
+						
+$payroll_adcom = 	array(
+						$base.'payroll/adcom">'.$image.'Additional Compensation</a>',
+						$base.'payroll/adcom/staff_entitlement">'.$image.'Staff Entitlement</a>',
+            			);
+						
+$payroll_deductions = 	array(
+						$base.'payroll/deduction/agency">'.$image.'Agency</a>',
+						$base.'payroll/deduction/information">'.$image.'Deduction Information</a>',
+						$base.'payroll/deduction/optional">'.$image.'Optional Contribution</a>',
+						$base.'payroll/deduction/loan">'.$image.'Loan Schedules</a>',
+						$base.'payroll/deduction/tax">'.$image.'Tax Exemption</a>',
+            			);
+									
 						
 $settings_management =  array(
 						$base.'settings_manage/salary_grade">'.$image.'Salary Grade</a>',
@@ -163,77 +192,27 @@ $settings_management =  array(
 
  
  
- <!--
- <li class="menu_close" onMouseOver="adminOpenMenu(this, 'menu_open');" onMouseOut="adminCloseMenu(this, 'menu_close');"><a class="first_line" href="?q=22" onClick="return false;"><img src="<?php echo base_url();?>/images/payroll.jpg" alt=".:" width="22" height="22" class="little_icon"><br>
-  Payroll<br /> Management</a>
-  <?php echo ul($payroll_management, $attributes);?>
-  </li>-->
- 
- 
- 
- 
-
- 
- 
  <li class="menu_close"><a class="first_line" href="" onClick="return false;"><img src="<?php echo base_url();?>/images/payroll.jpg" alt=".:" width="22" height="22" class="little_icon"><br>
   Payroll<br /> Management<br /></a><ul class="list_modules">
   
  <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />General Payroll</a>
-  <ul>
-  
-  <li><a  href="<?php echo base_url();?>payroll/monthly"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Monthly</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/additional"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/cos/status"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />COS Status</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/cos"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />COS</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/cos/rates"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Rate per day</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/cos/jo"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Job Order</a></li>
-  </ul>
+	<?php echo ul($payroll_general_payroll, $attributes);?>
   </li>
   
   <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Reports</a>
-  <ul>
-  
-  <li><a href="<?php echo base_url();?>payroll/report/payslip"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Payslip</a></li>
-  <li><a href="<?php echo base_url();?>payroll/report/salary_index"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Salary Index</a></li>
-  <li><a href="<?php echo base_url();?>payroll/report/loan_balance"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Loan Balance</a></li>
-  <li><a href="<?php echo base_url();?>payroll/report/income_tax"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Income Tax</a></li>
-  <li><a href="<?php echo base_url();?>payroll/report/signatory"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Signatory</a></li>
-  </ul>
+ 	<?php echo ul($payroll_reports, $attributes);?>
   </li>
   
   <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Remittances</a>
-  <ul>
-  
-  <!--<li><a  href="<?php echo base_url();?>Administration/add_user"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Deductions Agency</a></li>
-  <li><a  href="<?php echo base_url();?>Administration/list_user"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Premiums</a></li>
-  <li><a  href="<?php echo base_url();?>Administration/add_user"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Loans</a></li>
-  <li><a  href="<?php echo base_url();?>Administration/list_user"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Insurances</a></li>-->
-  <li><a  href="<?php echo base_url();?>payroll/remittance/deduction_refund"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Deductions Refund</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/remittance/philhealth_sched"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Philhealth Schedule</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/remittance/sss_sched"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />SSS Schedule</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/remittance/pae"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Personal Additional Exemption</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/remittance/tax_table"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Tax Table</a></li>
-  </ul>
+  	<?php echo ul($payroll_remittances, $attributes);?>
   </li>
   
   <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional Compensation</a>
-  <ul>
-  
-  <li><a  href="<?php echo base_url();?>payroll/adcom"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Additional Compensation</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/adcom/staff_entitlement"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Staff Entitlement</a></li>
-  </ul>
+  	<?php echo ul($payroll_adcom, $attributes);?>
   </li>
   
   <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Deductions</a>
-  <ul>
-  
-  <li><a  href="<?php echo base_url();?>payroll/deduction/agency"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Agency</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/deduction/information"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Deduction Information</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/deduction/optional"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Optional Contribution</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/deduction/loan"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Loan Schedules</a></li>
-  <li><a  href="<?php echo base_url();?>payroll/deduction/tax"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Tax Exemption</a></li>
-  </ul>
-  </li>
+		<?php echo ul($payroll_deductions, $attributes);?>  </li>
   
   <!--
   <li class="menu_close"><a class="arrow_left" href="" onclick="return false;"><img class="menu_icon" src="<?php echo base_url();?>/images/blank.gif" alt=".:" />Disbursing</a>

@@ -36,6 +36,7 @@ class Payroll_lib {
 	public $deduction_id				= 0;
 	public $additional_compensation_id 	= 0;
 	public $add_com_amount				= 0;
+	public $total_adcom					= 0;
 	public $deduction_amount			= 0;
 	public $amount						= 0;
 	public $caption						= '';
@@ -46,6 +47,9 @@ class Payroll_lib {
 	public $tax_status					= '';
 	public $dependents					= 0;
 	public $share						= 'employee_share'; // employee_share or employer_share
+	public $employer_deductions			= 0;
+	public $employee_deductions			= 0;
+	public $allow_save_adcom_deductions	= FALSE;
 	
 	 // ------------------------------------------------------------------------
    
@@ -81,6 +85,10 @@ class Payroll_lib {
 			}
 		}
 		
+		$CI = & get_instance();
+		
+		$this->monthly_salary = $CI->Salary_grade->get_monthly_salary($this->salary_grade, $this->step);
+		
 	}
 	
 	// ------------------------------------------------------------------------
@@ -88,6 +96,10 @@ class Payroll_lib {
 	function deduction_compensation($line, $employee_id)
 	{
 		$this->set_employee_id($employee_id);
+		
+		$this->additional_compensation_id = 0;
+		
+		$this->deduction_id = 0;
 				
 		if ($line->type == 'additional')
 		{			
@@ -98,6 +110,7 @@ class Payroll_lib {
 		else
 		{
 			$this->deduction_id = $line->deduction_id;
+			
 			$this->get_deduction();
 		}
 	}
@@ -110,7 +123,11 @@ class Payroll_lib {
 		
 		$this->add_com_amount = $s->get_add_com($this->employee_id, $this->additional_compensation_id, $date = '');
 		
+		$this->total_adcom += $this->add_com_amount;
+		
 		$this->amount = $this->add_com_amount;
+		
+		$this->save_deductions_adcom($this->add_com_amount);
 	}
 	
 	// ------------------------------------------------------------------------
@@ -125,23 +142,23 @@ class Payroll_lib {
 		
 		if ($d->type == 'tax')
 		{
-			$this->get_tax();
+			$this->amount = $this->get_tax();
 		}
-		else
+		else if($d->type == 'premiums')
 		{	
 			if ($d->reference_table != '')
 			{
 				$CI = & get_instance();
 				
-				$this->monthly_salary = $CI->Salary_grade->get_monthly_salary($this->salary_grade, $this->step);
-				
 				if ($d->er_share == 'yes')
 				{
 					$this->share = 'employer_share';
 				}
-				
-				// Todo: Save all deductions to table 
-				
+				else
+				{
+					$this->share = 'employee_share';
+				}
+								
 				// Phil Health
 				if ($d->reference_table == 'philhealth')
 				{
@@ -151,10 +168,21 @@ class Payroll_lib {
 				// Pagibig
 				if ($d->reference_table == 'pagibig')
 				{
-					$this->amount = $this->pagibig_deductions($d->amount);
+					$this->amount = $this->pagibig_gsis_deductions($d->amount);
+				}
+				
+				// GSIS
+				if ($d->reference_table == 'gsis')
+				{
+					$this->amount = $this->pagibig_gsis_deductions($d->amount, 'gsis');
 				}
 				
 			}
+		}
+		
+		else if ($d->type == 'loan')
+		{
+			$this->amount = $this->loan_deductions();
 		}
 		
 	}
@@ -195,21 +223,27 @@ class Payroll_lib {
 	{
 		$CI = & get_instance();
 			
-		$CI->load->library('tax');
 		
-		$CI->tax->tax_table_status 	= 'monthly';
-		$CI->tax->salary_grade 		= $this->salary_grade;
-		$CI->tax->step 				= $this->step;
-		$CI->tax->days 				= 22;
-		$CI->tax->hours 			= 0;
-		$CI->tax->count_working_days = 22;
+		$tax_exemption = ($this->tax_status != 'Single' ) ? 'ME' : 'S';
+		$tax_exemption .= $this->dependents;
+
+		$params = array(
+					'tax_table_status' 		=> 'monthly',
+					'salary_grade' 			=> $this->salary_grade,
+					'step'					=> $this->step,
+					'days' 					=> 22,
+					'hours' 				=> 0,
+					'count_working_days' 	=> 22,
+					'tax_exemption'			=> $tax_exemption
+					);
+					
+		$CI->load->library('tax', $params);
 		
-		$CI->tax->tax_exemption = ($this->tax_status != 'Single' ) ? 'ME' : 'S';
-		$CI->tax->tax_exemption .= $this->dependents;
-				
-		$CI->tax->initialize();
+		$CI->tax->initialize($params);
 		
-		$this->amount = $CI->tax->wtax;
+		$this->add_deductions($this->share, $CI->tax->wtax); // add up deductions
+		
+		return $CI->tax->wtax;
 	}
 	
 	// ------------------------------------------------------------------------
@@ -218,32 +252,160 @@ class Payroll_lib {
 	{
 		$p = new Philhealth_sched();
 		
-		$this->share = 'employee_share';
+		$amount = $p->get_amount($this->monthly_salary, $this->share);
 		
-		return $p->get_amount($this->monthly_salary, $this->share);
+		$this->add_deductions($this->share, $amount); // add up deductions
+			
+		return $amount;
 	}
 	
 	// ------------------------------------------------------------------------
 	
-	function pagibig_deductions($amount = 0)
+	function pagibig_gsis_deductions($amount = 0, $agency = 'pagibig')
 	{		
+		$personal_share_percent = 0.02;
+		$govt_share_percent 	= 0.02;
+		
+		if ($agency == 'gsis')
+		{
+			$personal_share_percent = 0.09;
+			$govt_share_percent 	= 0.12;
+		}
+		
 		if ($this->share == 'employee_share')
 		{
-			return $this->monthly_salary * 0.02;
+			$this->add_deductions($this->share, $this->monthly_salary * $personal_share_percent); // add up deductions
+			
+			return $this->monthly_salary * $personal_share_percent;
 		}
 		else
-		{
+		{			
 			if ($amount != 0)
 			{
+				$this->add_deductions($this->share, $amount); // add up deductions
 				return $amount;
 			}
 			else
 			{
-				return $this->monthly_salary * 0.02;	
+				$this->add_deductions($this->share, $this->monthly_salary * $govt_share_percent); // add up deductions
+				return $this->monthly_salary * $govt_share_percent;	
 			}
 		}
 		
+		
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	function loan_deductions()
+	{
+		$CI = & get_instance();
+		
+		$date = $CI->input->post('year') . '-' . $CI->input->post('month').'-15';
+		
+		$d = new Deduction_loan();
+		$d->where('employee_id', $this->employee_id);
+		$d->where('deduction_information_id', $this->deduction_id);
+		$d->where('date_to >=', $date);
+		$d->where('status', 'active');
+		$d->get();
+		
 		$this->share = 'employee_share';
+		
+		$this->add_deductions($this->share, $d->monthly_pay); // add up deductions
+		
+		return $d->monthly_pay;
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	function add_deductions($deduct_to = 'employee_share', $amount = 0)
+	{
+		if ($deduct_to == 'employee_share')
+		{
+			$this->employee_deductions += $amount;
+			
+			// Save the data to table
+			$this->save_deductions_adcom($amount);
+			
+		}
+		else if ($deduct_to == 'employer_share')
+		{
+			$this->employer_deductions += $amount;
+			
+			// Save the data to table
+			$this->save_deductions_adcom($amount);
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	function total_amount_due()
+	{
+		return ($this->monthly_salary + $this->total_adcom) - $this->employee_deductions;
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	function save_deductions_adcom($amount = 0)
+	{
+		if ($amount == 0)
+		{
+			return;
+		}
+		
+		$CI = & get_instance();
+		
+		$date = $CI->input->post('year') . '-' . $CI->input->post('month').'-15';
+		
+		// Just save all additional compensation and deductions
+		$this->allow_save_adcom_deductions = TRUE; // default is FALSE;
+		
+		$d = new Deduction_adcom();
+		
+		if ($this->allow_save_adcom_deductions == TRUE)
+		{
+			// Additional Compensation
+			if ($this->additional_compensation_id != 0)
+			{
+				$d->where('employee_id', $this->employee_id);
+				$d->where('additional_compensation_id', $this->additional_compensation_id);
+				$d->where('date', $date);
+				$d->get();
+				
+				$d->employee_id 				= $this->employee_id;
+				$d->additional_compensation_id 	= $this->additional_compensation_id;
+				$d->amount 						= $amount;
+				$d->monthly_salary 				= $this->monthly_salary;
+				$d->date 						= $date;
+				$d->save();				
+			}
+			else // Deductions
+			{
+				$d->where('employee_id', $this->employee_id);
+				$d->where('deduction_id', $this->deduction_id);
+				$d->where('date', $date);
+				$d->get();
+				
+				$d->employee_id 		= $this->employee_id;
+				$d->deduction_id 		= $this->deduction_id;
+				$d->amount 				= $amount;
+				$d->monthly_salary 		= $this->monthly_salary;
+				$d->date 				= $date;
+				$d->save();				
+			}
+						
+			$this->add_com_amount = 0;
+		}
+		
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	function reset_class()
+	{
+		foreach (get_class_vars(get_class($this)) as $name => $default) 
+  		$this->$name = $default;	
 	}
 	
 }

@@ -43,6 +43,7 @@ class Report extends MX_Controller {
 		header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 		header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 		
+		
 		//$this->output->enable_profiler(TRUE);
 		
 		
@@ -99,20 +100,57 @@ class Report extends MX_Controller {
 
 	}
 	
+	// --------------------------------------------------------------------
+	
 	function payslip()
-	{
+	{			
+		$p = new Payslip();
+		
+		$users = $p->where('office_id' , '=', 21)->get();
+				
+		foreach ($users as $user)
+		{
+			$deductions = $user->deductions;
+			
+			foreach ($deductions as $d)
+			{
+				echo $d->amount.'<br>';
+			}
+		}
+		
+		
+		$d = new Deductions();
+		
+		$deductions = $d->where('id' , '=', 126)->get();
+		
+		
+		foreach ($deductions as $dd)
+		{
+			echo $dd->employee->lname;
+		}
+		
+		// For single record
+		$deductions = $d->find(126);
+		
+		echo $deductions->employee->lname;
 		
 	}
+	
+	// --------------------------------------------------------------------
 	
 	function salary_index()
 	{
 	
 	}
 	
+	// --------------------------------------------------------------------
+	
 	function loan_balance()
 	{
 	
 	}
+	
+	// --------------------------------------------------------------------
 	
 	function income_tax()
 	{

@@ -45,8 +45,8 @@
   </tr>
 </table>
 </form>
-
-<div id="payroll_sheet" style="border:thin inset; padding:6px;overflow:auto;">
+<!--style="border:thin inset; padding:6px;overflow:auto;"-->
+<div id="payroll_sheet" >
 <table width="100%" border="0" class="type-one">
   <tr class="type-one-header">
     <th>&nbsp;</th>
@@ -54,7 +54,7 @@
     <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
-    <th>&nbsp;</th>
+    <th>Monthly Salary</th>
     <th>Extra1</th>
     <th>extra2</th>
     <?php 
@@ -66,24 +66,26 @@
 	$lines2 = $ph2->get_line(2);
 	?>
     <?php foreach($line1 as $line):?>
-    	<th><?php echo $line->caption;?></th>
+    	<th width="7%"><?php echo $line->caption;?></th>
     <?php endforeach;?>
     
     <th>&nbsp;</th>
     <th>extra3</th>
+    <th>Total Amount Due</th>
+    <th>extra5</th>
     
     
     
   </tr>
   <tr class="type-one-header">
     <th width="2%">&nbsp;</th>
-    <th width="17%">Employee Name</th>
-    <th width="20%">Designation</th>
-    <th width="6%">Daily Rate</th>
-    <th width="16%">Days Earned</th>
-    <th width="23%">Monthly Salary</th>
-    <th width="8%">extra1</th>
-    <th width="8%">extra2</th>
+    <th width="12%">Employee Name</th>
+    <th width="15%">Designation</th>
+    <th width="4%">Daily Rate</th>
+    <th width="4%">Days Earned</th>
+    <th width="6%">Tax Exemption</th>
+    <th width="6%">extra1</th>
+    <th width="17%">extra2</th>
     
 	<?php 
 	$ph = new Payroll_heading();
@@ -99,13 +101,15 @@
     <?php if($line1->result_count() > $line2->result_count()):?>
     	<?php $rows = $line1->result_count() - $line2->result_count();?>
         <?php //while($rows != 0):?>
-        	<th></th>
+        	<?php echo '<th></th>';?>
             <?php //$rows --;?>
         <?php //endwhile;?>
     <?php endif;?>
     
-    <th width="8%">&nbsp;</th>
-    <th width="8%">extra3</th>
+    <th width="6%">&nbsp;</th>
+    <th width="6%">extra3</th>
+    <th width="6%">extra4</th>
+    <th width="9%">extra5</th>
    
     </tr>
     
@@ -115,10 +119,19 @@
   <?php foreach ($employees as $employee): ?>
   		<?php $bg = $this->Helps->set_line_colors();?>
         <?php
-		$this->payroll_lib->salary_grade 	= $employee->salary_grade;
-		$this->payroll_lib->step 			= $employee->step;
-		$this->payroll_lib->tax_status 		= $employee->tax_status;
-		$this->payroll_lib->dependents 		= $employee->dependents;
+		$params = array(
+					'salary_grade' 	=>  $employee->salary_grade,
+					'step' 			=>  $employee->step,
+					'tax_status' 	=>  $employee->tax_status,
+					'dependents' 	=>  $employee->dependents,
+					);
+					
+		$this->payroll_lib->initialize($params);
+		
+		//$this->payroll_lib->salary_grade 	= $employee->salary_grade;
+		//$this->payroll_lib->step 			= $employee->step;
+		//$this->payroll_lib->tax_status 		= $employee->tax_status;
+		//$this->payroll_lib->dependents 		= $employee->dependents;
 		?>
       <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
     onmouseout ="this.bgColor = '<?php echo $bg;?>';">
@@ -129,7 +142,7 @@
           <br /></td>
         <td><br />
           <br /></td>
-        <td align="center" valign="top"><br />
+        <td align="center" valign="top"><?php echo number_format($this->payroll_lib->monthly_salary, 2);?><br />
           <br /></td>
         <td align="center" valign="top">&nbsp;</td>
         <td align="center" valign="top">&nbsp;</td>
@@ -173,10 +186,15 @@
         
         
         <td align="center" valign="top">&nbsp;</td>
+        <td align="center" valign="top"><?php echo $this->payroll_lib->employee_deductions.'<br><br>'.$this->payroll_lib->employer_deductions;?></td>
+        <td align="center" valign="top"><?php echo number_format($this->payroll_lib->total_amount_due(), 2);?></td>
         <td align="center" valign="top">&nbsp;</td>
       </tr>
       
-      <?php $employee_count++;?>
+      <?php 
+	  $employee_count++;
+	  $this->payroll_lib->reset_class();
+	  ?>
      
   <?php endforeach; //end $employees foreach?>
   <tr>
@@ -199,20 +217,8 @@
     
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <?php foreach($agencies as $agency):?>
-		<?php 
-        // Lets count info per agency
-        $d  = new Deduction_information();
-        $infos = $d->get_by_deduction_agency_id($agency->id);
-        ?>
-        
-        <?php foreach($infos as $info):?>
-       	<?php endforeach;?>
-        
-        <?php if( ! $infos->exists()):?>
-        <?php endif;?>
-        
-    <?php endforeach;?>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
     </tr>
 </table>
 </div>
