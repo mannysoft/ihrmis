@@ -2,9 +2,9 @@
 
 require_once('connection.php');
 
-use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
  
-class Payslip extends Model {
+class Payslip extends Eloquent {
 
 	public $table = "employee"; 
 		

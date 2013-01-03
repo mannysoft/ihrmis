@@ -44,12 +44,13 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost";
 $db['default']['username'] = "root";
-$db['default']['password'] = "pCt7DRVAqw6ENnVc";
+$db['default']['password'] = "";
 $db['default']['database'] = "tawa";
 $db['default']['database'] = "ihrmis_laguna";
 $db['default']['database'] = "ihrmis_mrdq";
-//$db['default']['database'] = "ihrmis_lu";
+
 $db['default']['database'] = "ihrmis_puerto";
+//$db['default']['database'] = "ihrmis_nia";
 $db['default']['dbdriver'] = "mysqli";
 $db['default']['dbprefix'] = "ats_";
 $db['default']['pconnect'] = TRUE;

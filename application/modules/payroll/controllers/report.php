@@ -134,6 +134,8 @@ class Report extends MX_Controller {
 		
 		echo $deductions->employee->lname;
 		
+		
+		
 	}
 	
 	// --------------------------------------------------------------------

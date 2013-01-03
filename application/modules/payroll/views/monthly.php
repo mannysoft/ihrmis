@@ -134,7 +134,7 @@
 		//$this->payroll_lib->dependents 		= $employee->dependents;
 		?>
       <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
-    onmouseout ="this.bgColor = '<?php echo $bg;?>';">
+    onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
         <td align="right" valign="top"><?php echo $employee_count;?></td>
         <td valign="top"><?php echo $employee->lname.', '.$employee->fname;?></td>
         <td valign="top"><?php echo $employee->position;?></td>

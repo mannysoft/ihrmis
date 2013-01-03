@@ -1685,14 +1685,9 @@ mpdf-->
 		
 		$rows = $s->get_by_employee_id($employee_id);
 	
-	$i = 1; 
+	$i = 0; 
 	
-	// Number of entries to display per page
-	$first_page = $this->Settings->get_selected_field( 'service_record_entries_first_page' );
-	$second_page = $this->Settings->get_selected_field( 'service_record_entries_second_page' );
-	$third_page = $this->Settings->get_selected_field( 'service_record_entries_3rd_page' );
-	$fourth_page = $this->Settings->get_selected_field( 'service_record_entries_4th_page' );
-	
+
 	//for ($i ==0; $i != 70; $i ++)
 	foreach ($rows as $row)
 	{
@@ -1713,30 +1708,43 @@ mpdf-->
 			  </tr>';
 	  	
 		// Second page
-	  	if ( $i == $first_page)
+	  	if ( $i == 24)
 		{
 			$html .='</table>'; // close the table
 			$html .='<pagebreak />'.$service;
+			
+			$html .='<tr>
+				<td align="center">'.$row->date_from.'</td>
+				<td align="center">'.$row->date_to.'</td>
+				<td align="left">'.$row->designation.'</td>
+				<td align="left">'.$row->status.'</td>
+				<td align="right">'.$row->salary.'</td>
+				<td align="left">'.$row->office_entity.'</td>
+				<td align="left">'.$row->lwop.'</td>
+				<td align="left">'.$row->separation_date.'</td>
+				<td align="left">'.$row->separation_cause.'</td>
+			  </tr>';
+			
 		}
 		
 		// If there is third page
-		if ( $i == $first_page + $second_page)
+		if ( $i == 53)
 		{
 			$html .='</table>'; // close the table
 			$html .='<pagebreak />'.$service;
-		}
-		
-		// If there is 4th page
-		if ( $i == $first_page + $second_page + $third_page)
-		{
-			$html .='</table>'; // close the table
-			$html .='<pagebreak />'.$service;
-		}
-		// If there is 5th page
-		if ( $i == $first_page + $second_page + $third_page + $fourth_page)
-		{
-			$html .='</table>'; // close the table
-			$html .='<pagebreak />'.$service;
+			
+			$html .='<tr>
+				<td align="center">'.$row->date_from.'</td>
+				<td align="center">'.$row->date_to.'</td>
+				<td align="left">'.$row->designation.'</td>
+				<td align="left">'.$row->status.'</td>
+				<td align="right">'.$row->salary.'</td>
+				<td align="left">'.$row->office_entity.'</td>
+				<td align="left">'.$row->lwop.'</td>
+				<td align="left">'.$row->separation_date.'</td>
+				<td align="left">'.$row->separation_cause.'</td>
+			  </tr>';
+			
 		}
 	
 		$i++;  
@@ -1761,13 +1769,10 @@ mpdf-->
 		
 		//$mpdf=new mPDF('c','Letter'); 
 
-		//$this->mpdf->mirrorMargins = 1;	// Use different Odd/Even headers and footers and mirror margins
+		$this->mpdf->mirrorMargins = 1;	// Use different Odd/Even headers and footers and mirror margins
 		
 		$stylesheet = file_get_contents(base_url().'css/mpdf/mpdfstyletables.css');
 		$this->mpdf->WriteHTML($stylesheet,1); // The parameter 1 tells that this is css/style only and no
-		
-		$this->mpdf->SetHTMLHeader('Page {PAGENO} of {nb}', '',false);
-		//$this->mpdf->SetHTMLFooter('{PAGENO}');
 		
 		
 		$this->mpdf->WriteHTML($html);

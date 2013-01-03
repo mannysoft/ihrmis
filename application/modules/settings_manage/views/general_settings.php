@@ -523,8 +523,8 @@ $('.click').click(function(){
 <form action="" method="post">
 <table width="100%" border="0" cellpadding="5" cellspacing="5" class="type-one">
   <tr class="type-one-header">
-    <th width="21%">Employees</th>
-    <th width="36%">&nbsp;</th>
+    <th width="30%">Employees</th>
+    <th width="27%">&nbsp;</th>
     <th width="43%"><input name="active_tabs" type="hidden" id="active_tabs" value="employees" /></th>
   </tr>
   <tr>
@@ -546,6 +546,26 @@ $('.click').click(function(){
       <label>Yes</label>
       <input name="enable_id_maker" type="radio" value="no" <?php echo $enable_id_maker2;?> />
       <label>No</label>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Service Record Entries First Page:</td>
+    <td><input name="service_record_entries_first_page" type="text" id="service_record_entries_first_page" value="<?php echo $settings['service_record_entries_first_page'];?>" size="20" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Service Record Entries Second Page:</td>
+    <td><input name="service_record_entries_second_page" type="text" id="service_record_entries_second_page" value="<?php echo $settings['service_record_entries_second_page'];?>" size="20" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Service Record Entries Third Page:</td>
+    <td><input name="service_record_entries_3rd_page" type="text" id="service_record_entries_3rd_page" value="<?php echo $settings['service_record_entries_3rd_page'];?>" size="20" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Service Record Entries Fourth Page:</td>
+    <td><input name="service_record_entries_4th_page" type="text" id="service_record_entries_4th_page" value="<?php echo $settings['service_record_entries_4th_page'];?>" size="20" /></td>
     <td>&nbsp;</td>
   </tr>
   <tr>

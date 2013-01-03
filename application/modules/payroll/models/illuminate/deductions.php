@@ -2,9 +2,9 @@
 
 require_once('connection.php');
 
-use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
  
-class Deductions extends Model {
+class Deductions extends Eloquent {
 
 	public $table = "payroll_deduction_adcoms";
 	
