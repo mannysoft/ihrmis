@@ -43,6 +43,7 @@ class Ajax extends MX_Controller {
 		//$this->output->enable_profiler(TRUE);
     }  
 	
+	
 	function add_earning($employee_id = '', $month = '', $day = '', $year = '', $v_earned = 0, $s_earned = 0)
 	{		
 		$data = array(

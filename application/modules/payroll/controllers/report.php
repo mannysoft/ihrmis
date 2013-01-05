@@ -50,6 +50,28 @@ class Report extends MX_Controller {
     }
 	
 	// --------------------------------------------------------------------
+	
+	function sortable()
+	{
+		$headings = $this->input->post('headings');
+		
+		$headings2 = $this->input->post('headings2');
+		
+		if ($headings2 != '')
+		{
+			$headings = $headings2;
+		}
+		
+		foreach ($headings as $order => $id)
+		{
+			PayrollHeading::where('id', '=', $id)
+			->update(array('order' => $order));
+		}
+	}
+	
+	
+	
+	// --------------------------------------------------------------------
 	/**
 	 * Enter description here...
 	 *
@@ -190,6 +212,75 @@ class Report extends MX_Controller {
 		$data['deductions'] = $p->get($limit, $offset);
 		
 		$data['main_content'] = 'report/signatory';
+		
+		$this->load->view('includes/template', $data);
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function headings($line = '1')
+	{		
+		$data['page_name'] = '<b>Payroll Headings</b>';
+		
+		$data['msg'] = '';
+				
+		$data['rows'] = PayrollHeading::where('line', '=', 1)
+						->orderBy('order')
+						->get();
+						
+		$data['rows2'] = PayrollHeading::where('line', '=', 2)
+						->orderBy('order')
+						->get();				
+		
+		$data['main_content'] = 'report/headings';
+		
+		$this->load->view('includes/template', $data);
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function headings_save($id = '')
+	{		
+		$data['page_name'] = '<b>Save Heading</b>';
+		
+		$data['msg'] = '';
+						
+		$data['row'] = $row = PayrollHeading::find($id);
+				
+		if ($row === NULL)
+		{
+			$row = PayrollHeading::blankRecord();
+			
+			$data['row'] = $row;
+		}
+		
+		if ($this->input->post('op'))
+		{			
+			$info = array(
+					'type' 							=> $this->input->post('type'),
+					'line' 							=> $this->input->post('line'),
+					'additional_compensation_id' 	=> $this->input->post('additional_compensation_id'),
+					'deduction_id' 					=> $this->input->post('deduction_id'),
+					'caption' 						=> $this->input->post('caption'),
+					);
+			
+			if ($row === NULL)
+			{
+				PayrollHeading::insert($info);
+			}
+			else
+			{
+				PayrollHeading::where('id', '=', $id)
+						->update($info);
+			}
+			
+			redirect(base_url().'payroll/report/headings');
+		}
+				
+		$data['compensations'] 	= AdditionalCompensation::listBox($id);
+		$data['deductions'] 	= DeductionInformation::listBox($id);
+				
+		$data['main_content'] = 'report/headings_save';
 		
 		$this->load->view('includes/template', $data);
 	}

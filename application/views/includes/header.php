@@ -26,6 +26,8 @@ if(!$this->session->userdata('username'))
 <script type="text/JavaScript" src="<?php echo base_url();?>js/jquery-1.8.1.js"></script>
 <script type="text/JavaScript" src="<?php echo base_url();?>js/jquery.labelify.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/lib.js"></script>
+<script type="text/JavaScript" src="<?php echo base_url();?>js/jquery.tablednd.js"></script>
+
 
 <!--Use for thickbox added on april 11, 2011-->
 <script type="text/JavaScript" src="<?php echo base_url();?>js/thickbox.js"></script>

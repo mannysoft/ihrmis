@@ -10,7 +10,7 @@ class Deductions extends Eloquent {
 	
 	public function employee()
     {
-		  return self::belongsTo('Payslip', 'employee_id');
+		return self::belongsTo('Payslip', 'employee_id');
     }
 	
 }

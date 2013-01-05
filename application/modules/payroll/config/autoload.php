@@ -121,8 +121,9 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array(
-							'illuminate/payslip',
-							'illuminate/deductions',
+							//'illuminate/employee_i',
+							//'illuminate/deductions',
+							//'illuminate/payrollheading',
 							);
 
 

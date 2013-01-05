@@ -111,7 +111,7 @@ $payroll_reports = 	array(
 						$base.'payroll/report/loan_balance">'.$image.'Loan Balance</a>',
 						$base.'payroll/report/income_tax">'.$image.'Income Tax</a>',
 						$base.'payroll/report/signatory">'.$image.'Signatory</a>',
-						$base.'payroll/report/signatory">'.$image.'Payroll Heading</a>',
+						$base.'payroll/report/headings">'.$image.'Payroll Heading</a>',
             			);
 						
 $payroll_remittances = 	array(

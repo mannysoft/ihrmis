@@ -405,20 +405,20 @@ class Attendance extends MX_Controller {
 				$this->load->library('fpdi');
 				
 				// initiate FPDI   
-				$this->pdf = new FPDI();
+				$pdf = new FPDI();
 				// add a page
-				$this->pdf->AddPage();
+				$pdf->AddPage();
 				// set the sourcefile
-				$this->pdf->setSourceFile('dtr/template/dtr.pdf');
+				$pdf->setSourceFile('dtr/template/dtr.pdf');
 				
 				// select the first page
-				$tplIdx = $this->pdf->importPage(1);
+				$tplIdx = $pdf->importPage(1);
 				
 				// use the page we imported
-				$this->pdf->useTemplate($tplIdx);
+				$pdf->useTemplate($tplIdx);
 				
 				// set font, font style, font size.
-				$this->pdf->SetFont('Times','B',11);
+				$pdf->SetFont('Times','B',11);
 				
 				####################################
 				#THIS IS FOR THE NAME OF EMPLOYEE  #
@@ -426,33 +426,33 @@ class Attendance extends MX_Controller {
 				
 				if ($show_employee_number_dtr == 'yes')
 				{
-					$this->pdf->SetXY(80, 10);
+					$pdf->SetXY(80, 10);
 				
-					$this->pdf->Write(0, $this->employee_id);
+					$pdf->Write(0, $this->employee_id);
 					
-					$this->pdf->SetX(175);
+					$pdf->SetX(175);
 					
-					$this->pdf->Write(0, $this->employee_id);
+					$pdf->Write(0, $this->employee_id);
 				}
 				
 				// set initial placement
-				$this->pdf->SetXY(30, 22.5);
+				$pdf->SetXY(30, 22.5);
 				
 				// line break
-				$this->pdf->Ln(5);
+				$pdf->Ln(5);
 				
 				// go to 25 X (indent)
-				$this->pdf->SetX(40);
+				$pdf->SetX(40);
 				
 				// write
-				$this->pdf->Write(0, ucwords(strtolower(utf8_decode($whole_name))));
+				$pdf->Write(0, ucwords(strtolower(utf8_decode($whole_name))));
 				
 				
 				// go to 25 X (indent)
-				$this->pdf->SetX(130);
+				$pdf->SetX(130);
 				
 				// write
-				$this->pdf->Write(0, ucwords(strtolower(utf8_decode($whole_name))));
+				$pdf->Write(0, ucwords(strtolower(utf8_decode($whole_name))));
 			
 				########################################
 				#THIS IS FOR THE NAME OF EMPLOYEE (END)#
@@ -466,28 +466,28 @@ class Attendance extends MX_Controller {
 				$month2 = $this->Helps->get_month_name($this->month);
 			
 				// line break
-				$this->pdf->Ln(11);
+				$pdf->Ln(11);
 				
 				// go to 25 X (indent)
-				$this->pdf->SetX(43);
+				$pdf->SetX(43);
 				
 				// write
-				$this->pdf->Write(0, ucwords(strtolower($month2.' '.$this->start_date.'-'.$this->period_to.', '.$this->year)));
+				$pdf->Write(0, ucwords(strtolower($month2.' '.$this->start_date.'-'.$this->period_to.', '.$this->year)));
 				
 				
 				// go to 25 X (indent)
-				$this->pdf->SetX(137);
+				$pdf->SetX(137);
 				
 				// write
-				$this->pdf->Write(0, ucwords(strtolower($month2.' '.$this->start_date.'-'.$this->period_to.', '.$this->year)));
+				$pdf->Write(0, ucwords(strtolower($month2.' '.$this->start_date.'-'.$this->period_to.', '.$this->year)));
 			
 				####################################
 				#THIS IS FOR THE MONTH (END)       #
 				####################################
 			
 			
-				$this->pdf->Ln(28.5);
-				$this->pdf->SetFont('Times','',9);
+				$pdf->Ln(28.5);
+				$pdf->SetFont('Times','',9);
 			
 			
 				// This will start the writing process to pdf
@@ -511,12 +511,25 @@ class Attendance extends MX_Controller {
 				//foreach ($dtr_result as $row) ========= START ====================================
 				foreach ($dtr_result as $row)
 				{
-					$this->set_dtr($row); // 
 					
+					$this->am_login 		= $row['am_login'];
+					$this->am_logout		= $row['am_logout'];
+					$this->pm_login 		= $row['pm_login'];
+					$this->pm_logout		= $row['pm_logout'];
+					$this->ot_login 		= $row['ot_login'];
+					$this->ot_logout		= $row['ot_logout'];
+					$this->leave_type_id 	= $row['leave_type_id'];
+					$this->log_date 		= $row['log_date'];
+					$this->manual_log_id 	= $row['manual_log_id'];
+					
+					
+						
 					// Split the logged_date
 					// As of PHP 5.3.0 the regex extension is deprecated, 
 					// calling this function will issue an E_DEPRECATED notice.
 					list($log_year, $log_month, $log_day) = explode('-', $this->log_date);
+					
+					
 					
 					
 					// Check if the day is Sat or Sun
@@ -603,7 +616,7 @@ class Attendance extends MX_Controller {
 					
 					$line_number_view = (in_array($this->line_number, $line_numbers)) ? 4 : 3.5;
 					
-					$this->pdf->Ln($line_number_view);
+					$pdf->Ln($line_number_view);
 					
 					// Check for saturdays and sundays
 					
@@ -627,6 +640,8 @@ class Attendance extends MX_Controller {
 								{
 									$this->pm_login = strtoupper($this->Holiday->holiday_name($this->log_date));
 								}
+								
+								
 								
 							}
 						}
@@ -928,34 +943,34 @@ class Attendance extends MX_Controller {
 					//convert the time to 12 hour 
 					
 					//am login A
-					$this->pdf->SetX(24);
-					$this->pdf->SetTextColor($this->Helps->font_color_am_login, 0, 0);
-					$this->pdf->SetFont('Times', $this->Helps->am_font_bold, 9);
-					$this->pdf->Write(0, $this->am_login);
+					$pdf->SetX(24);
+					$pdf->SetTextColor($this->Helps->font_color_am_login, 0, 0);
+					$pdf->SetFont('Times', $this->Helps->am_font_bold, 9);
+					$pdf->Write(0, $this->am_login);
 					
 					
 					//am login B
-					$this->pdf->SetX(118);
-					$this->pdf->Write(0, $this->am_login);
+					$pdf->SetX(118);
+					$pdf->Write(0, $this->am_login);
 					$this->Helps->font_color_am_login = 0;
 					$this->Helps->am_font_bold = '';
 					
 					//am logout A
-					$this->pdf->SetX(36);
-					$this->pdf->SetTextColor($this->Helps->font_color_am_logout, 0, 0);
-					$this->pdf->SetFont('Times', $this->Helps->am_out_bold, 9);
-					$this->pdf->Write(0, $this->am_logout);
+					$pdf->SetX(36);
+					$pdf->SetTextColor($this->Helps->font_color_am_logout, 0, 0);
+					$pdf->SetFont('Times', $this->Helps->am_out_bold, 9);
+					$pdf->Write(0, $this->am_logout);
 					
 					//am logout B
-					$this->pdf->SetX(130);
-					$this->pdf->Write(0, $this->am_logout);
+					$pdf->SetX(130);
+					$pdf->Write(0, $this->am_logout);
 					$this->Helps->font_color_am_logout = 0;
 					$this->Helps->am_out_bold = '';
 				
 					//pm login A
-					$this->pdf->SetX(50);
-					$this->pdf->SetTextColor($this->Helps->font_color_pm_login, 0, 0);
-					$this->pdf->SetFont('Times', $this->Helps->pm_font_bold, 9);
+					$pdf->SetX(50);
+					$pdf->SetTextColor($this->Helps->font_color_pm_login, 0, 0);
+					$pdf->SetFont('Times', $this->Helps->pm_font_bold, 9);
 					
 					// Change format(only if notes is blank)
 					if(isset($notes) && $notes != '')
@@ -998,36 +1013,36 @@ class Attendance extends MX_Controller {
 					// Reset the notes to blank
 					$notes = '';
 					
-					$this->pdf->Write(0, $this->pm_login);
+					$pdf->Write(0, $this->pm_login);
 					
 					//pm login B
-					$this->pdf->SetX(144);
-					$this->pdf->Write(0, $this->pm_login);
+					$pdf->SetX(144);
+					$pdf->Write(0, $this->pm_login);
 					$this->Helps->font_color_pm_login = 0;
 					$this->Helps->pm_font_bold = '';
 				
 					//pm logout A
-					$this->pdf->SetX(62);
-					$this->pdf->SetTextColor($this->Helps->font_color_pm_logout, 0, 0);
-					$this->pdf->SetFont('Times', $this->Helps->pm_out_bold, 9);
+					$pdf->SetX(62);
+					$pdf->SetTextColor($this->Helps->font_color_pm_logout, 0, 0);
+					$pdf->SetFont('Times', $this->Helps->pm_out_bold, 9);
 					
 					// Change format if the entry is not leave and not Undertime or (leave in the morning)
 					if( ($this->leave_type_id == 0 && $this->pm_logout != 'Undertime') or $am_is_leave == TRUE)
 					{
 						$this->pm_logout = $this->Helps->change_format($this->pm_logout, 1, $format = '');
 					}
-					$this->pdf->Write(0, $this->pm_logout);
+					$pdf->Write(0, $this->pm_logout);
 					
 					//pm logout B
-					$this->pdf->SetX(157);
-					$this->pdf->Write(0, $this->pm_logout);
+					$pdf->SetX(157);
+					$pdf->Write(0, $this->pm_logout);
 					$this->Helps->font_color_pm_logout = 0;
 					$this->Helps->pm_out_bold = '';
 
 					
 					//ot login A
-					$this->pdf->SetX(74);
-					$this->pdf->SetTextColor(0, 0, 0);
+					$pdf->SetX(74);
+					$pdf->SetTextColor(0, 0, 0);
 					
 					
 					if ($has_ob == TRUE and trim($ob_location) != '')
@@ -1039,23 +1054,23 @@ class Attendance extends MX_Controller {
 						$this->ot_login = $this->Helps->change_format($this->ot_login, 1, $format = '');
 					}
 					
-					$this->pdf->Write(0, $this->ot_login);
+					$pdf->Write(0, $this->ot_login);
 					
 					//ot login B
-					$this->pdf->SetX(169);
-					$this->pdf->SetTextColor(0, 0, 0);
-					$this->pdf->Write(0, $this->ot_login);
+					$pdf->SetX(169);
+					$pdf->SetTextColor(0, 0, 0);
+					$pdf->Write(0, $this->ot_login);
 				
 					//ot logout A
-					$this->pdf->SetX(88);
-					$this->pdf->SetTextColor(0, 0, 0);
+					$pdf->SetX(88);
+					$pdf->SetTextColor(0, 0, 0);
 					$this->ot_logout = $this->Helps->change_format($this->ot_logout, 1, $format = '');
-					$this->pdf->Write(0, $this->ot_logout);
+					$pdf->Write(0, $this->ot_logout);
 					
 					//ot logout B
-					$this->pdf->SetX(182);
-					$this->pdf->SetTextColor(0, 0, 0);
-					$this->pdf->Write(0, $this->ot_logout);
+					$pdf->SetX(182);
+					$pdf->SetTextColor(0, 0, 0);
+					$pdf->Write(0, $this->ot_logout);
 					
 					$this->line_number++ ;
 					
@@ -1123,15 +1138,15 @@ class Attendance extends MX_Controller {
 				
 				
 				// set initial placement
-				$this->pdf->SetXY(30, 34);
-				//$this->pdf->Ln(160.5);
-				$this->pdf->Ln(153);
+				$pdf->SetXY(30, 34);
+				//$pdf->Ln(160.5);
+				$pdf->Ln(153);
 				//total A
-				$this->pdf->SetX(50);
-				//$this->pdf->Write(0, ucwords(($this->Helps->compute_time($this->number_of_hours_work))));
+				$pdf->SetX(50);
+				//$pdf->Write(0, ucwords(($this->Helps->compute_time($this->number_of_hours_work))));
 				//total B
-				$this->pdf->SetX(145);
-				//$this->pdf->Write(0, ucwords(($this->Helps->compute_time($this->number_of_hours_work))));
+				$pdf->SetX(145);
+				//$pdf->Write(0, ucwords(($this->Helps->compute_time($this->number_of_hours_work))));
 				
 				// LGU CODE
 				$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
@@ -1164,64 +1179,64 @@ class Attendance extends MX_Controller {
 				
 				
 				// Total
-				$this->pdf->Ln(48);
-				$this->pdf->SetX(17);
-				$this->pdf->Write(0, 'Tardiness:');
+				$pdf->Ln(48);
+				$pdf->SetX(17);
+				$pdf->Write(0, 'Tardiness:');
 				
-				$this->pdf->SetX(40);
-				$this->pdf->Write(0, '('.$this->late_count.'x)' .$this->late_final);
+				$pdf->SetX(40);
+				$pdf->Write(0, '('.$this->late_count.'x)' .$this->late_final);
 				
 				
-				$this->pdf->SetX(110);
-				$this->pdf->Write(0, 'Tardiness:');
+				$pdf->SetX(110);
+				$pdf->Write(0, 'Tardiness:');
 				
-				$this->pdf->SetX(133);
-				$this->pdf->Write(0, '('.$this->late_count.'x)' .$this->late_final);
+				$pdf->SetX(133);
+				$pdf->Write(0, '('.$this->late_count.'x)' .$this->late_final);
 				
-				$this->pdf->Ln(6);
+				$pdf->Ln(6);
 				
-				$this->pdf->SetX(17);
-				$this->pdf->Write(0, 'Under time:');
-				$this->pdf->SetX(40);
+				$pdf->SetX(17);
+				$pdf->Write(0, 'Under time:');
+				$pdf->SetX(40);
 				
 				if ( $lgu_code == 'marinduque_province' )
 				{
-					$this->pdf->Write(0, $this->undertime_final);
+					$pdf->Write(0, $this->undertime_final);
 				}
 				else
 				{
-					$this->pdf->Write(0, '('.$this->undertime_count.'x) ' .$this->undertime_final);
+					$pdf->Write(0, '('.$this->undertime_count.'x) ' .$this->undertime_final);
 				}
 				
 				
 				
-				$this->pdf->SetX(110);
-				$this->pdf->Write(0, 'Under time:');
+				$pdf->SetX(110);
+				$pdf->Write(0, 'Under time:');
 				
-				$this->pdf->SetX(133);
+				$pdf->SetX(133);
 				if ( $lgu_code == 'marinduque_province' )
 				{
-					$this->pdf->Write(0, $this->undertime_final);
+					$pdf->Write(0, $this->undertime_final);
 				}
 				else
 				{
-					$this->pdf->Write(0, '('.$this->undertime_count.'x) ' .$this->undertime_final);
+					$pdf->Write(0, '('.$this->undertime_count.'x) ' .$this->undertime_final);
 				}
 				
 				//overtime
-				$this->pdf->Ln(6);
+				$pdf->Ln(6);
 				$this->number_of_hours_work = $this->Helps->compute_time($this->number_of_hours_work);
-				$this->pdf->SetX(17);
-				//$this->pdf->Write(0, ucwords(('Number of Tardiness:')));
+				$pdf->SetX(17);
+				//$pdf->Write(0, ucwords(('Number of Tardiness:')));
 				
-				$this->pdf->SetX(50);
-				//$this->pdf->Write(0, ucwords(($late_count + $undertime_count)));
+				$pdf->SetX(50);
+				//$pdf->Write(0, ucwords(($late_count + $undertime_count)));
 				
-				$this->pdf->SetX(110);
-				//$this->pdf->Write(0, ucwords(('Number of Tardiness:')));
+				$pdf->SetX(110);
+				//$pdf->Write(0, ucwords(('Number of Tardiness:')));
 				
-				$this->pdf->SetX(143);
-				//$this->pdf->Write(0, ucwords(($late_count + $undertime_count)));
+				$pdf->SetX(143);
+				//$pdf->Write(0, ucwords(($late_count + $undertime_count)));
 				
 				
 				//overtime
@@ -1231,56 +1246,56 @@ class Attendance extends MX_Controller {
 				
 				if ( $print_overtime_in_dtr == 1)
 				{
-					$this->pdf->SetX(17);
-					$this->pdf->Write(0, ucwords(('Over time:')));
-					$this->pdf->Write(0, ucwords(($this->overtime)));
+					$pdf->SetX(17);
+					$pdf->Write(0, ucwords(('Over time:')));
+					$pdf->Write(0, ucwords(($this->overtime)));
 					
 					
-					$this->pdf->SetX(110);
-					$this->pdf->Write(0, ucwords(('Over time:')));
-					$this->pdf->Write(0, ucwords(($this->overtime)));
+					$pdf->SetX(110);
+					$pdf->Write(0, ucwords(('Over time:')));
+					$pdf->Write(0, ucwords(($this->overtime)));
 				}
 				
 				// If allow the 40 hrs per week
 				if ($this->allow_40hrs == TRUE)
 				{
-					$this->pdf->Ln(6);
-					$this->pdf->SetX(17);
-					$this->pdf->Write(0, ('The system allow the 40 hrs a week'));
+					$pdf->Ln(6);
+					$pdf->SetX(17);
+					$pdf->Write(0, ('The system allow the 40 hrs a week'));
 					
-					$this->pdf->SetX(110);
-					$this->pdf->Write(0, ('The system allow the 40 hrs a week'));
+					$pdf->SetX(110);
+					$pdf->Write(0, ('The system allow the 40 hrs a week'));
 					
 					// We require hours only here.
 					$this->Helps->hours_only = TRUE;
 					
-					$this->pdf->Ln(4);
-					$this->pdf->SetX(17);
-					$this->pdf->Write(0, ('1st week: '.$this->Helps->compute_time($this->week1_hours)));
+					$pdf->Ln(4);
+					$pdf->SetX(17);
+					$pdf->Write(0, ('1st week: '.$this->Helps->compute_time($this->week1_hours)));
 					
-					$this->pdf->SetX(110);
-					$this->pdf->Write(0, ('1st week: '.$this->Helps->compute_time($this->week1_hours)));
+					$pdf->SetX(110);
+					$pdf->Write(0, ('1st week: '.$this->Helps->compute_time($this->week1_hours)));
 					
-					$this->pdf->Ln(4);
-					$this->pdf->SetX(17);
-					$this->pdf->Write(0, ('2nd week: '.$this->Helps->compute_time($this->week2_hours)));
+					$pdf->Ln(4);
+					$pdf->SetX(17);
+					$pdf->Write(0, ('2nd week: '.$this->Helps->compute_time($this->week2_hours)));
 					
-					$this->pdf->SetX(110);
-					$this->pdf->Write(0, ('2nd week: '.$this->Helps->compute_time($this->week2_hours)));
+					$pdf->SetX(110);
+					$pdf->Write(0, ('2nd week: '.$this->Helps->compute_time($this->week2_hours)));
 					
-					$this->pdf->Ln(4);
-					$this->pdf->SetX(17);
-					$this->pdf->Write(0, ('3rd week: '.$this->Helps->compute_time($this->week3_hours)));
+					$pdf->Ln(4);
+					$pdf->SetX(17);
+					$pdf->Write(0, ('3rd week: '.$this->Helps->compute_time($this->week3_hours)));
 					
-					$this->pdf->SetX(110);
-					$this->pdf->Write(0, ('3rd week: '.$this->Helps->compute_time($this->week3_hours)));
+					$pdf->SetX(110);
+					$pdf->Write(0, ('3rd week: '.$this->Helps->compute_time($this->week3_hours)));
 					
-					$this->pdf->Ln(4);
-					$this->pdf->SetX(17);
-					$this->pdf->Write(0, ('4th week: '.$this->Helps->compute_time($this->week4_hours)));
+					$pdf->Ln(4);
+					$pdf->SetX(17);
+					$pdf->Write(0, ('4th week: '.$this->Helps->compute_time($this->week4_hours)));
 					
-					$this->pdf->SetX(110);
-					$this->pdf->Write(0, ('4th week: '.$this->Helps->compute_time($this->week4_hours)));
+					$pdf->SetX(110);
+					$pdf->Write(0, ('4th week: '.$this->Helps->compute_time($this->week4_hours)));
 				}
 				
 				// Add office head and designation
@@ -1345,19 +1360,19 @@ class Attendance extends MX_Controller {
 					}
 					
 					
-					$this->pdf->SetXY(17, 217);
-					$this->pdf->Cell(73, 4, strtoupper($office['office_head']), '0', 0, 'C', FALSE);
+					$pdf->SetXY(17, 217);
+					$pdf->Cell(73, 4, strtoupper($office['office_head']), '0', 0, 'C', FALSE);
 					
-					$this->pdf->SetX(110);
-					$this->pdf->Cell(73, 4, strtoupper($office['office_head']), '0', 0, 'C', FALSE);
+					$pdf->SetX(110);
+					$pdf->Cell(73, 4, strtoupper($office['office_head']), '0', 0, 'C', FALSE);
 					
-					$this->pdf->Ln(4);
+					$pdf->Ln(4);
 					
-					$this->pdf->SetX(17);
-					$this->pdf->Cell(73, 4, $office['position'], '0', 0, 'C', FALSE);
+					$pdf->SetX(17);
+					$pdf->Cell(73, 4, $office['position'], '0', 0, 'C', FALSE);
 					
-					$this->pdf->SetX(110);
-					$this->pdf->Cell(73, 4, $office['position'], '0', 0, 'C', FALSE);
+					$pdf->SetX(110);
+					$pdf->Cell(73, 4, $office['position'], '0', 0, 'C', FALSE);
 				}
 				
 				
@@ -1386,7 +1401,7 @@ class Attendance extends MX_Controller {
 			
 				// If the parameter is D = download F = save as file
 				
-				$this->pdf->Output('dtr/archives/'.$name['office_id']."_$employee_id.pdf", 'F'); 
+				$pdf->Output('dtr/archives/'.$name['office_id']."_$employee_id.pdf", 'F'); 
 				
 				// All name of dtr file. put in an array
 				$multiple_dtr[] = 'dtr/archives/'.$name['office_id']."_$employee_id.pdf";
@@ -1406,12 +1421,12 @@ class Attendance extends MX_Controller {
 			
 			/*
 			// Concatenate the pdf files
-			$this->pdf = new FPDI();
+			$pdf = new FPDI();
 			
-			$this->pdf->setFiles($multiple_dtr); 
-			$this->pdf->concat();
+			$pdf->setFiles($multiple_dtr); 
+			$pdf->concat();
 			
-			$this->pdf->Output('dtr/archives/'.$name['office_id'].".pdf", 'F'); 
+			$pdf->Output('dtr/archives/'.$name['office_id'].".pdf", 'F'); 
 			*/
 			
 			// Changed on 1.28.2012
@@ -1456,21 +1471,6 @@ class Attendance extends MX_Controller {
 			$this->load->view('includes/template', $data);
 		}
 		
-	}
-	
-	// --------------------------------------------------------------------
-	
-	function set_dtr($row)
-	{
-		$this->am_login 		= $row['am_login'];
-		$this->am_logout		= $row['am_logout'];
-		$this->pm_login 		= $row['pm_login'];
-		$this->pm_logout		= $row['pm_logout'];
-		$this->ot_login 		= $row['ot_login'];
-		$this->ot_logout		= $row['ot_logout'];
-		$this->leave_type_id 	= $row['leave_type_id'];
-		$this->log_date 		= $row['log_date'];
-		$this->manual_log_id 	= $row['manual_log_id'];
 	}
 	
 	// --------------------------------------------------------------------
