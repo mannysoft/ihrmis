@@ -15,9 +15,7 @@ offices.m_columns['dates']={'coltype':'text','style':''};
 <table width="100%" border="0" class="type-one">
   <tr>
     <td width="20%">
-    <?php 
-    $js = 'id = "office_id" ';
-    echo form_dropdown('office_id', $options, $selected, $js); ?></td>
+    <?php echo form_office_dropdown(); ?></td>
     <td width="71%"></td>
 </tr>
     </table></form>

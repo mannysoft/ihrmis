@@ -188,7 +188,7 @@ class Employee extends CI_Model {
 			$this->db->where('lname', $lname);
 		}
 		
-		//Type of employment
+		// Type of employment
 		if ($this->employment_type != '')
 		{
 			$this->db->where('permanent', $this->employment_type);

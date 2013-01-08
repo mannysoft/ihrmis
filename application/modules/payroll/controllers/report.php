@@ -162,16 +162,58 @@ class Report extends MX_Controller {
 	
 	// --------------------------------------------------------------------
 	
-	function salary_index()
+	function salary_index($employee_id = '')
 	{
-	
+		$data['page_name'] = '<b>Employee Salary Index</b>';
+				
+		$data['employee_id'] = $employee_id;
+		
+		$data['msg'] = '';
+								
+		if ( $this->input->post('op'))
+		{
+
+		}
+		
+		$e = new Employee_m();
+			
+		$e->where('permanent', 1);
+		$e->where('id', 171);
+		$e->order_by('lname');
+		
+		$data['employees'] = $e->get();
+				
+		$data['main_content'] = 'report/salary_index';
+		
+		$this->load->view('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
 	
-	function loan_balance()
+	function loan_balance($employee_id = '')
 	{
-	
+		$data['page_name'] = '<b>Loan Balance</b>';
+				
+		$data['employee_id'] = $employee_id;
+		
+		$data['msg'] = '';
+		
+		$data['loans'] = array();
+		
+		if ( $this->input->post('op'))
+		{
+			$data['employee_id'] 	= $this->input->post('employee_id');
+			$data['selected'] 		= $this->input->post('office_id');
+			
+			$e = Employee_Eloquent::find($this->input->post('employee_id'));
+			
+			$data['loans'] = $e->loan;
+			
+		}
+		
+		$data['main_content'] = 'report/loan_balance';
+		
+		$this->load->view('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------

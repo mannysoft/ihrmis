@@ -13,9 +13,7 @@ offices.m_columns['cos_status']['selectvalues']=<?php echo json_encode(array('FT
 <table width="100%" border="0" cellpadding="5" cellspacing="5" class="type-one">
   <tr>
     <td width="9%" align="right"><strong>Office:</strong></td>
-    <td width="91%"><?php 
-    $js = 'id = "office_id" ';
-    echo form_dropdown('office_id', $options, $selected, $js); ?>
+    <td width="91%"><?php echo form_office_dropdown(); ?>
       <input name="op" type="hidden" id="op" value="1" /></td>
   </tr>
     </table></form>

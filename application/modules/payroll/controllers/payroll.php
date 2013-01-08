@@ -46,75 +46,15 @@ class Payroll extends MX_Controller {
 	
 	function monthly( $employee_id = '')
 	{	
-	
 		$data['page_name'] = '<b>Monthly Payroll</b>';
-		
-		//Use for office listbox
-		$data['options'] = $this->options->office_options();
-		$data['selected'] = $this->session->userdata('office_id');
-		
-		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
-		$data['year_selected'] 		= date('Y');
-		
-		// Months
-		$data['month_options'] 		= $this->options->month_options();
-		$data['month_selected'] 	= date('m');
-		
+				
 		$data['employee_id'] = $employee_id;
 		
 		$data['msg'] = '';
-				
-		$p = new Staff_entitlement_m();
-		
-		
-		
-		$this->load->library('pagination');
-		
-		$config['base_url'] = base_url().'payroll/additional_compensation/staff_entitlement/';
-		$config['total_rows'] = $p->get()->count();
-		$config['per_page'] = '15';
-		
-		$this->pagination->initialize($config);
-		
-		// How many related records we want to limit ourselves to
-		$limit = $config['per_page'];
-		
-		// Set the offset for our paging
-		$offset = $this->uri->segment(3);
-		
-		$data['deductions'] = array();	
-		
-		if ( $employee_id )
-		{			
-			$p->where('employee_id', $employee_id);
-			
-			$data['deductions'] = $p->get($limit, $offset);
-		}
 		
 		if ( $this->input->post('op'))
 		{
-			$data['employee_id'] 	= $this->input->post('employee_id');
-			$data['selected'] 		= $this->input->post('office_id');
-			
-			$p->where('employee_id', $this->input->post('employee_id'));
-			
-			$data['deductions'] = $p->get($limit, $offset);
-			
-			$e = new Employee_m();
-			
-			$e->where('office_id', $this->input->post('office_id'));
-			$e->where('permanent', 1);
-			$e->order_by('lname');
-			
-			$data['employees'] = $e->get($limit, $offset);
-			
-			
-			$a  = new Deduction_agency();
-			$a->order_by('report_order');
-			$data['agencies'] = $a->get();
-			
-			
-			
+	
 		}
 		
 		$e = new Employee_m();
@@ -123,13 +63,8 @@ class Payroll extends MX_Controller {
 		$e->where('permanent', 1);
 		$e->order_by('lname');
 		
-		//$data['employees'] = $e->get($limit, $offset);
 		$data['employees'] = $e->get();
-		
-		$a  = new Deduction_agency();
-		$a->order_by('report_order');
-		$data['agencies'] = $a->get();
-		
+				
 		$data['main_content'] = 'monthly';
 		
 		$this->load->view('includes/template', $data);	

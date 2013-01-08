@@ -22,9 +22,9 @@
   <tr>
     <td align="right">Year:</td>
     <td colspan="4"><strong>
-      <?php $js = 'id= "year"';echo form_dropdown('year', $year_options, $year_selected, $js);?>
+      <?php echo form_year_dropdown();?>
       </strong>Month:<strong>
-        <?php $js = 'id= "month"';echo form_dropdown('month', $month_options, $month_selected, $js);?>
+        <?php echo form_month_dropdown();?>
       </strong> Period:<strong>
       <?php $js = 'id= "period"';echo form_dropdown('period', array('1-15/16-31'));?>
       </strong></td>
@@ -34,7 +34,7 @@
   </tr>
   <tr>
     <td width="8%" align="right">Office:</td>
-    <td colspan="5"><?php $js = 'id = "office_id"';echo form_dropdown('office_id', $options, $selected, $js);?>
+    <td colspan="5"><?php echo form_office_dropdown();?>
       
       Document:<?php $js = 'id= "document"';echo form_dropdown('document', array('monthly_salary'=> 'Monthly Salary', 'pera'=> 'PERA/ADCOM', 'rata' => 'RATA'), $this->input->post('document'));?>
       <input type="submit" name="go" id="go" value="-- G O --" /></td>
@@ -128,10 +128,6 @@
 					
 		$this->payroll_lib->initialize($params);
 		
-		//$this->payroll_lib->salary_grade 	= $employee->salary_grade;
-		//$this->payroll_lib->step 			= $employee->step;
-		//$this->payroll_lib->tax_status 		= $employee->tax_status;
-		//$this->payroll_lib->dependents 		= $employee->dependents;
 		?>
       <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
     onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
@@ -248,56 +244,6 @@ $('#go').click(function(){
 		alert("Please select employee");
 		return false
 	}
-
-});
-
-
-$('#toggle_deductions').click(function(){
-
-	if ($('.official_deductions').val() == 'hide deductions')
-	{
-		$('.official_deductions').hide('slow');
-		$('.official_deductions').val('show deductions');
-	}
-	
-	else
-	{
-		$('.official_deductions').show('slow');
-		$('.official_deductions').val('hide deductions');
-	}
-	
-
-});
-
-$(document).ready(function(){
-
-	
-	//return
-	var office_id = $('#office_id').val()
-	
-	var selected = "";
-		
-	$.getJSON('<?php echo base_url();?>pds/employees/' + office_id, null, function (data) {
-		
-		$('#employee_id').empty().append("<option value='0'>--All--</option>");
-		$.each(data, function (key, val) {
-			
-			if ( key == "<?php echo $employee_id;?>")
-			{
-				selected = "selected";
-			}
-			else
-			{
-				selected = "";
-			}
-			
-			$('#employee_id').append("<option value='" + key + "' "+ selected +">" + val + "</option>");
-
-		});
-		
-		$('#employee_id').sort();
-	});
-	
 
 });
 </script>

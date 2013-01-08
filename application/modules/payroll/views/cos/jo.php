@@ -26,12 +26,12 @@ offices.m_columns['dates']={'coltype':'text','style':''};
   <tr>
     <td width="18%" align="right"><strong>For the Month of: </strong></td>
     <td width="82%"><strong>
-      <?php $js = 'id= "month"';echo form_dropdown('month', $month_options, $month_selected, $js);?>
-      <?php $js = 'id= "period_from"';echo form_dropdown('period_from', $days_options, $period_from_selected, $js);?>
+      <?php echo form_month_dropdown();?>
+      <?php echo form_period_from_dropdown();?>
       </strong> To: <strong>
-        <?php $js = 'id= "period_to"';echo form_dropdown('period_to', $days_options, $days_selected, $js);?>
+        <?php echo form_period_to_dropdown();?>
         </strong><strong>
-        <?php $js = 'id= "year"';echo form_dropdown('year', $year_options, $year_selected, $js);?>
+       <?php echo form_year_dropdown();?>
         <input type="submit" name="button" id="button" value="-- Go --" />
         <input name="op" type="hidden" id="op" value="1" />
         <input type="submit" name="print" id="print" value="Print" />

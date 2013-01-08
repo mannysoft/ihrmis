@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['script_version'] = "1.76";
+$config['script_version'] = "2.1";
 
 
 /* End of file config.php */

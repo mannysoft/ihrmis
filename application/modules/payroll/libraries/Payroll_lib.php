@@ -50,6 +50,7 @@ class Payroll_lib {
 	public $employer_deductions			= 0;
 	public $employee_deductions			= 0;
 	public $allow_save_adcom_deductions	= FALSE;
+	public $loan_id						= 0;
 	
 	 // ------------------------------------------------------------------------
    
@@ -310,6 +311,8 @@ class Payroll_lib {
 		$d->where('status', 'active');
 		$d->get();
 		
+		$this->loan_id = $d->id; // The deduction loan id
+		
 		$this->share = 'employee_share';
 		
 		$this->add_deductions($this->share, $d->monthly_pay); // add up deductions
@@ -358,8 +361,11 @@ class Payroll_lib {
 		
 		$date = $CI->input->post('year') . '-' . $CI->input->post('month').'-15';
 		
-		// Just save all additional compensation and deductions
-		$this->allow_save_adcom_deductions = TRUE; // default is FALSE;
+		if ($CI->input->post('year'))
+		{
+			// Just save all additional compensation and deductions
+			$this->allow_save_adcom_deductions = TRUE; // default is FALSE;
+		}
 		
 		$d = new Deduction_adcom();
 		
@@ -389,6 +395,7 @@ class Payroll_lib {
 				
 				$d->employee_id 		= $this->employee_id;
 				$d->deduction_id 		= $this->deduction_id;
+				$d->loan_id 			= $this->loan_id;
 				$d->amount 				= $amount;
 				$d->monthly_salary 		= $this->monthly_salary;
 				$d->date 				= $date;

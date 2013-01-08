@@ -95,27 +95,7 @@ class Cos extends MX_Controller {
 		$data['msg'] = '';
 		
 		$data['error_msg'] = '';
-		
-		// Use for office listbox
-		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->office_id;
-		
-			// Months
-		$data['month_options'] 		= $this->options->month_options();
-		$data['month_selected'] 	= ($this->input->post('month')) ? $this->input->post('month') : date('m');
-		
-		// Period from
-		$data['days_options'] 		= $this->options->days_options();
-		
-		$data['period_from_selected'] = ($this->input->post('period_from')) ? $this->input->post('period_from') : '01';
-		
-		// Period to
-		$data['days_options'] 		= $this->options->days_options();
-		$data['days_selected'] 		= ($this->input->post('period_to')) ? $this->input->post('period_to') : '15';
-		
-		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
-		$data['year_selected'] 		= date('Y');
-		
+								
 		$this->Employee->fields = array(
                                 'id',
                                 'employee_id',
@@ -166,15 +146,13 @@ class Cos extends MX_Controller {
 	
 	function rates()
 	{
-		$data['page_name'] = '<b>Employee Rates</b>';
+		$data['page_name'] = '<b>Job Order Employee Rates</b>';
 		
 		$data['msg'] = '';
 		
 		$data['error_msg'] = '';
 		
-		// Use for office listbox
-		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->office_id;
+		$this->Employee->employment_type = '4';
 		
 		$this->Employee->fields = array(
                                 'id',
