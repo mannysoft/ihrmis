@@ -8,9 +8,17 @@ class Deductions extends Eloquent {
 
 	public $table = "payroll_deduction_adcoms";
 	
+	// --------------------------------------------------------------------
+	
 	public function employee()
     {
 		return self::belongsTo('Payslip', 'employee_id');
     }
 	
+	// --------------------------------------------------------------------
+	
+	public function amountPaid($id = '')
+	{
+		return self::where('loan_id', '=', $id)->sum('amount');	
+	}
 }

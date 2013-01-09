@@ -24,14 +24,14 @@
 <table width="100%" border="0" class="type-one">
   <tr class="type-one-header">
     <th width="2%">ID</th>
-    <th width="12%">Loan</th>
-    <th width="7%">Date of Loan</th>
-    <th width="4%">Loan Gross</th>
+    <th width="14%">Loan</th>
+    <th width="10%">Date of Loan</th>
+    <th width="9%">Loan Gross</th>
     <th width="5%">Months to Pay</th>
-    <th width="6%">Monthly Due</th>
-    <th width="6%">Amounts Paid</th>
-    <th width="6%">Balance</th>
-    <th width="29%">Remaining Months</th>
+    <th width="9%">Monthly Due</th>
+    <th width="9%">Amount Paid</th>
+    <th width="10%">Balance</th>
+    <th width="9%">Remaining Months</th>
     <th width="7%">Status</th>
     <th width="16%">Actions</th>
   </tr>
@@ -42,11 +42,11 @@
         <td><?php echo $row->id;?></td>
         <td><?php echo $row->deductionInformation->desc;?></td>
         <td><?php echo $row->date_loan;?></td>
-        <td align="right"><?php echo $row->loan_gross;?></td>
+        <td align="right"><?php echo number_format($row->loan_gross, 2);?></td>
         <td align="right"><?php echo $row->months_pay;?></td>
-        <td align="right"><?php echo $row->monthly_pay;?></td>
-        <td><?php echo $row->date_from;?></td>
-        <td><?php echo $row->date_to;?></td>
+        <td align="right"><?php echo number_format($row->monthly_pay, 2);?></td>
+        <td align="right"><?php echo number_format(Deductions::amountPaid($row->id), 2);?></td>
+        <td align="right"><?php echo $row->date_to;?></td>
         <td>&nbsp;</td>
         <td><?php echo $row->status?>&nbsp;</td>
         <td><a href="<?php echo base_url().'payroll/deduction/loan_save/'.$row->id.'/'.$employee_id;?>">Edit</a> | <a href="<?php echo base_url().'payroll/deduction/loan_delete/'.$row->id.'/'.$employee_id;?>">Delete</a></td>

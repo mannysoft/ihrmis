@@ -301,7 +301,7 @@ class Payroll_lib {
 	function loan_deductions()
 	{
 		$CI = & get_instance();
-		
+				
 		$date = $CI->input->post('year') . '-' . $CI->input->post('month').'-15';
 		
 		$d = new Deduction_loan();

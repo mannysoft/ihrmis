@@ -12,6 +12,7 @@ class DeductionLoan extends Eloquent {
 	public $table = "payroll_deduction_loans";
 	
 	// --------------------------------------------------------------------
+	
 	public function deductionInformation()
 	{
 		return self::belongsTo('DeductionInformation', 'deduction_information_id');

@@ -287,14 +287,7 @@ class Report extends MX_Controller {
 		
 		$data['msg'] = '';
 						
-		$data['row'] = $row = PayrollHeading::find($id);
-				
-		if ($row === NULL)
-		{
-			$row = PayrollHeading::blankRecord();
-			
-			$data['row'] = $row;
-		}
+		$data['row'] = PayrollHeading::blankRecord();
 		
 		if ($this->input->post('op'))
 		{			
@@ -305,6 +298,8 @@ class Report extends MX_Controller {
 					'deduction_id' 					=> $this->input->post('deduction_id'),
 					'caption' 						=> $this->input->post('caption'),
 					);
+					
+			$data['row'] = $row = PayrollHeading::find($id);		
 			
 			if ($row === NULL)
 			{
