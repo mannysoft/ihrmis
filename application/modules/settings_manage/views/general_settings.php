@@ -1088,14 +1088,14 @@ $('.click').click(function(){
     <td align="right"><strong>Position:</strong></td>
     <td><input name="training_prepared_position" type="text" id="training_prepared_position" value="<?php echo $settings['training_prepared_position'];?>" size="30" /></td>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -1171,6 +1171,20 @@ $('.click').click(function(){
   <tr>
     <td align="right"><strong>Position:</strong></td>
     <td><input name="money_value_signatory_certified_position" type="text" id="money_value_signatory_certified_position" value="<?php echo $settings['money_value_signatory_certified_position'];?>" size="30" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><strong>Authority of the Mayor:</strong></td>
+    <td><input name="authority_of_mayor" type="text" id="authority_of_mayor" value="<?php echo $settings['authority_of_mayor'];?>" size="30" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

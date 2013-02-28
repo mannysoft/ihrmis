@@ -10,15 +10,24 @@ class Deductions extends Eloquent {
 	
 	// --------------------------------------------------------------------
 	
-	public function employee()
-    {
-		return self::belongsTo('Payslip', 'employee_id');
-    }
-	
 	// --------------------------------------------------------------------
 	
 	public function amountPaid($id = '')
 	{
 		return self::where('loan_id', '=', $id)->sum('amount');	
 	}
+	
+	// --------------------------------------------------------------------
+	
+	public function countMonthPaid($id = '')
+	{
+		return self::where('loan_id', '=', $id)->count();	
+	}
+	
+	// --------------------------------------------------------------------
+	
+	public function loan()
+    {
+		return self::belongsTo('DeductionLoan', 'loan_id');
+    }
 }

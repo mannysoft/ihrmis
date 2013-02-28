@@ -57,6 +57,9 @@ class Payroll extends MX_Controller {
 	
 		}
 		
+		
+		
+		
 		$e = new Employee_m();
 			
 		$e->where('office_id', ($this->input->post('office_id')) ? $this->input->post('office_id') : $this->session->userdata('office_id'));

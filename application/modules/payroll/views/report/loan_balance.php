@@ -4,9 +4,6 @@
     <td>&nbsp;</td>
     <td>illuminate/database/connection.php line 217 to show query</td>
     <td>
-    <?php if ( $employee_id != '' ):?>
-    <a href="<?php echo base_url().'payroll/deduction/loan_save/0/'.$employee_id;?>">Add Loan Schedule</a>
-     <?php endif;?>
     </td>
   </tr>
   <tr>
@@ -31,9 +28,9 @@
     <th width="9%">Monthly Due</th>
     <th width="9%">Amount Paid</th>
     <th width="10%">Balance</th>
-    <th width="9%">Remaining Months</th>
-    <th width="7%">Status</th>
-    <th width="16%">Actions</th>
+    <th width="11%">Remaining Months</th>
+    <th width="11%">Status</th>
+    <th width="10%">&nbsp;</th>
   </tr>
   <?php foreach ($loans as $row): ?>
   		<?php $bg = $this->Helps->set_line_colors();?>
@@ -45,15 +42,15 @@
         <td align="right"><?php echo number_format($row->loan_gross, 2);?></td>
         <td align="right"><?php echo $row->months_pay;?></td>
         <td align="right"><?php echo number_format($row->monthly_pay, 2);?></td>
-        <td align="right"><?php echo number_format(Deductions::amountPaid($row->id), 2);?></td>
-        <td align="right"><?php echo $row->date_to;?></td>
-        <td>&nbsp;</td>
+        <td align="right"><a href="<?php echo base_url().'payroll/report/loan_payments/'.$row->id.'/'.$employee_id?>"><?php echo number_format(Deductions::amountPaid($row->id), 2);?></a></td>
+        <td align="right"><?php echo number_format($row->loan_gross - Deductions::amountPaid($row->id), 2);?></td>
+        <td align="right"><?php echo $row->months_pay - Deductions::countMonthPaid($row->id);?></td>
         <td><?php echo $row->status?>&nbsp;</td>
-        <td><a href="<?php echo base_url().'payroll/deduction/loan_save/'.$row->id.'/'.$employee_id;?>">Edit</a> | <a href="<?php echo base_url().'payroll/deduction/loan_delete/'.$row->id.'/'.$employee_id;?>">Delete</a></td>
+        <td></td>
       </tr>
   <?php endforeach; ?>
   <tr>
-    <td><?php //echo $this->pagination->create_links();?></td>
+    <td></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

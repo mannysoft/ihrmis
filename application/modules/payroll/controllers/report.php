@@ -190,11 +190,39 @@ class Report extends MX_Controller {
 	
 	// --------------------------------------------------------------------
 	
-	function loan_balance($employee_id = '')
+	function loan_balance()
 	{
 		$data['page_name'] = '<b>Loan Balance</b>';
 				
-		$data['employee_id'] = $employee_id;
+		$data['employee_id'] = '';
+		
+		$data['msg'] = '';
+		
+		$data['loans'] = array();
+		
+		if ( $this->input->post('op'))
+		{
+			$data['employee_id'] 	= $this->input->post('employee_id');
+			$data['selected'] 		= $this->input->post('office_id');
+			
+			$e = Employee_Eloquent::find($this->input->post('employee_id'));
+			
+			$data['loans'] = $e->loan;
+			
+		}
+		
+		$data['main_content'] = 'report/loan_balance';
+		
+		$this->load->view('includes/template', $data);	
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function loan_payments($loan_id = '', $employee_id = '')
+	{
+		$data['page_name'] = '<b>Loan Balance</b>';
+				
+		$data['employee_id'] = '';
 		
 		$data['msg'] = '';
 		

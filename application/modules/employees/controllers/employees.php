@@ -592,6 +592,7 @@ class Employees extends MX_Controller  {
 		
 		$this->Employee->fields = array(
 										'shift_id',
+										'friday_exempted',
 										'office_id',
 										'detailed_office_id',
 										'permanent',
@@ -640,6 +641,10 @@ class Employees extends MX_Controller  {
 		$data['position'] 					= $employee_info['position'];
 		$data['assistant_dept_head'] 		= $employee_info['assistant_dept_head'];
 		$data['employee_id'] 				= $employee_info['employee_id'];
+		
+		$data['friday_exempted'] 			= $employee_info['friday_exempted'];
+		
+		
 		
 		//Salary grade options
 		$data['sg_options'] = $this->options->salary_grade();
@@ -740,11 +745,14 @@ class Employees extends MX_Controller  {
 						'assistant_dept_head' 	=> $this->input->post('assistant_dept_head'),
 						'shift_id' 				=> $this->input->post('shift2'),
 						'shift_type' 			=> $this->input->post('shift2'),
+						'friday_exempted' 		=> $this->input->post('friday_exempted'),
 						'updated' 				=> 1,
 						'emergency_contact'		=> $this->input->post('emergency_contact'),
 						'emergency_contact_no'	=> $this->input->post('emergency_contact_no'),
 						
 						);
+				
+				
 				
 				//$data['emergency_contact'] = $employee_info['emergency_contact'];
 				

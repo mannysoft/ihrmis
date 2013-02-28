@@ -356,11 +356,25 @@ to
     
     <?php endif;?>
     <tr>
+      <td align="right">Exempted on Fridays:</td>
+      <td>&nbsp;</td>
+      <?php 
+	  $checked = 'checked="checked"';
+	  
+	  $friday_exempted1 = ($friday_exempted == 'yes') ? $checked : '';
+	  $friday_exempted2 = ($friday_exempted == 'no') ? $checked : '';
+		?>
+      <td align="left"><input type="radio" name="friday_exempted" id="friday_exempted_yes" value="yes" <?php echo $friday_exempted1;?>/>
+      <label for="friday_exempted_yes">Yes</label> <input type="radio" name="friday_exempted" id="friday_exempted_no" value="no" <?php echo $friday_exempted2;?>/>
+      <label for="friday_exempted_no">No</label></td>
+    </tr>
+    <tr>
       <td align="right"><strong>
         <input type="submit" name="button2" id="button" value="Update" class="button"/>
       </strong><a href="<?=base_url().'employees'?>">Cancel</a></td>
       <td>&nbsp;</td>
-      <td align="left"><input type="hidden" name="MAX_FILE_SIZE" value="10000000000"/></td>
+      <td align="left"><input type="hidden" name="MAX_FILE_SIZE" value="10000000000"/>
+      </td>
     </tr>
 </table>
 <script>

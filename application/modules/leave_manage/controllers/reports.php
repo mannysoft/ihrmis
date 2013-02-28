@@ -1776,6 +1776,8 @@ class Reports extends MX_Controller
 		$office_name = $this->Office->get_office_name($name['office_id']);
 		
 		
+		//var_dump($office_name);exit;
+		
 		$this->load->library('fpdf');
 		
 		define('FPDF_FONTPATH',$this->config->item('fonts_path'));
@@ -1784,6 +1786,12 @@ class Reports extends MX_Controller
 		
 		// initiate FPDI   
 		$pdf = new FPDI('P', 'mm', 'A4');
+		
+		if ( $lgu_code == 'bataraza' )
+		{
+			//$pdf = new FPDI('P', 'mm', 'Letter');
+		}
+		
 		
 		// add a page
 		$pdf->AddPage();
@@ -1819,12 +1827,13 @@ class Reports extends MX_Controller
 		// go to 25 X (indent)
 		$pdf->SetX(25);
 		
-		$this->Office->fields = array('office_code');
+		$this->Office->fields = array('office_code', 'office_head', 'position');
 		
 		$office = $this->Office->get_office_info($name['office_id']);
 		
 		// write office
-		$pdf->Write(0, $office['office_code']);
+		//$pdf->Write(0, $office['office_code']);
+		$pdf->Write(0, $office_name);
 		
 		//lname
 		$pdf->SetX(90);
@@ -1948,6 +1957,17 @@ class Reports extends MX_Controller
 		$pdf->SetX(60);
 		$pdf->Write(0, $date_leave);
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		$last_earn = $this->Leave_card->get_last_earn($rows['employee_id']);
 		//$last_earn = date('F d, Y', strtotime($last_earn));
 		
@@ -2052,6 +2072,38 @@ class Reports extends MX_Controller
 		$pdf->SetXY(35,211);
 		$pdf->SetFont('Arial','I',11);
 		$pdf->Cell(65,5,$statement_certified_position,'',0,'C',1);
+		
+		
+		if ( $lgu_code == 'bataraza' )
+		{
+			// Change authority of city mayor
+			$pdf->SetFont('Arial','',11);
+			$pdf->SetXY(74, 235);
+			$pdf->SetFillColor(255, 255, 255);
+			$pdf->Cell(70, 5, 'BY AUTHORITY OF THE MAYOR:','',0,'C',1);
+		}
+		
+		
+		$pdf->SetXY(129, 139);
+		$pdf->Cell(65,5, $name['fname'] . ' ' . $name['mname'] . ' '. $name['lname'],'',0,'C',1);
+		
+		
+		
+		//$pdf->SetXY(129, 200);
+		//$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
+		
+		$pdf->SetXY(129, 206);
+		$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
+		//$pdf->Cell(65,5, $office['position'],'',0,'C',1);
+		//$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
+		
+		$authority_of_mayor = $this->Settings->get_selected_field('authority_of_mayor');
+		
+		$pdf->SetXY(70, 260);
+		$pdf->Cell(65,5, $authority_of_mayor,'',0,'C',1);
+		
+		//$pdf->Write(0, 'hahaha');
+		
 		
 		
 		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately

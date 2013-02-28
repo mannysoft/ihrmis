@@ -138,6 +138,8 @@ class Attendance extends MX_Controller {
 	public $start_date				= 1;
 	
 	public $pdf						= '';
+	
+	public $friday_exempted			= 'no';
 
 	// --------------------------------------------------------------------
 	
@@ -371,6 +373,7 @@ class Attendance extends MX_Controller {
 											'mname', 
 											'lname', 
 											'shift_type', 
+											'friday_exempted', 
 											'office_id',
 											'detailed_office_id',
 											'assistant_dept_head',
@@ -378,6 +381,11 @@ class Attendance extends MX_Controller {
 				
 				
 				$name = $this->Employee->get_employee_info($this->employee_id);
+				
+				$this->friday_exempted = $name['friday_exempted'];
+				
+				//echo $this->friday_exempted;
+				//exit;
 				
 				// Check what type of user is logged
 				// If leave manager
@@ -797,11 +805,19 @@ class Attendance extends MX_Controller {
 						{
 							//$this->am_login = 'Vacation Leave';
 							//$this->am_login = 'Late';
-							$this->am_login = 'Tardy';
-							$this->am_logout= '';
 							
-							// Change font color
-							$this->Helps->font_color_am_login = 200;
+							// Update 2.8.2013
+							// Put Tardy only if not saturday or sunday
+							if ($this->sat_or_sun != 'Saturday' and $this->sat_or_sun != 'Sunday' and $this->is_holiday == FALSE)
+							{
+								$this->am_login = 'Tardy';
+								$this->am_logout= '';
+								
+								// Change font color
+								$this->Helps->font_color_am_login = 200;
+							}
+							
+							
 						}
 						
 						// PM Absent
@@ -2129,6 +2145,15 @@ class Attendance extends MX_Controller {
 		{
 			//*****THIS IS TO CHECK FOR THE LATE********//
 			
+			// Use for muslim added 2.8.2013 3.29pm
+			if ($this->friday_exempted == 'yes' and $this->sat_or_sun == 'Friday')
+			{
+				//$this->time_a = $shift_time['time_a'];
+				$this->time_b = '10:00';
+				$this->time_c = '14:00';
+				//$this->time_d = $shift_time['time_d'];
+			}
+			
 			$this->Helps->employee_id = $this->employee_id; // added 09-07-2011
 				
 			//am login and pm login check if late
@@ -2145,8 +2170,19 @@ class Attendance extends MX_Controller {
 			$this->Tardiness->delete_tardiness($this->employee_id, $this->log_date, $this->Helps->am_login);
 			$this->Tardiness->delete_tardiness($this->employee_id, $this->log_date, $this->Helps->pm_login);
 			
-			//am logout check if undertime
+			//echo $this->time_c;
+			//echo $this->sat_or_sun;
+			
+			//exit;
+			
+			
+			// Am logout check if undertime
 			$undertime = $this->Helps->check_undertime($this->am_logout, $this->time_b, $this->pm_logout, $this->time_d);
+			
+			//$this->time_a = $shift_time['time_a'];
+			//$this->time_b = $shift_time['time_b'];
+			//$this->time_c = $shift_time['time_c'];
+			//$this->time_d = $shift_time['time_d'];
 			
 			$this->Tardiness->delete_tardiness($this->employee_id, $this->log_date, $this->Helps->am_logout);
 			$this->Tardiness->delete_tardiness($this->employee_id, $this->log_date, $this->Helps->pm_logout);
