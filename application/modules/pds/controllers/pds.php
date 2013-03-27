@@ -798,7 +798,13 @@ class Pds extends MX_Controller  {
 		// Training=========================================================
 		$t = new Training();
 		
+		//STR_TO_DATE(date_from, '%M %Y') DESC
+		
 		$t->order_by('date_from', 'DESC');
+		//$t->order_by('STR_TO_DATE(date_from, "%Y-%m-%d")', 'DESC');
+		//$t->order_by("YEAR(date_from)", 'DESC');
+		
+		//var_dump($t);
 		
 		$data['trains'] = $t->get_by_employee_id($employee_id);
 		$data['tra_location_options'] = array(

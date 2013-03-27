@@ -33,7 +33,7 @@
           <td width="14%" align="center" valign="top">TITLE OF SEMINAR/CONFERENCES/WORKSHOP/SHORT COURSES <br />
             (Write in full)</td>
           <td colspan="2" align="center" valign="top" >INCLUSIVE DATES<br />
-            (yyyy-mm-dd)</td>
+            (yyyy-mm-dd)<!--(mm-dd-yyyy)--></td>
           <td width="16%" align="center" valign="top" >NUMBER OF HOURS </td>
           <td width="0%" align="center" valign="top" >CONDUCTED/ SPONSORED BY<br>
             (Write in full)</td>
