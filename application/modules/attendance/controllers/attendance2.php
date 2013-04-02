@@ -939,10 +939,7 @@ class Attendance extends MX_Controller {
 					
 					}
 					
-					//if ($this->log_date == '2013-03-30')
-					//{
-						//var_dump( $this->pm_login);exit;
-					//}
+					
 					
 					//convert the time to 12 hour 
 					
@@ -988,13 +985,7 @@ class Attendance extends MX_Controller {
 						if( ($this->leave_type_id == 0 && $this->pm_login != 'Undertime' && $this->pm_login != 'UT') )
 						{
 							
-							
-							
-							
 							$this->pm_login = $this->Helps->change_format($this->pm_login, 1, $format = '');
-							
-							
-							
 							
 							
 							// add this lines 12.14.2012 8.37am
@@ -1019,13 +1010,6 @@ class Attendance extends MX_Controller {
 						}
 						
 					}
-					
-					//echo 
-					
-					//if ($this->log_date == '2012-03-30')
-					//{
-						//var_dump( $this->pm_login);exit;
-						//}
 					
 					// Reset the notes to blank
 					$notes = '';
@@ -2136,15 +2120,10 @@ class Attendance extends MX_Controller {
 				
 				if ($this->pm_logout != "")
 				{
-					
-					//echo 
 					// If the PM login is between 12:01 to 12:59 then make it 1pm
 					// Do this if not leave
-					if ($this->pm_login > '12:00' and $this->pm_login != 'Official Business' && $this->leave_type_id == 0 )
+					if ($this->pm_login > '12:00' && $this->leave_type_id == 0 )
 					{
-						//echo $this->pm_login;
-						//echo 'yes';exit;
-						
 						$this->pm_login = '13:00';//comment it 09-05-2011 due to leave error if leave is sat or sun
 					}
 				
