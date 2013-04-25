@@ -2,7 +2,7 @@
 /**
  * Integrated Human Resource Management Information System
  *
- * An Open source Application Software use by Government agencies for 
+ * An Open Source Application Software use by Government agencies for  
  * management of employees Attendance, Leave Administration, Payroll, 
  * Personnel Training, Service Records, Performance, Recruitment,
  * Personnel Schedule(Plantilla) and more...
@@ -12,6 +12,7 @@
  * @copyright	Copyright (c) 2008 - 2013, Charliesoft
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
+ * @github	    http://github.com/mannysoft/ihrmis
  * @since		Version 1.0
  * @filesource
  */
@@ -27,7 +28,8 @@
  * @subpackage	Libraries
  * @category	Leave
  * @author		Manny Isles
- * @link		http://charliesoft.net/hrmis/user_guide/libraries/zkemkeeper.html
+ * @link		http://charliesoft.net
+ * @github	    http://github.com/mannysoft/ihrmis/hrmis/user_guide/libraries/zkemkeeper.html
  */
 class Zkemkeeper {
    

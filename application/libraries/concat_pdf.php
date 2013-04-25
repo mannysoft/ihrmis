@@ -11,6 +11,7 @@
  * @copyright	Copyright (c) 2008 - 2012, Charliesoft
  * @license		http://charliesoft.net/hrmis/user_guide/license.html
  * @link		http://charliesoft.net
+ * @github	    http://github.com/mannysoft/ihrmis
  * @since		Version 1.0
  * @filesource
  */
@@ -26,7 +27,8 @@
  * @subpackage	Libraries
  * @category	PDF Utilities
  * @author		Manolito Isles
- * @link		http://charliesoft.net/hrmis/user_guide/libraries/concat_pdf.html
+ * @link		http://charliesoft.net
+ * @github	    http://github.com/mannysoft/ihrmis/hrmis/user_guide/libraries/concat_pdf.html
  */
 require_once('fpdi.php');
 

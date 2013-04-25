@@ -2,7 +2,7 @@
 /**
  * Integrated Human Resource Management Information System
  *
- * An Open source Application Software use by Government agencies for 
+ * An Open Source Application Software use by Government agencies for  
  * management of employees Attendance, Leave Administration, Payroll, 
  * Personnel Training, Service Records, Performance, Recruitment,
  * Personnel Schedule(Plantilla) and more...
@@ -12,6 +12,7 @@
  * @copyright	Copyright (c) 2008 - 2013, Charliesoft
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
+ * @github	    http://github.com/mannysoft/ihrmis
  * @since		Version 1.0
  * @filesource
  */
@@ -28,7 +29,8 @@
  * @subpackage	Models
  * @category	Models
  * @author		Manny Isles
- * @link		http://charliesoft.net/hrmis/user_guide/models/conversion_table.html
+ * @link		http://charliesoft.net
+ * @github	    http://github.com/mannysoft/ihrmis/hrmis/user_guide/models/conversion_table.html
  */
 class Home extends MX_Controller  
 {
@@ -105,6 +107,66 @@ class Home extends MX_Controller
 	function home_page()
 	{
 		
+		//$dsn = 'dbdriver://username:password@hostname/database';
+
+		//$this->load->database($dsn);
+		
+		//$this->db->reconnect();
+		
+		
+		//var_dump($this->db);
+		//exit;
+		
+		// Assign 
+        //$pdo = $this->db->get_connection();
+		
+		
+		//include APPPATH.'config/database.php';
+		
+		//$config = $db['default'];
+		
+		//
+		
+		$config = $this->db; // Get the DB object
+		
+		$pdo = new PDO('mysql:host='.$config->hostname.';dbname='.$config->database, $config->username, $config->password);
+		
+		
+		$drivers = array(
+                'mysql' => '\Illuminate\Database\MySqlConnection',
+                'pgsql' => '\Illuminate\Database\PostgresConnection',
+                'sqlite' => '\Illuminate\Database\SQLiteConnection',
+            );
+			
+		$conn = new $drivers['mysql']($pdo, $config->database, $config->dbprefix);		
+		
+		
+		$resolver = Capsule\Database\Connection::getResolver();
+		$resolver->addConnection('default', $conn);
+		$resolver->setDefaultConnection('default');
+		
+		
+		\Illuminate\Database\Eloquent\Model::setConnectionResolver($resolver);
+		
+		//$this->load->model('eloquent/dtr_mo');
+		var_dump(Dtr_mo::find(21260));
+		//echo $config->dbprefix;
+		
+		//exit;
+		//var_dump($config);
+		/*
+		$conn = Capsule\Database\Connection::make('default', array(
+                'host'     	=> $config->hostname,
+				'database' 	=> $config->database,
+				'username' 	=> $config->username,
+				'password' 	=> $config->password,
+				'collation' => 'utf8_general_ci',
+				'driver'   	=> 'mysql',
+				'prefix'   	=> $config->dbprefix,
+            ), true);
+			
+		*/	
+		
 		//$this->load->library('MPDF52/mpdf');
 				
 		//$this->mpdf->WriteHTML('<p>Hello There hahahaha</p>');
@@ -113,8 +175,11 @@ class Home extends MX_Controller
 		
 		//print_r($dates);
 		
+		//echo Payroll::foo();
 		
+		//$this->load->model('eloquent/AdditionalCompensation');
 		
+		//echo AdditionalCompensation::all();
 		
 		$data = array();
 		
