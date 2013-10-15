@@ -50,6 +50,7 @@ offices.m_columns['dates']={'coltype':'text','style':''};
       <th width="7%" bgcolor="#D6D6D6">Rate per Day</th>
       <th width="8%" bgcolor="#D6D6D6">No. of days with Pay</th>
       <th width="9%" bgcolor="#D6D6D6">Total Amount of Salary</th>
+      <th width="12%" bgcolor="#D6D6D6">Pag-ibig Personal Contribution</th>
       <th width="12%" bgcolor="#D6D6D6">Total Deduction</th>
       <th width="7%" bgcolor="#D6D6D6">Total Amount Due</th>
       <th width="11%" bgcolor="#D6D6D6">&nbsp;</th>
@@ -77,6 +78,8 @@ offices.m_columns['dates']={'coltype':'text','style':''};
         $total_salary = $r->rate_per_day * $j->days;
 		$grand_total_salary += $total_salary;
 		
+		$deduction = $r->pagibig_amount;
+		
 		$total_amount_due = $total_salary - $deduction;
 		$grand_total_amount_due += $total_amount_due;
 		    
@@ -95,6 +98,7 @@ onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px soli
       <td align="right"><?php echo number_format($r->rate_per_day, 2);?></td>
       <td align="right" id="offices.1.<?php echo $i;?>" <?php echo $onclick0;?>><?php echo $j->days?></td>
       <td align="right"><?php echo number_format($total_salary, 2);?></td>
+      <td align="right"><?php echo $r->pagibig_amount;?></td>
       <td align="right"><?php echo $deduction?></td>
       <td align="right"><?php echo number_format($total_amount_due, 2);?></td>
       <td><?php //echo $r->dates;?></td>
@@ -115,11 +119,13 @@ onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px soli
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
+      <td>&nbsp;</td>
     </tr>
     <tr>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td></td>
+      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
@@ -138,6 +144,7 @@ onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px soli
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td align="right"><strong><?php echo number_format($grand_total_salary, 2);?></strong></td>
+      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td align="right"><strong><?php echo number_format($grand_total_amount_due, 2);?></strong></td>
       <td>&nbsp;</td>

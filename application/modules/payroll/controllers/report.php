@@ -1,4 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+use Mannysoft\Decoration\Decoration;
+//use Illuminate\View\View;
+//use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Input;
 /**
  * Integrated Human Resource Management Information System
  *
@@ -292,19 +296,67 @@ class Report extends MX_Controller {
 	
 	function headings($line = '1')
 	{		
+		
+		
 		$data['page_name'] = '<b>Payroll Headings</b>';
 		
 		$data['msg'] = '';
 				
-		$data['rows'] = PayrollHeading::where('line', '=', 1)
-						->orderBy('order')
-						->get();
+		$data['rows'] = PayrollHeading::line(1)->orderBy('order')->get();
 						
-		$data['rows2'] = PayrollHeading::where('line', '=', 2)
-						->orderBy('order')
-						->get();				
+		$data['rows2'] = PayrollHeading::line(2)->orderBy('order')->get();				
 		
 		$data['main_content'] = 'report/headings';
+	
+		$validator = Validator::make($data1 = array('name' => '', 'email' => 'as'), $rules = array('name' => 'email|required|min:30', 'email' => 'email|required'));
+		
+		
+		if ($validator->fails())
+		{
+			// The given data did not pass validation
+			$messages = $validator->messages()->all();
+		
+			foreach ($messages as $message)
+			{
+				//
+				//echo $message;
+			}
+		}
+		
+		//var_dump(class_exists('Input1'));
+		//echo Input1::get('aa');
+		//print_r(get_declared_classes());
+		
+		//\Illuminate\Support\Facades\Input::all();
+		//$a->all();
+		//var_dump($a);
+		//exit;
+		//$v = new View(Illuminate\View\Environment, EngineInterface, $view = '');
+		//return View::make('account.register', $data);
+		//exit;
+		
+		//Decoration::setLineColors();
+		//$p = new Payment;
+		//$p->process();
+
+
+		
+		
+		//Input::get();
+		
+		//https://github.com/laravel/framework/issues/854
+		
+		
+		
+		//var_dump($validator);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		$this->load->view('includes/template', $data);
 	}
@@ -337,8 +389,7 @@ class Report extends MX_Controller {
 			}
 			else
 			{
-				PayrollHeading::where('id', '=', $id)
-						->update($info);
+				PayrollHeading::where('id', '=', $id)->update($info);
 			}
 			
 			redirect(base_url().'payroll/report/headings');
@@ -573,7 +624,7 @@ class Report extends MX_Controller {
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="6">Each person whose name appears on this rolls had rendered services for the time stated</td>
+        <td colspan="6">Each person whose name appears on this roll had rendered services for the time stated</td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -618,8 +669,11 @@ class Report extends MX_Controller {
       </tr>
     </table></td>
   </tr>
+</table>
+
+<table width="100%" border="1">
   <tr>
-    <td><table width="100%" border="0">
+    <td><table width="100%">
       <tr>
         <td width="3%">&nbsp;</td>
         <td width="35%">CERTIFIED: Funds available in the amount of</td>
@@ -681,6 +735,7 @@ class Report extends MX_Controller {
     </table></td>
   </tr>
 </table>
+
 <pagebreak />
 ';
 
@@ -695,6 +750,14 @@ $page2 = '<table width="100%" border="0">
     <td align="right"></td>
     <td>&nbsp;</td>
     <td align="right"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
   </tr>
   <tr>
     <td>'.strtoupper($office_page2).'</td>
@@ -721,14 +784,6 @@ $page2 = '<table width="100%" border="0">
     <td align="right">&nbsp;</td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td align="right">&nbsp;</td>
-  </tr>
-  <tr>
     <td colspan="6">&nbsp;</td>
   </tr>
 </table>
@@ -738,7 +793,7 @@ $page2 = '<table width="100%" border="0">
     <td width="5%" rowspan="3" align="center" valign="middle"><strong>No of Hours</strong></td>
     <td width="19%" rowspan="3" align="center" valign="middle"><strong>No. of Days with Pay</strong></td>
     <td width="15%" rowspan="3" align="center" valign="middle"><strong>Total Amount of Salary</strong></td>
-    <td width="7%" rowspan="3" align="center" valign="middle">&nbsp;</td>
+    <td width="7%" rowspan="3" align="center" valign="middle"><strong>Pag-ibig Personal Contribution</strong></td>
     <td width="10%" rowspan="3" align="center" valign="middle"><strong>Total Deductions</strong></td>
     <td width="13%" rowspan="3" align="center" valign="middle"><strong>Total Amount Due</strong></td>
     <td width="5%" rowspan="3" align="center" valign="middle"><strong>No.</strong></td>
@@ -758,6 +813,7 @@ $page2 = '<table width="100%" border="0">
     $deduction = 0;
   
   $j = new Jo_days();
+  $r = new Rates();
   
   foreach ($rows as $row)
   {
@@ -765,8 +821,12 @@ $page2 = '<table width="100%" border="0">
 		$j->where('period', $period);
 		$j->get();
 		
+		$r->get_by_employee_id($row['employee_id']);
+		
 		$total_salary = $r->rate_per_day * $j->days;
 		$grand_total_salary += $total_salary;
+		
+		$deduction = $r->pagibig_amount;
 		
 		$total_amount_due = $total_salary - $deduction;
 		$grand_total_amount_due += $total_amount_due;
@@ -774,9 +834,9 @@ $page2 = '<table width="100%" border="0">
 	  $page2 .='
 	  <tr>
 		<td></td>
-		<td align="right">'.$j->days.'</td>
+		<td align="center">'.$j->days.'</td>
 		<td align="right">'.number_format($total_salary, 2).'</td>
-		<td>&nbsp;</td>
+		<td>'.$r->pagibig_amount.'</td>
 		<td align="right">'.$deduction.'</td>
 		<td align="right">'.number_format($total_amount_due, 2).'</td>
 		<td>'.$n.'</td>
@@ -885,12 +945,14 @@ $page2 = '<table width="100%" border="0">
       </tr>
     </table></td>
   </tr>
+</table>
+<table width="100%" border="1">
   <tr>
     <td><table width="100%" border="0">
       <tr>
         <td width="3%">&nbsp;</td>
         <td colspan="6">CERTIFIED: Each person whose name appears on the above rolls has been</td>
-        </tr>
+      </tr>
       <tr>
         <td>&nbsp;</td>
         <td colspan="6">paid the amount stated opposite his name after identifying himself</td>
@@ -943,6 +1005,7 @@ $page2 = '<table width="100%" border="0">
     </table></td>
   </tr>
 </table>
+
 ';
 
 		
@@ -968,3 +1031,4 @@ $page2 = '<table width="100%" border="0">
 	}
 
 }	
+

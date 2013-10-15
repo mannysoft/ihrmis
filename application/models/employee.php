@@ -196,6 +196,8 @@ class Employee extends CI_Model {
 			$this->db->where('permanent', $this->employment_type);
 		}
 		
+		$this->db->where('status', 1); // Get only the active employee
+		
 		$q = $this->db->get('employee');
 		
 		$this->num_rows = $q->num_rows();

@@ -263,8 +263,16 @@ class Cos extends MX_Controller {
 			$r->where('id', $this->input->post('rowid'));
 			
 			$r->get();
-						
-			$r->rate_per_day = $this->input->post('new');
+			
+			if ( $this->input->post('colid') == 'rate_per_day' )
+			{
+				$r->rate_per_day = $this->input->post('new');
+			}
+			if ( $this->input->post('colid') == 'pagibig_amount' )
+			{
+				$r->pagibig_amount = $this->input->post('new');
+			}		
+			
 			
 			$r->save();
 						

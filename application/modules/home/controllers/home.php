@@ -1,4 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+
 /**
  * Integrated Human Resource Management Information System
  *
@@ -86,70 +88,29 @@ class Home extends MX_Controller
 	
 	// --------------------------------------------------------------------
 	
-	function index()
-	{
-		
-		$this->is_user_logged($isUserLogged);
-	}
-	
-	// --------------------------------------------------------------------
-	
-	function is_user_logged($isUserLogged = FALSE)
-	{
-		if ($isUserLogged == FALSE)
-		{
-			redirect('login/show_login', 'refresh');
-		}
-	}
-	
-	// --------------------------------------------------------------------
-	
 	function home_page()
 	{
-		
-		//$dsn = 'dbdriver://username:password@hostname/database';
-
-		//$this->load->database($dsn);
-		
-		//$this->db->reconnect();
-		
-		
-		//var_dump($this->db);
-		//exit;
-		
-		// Assign 
-        //$pdo = $this->db->get_connection();
-		
-		
-		//include APPPATH.'config/database.php';
-		
-		//$config = $db['default'];
-		
 		//
 		
-		$config = $this->db; // Get the DB object
-		
-		$pdo = new PDO('mysql:host='.$config->hostname.';dbname='.$config->database, $config->username, $config->password);
+		//MannysoftDate::yes();
 		
 		
-		$drivers = array(
-                'mysql' => '\Illuminate\Database\MySqlConnection',
-                'pgsql' => '\Illuminate\Database\PostgresConnection',
-                'sqlite' => '\Illuminate\Database\SQLiteConnection',
-            );
-			
-		$conn = new $drivers['mysql']($pdo, $config->database, $config->dbprefix);		
+		//$dtr->office_id = 19;
+		//$dtr->validate();
 		
+		//$resolver = new Illuminate\Validation\Validator();
 		
-		$resolver = Capsule\Database\Connection::getResolver();
-		$resolver->addConnection('default', $conn);
-		$resolver->setDefaultConnection('default');
+		//$dtr->save();
 		
+		//var_dump($dtr);
+		//echo $dtr->id;
 		
-		\Illuminate\Database\Eloquent\Model::setConnectionResolver($resolver);
+		//exit;
 		
-		//$this->load->model('eloquent/dtr_mo');
-		var_dump(Dtr_mo::find(21260));
+		//if($dtr->save())
+		//{
+			//echo 'yeah';
+		//}
 		//echo $config->dbprefix;
 		
 		//exit;

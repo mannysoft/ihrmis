@@ -255,37 +255,41 @@ class Manual_Manage extends MX_Controller {
 						'time_out'	  	=> $this->input->post('hour').':'.$this->input->post('minute'). ' '.$this->input->post('am_pm'),
 						'time_in'	 	=> $this->input->post('hour2').':'.$this->input->post('minute2'). ' '.$this->input->post('am_pm2'),
 						'seconds'	  	=> $seconds,
+						'pass_slip_type'=> $this->input->post('pass_slip_type'),
 						'date_acquired'	=> date('Y-m-d')
 			);
 			
 			$this->Office_pass->insert_office_pass($info);
 			
 			// Insert to leave card but not yet active
+			// Modified 10.9.2013 9.55am
+			// If Personal Add to Leave card otherwise dont add
+			if ($this->input->post('pass_slip_type') == 'Personal')
+			{
+				$card_month = $this->Helps->get_month_name($this->input->post('month'));
+				
+				$particulars = 'Pass Slip';
+				
+				$last_day = $this->Helps->get_last_day($this->input->post('month'), $this->input->post('year'));
 			
-			$card_month = $this->Helps->get_month_name($this->input->post('month'));
-			
-			$particulars = 'Pass Slip';
-			
-			$last_day = $this->Helps->get_last_day($this->input->post('month'), $this->input->post('year'));
-		
-			$last_day = $this->input->post('year').'-'.$this->input->post('month').'-'.$last_day;
-			
-			$v_abs = $this->Leave_conversion_table->compute_hour_minute($seconds);
-			
-			$action_take = substr($card_month, 0, 3).'. '.$this->input->post('year').' Pass Slip'; 
-			
-			$pass_slip_date = $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('day');
-			
-			$this->Leave_card->insert_entry(
-											$this->input->post('employee_id'), 
-											$particulars, 
-											$v_abs, 
-											$action_take, 
-											$last_day, 
-											0, 
-											$pass_slip_date
-											);
-			
+				$last_day = $this->input->post('year').'-'.$this->input->post('month').'-'.$last_day;
+				
+				$v_abs = $this->Leave_conversion_table->compute_hour_minute($seconds);
+				
+				$action_take = substr($card_month, 0, 3).'. '.$this->input->post('year').' Pass Slip'; 
+				
+				$pass_slip_date = $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('day');
+				
+				$this->Leave_card->insert_entry(
+												$this->input->post('employee_id'), 
+												$particulars, 
+												$v_abs, 
+												$action_take, 
+												$last_day, 
+												0, 
+												$pass_slip_date
+												);
+			}
 			
 			$data['msg'] =  'Office Pass/ Pass slip set!';
 			

@@ -52,7 +52,7 @@ class Utility extends MX_Controller {
 	function manual_upload_data($file_type = 'xml')
 	{
 		$config['upload_path'] 		= './logs/uploaded/';
-		$config['allowed_types'] 	= 'zip|jpg|png|txt';
+		$config['allowed_types'] 	= 'zip|jpg|png|txt|dat';
 		//$config['allowed_types'] = 'application/zip';
 		$config['overwrite'] 		= TRUE;
 		$config['remove_spaces'] 	= TRUE;
@@ -69,7 +69,7 @@ class Utility extends MX_Controller {
 		{
 			$error = array('error' => $this->upload->display_errors());
 			
-			//print_r( $error);
+			print_r( $error);
 			
 			
 			//$this->load->view('upload_form', $error);
@@ -78,9 +78,9 @@ class Utility extends MX_Controller {
 		{
 			$data = array('upload_data' => $this->upload->data());
 			
-			// Use for uploading text file
+			// Use for uploading text file or dat file from usb
 			// =====================================================
-			if ($data['upload_data']['file_ext'] == '.txt')
+			if ($data['upload_data']['file_ext'] == '.txt' or $data['upload_data']['file_ext'] == '.dat')
 			{
 				set_time_limit(0);
 				
@@ -89,7 +89,6 @@ class Utility extends MX_Controller {
 				//Read the logs file and put to db
 				$TempTXT = 'logs/uploaded/'.$data['upload_data']['file_name'];
 				
-				//print_r($data);
 				if (!file_exists($TempTXT))
 				{
 					$TempTXT = 't4_connect/logs/temp.txt';

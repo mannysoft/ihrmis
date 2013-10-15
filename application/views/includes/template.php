@@ -5,6 +5,10 @@ if ($this->config->item('active_apps') == 'leave_only' )
 {
 	$this->load->view('includes/menu_leave');
 }
+else if ($this->config->item('active_apps') == 'ats_only')
+{
+	$this->load->view('includes/menu_ats');
+}
 else if ($this->config->item('active_apps') == 'hris')
 {
 	$this->load->view('includes/menu_hris');

@@ -115,7 +115,7 @@ class Stand_alone extends CI_Model {
 	 */
 	function get_logs()
 	{
-		//delete dtr temp
+		// Delete blank employee id in dtr temp
 		$this->Dtr_temp->delete_dtr_temp();
 		
 		$rows = $this->Dtr_temp->get_dtr_temp();
@@ -137,7 +137,7 @@ class Stand_alone extends CI_Model {
 			$log_type 		= $row['log_type'];
 			$date_extract 	= $row['date_extract'];
 			
-			// if the date is not the same as the previous date that process
+			// If the date is not the same as the previous date that process
 			if ($old_date != $log_date)
 			{
 				$am_logout_temp = '';

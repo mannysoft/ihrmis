@@ -216,6 +216,10 @@ to
         <td></td>
       </tr>
       <tr>
+        <td align="right"><strong>Type</strong></td>
+        <td><?php echo form_dropdown('pass_slip_type', array('Personal' => 'Personal', 'Official' => 'Official'));?></td>
+      </tr>
+      <tr>
         <td align="right">&nbsp;</td>
         <td><input name="view_dtr" type="submit" class="button" id="view_dtr" onclick="please_wait();" value="Go"/></td>
       </tr>
@@ -227,7 +231,7 @@ to
         <td align="right"></td>
         <td></td>
   </tr>
-    	</table></form>
+</table></form>
 		
 		
 		<div id="div15" style="display:block">
@@ -243,6 +247,7 @@ to
               <th width="8%" bgcolor="#D6D6D6">Time Out</th>
               <th width="7%" bgcolor="#D6D6D6">Time In </th>
               <th width="11%" bgcolor="#D6D6D6">Total</th>
+              <th width="6%" bgcolor="#D6D6D6">Type</th>
               <th width="6%" bgcolor="#D6D6D6">&nbsp;</th>
             </tr>
             <?php 
@@ -293,6 +298,7 @@ to
 		      <td bgcolor=""><?php echo $time_out;?></td>
 		      <td bgcolor=""><?php echo $time_in;?></td>
 		      <td bgcolor=""><?php echo $this->Helps->compute_time($seconds);?></td>
+		      <td bgcolor=""><?php echo $row['pass_slip_type'];?></td>
 		      <td bgcolor=""><a href="<?php echo base_url().'manual_manage/cancel_office_pass/'.$id;?>" class="cancel_office_pass">Cancel</a></td>
 	        </tr>
             <?php
@@ -302,6 +308,7 @@ to
             <tr>
               <td colspan="2">&nbsp;</td>
               <td></td>
+              <td>&nbsp;</td>
               <td>&nbsp;</td>
               <td>&nbsp;</td>
               <td>&nbsp;</td>

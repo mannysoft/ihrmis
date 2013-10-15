@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+use Mannysoft\Date\Date;
 /**
  * Integrated Human Resource Management Information System
  *
@@ -63,9 +64,24 @@ class Ajax extends MX_Controller {
 	
 	// --------------------------------------------------------------------
 	
+	function deduct_undertime($month, $year)
+	{
+		$last_day = $this->Helps->get_last_day($month, $year);
+	
+		$last_day = $year.'-'.$month.'-'.$last_day;
+		
+		$this->Leave_card->set_enabled($last_day, 1);
+		
+		echo '<b>Done!</b>';
+	}
+	
+	// --------------------------------------------------------------------
+	
 	function cancel_deduct_undertime($month, $year)
 	{
 		$last_day = $this->Helps->get_last_day($month, $year);
+		
+		//echo $last_day;
 	
 		$last_day = $year.'-'.$month.'-'.$last_day;
 		
@@ -78,6 +94,8 @@ class Ajax extends MX_Controller {
 	
 	function connect_machine($ip, $com_no = 0, $machine_no = 0, $delete_data = '')
 	{
+		
+		
 		// Change the IP address of t4_connect/logs/ip.txt
 		$this->Stand_alone->change_ip('t4_connect/logs/ip.txt', $ip);
 		
@@ -219,19 +237,6 @@ class Ajax extends MX_Controller {
 									'Download logs from machine', 
 									'');
 		}
-	}
-	
-	// --------------------------------------------------------------------
-	
-	function deduct_undertime($month, $year)
-	{
-		$last_day = $this->Helps->get_last_day($month, $year);
-	
-		$last_day = $year.'-'.$month.'-'.$last_day;
-		
-		$this->Leave_card->set_enabled($last_day, 1);
-		
-		echo '<b>Done!</b>';
 	}
 	
 	// --------------------------------------------------------------------
@@ -641,6 +646,8 @@ class Ajax extends MX_Controller {
 		// monetize, replace dash with underscore
 		if ( $days != '0' and $days != '')
 		{
+			$monetize_vl = $days;
+			
 			// If days is not nomeric because it has a underscore on it
 			if ( ! is_numeric($days))
 			{
@@ -822,10 +829,15 @@ class Ajax extends MX_Controller {
 				
 			}
 			
+			
 			// If monetization is both VL and SL
 			if (isset($monetize_vl) and isset($monetize_sl))
 			{
 				$this->leave->count_leave = $monetize_vl + $monetize_sl;
+			}
+			else
+			{
+				$this->leave->count_leave = $monetize_vl;
 			}
 			
 			echo $this->leave->count_leave.' '.$notes.'<br><br>';
@@ -836,7 +848,7 @@ class Ajax extends MX_Controller {
 		
 		// If date is sat sun or holiday
 		$hidden_sat_sun = ($this->leave->count_leave == 0) ? '1' : '0';
-		
+				
 		echo '<input name="sat_sun" type="hidden" id="sat_sun" value="'.$hidden_sat_sun.'" />';	
 		
 		// Get the max and min dates

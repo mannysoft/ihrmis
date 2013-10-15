@@ -354,6 +354,7 @@ $config['fonts_path'] = "dtr/font/";
 
 */
 $config['active_apps'] = "leave_only";
+$config['active_apps'] = "ats_only";
 $config['active_apps'] = "";
 
 $config['mouseover_linecolor'] = "#FFFF99";

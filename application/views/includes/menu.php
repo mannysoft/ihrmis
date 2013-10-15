@@ -97,11 +97,11 @@ $leave_management = 	array(
 
 // Payroll Module
 $payroll_general_payroll = 	array(
-						$base.'payroll/monthly">'.$image.'Monthly</a>',
+						$base.'payroll/monthly">'.$image.'Monthly Payroll Permanent</a>',
 						$base.'payroll/additional">'.$image.'Additional</a>',
 						$base.'payroll/cos/status">'.$image.'COS Status</a>',
-						$base.'payroll/cos">'.$image.'COS</a>',
-						$base.'payroll/cos/rates">'.$image.'Rate per day</a>',
+						$base.'payroll/cos">'.$image.'COS Payroll</a>',
+						$base.'payroll/cos/rates">'.$image.'JO Rate per day</a>',
 						$base.'payroll/cos/jo">'.$image.'Job Order</a>',
             			);
 						

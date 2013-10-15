@@ -57,7 +57,7 @@ class Migrate extends MX_Controller{
 	
 		$this->load->library('migration');
 				
-		//if ( ! $this->migration->version('052'))
+		//if ( ! $this->migration->version('070'))
 		if ( ! $this->migration->latest())
 		{
 			

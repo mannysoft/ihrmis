@@ -71,6 +71,11 @@ class User_access
 			}
 		}
 		
+		if (($u->group_id == 1 or $u->group_id == 2) )
+		{
+			return TRUE;
+		}
+		
 		$has_access = FALSE;
 		
 		$error = 'You are not allowed to access this section! 

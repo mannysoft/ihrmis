@@ -23,7 +23,7 @@ class Rates extends DataMapper{
 			$this->get();
 			
 			$this->employee_id 	= $row['employee_id'];
-			$this->rate_per_day 	= '';
+			$this->rate_per_day 	= ($this->rate_per_day != '') ? $this->rate_per_day : '';
 			$this->save();
 			
 		}

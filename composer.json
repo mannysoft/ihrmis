@@ -2,9 +2,10 @@
     "minimum-stability": "dev",
 
     "require": {
-        "dhorrigan/capsule": "2.1.*",
-        "illuminate/database": "dev-master"
-        
+        "laravel/framework": "4.1.*",
+	   "mannysoft/decoration": "*",
+	   "mannysoft/date": "*"
+	
     },
     
     "autoload": {
