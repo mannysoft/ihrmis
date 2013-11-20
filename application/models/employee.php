@@ -38,6 +38,7 @@ class Employee extends CI_Model {
 	public $num_rows 			= 0;
 	public $employee_id 		= '';
 	public $office_id 			= 0;
+	public $detailed_office_id	= 0;
 	public $employment_type 	= '';
 	
 	public $per_page 			= '';
@@ -163,6 +164,11 @@ class Employee extends CI_Model {
 		if ($office_id !='')
 		{
 			$this->db->where('office_id', $office_id);
+			
+			if ($this->detailed_office_id != 0)
+			{
+				$this->db->or_where('detailed_office_id', $this->detailed_office_id);
+			}
 			$this->db->order_by('lname');
 		
 			if ( $per_page != '' or $off_set != '' )

@@ -202,7 +202,17 @@ class Attendance extends MX_Controller {
 		}
 		// end add
 		
+		//date_default_timezone_set('Asia/Manila');
+		
+		//if( ! ini_get('date.timezone') )
+		//{
+		  // echo 'hehe';
+		  // date_default_timezone_set('GMT');
+		//}
+		
 		$data['date'] 						= date("Y-m-d");
+		
+		//echo date("Y-m-d H:i A");
 		$data['date2'] 						= date("Y-m-d");
 		
 		// View DTR
@@ -1363,7 +1373,7 @@ class Attendance extends MX_Controller {
 					}
 					
 					// We need to work out for this as exception
-					if ( $this->employee_id == '61')
+					if ( $this->employee_id === '61')
 					{
 						$office['office_head'] 	= 'ANTONIO L. UY, JR. M.D.';
 						$office['position'] 	= 'Vice Governor';
@@ -1649,7 +1659,7 @@ class Attendance extends MX_Controller {
 		
 		
 		
-		//Use for office listbox
+		// Use for office listbox
 		$data['options'] = $this->options->office_options(TRUE);
 		
 		

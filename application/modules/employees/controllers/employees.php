@@ -39,7 +39,7 @@ class Employees extends MX_Controller  {
 	function __construct()
     {
         parent::__construct();
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 		
 		$this->load->model('options');
 		
@@ -100,6 +100,9 @@ class Employees extends MX_Controller  {
 		//http://localhost/hris/user_guide/libraries/uri.html
 		
 		$this->mi_pagination->initialize($config);
+		
+		// Added Oct 25 2013
+		$this->Employee->detailed_office_id = $office_id;
 		
 		$this->Employee->fields = array(
 									'id',

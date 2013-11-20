@@ -103,6 +103,8 @@ class Users extends MX_Controller  {
 	 */
 	function save($id = '')
 	{
+		//var_dump(Input::file('group_id'));
+		
 		$data['page_name'] = '<b>Add User</b>';
 		
 		if ($id != '')

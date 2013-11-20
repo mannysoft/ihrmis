@@ -91,7 +91,12 @@ class Home extends MX_Controller
 	function home_page()
 	{
 		//
+		//$a = new Input();
+		var_dump(Input::get('a'));
+		//Input::all();
+		$input = Illuminate\Http\Request::createFromGlobals();
 		
+		var_dump($input->get('group_id'));
 		//MannysoftDate::yes();
 		
 		

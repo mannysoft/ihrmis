@@ -1191,6 +1191,27 @@ $('.click').click(function(){
   </tr>
   <tr>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">Final Approval of Leave Application</td>
+    <td><input name="final_approval_leave_application" type="text" id="final_approval_leave_application" value="<?php echo $settings['final_approval_leave_application'];?>" size="30" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input name="final_approval_leave_application_designation" type="text" id="final_approval_leave_application_designation" value="<?php echo $settings['final_approval_leave_application_designation'];?>" size="30" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
     <td><input type="submit" name="button4" id="button4" value="Save" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

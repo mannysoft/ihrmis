@@ -829,21 +829,24 @@ class Ajax extends MX_Controller {
 				
 			}
 			
-			
-			// If monetization is both VL and SL
-			if (isset($monetize_vl) and isset($monetize_sl))
+			if ($this->leave->leave_type_id == 9)
 			{
-				$this->leave->count_leave = $monetize_vl + $monetize_sl;
-			}
-			else
-			{
-				$this->leave->count_leave = $monetize_vl;
+				// If monetization is both VL and SL
+				if (isset($monetize_vl) and isset($monetize_sl))
+				{
+					$this->leave->count_leave = $monetize_vl + $monetize_sl;
+				}
+				else
+				{
+					$this->leave->count_leave = $monetize_vl;
+				}
 			}
 			
 			echo $this->leave->count_leave.' '.$notes.'<br><br>';
 			
 			
 		}
+		
 		
 		
 		// If date is sat sun or holiday

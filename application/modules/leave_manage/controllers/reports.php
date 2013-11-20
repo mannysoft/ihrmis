@@ -1771,6 +1771,14 @@ class Reports extends MX_Controller
 			return;
 		}
 		
+		if ( $lgu_code == 'quezon_province' )
+		{
+	
+			$this->leave_apps_quezon($leave_apps_id);
+			
+			return;
+		}
+		
 		$rows = $this->Leave_apps->get_leave_apps_info($leave_apps_id);
 
 		$name = $this->Employee->get_employee_info($rows['employee_id']);
@@ -1800,7 +1808,7 @@ class Reports extends MX_Controller
 		
 		// set the sourcefile
 		$pdf->setSourceFile('dtr/template/APPLICATION_FOR_LEAVE.pdf');
-		
+				
 		// select the first page
 		$tplIdx = $pdf->importPage(1);
 		
@@ -1836,6 +1844,8 @@ class Reports extends MX_Controller
 		// write office
 		//$pdf->Write(0, $office['office_code']);
 		$pdf->Write(0, $office_name);
+		
+		$pdf->SetFont('Arial','B',12);
 		
 		//lname
 		$pdf->SetX(90);
@@ -2084,7 +2094,7 @@ class Reports extends MX_Controller
 			$pdf->SetFillColor(255, 255, 255);
 			$pdf->Cell(70, 5, 'BY AUTHORITY OF THE MAYOR:','',0,'C',1);
 		}
-		
+				
 		
 		$pdf->SetXY(129, 139);
 		$pdf->Cell(65,5, $name['fname'] . ' ' . $name['mname'] . ' '. $name['lname'],'',0,'C',1);
@@ -2103,11 +2113,7 @@ class Reports extends MX_Controller
 		
 		$pdf->SetXY(70, 260);
 		$pdf->Cell(65,5, $authority_of_mayor,'',0,'C',1);
-		
-		//$pdf->Write(0, 'hahaha');
-		
-		
-		
+				
 		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
 		
 		header('Pragma: public');
@@ -2491,6 +2497,315 @@ class Reports extends MX_Controller
 		
 		$pdf->Output('dtr/reports/leave-apps-'.$rows['employee_id'].'.pdf', 'I'); 
 				
+	}
+	
+	function leave_apps_quezon($leave_apps_id = '')
+	{		
+		$rows = $this->Leave_apps->get_leave_apps_info($leave_apps_id);
+
+		$name = $this->Employee->get_employee_info($rows['employee_id']);
+		
+		$office_name = $this->Office->get_office_name($name['office_id']);
+				
+		$this->load->library('fpdf');
+		
+		define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+						
+		$this->load->library('fpdi');
+		
+		// initiate FPDI   
+		$pdf = new FPDI('P', 'mm', 'A4');
+				
+		// add a page
+		$pdf->AddPage();
+		
+		// set the sourcefile
+		$pdf->setSourceFile('dtr/template/APPLICATION_FOR_LEAVE_QUEZON.pdf');
+		
+		// select the first page
+		$tplIdx = $pdf->importPage(1);
+		
+		// use the page we imported
+		$pdf->useTemplate($tplIdx);
+		
+		// set font, font style, font size.
+		$pdf->SetFont('Arial','B',12);
+		
+		
+		// set initial placement
+		$pdf->SetXY(158,10.5);
+		
+		// line break
+		//$pdf->Ln(40);
+		
+		$pdf->Write(0, 'Tracking no: '.$leave_apps_id);
+		$pdf->Ln(9);
+		$pdf->SetX(158);
+		
+		//ID number
+		$pdf->Write(0, ' '.$rows['employee_id']);
+		
+		$pdf->Ln(14);
+		
+		// go to 25 X (indent)
+		$pdf->SetX(25);
+		
+		$this->Office->fields = array('office_code', 'office_head', 'position');
+		
+		$office = $this->Office->get_office_info($name['office_id']);
+		
+		// write office
+		//$pdf->Write(0, $office['office_code']);
+		//$pdf->Write(0, $office_name);
+		//$pdf->SetXY(158,10.5);
+		$pdf->SetFont('Arial','',7);
+		$pdf->MultiCell(60, 5, $office_name);
+		
+		$pdf->SetFont('Arial','B',12);
+		
+		$pdf->SetXY(90,40);
+		
+		//lname
+		$pdf->SetX(90);
+		$pdf->Write(0, $name['lname']);
+		
+		//fname
+		$pdf->SetX(145);
+		$pdf->Write(0, $name['fname']);
+		
+		//mname
+		$pdf->SetX(192);
+		$pdf->Write(0, $name['mname'][0].'.');
+		
+		$pdf->Ln(13);
+		
+		//date of file
+		$pdf->SetX(25);
+		$pdf->Write(0, date("F d, Y", strtotime($rows['date_encode'])));
+		
+		//position
+		$pdf->SetX(70);
+		$pdf->Write(0, $name['position']);
+		
+		// We need to check what salary grade the office use
+		if ( $office['salary_grade_type'] == 'hospital' )
+		{
+			$this->Salary_grade->salary_grade_type = 'hospital';
+		}
+		
+		//monthly salary
+		$pdf->SetX(170);
+		$pdf->Write(0, 'P '.number_format($this->Salary_grade->get_monthly_salary($name['salary_grade'], $name['step']), 2));
+		
+		
+		$pdf->Ln(14);
+		
+		$leave_name = $this->Leave_type->get_leave_name($rows['leave_type_id']);
+		
+		$leave_type_ids = array(1, 3, 4, 5, 6, 7, 9, 10, 12);
+		
+		if (in_array($rows['leave_type_id'], $leave_type_ids))
+		{
+			$pdf->Ln(2);
+			$pdf->SetX(28);
+			$pdf->Write(0, 'X');
+			
+			$pdf->Ln(18);
+			
+			$pdf->SetX(32);
+			
+			if ( $rows['leave_type_id'] == 1 )
+			{
+				$leave_name = '';
+			}
+			
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Write(0, $leave_name);
+			$pdf->SetFont('Arial','B',12);
+		}
+		
+		$leave_type_ids = array(2, 11, 20);
+		
+		if (in_array($rows['leave_type_id'], $leave_type_ids))
+		{
+			$pdf->Ln(27);
+			$pdf->SetX(28);
+			$pdf->Write(0, 'X');
+			
+			$pdf->Ln(18);
+			
+			$pdf->SetX(32);
+			
+			if ( $rows['leave_type_id'] == 2 )
+			{
+				$leave_name = '';
+			}
+			
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Write(0, $leave_name);
+			$pdf->SetFont('Arial','B',12);
+		}
+				
+		
+		$pdf->Ln(35);
+		
+		$pdf->SetXY(35, 128);
+		
+		$days = 'day';
+		
+		if ($rows['days'] > 1)
+		{
+			$days = 'days';
+		}
+		
+		$pdf->Write(0, $rows['days'].' '.$days);
+		
+		$date_leave = $this->Helps->get_month_name($rows['month']).' '.$rows['multiple'].', '.$rows['year'];
+		
+		if ($rows['multiple5'] != '')
+		{
+			$date_leave .= ' - '.$this->Helps->get_month_name($rows['month5']).' '.$rows['multiple5'].', '.$rows['year5'];
+		}
+		
+		$pdf->Ln(4);
+		$pdf->SetX(60);
+		$pdf->Write(0, $date_leave);
+		
+		
+		
+		
+	
+		$last_earn = $this->Leave_card->get_last_earn($rows['employee_id']);
+		//$last_earn = date('F d, Y', strtotime($last_earn));
+		
+		if ( $last_earn != '')
+		{
+			$last_earn = date('F d, Y', strtotime($last_earn));
+		}
+		else
+		{
+			$last_earn = date('F d, Y');
+		}
+				
+		$credits = $this->Leave_card->get_total_leave_credits($rows['employee_id']);
+
+		
+		$pdf->Ln(39);
+		$pdf->SetX(35);
+		$pdf->Write(0, $last_earn);
+		
+		//balances
+		$pdf->Ln(18);
+		$pdf->SetX(25);
+		//$pdf->Write(0, $vbalance);
+		$pdf->Write(0, $credits['vacation']);
+		
+		$pdf->SetX(54);
+		//$pdf->Write(0, $sbalance);
+		$pdf->Write(0, $credits['sick']);
+		
+		$total_leave_balance = $credits['vacation'] + $credits['sick'];
+		
+		$pdf->SetX(80);
+		$pdf->Write(0, $total_leave_balance);
+		
+		
+		// set font, font style, font size.
+		$pdf->SetFont('Arial','B',12);
+		
+		$pdf->Ln(9);
+		
+		$pdf->SetX(136);
+		
+		//credits
+		//vaation
+		$pdf->Ln(23);
+		
+		$pdf->SetX(52);
+		
+		//$pdf->Write(0, number_format($vacation_leave, 3));
+		
+		//sick
+		//$pdf->Ln(9);
+		
+		$pdf->SetX(108);
+		
+		//$pdf->Write(0, number_format($sick_leave, 3));
+		
+		//total
+		//$pdf->Ln(7);
+		
+		$pdf->SetX(160);
+		
+		//$pdf->Write(0, number_format($vacation_leave + $sick_leave, 3));
+		
+		
+		//date for the day
+		$pdf->Ln(21);
+		
+		$pdf->SetX(67);
+		
+		//day
+		//$pdf->Write(0, date('jS'));
+		
+		$pdf->SetX(104);
+		
+		//$pdf->Write(0, date('F'));
+		
+		//year
+		$pdf->SetX(138);
+		
+		//$pdf->Write(0, date('Y'));
+		
+		//MR or MS. request
+		$pdf->Ln(7);
+		
+		//$pdf->Image('white.png',10,10,-300);
+		
+		$pdf->SetX(32);
+		
+		
+		$statement_certified = $this->Settings->get_selected_field('statement_certified');
+		$statement_certified_position = $this->Settings->get_selected_field('statement_certified_position');
+		
+		$pdf->SetXY(35,205);
+		$pdf->SetFillColor(255, 255, 255); 
+		
+		$pdf->Cell(65,5,strtoupper($statement_certified),'',0,'C',1);
+		$pdf->SetXY(35,211);
+		$pdf->SetFont('Arial','I',11);
+		$pdf->Cell(65,5,$statement_certified_position,'',0,'C',1);
+		
+				$pdf->SetXY(129, 139);
+		$pdf->Cell(65,5, $name['fname'] . ' ' . $name['mname'] . ' '. $name['lname'],'',0,'C',1);
+		
+		
+		
+		//$pdf->SetXY(129, 200);
+		//$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
+		
+		$pdf->SetXY(129, 206);
+		$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
+		//$pdf->Cell(65,5, $office['position'],'',0,'C',1);
+		//$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
+		
+		
+		// For quezon province
+		$final_approval_leave_application = $this->Settings->get_selected_field('final_approval_leave_application');
+		$final_approval_leave_application_designation = $this->Settings->get_selected_field('final_approval_leave_application_designation');
+		
+		$pdf->SetXY(70, 255);
+		$pdf->Cell(65,5, $final_approval_leave_application,'',0,'C',1);
+		$pdf->SetXY(70, 260);
+		$pdf->Cell(65,5, $final_approval_leave_application_designation,'',0,'C',1);
+		
+		//$pdf->Write(0, 'hahaha');
+		
+		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
+		
+		header('Pragma: public');
+		
+		$pdf->Output('dtr/reports/leave-apps-'.$rows['employee_id'].'.pdf', 'I'); 
 	}
 	
 	// --------------------------------------------------------------------
