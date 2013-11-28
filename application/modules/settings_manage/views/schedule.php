@@ -76,7 +76,7 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
 	$i =1;
 	$array = '[';	
 	
-	$minutes_tardy = $this->Settings->get_selected_field('minutes_tardy');
+	$minutes_tardy = Setting::getField('minutes_tardy');
 		
 	foreach($rows as $row)
 	{

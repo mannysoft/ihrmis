@@ -103,17 +103,17 @@ class Groups extends MX_Controller {
 		$data['row'] = $s->get_by_id( $id );
 				
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('description', 'Description', 'required');
 						
 			if ($this->form_validation->run($this) == TRUE)
 			{
-				$s->name 				= $this->input->post('name');
-				$s->description 		= $this->input->post('description');
-				$s->percent_discount 	= $this->input->post('percent_discount');
-				$s->amount_discount 	= $this->input->post('amount_discount');
+				$s->name 				= Input::get('name');
+				$s->description 		= Input::get('description');
+				$s->percent_discount 	= Input::get('percent_discount');
+				$s->amount_discount 	= Input::get('amount_discount');
 				$s->save();
 				
 				redirect(base_url().'groups', 'refresh');

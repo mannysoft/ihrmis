@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
 /**
  * Integrated Human Resource Management Information System
  *
@@ -42,19 +41,7 @@ class Home extends MX_Controller
     {
         parent::__construct();
 		//$this->output->enable_profiler(TRUE);
-		//$this->load->driver('my_driver');
-		//$this->my_driver->my_driver_subclass->cool();
-		
-		//$this->load->spark('datamapper/1.8.2');
-		
-		//$this->load->spark('gas/2.1.1');
-		
-		
-		
-		//$this->ci_alerts->set('error', 'hehe');
-		
-		//echo $this->ci_alerts->display();
-		
+				
 		//$this->load->library('zkemkeeper');
 		
 		//$this->zkemkeeper->connect();
@@ -74,29 +61,68 @@ class Home extends MX_Controller
 		echo $date->getShortDate(); // Jan 31, 2012
 		
 		$a = new Illuminate\Container;
-		
-		var_dump($a);*/
-		
-		
-		
-		
-		
-		
-		
-		
+		*/
     }  
 	
 	// --------------------------------------------------------------------
 	
 	function home_page()
 	{
+		//var_dump(AppointmentIssued::create(array('id' => 25)));
+		//return View::make('home.index', array('test' => '25654'));
+		
+		//https://gist.github.com/mannysoft/7594099
+		
+		// Prepare some test data for our views
+		/*
+		$array = explode('-', date('d-m-Y'));
+		list($d, $m, $y) = $array;
+ 		
+		return View::make('home.index', array('test' => '1213120'));
+		
+		return $this->load->blade('home.index', array('test' => '1213120'));
+		
+		// Basic view with no data
+		return $this->load->blade('welcome_message', array('test' => '1213120'));
+		 
+		// Passing a single value
+		echo $this->load->blade('home.index')->with('day', $d);
+ 
+		// Multiple values with method chaining
+		echo $this->load->blade('home.index')
+			 ->with('day', $d)
+			 ->with('month', $m)
+			 ->with('year', $y);
+ 
+		// Passing an array
+		echo $this->load->blade('home.index', array(
+			'day' => $d,
+			'month' => $m,
+			'year' => $y
+		));
+		*/
+		//$v = new View();
+		//echo $v->make('welcome_message');
+		
+		//echo Viewmake('welcome_message');
+				
+		/*
+		return new Illuminate\Blade\View(
+			new Environment(Loader::make(
+				$this->config->item('views_path', 'blade'),
+				$this->config->item('cache_path', 'blade')
+			)),
+			'home.index', array()
+		);
+		*/
+		
 		//
 		//$a = new Input();
-		var_dump(Input::get('a'));
+		//var_dump(Input::get('a'));
 		//Input::all();
-		$input = Illuminate\Http\Request::createFromGlobals();
+		//$input = Illuminate\Http\Request::createFromGlobals();
 		
-		var_dump($input->get('group_id'));
+		///var_dump($input->get('group_id'));
 		//MannysoftDate::yes();
 		
 		
@@ -185,24 +211,6 @@ class Home extends MX_Controller
 			$data['msg'] .='The earnings of leave credits is always scheduled every last day <br>';
 			$data['msg'] .= 'of every month.<br>';
 			$data['msg'] .= 'We are going to schedule the earning of leave credits on the last friday of this month.<br>';
-			
-			
-			$lastfriday = strtotime( "last Friday", mktime( 0, 0, 0, date( "n" ) + 1, 1 ));
-			
-			$theLastFriday =  date('Y-m-d', $lastfriday);
-			
-			$today = date('Y-m-d');
-			
-			//If the last friday is equal to the date of today
-			if ($theLastFriday == $today)
-			{
-				if ($isLeaveMonthEarned == FALSE)
-				{
-					//echo '<div id="mydiv"><img src="images/progress.gif"> Please wait... Leave earning on progress...</div>';
-					//$Leave->process_leave_earnings($month, $year);
-				}
-			}
-		
 		}
 		
 		
@@ -219,6 +227,8 @@ class Home extends MX_Controller
 		$data['main_content'] = 'home';
 		
 		$this->load->view('includes/template', $data);
+		
+		//return View::make('includes/template', $data);
 	}
 }
 

@@ -100,8 +100,8 @@
 		$format_vacation_leave, $monetary);
 	}
 	
-	$cert_no = $this->Settings->get_selected_field('certification_no');
-	$state_no = $this->Settings->get_selected_field('statement_no');
+	$cert_no = Setting::getField('certification_no');
+	$state_no = Setting::getField('statement_no');
 		
 	?></td>
     <td><img src="<?php echo base_url();?>images/certificate_report_certificate.png" title="Certification of Vacation and Sick Leave Creadits"  style="cursor: pointer;" onclick="openBrWindow('<?php echo base_url();?>leave_manage/reports/leave_certification/<?php echo $total_leave['vacation'].'/'.$total_leave['sick'].'/'.$employee_id;?>','','scrollbars=yes,width=700,height=700')"/>

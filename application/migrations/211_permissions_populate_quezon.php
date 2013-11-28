@@ -4,7 +4,7 @@ class Migration_permissions_populate_quezon extends CI_Migration {
 	
 	function up() 
 	{			
-		$agency = $this->Settings->get_selected_field( 'system_name' );
+		$agency = Setting::getField( 'system_name' );
 		
 		if ($agency == 'Provincial Government of Quezon')
 		{

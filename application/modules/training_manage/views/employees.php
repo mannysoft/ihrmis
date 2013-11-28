@@ -4,12 +4,12 @@
     <td><a href="#" tab="general" class="click">Trainings</a> | <a href="#" tab="users" class="click">Recommended Trainings</a> | <a href="#" tab="employees" class="click">Actual Duties</a><!-- | <a href="#" tab="attendance" class="click">Attendance</a> | <a href="#" tab="leave" class="click">Leave</a> | <a href="#" tab="signatories" class="click">Signatories</a>--></td>
     <td>&nbsp;</td>
     <td>
-    <?php if($this->input->post('active_tab_name_tag') != ''):?>
+    <?php if(Input::get('active_tab_name_tag') != ''):?>
     	<input name="active_tab" type="hidden" id="active_tab" 
-        value="<?php echo $this->input->post('active_tab_name_tag')?>" />
+        value="<?php echo Input::get('active_tab_name_tag')?>" />
     <?php else:?>
          <input name="active_tab" type="hidden" id="active_tab" 
-        value="<?php echo ($this->input->post('active_tabs')) ? $this->input->post('active_tabs'): 'general'?>" />
+        value="<?php echo (Input::get('active_tabs')) ? Input::get('active_tabs'): 'general'?>" />
     <?php endif;?>
    </td>
   </tr>

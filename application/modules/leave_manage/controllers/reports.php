@@ -52,7 +52,7 @@ class Reports extends MX_Controller
 		
 	function leave_certification($vl = 0, $sl = 0, $employee_id = '004001') 
 	{
-		$lgu_code = $this->Settings->get_selected_field('lgu_code'); 
+		$lgu_code = Setting::getField('lgu_code'); 
 		
 		// Marinduque Province
 		if ( $lgu_code == 'marinduque_province' )
@@ -227,10 +227,10 @@ class Reports extends MX_Controller
 		//$pdf->SetX(160);
 		$pdf->Ln(25);
 		
-		$notice_leave_balance 					= $this->Settings->get_selected_field( 'notice_leave_balance' );
-		$notice_leave_balance_position 			= $this->Settings->get_selected_field( 'notice_leave_balance_position' );
-		$notice_leave_balance_noted 			= $this->Settings->get_selected_field( 'notice_leave_balance_noted' );
-		$notice_leave_balance_noted_position 	= $this->Settings->get_selected_field( 'notice_leave_balance_noted_position' );
+		$notice_leave_balance 					= Setting::getField( 'notice_leave_balance' );
+		$notice_leave_balance_position 			= Setting::getField( 'notice_leave_balance_position' );
+		$notice_leave_balance_noted 			= Setting::getField( 'notice_leave_balance_noted' );
+		$notice_leave_balance_noted_position 	= Setting::getField( 'notice_leave_balance_noted_position' );
 		
 		//$pdf->Write(0,$notice_leave_balance);
 		
@@ -375,10 +375,10 @@ class Reports extends MX_Controller
 		$pdf->Ln(15);
 		$pdf->SetX(110);
 
-		$statement_prepared 			= $this->Settings->get_selected_field( 'statement_prepared' );
-		$statement_prepared_position 	= $this->Settings->get_selected_field( 'statement_prepared_position' );
-		$statement_certified 			= $this->Settings->get_selected_field( 'statement_certified' );
-		$statement_certified_position 	= $this->Settings->get_selected_field( 'statement_certified_position' );
+		$statement_prepared 			= Setting::getField( 'statement_prepared' );
+		$statement_prepared_position 	= Setting::getField( 'statement_prepared_position' );
+		$statement_certified 			= Setting::getField( 'statement_certified' );
+		$statement_certified_position 	= Setting::getField( 'statement_certified_position' );
 		
 		//$pdf->Cell(90,5, $statement_prepared,			'0',	0,'C',false); //4th param border
 		$pdf->Cell(90,5, $statement_certified,			'0',	1,'C',false);
@@ -665,10 +665,10 @@ class Reports extends MX_Controller
 		$pdf->Ln(15);
 		$pdf->SetX(110);
 
-		$statement_prepared 			= $this->Settings->get_selected_field( 'statement_prepared' );
-		$statement_prepared_position 	= $this->Settings->get_selected_field( 'statement_prepared_position' );
-		$statement_certified 			= $this->Settings->get_selected_field( 'statement_certified' );
-		$statement_certified_position 	= $this->Settings->get_selected_field( 'statement_certified_position' );
+		$statement_prepared 			= Setting::getField( 'statement_prepared' );
+		$statement_prepared_position 	= Setting::getField( 'statement_prepared_position' );
+		$statement_certified 			= Setting::getField( 'statement_certified' );
+		$statement_certified_position 	= Setting::getField( 'statement_certified_position' );
 		
 		//$pdf->Cell(90,5, $statement_prepared,			'0',	0,'C',false); //4th param border
 		$pdf->Cell(90,5, $statement_certified,			'0',	1,'C',false);
@@ -810,10 +810,10 @@ class Reports extends MX_Controller
 		
 		// Get settings
 		
-		$statement_prepared 			= $this->Settings->get_selected_field( 'statement_prepared' );
-		$statement_prepared_position 	= $this->Settings->get_selected_field( 'statement_prepared_position' );
-		$statement_certified 			= $this->Settings->get_selected_field( 'statement_certified' );
-		$statement_certified_position 	= $this->Settings->get_selected_field( 'statement_certified_position' );
+		$statement_prepared 			= Setting::getField( 'statement_prepared' );
+		$statement_prepared_position 	= Setting::getField( 'statement_prepared_position' );
+		$statement_certified 			= Setting::getField( 'statement_certified' );
+		$statement_certified_position 	= Setting::getField( 'statement_certified_position' );
 		
 		$pdf->SetX(20);
 		
@@ -1271,7 +1271,7 @@ class Reports extends MX_Controller
 		$pdf->Write(0, number_format($vacation_spent_total, 3));
 		
 		$pdf->SetX(115);
-		$pdf->Write(0, number_format(($sick_spent_total == '0.000') ? '' : $sick_spent_total, 3));
+		$pdf->Write(0, number_format(($sick_spent_total == '0.000') ? 0 : $sick_spent_total, 3));
 		
 		$pdf->SetX(135);
 		$pdf->Write(0, number_format($vacation_balance, 3));
@@ -1320,10 +1320,10 @@ class Reports extends MX_Controller
 		
 		// Get settings
 		
-		$statement_prepared 			= $this->Settings->get_selected_field( 'statement_prepared' );
-		$statement_prepared_position 	= $this->Settings->get_selected_field( 'statement_prepared_position' );
-		$statement_certified 			= $this->Settings->get_selected_field( 'statement_certified' );
-		$statement_certified_position 	= $this->Settings->get_selected_field( 'statement_certified_position' );
+		$statement_prepared 			= Setting::getField( 'statement_prepared' );
+		$statement_prepared_position 	= Setting::getField( 'statement_prepared_position' );
+		$statement_certified 			= Setting::getField( 'statement_certified' );
+		$statement_certified_position 	= Setting::getField( 'statement_certified_position' );
 		
 		$pdf->Cell(90,5, $statement_prepared,			'0',	0,'C',false); //4th param border
 		$pdf->Cell(90,5, $statement_certified,			'0',	1,'C',false);
@@ -1354,7 +1354,7 @@ class Reports extends MX_Controller
 		$e->get_by_employee_id($employee_id);
 
 		// View the form
-		if (!$this->input->post('op'))
+		if (!Input::get('op'))
 		{			
 			$data['date_retired'] = $e->date_retired;
 			
@@ -1363,7 +1363,7 @@ class Reports extends MX_Controller
 			
 		}
 		
-		$date_retired = $this->input->post('date_retired');
+		$date_retired = Input::get('date_retired');
 		
 		if ($date_retired == '')
 		{
@@ -1461,24 +1461,24 @@ class Reports extends MX_Controller
 		$pdf->Ln(44);
 		$pdf->SetX(50);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'money_value_signatory_prepared' ), 
+					Setting::getField( 'money_value_signatory_prepared' ), 
 					'', 0, 'C', FALSE);
 		
 		$pdf->SetX(136);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'money_value_signatory_certified' ),
+					Setting::getField( 'money_value_signatory_certified' ),
 					'', 0, 'C', FALSE);
 		
 		
 		$pdf->Ln(6);
 		$pdf->SetX(50);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'money_value_signatory_prepared_position' ),
+					Setting::getField( 'money_value_signatory_prepared_position' ),
 					'', 0, 'C', FALSE);
 		
 		$pdf->SetX(136);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'money_value_signatory_certified_position' ),
+					Setting::getField( 'money_value_signatory_certified_position' ),
 					'', 0, 'C', FALSE);		
 		
 		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
@@ -1559,7 +1559,7 @@ class Reports extends MX_Controller
 		
 		$period = 'January 1, 2012 May 10, 2012';
 		$office_name = $o->office_name;
-		$lgu_name = $this->Settings->get_selected_field( 'lgu_name' );
+		$lgu_name = Setting::getField( 'lgu_name' );
 		
 		//var_dump($date_retired);
 		
@@ -1669,7 +1669,7 @@ class Reports extends MX_Controller
 		$pdf->Ln(35);
 		$pdf->SetX(13);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_prepared' ), 
+					Setting::getField( 'retirement_signatory_prepared' ), 
 					'', 0, 'C', FALSE);
 		// date	
 		$pdf->SetFont('Times','',10);
@@ -1679,19 +1679,19 @@ class Reports extends MX_Controller
 		$pdf->SetFont('Times','B',10);
 		$pdf->SetX(147);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_approved' ),
+					Setting::getField( 'retirement_signatory_approved' ),
 					'', 0, 'C', FALSE);
 		
 		$pdf->SetFont('Times','',10);
 		$pdf->Ln(5);
 		$pdf->SetX(13);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_prepared_position' ),
+					Setting::getField( 'retirement_signatory_prepared_position' ),
 					'', 0, 'C', FALSE);
 		
 		$pdf->SetX(146);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_approved_position' ),
+					Setting::getField( 'retirement_signatory_approved_position' ),
 					'', 0, 'C', FALSE);
 					
 		
@@ -1700,23 +1700,23 @@ class Reports extends MX_Controller
 		$pdf->Ln(25);
 		$pdf->SetX(13);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_certified' ), 
+					Setting::getField( 'retirement_signatory_certified' ), 
 					'', 0, 'C', FALSE);
 		
 
 		$pdf->SetX(88);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_attested' ),
+					Setting::getField( 'retirement_signatory_attested' ),
 					'', 0, 'C', FALSE);
 					
 		$pdf->SetX(147);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_availability' ),
+					Setting::getField( 'retirement_signatory_availability' ),
 					'', 0, 'C', FALSE);
 					
 		$pdf->SetX(223);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_noted' ),
+					Setting::getField( 'retirement_signatory_noted' ),
 					'', 0, 'C', FALSE);	
 					
 					
@@ -1725,23 +1725,23 @@ class Reports extends MX_Controller
 		$pdf->Ln(5);
 		$pdf->SetX(13);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_certified_position' ), 
+					Setting::getField( 'retirement_signatory_certified_position' ), 
 					'', 0, 'C', FALSE);
 		
 
 		$pdf->SetX(88);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_attested_position' ),
+					Setting::getField( 'retirement_signatory_attested_position' ),
 					'', 0, 'C', FALSE);
 					
 		$pdf->SetX(147);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_availability_position' ),
+					Setting::getField( 'retirement_signatory_availability_position' ),
 					'', 0, 'C', FALSE);
 					
 		$pdf->SetX(223);
 		$pdf->Cell(50, 8, 
-					$this->Settings->get_selected_field( 'retirement_signatory_noted_position' ),
+					Setting::getField( 'retirement_signatory_noted_position' ),
 					'', 0, 'C', FALSE);							
 		
 		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
@@ -1760,7 +1760,7 @@ class Reports extends MX_Controller
 	
 	function leave_apps($leave_apps_id = '')
 	{
-		$lgu_code = $this->Settings->get_selected_field('lgu_code'); 
+		$lgu_code = Setting::getField('lgu_code'); 
 		
 		
 		if ( $lgu_code == 'marinduque_province' )
@@ -2074,8 +2074,8 @@ class Reports extends MX_Controller
 		$pdf->SetX(32);
 		
 		
-		$statement_certified = $this->Settings->get_selected_field('statement_certified');
-		$statement_certified_position = $this->Settings->get_selected_field('statement_certified_position');
+		$statement_certified = Setting::getField('statement_certified');
+		$statement_certified_position = Setting::getField('statement_certified_position');
 		
 		$pdf->SetXY(35,205);
 		$pdf->SetFillColor(255, 255, 255); 
@@ -2109,7 +2109,7 @@ class Reports extends MX_Controller
 		//$pdf->Cell(65,5, $office['position'],'',0,'C',1);
 		//$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
 		
-		$authority_of_mayor = $this->Settings->get_selected_field('authority_of_mayor');
+		$authority_of_mayor = Setting::getField('authority_of_mayor');
 		
 		$pdf->SetXY(70, 260);
 		$pdf->Cell(65,5, $authority_of_mayor,'',0,'C',1);
@@ -2480,8 +2480,8 @@ class Reports extends MX_Controller
 		
 		
 		
-		$statement_certified = $this->Settings->get_selected_field('statement_certified');
-		$statement_certified_position = $this->Settings->get_selected_field('statement_certified_position');
+		$statement_certified = Setting::getField('statement_certified');
+		$statement_certified_position = Setting::getField('statement_certified_position');
 		
 		$pdf->SetXY(26,195);
 		$pdf->SetFillColor(255, 255, 255); 
@@ -2765,8 +2765,8 @@ class Reports extends MX_Controller
 		$pdf->SetX(32);
 		
 		
-		$statement_certified = $this->Settings->get_selected_field('statement_certified');
-		$statement_certified_position = $this->Settings->get_selected_field('statement_certified_position');
+		$statement_certified = Setting::getField('statement_certified');
+		$statement_certified_position = Setting::getField('statement_certified_position');
 		
 		$pdf->SetXY(35,205);
 		$pdf->SetFillColor(255, 255, 255); 
@@ -2791,8 +2791,8 @@ class Reports extends MX_Controller
 		
 		
 		// For quezon province
-		$final_approval_leave_application = $this->Settings->get_selected_field('final_approval_leave_application');
-		$final_approval_leave_application_designation = $this->Settings->get_selected_field('final_approval_leave_application_designation');
+		$final_approval_leave_application = Setting::getField('final_approval_leave_application');
+		$final_approval_leave_application_designation = Setting::getField('final_approval_leave_application_designation');
 		
 		$pdf->SetXY(70, 255);
 		$pdf->Cell(65,5, $final_approval_leave_application,'',0,'C',1);
@@ -3007,8 +3007,8 @@ class Reports extends MX_Controller
 		
 		
 		// Statement of CTO signatory
-		$statement_certified 			= $this->Settings->get_selected_field( 'cto_certification' );
-		$statement_certified_position 	= $this->Settings->get_selected_field( 'cto_certification_position' );
+		$statement_certified 			= Setting::getField( 'cto_certification' );
+		$statement_certified_position 	= Setting::getField( 'cto_certification_position' );
 		
 		$pdf->Ln(5);
 		$pdf->SetX(22);

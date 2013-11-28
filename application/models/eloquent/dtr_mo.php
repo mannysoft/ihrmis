@@ -30,39 +30,3 @@ class Dtr_mo extends BaseModel {
 	}
 	
 }
-
-
-class BaseModel extends Eloquent{
-	
-	public $errors;
-	
-	
-	public static function boot()
-	{		
-		parent::boot();	
-		
-		
-		//self::validate();
-		
-		static::saving(function($dtr)
-		{
-			
-			
-			return $dtr->validate();	
-		});
-	}
-		
-	public function validate()
-	{
-		//echo 'validate';
-		
-		$validation = new Illuminate\Validation\Validator($this->attributes, static::$rules);
-		
-		if($validation->passes()) return true;
-		
-		//$this->errors = $validation->messages();
-		$this->errors = $validation->messages()->all();
-		return false;
-	}
-
-}

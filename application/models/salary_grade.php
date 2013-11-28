@@ -49,7 +49,7 @@ class Salary_grade extends CI_Model {
 		parent::__construct();
 		
 		// assign the default salary grade
-		$this->year = $this->Settings->get_selected_field( 'default_salary_grade_year' );
+		$this->year = Setting::getField( 'default_salary_grade_year' );
 	}
 	
 	// --------------------------------------------------------------------

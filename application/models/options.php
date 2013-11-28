@@ -178,7 +178,7 @@ class Options extends CI_Model {
 		// add Undertime in type of leave
 		// for laguna use
 		
-		$lgu_code = $this->Settings->get_selected_field('lgu_code'); 
+		$lgu_code = Setting::getField('lgu_code'); 
 		
 		// Laguna Province
 		if ( $lgu_code == 'laguna_province' )

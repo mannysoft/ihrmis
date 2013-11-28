@@ -164,29 +164,29 @@ class Attendance extends MX_Controller {
 		
 		$data['focus_field']		= '';
 		
-		$dtr2 = $this->input->post('dtr2');
+		$dtr2 = Input::get('dtr2');
 		
 		// If view DTR
 		if ($dtr2)
 		{
-			$office_id 						= $this->input->post('office_id');
-			$employee_id 					= $this->input->post('employee_id');
+			$office_id 						= Input::get('office_id');
+			$employee_id 					= Input::get('employee_id');
 			
-			$date 							= $this->input->post('date'); 
-			$date2   						= $this->input->post('date2'); 
+			$date 							= Input::get('date'); 
+			$date2   						= Input::get('date2'); 
 			
 			
 			// Use to view dtr
-			$_GET['office_id']	 			= $this->input->post('office_id');
-			$_GET['employee_id'] 			= $this->input->post('employee_id');
-			$_GET['date']					= $this->input->post('date');
-			$_GET['date2']					= $this->input->post('date2');
+			$_GET['office_id']	 			= Input::get('office_id');
+			$_GET['employee_id'] 			= Input::get('employee_id');
+			$_GET['date']					= Input::get('date');
+			$_GET['date2']					= Input::get('date2');
 			$_GET['from_view_attendance']	= TRUE;
 			
 			// Generate the DTR
 			$this->dtr();
 			
-			$office_id 						= $this->input->post('office_id');// added 2011-02-14
+			$office_id 						= Input::get('office_id');// added 2011-02-14
 			?>
 			<script src="<?php echo base_url();?>js/function.js"></script>
 			<script>openBrWindow('<?php echo base_url()."dtr/archives/".$office_id.".pdf";?>','','scrollbars=yes,width=800,height=700')</script>
@@ -208,20 +208,20 @@ class Attendance extends MX_Controller {
 		$data['date2'] 						= date("Y-m-d");
 		
 		// View DTR
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
-			$double_incomplete 				= $this->input->post('double_incomplete');
+			$double_incomplete 				= Input::get('double_incomplete');
 			
-			$this_only 						= $this->input->post('this_only');
+			$this_only 						= Input::get('this_only');
 			
-			$data['selected'] 				= $this->input->post('office_id');
+			$data['selected'] 				= Input::get('office_id');
 			
 			if ($this_only)
 			{
-				$_POST['date2'] 			= $this->input->post('date');
+				$_POST['date2'] 			= Input::get('date');
 			}
 			
-			if($this->input->post('employee_id') == 'Employee ID')
+			if(Input::get('employee_id') == 'Employee ID')
 			{
 				$_POST['employee_id'] 		= '';
 			}
@@ -232,14 +232,14 @@ class Attendance extends MX_Controller {
 			}
 			
 			$data['rows'] = $this->Dtr->get_office_dtr(
-										 $this->input->post('office_id'), 
-										 $this->input->post('date'), 
-										 $this->input->post('date2'), 
-										 $this->input->post('employee_id')
+										 Input::get('office_id'), 
+										 Input::get('date'), 
+										 Input::get('date2'), 
+										 Input::get('employee_id')
 										 );
 		
-			$data['date'] = $this->input->post('date');
-			$data['date2'] = $this->input->post('date2');
+			$data['date'] = Input::get('date');
+			$data['date2'] = Input::get('date2');
 		}
 		else // If view DTR initial
 		{
@@ -292,33 +292,33 @@ class Attendance extends MX_Controller {
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
 		$data['year_selected'] 		= date('Y');
 		
-		$show_employee_number_dtr = $this->Settings->get_selected_field('show_employee_number_dtr');
+		$show_employee_number_dtr = Setting::getField('show_employee_number_dtr');
 		
 		
 		//If ($op == 1) ================== START ==========================
-		if ($this->input->post('op') == 1)
+		if (Input::get('op') == 1)
 		{
 			
-			$data['month_selected'] 	= $this->input->post('month');
+			$data['month_selected'] 	= Input::get('month');
 		
-			$data['days_selected'] 		= $this->input->post('period_to');
+			$data['days_selected'] 		= Input::get('period_to');
 		
-			$data['year_selected'] 		= $this->input->post('year');
+			$data['year_selected'] 		= Input::get('year');
 			
 			// Get the data that need to process
 	
-			$this->employee_array[] = $this->input->post('employee_id');
+			$this->employee_array[] = Input::get('employee_id');
 			
-			$this->employee_array[] = $this->input->post('hidden_employee_id');
+			$this->employee_array[] = Input::get('hidden_employee_id');
 			
 			
 			// Dont compute dates 
-			$this->dont_compute_dates = $this->Settings->get_selected_field('dont_compute');
+			$this->dont_compute_dates = Setting::getField('dont_compute');
 			
-			$this->month		= $this->input->post('month');
-			$this->year			= $this->input->post('year');
-			$this->period_from 	= $this->input->post('period_from');
-			$this->period_to   	= $this->input->post('period_to');
+			$this->month		= Input::get('month');
+			$this->year			= Input::get('year');
+			$this->period_from 	= Input::get('period_from');
+			$this->period_to   	= Input::get('period_to');
 			
 			
 			//$start_date = '1';
@@ -326,16 +326,16 @@ class Attendance extends MX_Controller {
 			// If the $this->period_from is not 1
 			if ($this->period_from != '1')
 			{
-				$this->start_date = $this->input->post('period_from'); // Start of viewing DTR
+				$this->start_date = Input::get('period_from'); // Start of viewing DTR
 				
 				$this->period_from = '1'; // We will still use the first day
 			}
 			
 			// If the Multiple employee checkbox is checked
-			if($this->input->post('multi_employee'))
+			if(Input::get('multi_employee'))
 			{
 				// Array of employee from checkboxes
-				$employees	 = $this->input->post('employee');
+				$employees	 = Input::get('employee');
 				
 				if(is_array($employees))
 				{
@@ -535,7 +535,7 @@ class Attendance extends MX_Controller {
 					// Check if the day is holiday
 					$this->is_holiday = $this->Holiday->is_holiday($this->log_date);
 					
-					$allow_forty_hours = $this->Settings->get_selected_field('allow_forty_hours');
+					$allow_forty_hours = Setting::getField('allow_forty_hours');
 					
 					// If the $this->period_from is not 1 something like
 					// June 16-30 2012
@@ -1152,7 +1152,7 @@ class Attendance extends MX_Controller {
 				//$this->pdf->Write(0, ucwords(($this->Helps->compute_time($this->number_of_hours_work))));
 				
 				// LGU CODE
-				$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+				$lgu_code = Setting::getField( 'lgu_code' );
 				
 				
 				if ( $lgu_code == 'marinduque_province' )
@@ -1245,7 +1245,7 @@ class Attendance extends MX_Controller {
 				//overtime
 				$this->overtime = $this->Helps->compute_time($this->overtime);
 				
-				$print_overtime_in_dtr = $this->Settings->get_selected_field( 'print_overtime_in_dtr' );
+				$print_overtime_in_dtr = Setting::getField( 'print_overtime_in_dtr' );
 				
 				if ( $print_overtime_in_dtr == 1)
 				{
@@ -1302,7 +1302,7 @@ class Attendance extends MX_Controller {
 				}
 				
 				// Add office head and designation
-				$print_office_head_in_dtr = $this->Settings->get_selected_field( 'print_office_head_in_dtr' );
+				$print_office_head_in_dtr = Setting::getField( 'print_office_head_in_dtr' );
 				
 				if ( $print_office_head_in_dtr == 1)
 				{
@@ -1505,7 +1505,7 @@ class Attendance extends MX_Controller {
 		
 		$data['page'] = $this->uri->segment(3);
 				
-		$op = $this->input->post('op');
+		$op = Input::get('op');
 				
 		$data['main_content'] = 'schedules';
 		
@@ -1542,24 +1542,24 @@ class Attendance extends MX_Controller {
 		
 		$data['sched'] = $s->get_by_id( $id );
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			$all_time = array(
-					'am_in_hour' 	=> $this->input->post('am_in_hour'),
-					'am_in_min' 	=> $this->input->post('am_in_min'),
+					'am_in_hour' 	=> Input::get('am_in_hour'),
+					'am_in_min' 	=> Input::get('am_in_min'),
 					
-					'am_out_hour' 	=> $this->input->post('am_out_hour'),
-					'am_out_min' 	=> $this->input->post('am_out_min'),
+					'am_out_hour' 	=> Input::get('am_out_hour'),
+					'am_out_min' 	=> Input::get('am_out_min'),
 					
-					'pm_in_hour' 	=> $this->input->post('pm_in_hour'),
-					'pm_in_min' 	=> $this->input->post('pm_in_min'),
+					'pm_in_hour' 	=> Input::get('pm_in_hour'),
+					'pm_in_min' 	=> Input::get('pm_in_min'),
 					
-					'pm_out_hour' 	=> $this->input->post('pm_out_hour'),
-					'pm_out_min' 	=> $this->input->post('pm_out_min')
+					'pm_out_hour' 	=> Input::get('pm_out_hour'),
+					'pm_out_min' 	=> Input::get('pm_out_min')
 					);
 					
 			
-			$s->name 		= $this->input->post('name');
+			$s->name 		= Input::get('name');
 			$s->times 		= serialize($all_time);	
 			
 			$s->save();
@@ -1608,7 +1608,7 @@ class Attendance extends MX_Controller {
 		
 		$data['page'] = $this->uri->segment(3);
 						
-		$op = $this->input->post('op');
+		$op = Input::get('op');
 				
 		$data['main_content'] = 'employee_schedule';
 		
@@ -1660,7 +1660,7 @@ class Attendance extends MX_Controller {
 		
 		$db_employees = unserialize($sd->employees);
 		
-		if( ! $this->input->post('op'))
+		if( ! Input::get('op'))
 		{
 			// if the database has value on it add the value from database to session
 			if (is_array($db_employees))
@@ -1676,26 +1676,26 @@ class Attendance extends MX_Controller {
 			}
 		}
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			$employees = $this->session->userdata('employees');
 			
-			$month_year = $this->input->post('year').'-'.$this->input->post('month');
+			$month_year = Input::get('year').'-'.Input::get('month');
 			
-			$between_from = $month_year.'-'.$this->input->post('period_from');
-			$between_to   = $month_year.'-'.$this->input->post('period_to');
+			$between_from = $month_year.'-'.Input::get('period_from');
+			$between_to   = $month_year.'-'.Input::get('period_to');
 			
 			$dates = array(
-						'year' 			=> $this->input->post('year'),
-						'period_from' 	=> $this->input->post('period_from'),
-						'period_to'		=> $this->input->post('period_to'),
-						'month' 		=> $this->input->post('month')
+						'year' 			=> Input::get('year'),
+						'period_from' 	=> Input::get('period_from'),
+						'period_to'		=> Input::get('period_to'),
+						'month' 		=> Input::get('month')
 						); 
 			
 			$days = $this->Helps->get_days_in_between($between_from, $between_to);
 			
 			
-			if( ! $this->input->post('op'))
+			if( ! Input::get('op'))
 			{
 				if (is_array($db_employees))
 				{
@@ -1705,11 +1705,11 @@ class Attendance extends MX_Controller {
 			
 			$employees = array_unique($employees);
 			
-			$sd->name 			= $this->input->post('name');
+			$sd->name 			= Input::get('name');
 			$sd->employees 		= serialize($employees);
 			$sd->dates 			= serialize($dates);	
-			$sd->schedule_id 	= $this->input->post('schedule_id');
-			$sd->office_id 		= $this->input->post('office_id');
+			$sd->schedule_id 	= Input::get('schedule_id');
+			$sd->office_id 		= Input::get('office_id');
 			
 			$sd->save();
 			
@@ -1718,7 +1718,7 @@ class Attendance extends MX_Controller {
 			// Get the schedule
 			$s = new Schedule();
 			
-			$s->get_by_id($this->input->post('schedule_id'));
+			$s->get_by_id(Input::get('schedule_id'));
 			
 			$times = unserialize($s->times);
 			
@@ -1932,11 +1932,11 @@ class Attendance extends MX_Controller {
 		
 		if(isset($_POST['op']) )
 		{
-			$data['month'] 	= $this->input->post('month');
-			$data['year'] 	= $this->input->post('year');
+			$data['month'] 	= Input::get('month');
+			$data['year'] 	= Input::get('year');
 			
-			$data['month_selected'] = $this->input->post('month');
-			$data['year_selected'] 	= $this->input->post('year');
+			$data['month_selected'] = Input::get('month');
+			$data['year_selected'] 	= Input::get('year');
 		}
 
 		$data['rows'] = $this->Employee->get_jo_contract();
@@ -1993,13 +1993,13 @@ class Attendance extends MX_Controller {
 		
 		// ============================
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$data['month_selected'] 	= $this->input->post('month');
-			$data['year_selected'] 		= $this->input->post('year');
+			$data['month_selected'] 	= Input::get('month');
+			$data['year_selected'] 		= Input::get('year');
 			$data['rows'] = $this->Dtr->double_entries(
-										$this->input->post('month'), 
-										$this->input->post('year'));	
+										Input::get('month'), 
+										Input::get('year'));	
 		}
 		
 		
@@ -2969,7 +2969,7 @@ class Attendance extends MX_Controller {
 		
 		$active = 0;
 		
-		$tardy_autodeduct = $this->Settings->get_selected_field('tardy_autodeduct');
+		$tardy_autodeduct = Setting::getField('tardy_autodeduct');
 		
 		if ($tardy_autodeduct == 'yes')
 		{
@@ -3019,14 +3019,14 @@ class Attendance extends MX_Controller {
 													$data['date']
 													);
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$data['date'] 			= $this->input->post('date2');
+			$data['date'] 			= Input::get('date2');
 			
-			$data['selected'] 		= $this->input->post('office_id');
+			$data['selected'] 		= Input::get('office_id');
 			
 			$data['rows'] 			= $this->Dtr->get_absences(
-													$this->input->post('office_id'), 
+													Input::get('office_id'), 
 													$data['date']
 													);
 		}
@@ -3057,13 +3057,13 @@ class Attendance extends MX_Controller {
 											$is_log_pm
 											);
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$data['date'] 		= $this->input->post('date2');
+			$data['date'] 		= Input::get('date2');
 			
-			$data['selected'] 	= $this->input->post('office_id');
+			$data['selected'] 	= Input::get('office_id');
 			
-			$data['rows'] = $this->Dtr->get_late_employee($this->input->post('office_id'), $data['date'], $is_log_pm);
+			$data['rows'] = $this->Dtr->get_late_employee(Input::get('office_id'), $data['date'], $is_log_pm);
 		}
 				
 		$data['main_content'] = 'view_late';
@@ -3090,13 +3090,13 @@ class Attendance extends MX_Controller {
 		
 		$data['rows'] 				= $this->Dtr->get_ob_employee($this->session->userdata('office_id'), $data['date']);
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$data['date'] 			= $this->input->post('date2');
+			$data['date'] 			= Input::get('date2');
 			
-			$data['selected'] 		= $this->input->post('office_id');
+			$data['selected'] 		= Input::get('office_id');
 			
-			$data['rows'] 			= $this->Dtr->get_ob_employee($this->input->post('office_id'), $data['date']);
+			$data['rows'] 			= $this->Dtr->get_ob_employee(Input::get('office_id'), $data['date']);
 		}
 		
 		$data['main_content'] = 'view_ob';
@@ -3134,23 +3134,23 @@ class Attendance extends MX_Controller {
 		
 		if(isset($_POST['month']))
 		{
-			$data['month1'] 		= $this->input->post('month');
-			$data['year1'] 			= $this->input->post('year');
+			$data['month1'] 		= Input::get('month');
+			$data['year1'] 			= Input::get('year');
 			
 			$data['rows']			= $this->Tardiness->get_employees_with_tardy(
 																	$data['month1'], 
 																	$data['year1'], 
-																	$this->input->post('office_id')
+																	Input::get('office_id')
 																	);
 																		
-			$data['selected'] 		= $this->input->post('office_id');	
+			$data['selected'] 		= Input::get('office_id');	
 			
-			$data['month_selected'] = $this->input->post('month');	
+			$data['month_selected'] = Input::get('month');	
 			
-			$data['year_selected'] 	= $this->input->post('year');								
+			$data['year_selected'] 	= Input::get('year');								
 		}
 		
-		if ($this->input->post('print') || $this->input->post('print2'))
+		if (Input::get('print') || Input::get('print2'))
 		{
 			// Create the report
 			modules::run("reports/report_tardiness");// Although there is no parameter for the module call
@@ -3202,7 +3202,7 @@ class Attendance extends MX_Controller {
 		$data['mo5'] = '05';
 		$data['mo6'] = '06';
 		
-		$all_tardiness = $this->input->post('all_tardiness');
+		$all_tardiness = Input::get('all_tardiness');
 		
 		if ($all_tardiness)
 		{
@@ -3211,9 +3211,9 @@ class Attendance extends MX_Controller {
 		
 		$data['office_id'] = $this->session->userdata('office_id');
 		
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
-			$data['year_selected'] 	= $this->input->post('year');
+			$data['year_selected'] 	= Input::get('year');
 			
 			// Just implement to set the selected month dropdown
 			$this->form_validation->set_rules('month1', 'Month');
@@ -3221,12 +3221,12 @@ class Attendance extends MX_Controller {
 			$this->form_validation->run();
 		}
 		
-		if($this->input->post('month1'))
+		if(Input::get('month1'))
 		{
-			$data['month1'] 	= $this->input->post('month1');
-			$data['month2'] 	= $this->input->post('month2');
-			$data['year1'] 		= $this->input->post('year');
-			$data['office_id'] 	= $this->input->post('office_id');
+			$data['month1'] 	= Input::get('month1');
+			$data['month2'] 	= Input::get('month2');
+			$data['year1'] 		= Input::get('year');
+			$data['office_id'] 	= Input::get('office_id');
 			
 			if ($data['month1'] == '01' && $data['month2'] == '06')
 			{
@@ -3327,18 +3327,18 @@ class Attendance extends MX_Controller {
 		}
 
 		// Print memo
-		if ($this->input->post('memo'))
+		if (Input::get('memo'))
 		{
-			$offices = $this->input->post('offices');
+			$offices = Input::get('offices');
 			
-			$year1 = $this->input->post('year');
+			$year1 = Input::get('year');
 			
-			if ($this->input->post('month1') == '01' && $this->input->post('month2') == '06')
+			if (Input::get('month1') == '01' && Input::get('month2') == '06')
 			{
 				$sem = 1;
 			}
 			
-			if ($this->input->post('month1') == '07' && $this->input->post('month2') == '12')
+			if (Input::get('month1') == '07' && Input::get('month2') == '12')
 			{
 				$sem = 2;
 			}
@@ -3362,7 +3362,7 @@ class Attendance extends MX_Controller {
 		}
 		
 		// All offices tardiness
-		if ($this->input->post('print') || $this->input->post('print2'))
+		if (Input::get('print') || Input::get('print2'))
 		{
 			// Create the report
 			modules::run("reports/all_office_tardiness");

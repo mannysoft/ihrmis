@@ -86,11 +86,11 @@ class Expenses extends MX_Controller  {
 		
 		$e = new Budget_expenses_m();
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			if ( $this->input->post('budget_expenditure_id') != 0)
+			if ( Input::get('budget_expenditure_id') != 0)
 			{
-				$e->where('budget_expenditure_id', $this->input->post('budget_expenditure_id'));
+				$e->where('budget_expenditure_id', Input::get('budget_expenditure_id'));
 			}	
 		}
 		
@@ -140,7 +140,7 @@ class Expenses extends MX_Controller  {
 		}
 						
 		//If form submit
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{	
 			$this->form_validation->set_rules('budget_expenditure_id', 'Object of Expenditure', 'required');
 			$this->form_validation->set_rules('date', 'Date', 'required');
@@ -149,16 +149,16 @@ class Expenses extends MX_Controller  {
 			
 			if ($this->form_validation->run($this) == TRUE)
 			{
-				$e->budget_expenditure_id	= $this->input->post('budget_expenditure_id');
-				$e->date					= $this->input->post('date');
-				$e->description 			= $this->input->post('description');
-				$e->amount 					= $this->input->post('amount');
+				$e->budget_expenditure_id	= Input::get('budget_expenditure_id');
+				$e->date					= Input::get('date');
+				$e->description 			= Input::get('description');
+				$e->amount 					= Input::get('amount');
 				
 				$e->save();
 																					 
 				$this->session->set_flashdata('msg', 'Expenses has been saved!');
 						
-				redirect(base_url().'budget/expenses/index/'.$this->input->post('budget_expenditure_id'), 'refresh');		
+				redirect(base_url().'budget/expenses/index/'.Input::get('budget_expenditure_id'), 'refresh');		
 			}
 					
 		}

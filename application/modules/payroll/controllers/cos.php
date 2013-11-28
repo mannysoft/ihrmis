@@ -13,22 +13,22 @@ class Cos extends MX_Controller {
 		
 		$this->load->model('options');
 		
-		$this->office_id = ($this->input->post('office_id')) ? 
-					  		$this->input->post('office_id') :
+		$this->office_id = (Input::get('office_id')) ? 
+					  		Input::get('office_id') :
 					 		$this->session->userdata('office_id');
 							
-		$this->period 	= 	$this->input->post('month').'-'.
-							$this->input->post('period_from').'-'.
-							$this->input->post('period_to').'-'.
-							$this->input->post('year');
+		$this->period 	= 	Input::get('month').'-'.
+							Input::get('period_from').'-'.
+							Input::get('period_to').'-'.
+							Input::get('year');
 						
-		$this->date1 	= 	$this->input->post('year').'-'.
-							$this->input->post('month').'-'.
-							$this->input->post('period_from');
+		$this->date1 	= 	Input::get('year').'-'.
+							Input::get('month').'-'.
+							Input::get('period_from');
 					
-		$this->date2 	= 	$this->input->post('year').'-'.
-							$this->input->post('month').'-'.
-							$this->input->post('period_to');			
+		$this->date2 	= 	Input::get('year').'-'.
+							Input::get('month').'-'.
+							Input::get('period_to');			
 		
 		$this->count_working_days = $this->Holiday->count_working_days($this->date1, $this->date2);
 		
@@ -71,7 +71,7 @@ class Cos extends MX_Controller {
 		
 		$data['pop_up_office_id'] = $this->office_id;
 		
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
 			$data['rows'] = $this->Employee->get_employee_list($this->office_id, '');
 			
@@ -118,7 +118,7 @@ class Cos extends MX_Controller {
 		$data['pop_up_office_id'] = $this->office_id;
 		$data['pop_up_period'] = 1;
 		
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
 			$data['rows'] = $this->Employee->get_employee_list($this->office_id, '');
 			
@@ -126,7 +126,7 @@ class Cos extends MX_Controller {
 			
 			$data['count_working_days'] = $this->count_working_days;
 			
-			if ($this->input->post('print'))
+			if (Input::get('print'))
 			{
 				$data['pop_up'] = 1;
 				$data['pop_up_office_id'] 	= $this->office_id;
@@ -194,16 +194,16 @@ class Cos extends MX_Controller {
 		
 			// Months
 		$data['month_options'] 		= $this->options->month_options();
-		$data['month_selected'] 	= ($this->input->post('month')) ? $this->input->post('month') : date('m');
+		$data['month_selected'] 	= (Input::get('month')) ? Input::get('month') : date('m');
 		
 		// Period from
 		$data['days_options'] 		= $this->options->days_options();
 		
-		$data['period_from_selected'] = ($this->input->post('period_from')) ? $this->input->post('period_from') : '01';
+		$data['period_from_selected'] = (Input::get('period_from')) ? Input::get('period_from') : '01';
 		
 		// Period to
 		$data['days_options'] 		= $this->options->days_options();
-		$data['days_selected'] 		= ($this->input->post('period_to')) ? $this->input->post('period_to') : '15';
+		$data['days_selected'] 		= (Input::get('period_to')) ? Input::get('period_to') : '15';
 		
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
 		$data['year_selected'] 		= date('Y');
@@ -227,7 +227,7 @@ class Cos extends MX_Controller {
 		$data['pop_up_office_id'] = $this->office_id;
 		$data['pop_up_period'] = 1;
 		
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
 			$data['rows'] = $this->Employee->get_employee_list($this->office_id, '');
 						
@@ -235,7 +235,7 @@ class Cos extends MX_Controller {
 			
 			$data['count_working_days'] = $this->count_working_days;		
 			
-			if ($this->input->post('print'))
+			if (Input::get('print'))
 			{
 				$data['pop_up'] = 1;
 				$data['pop_up_office_id'] 	= $this->office_id;
@@ -260,17 +260,17 @@ class Cos extends MX_Controller {
 		{
 			$r = new Rates();
 		
-			$r->where('id', $this->input->post('rowid'));
+			$r->where('id', Input::get('rowid'));
 			
 			$r->get();
 			
-			if ( $this->input->post('colid') == 'rate_per_day' )
+			if ( Input::get('colid') == 'rate_per_day' )
 			{
-				$r->rate_per_day = $this->input->post('new');
+				$r->rate_per_day = Input::get('new');
 			}
-			if ( $this->input->post('colid') == 'pagibig_amount' )
+			if ( Input::get('colid') == 'pagibig_amount' )
 			{
-				$r->pagibig_amount = $this->input->post('new');
+				$r->pagibig_amount = Input::get('new');
 			}		
 			
 			
@@ -283,17 +283,17 @@ class Cos extends MX_Controller {
 		{
 			$j = new Jo_days();
 		
-			$j->where('id', $this->input->post('rowid'));
+			$j->where('id', Input::get('rowid'));
 			
 			$j->get();
 			
-			if ( $this->input->post('colid') == 'hours' )
+			if ( Input::get('colid') == 'hours' )
 			{
-				$j->hours = $this->input->post('new');
+				$j->hours = Input::get('new');
 			}
-			if ( $this->input->post('colid') == 'days' )
+			if ( Input::get('colid') == 'days' )
 			{
-				$j->days = $this->input->post('new');
+				$j->days = Input::get('new');
 			}
 						
 			$j->save();
@@ -305,11 +305,11 @@ class Cos extends MX_Controller {
 		{
 			$c = new Cos_status();
 		
-			$c->where('id', $this->input->post('rowid'));
+			$c->where('id', Input::get('rowid'));
 			
 			$c->get();
 						
-			$c->status = $this->input->post('new');
+			$c->status = Input::get('new');
 			
 			$c->save();
 						

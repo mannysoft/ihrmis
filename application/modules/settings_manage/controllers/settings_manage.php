@@ -59,9 +59,9 @@ class Settings_Manage extends MX_Controller {
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
 		$data['year_selected'] 		= date('Y');
 		
-		if($this->input->post('year'))
+		if(Input::get('year'))
 		{
-			$data['year_selected'] 	= $this->input->post('year');
+			$data['year_selected'] 	= Input::get('year');
 			
 			// Check if the year exists
 			$s = new Salary_grade_m();
@@ -77,8 +77,8 @@ class Settings_Manage extends MX_Controller {
 					$s = new Salary_grade_m();
 					$s->sg 					= $i;
 					$s->year 				= $data['year_selected'];
-					$s->salary_grade_type 	= ($this->input->post('salary_grade_type')) 
-											? $this->input->post('salary_grade_type') 
+					$s->salary_grade_type 	= (Input::get('salary_grade_type')) 
+											? Input::get('salary_grade_type') 
 											: '';
 					$s->save();
 					
@@ -90,12 +90,12 @@ class Settings_Manage extends MX_Controller {
 		
 		$data['hospital'] = '';
 		
-		if ( $this->Settings->get_selected_field('lgu_code') == 'marinduque_province' )
+		if ( Setting::getField('lgu_code') == 'marinduque_province' )
 		{
 			$data['hospital'] = 'yes';
 		}
 		
-		$data['rows'] = $this->Salary_grade->get_salary_grade($data['year_selected'], $this->input->post('salary_grade_type'));
+		$data['rows'] = $this->Salary_grade->get_salary_grade($data['year_selected'], Input::get('salary_grade_type'));
 		
 		$data['main_content'] = 'salary_grade';
 		
@@ -114,9 +114,9 @@ class Settings_Manage extends MX_Controller {
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
 		$data['year_selected'] 		= date('Y');
 		
-		if($this->input->post('year'))
+		if(Input::get('year'))
 		{
-			$data['year_selected'] 	= $this->input->post('year');
+			$data['year_selected'] 	= Input::get('year');
 			
 			// Check if the year exists
 			$s = new Salary_grade_proposed_m();
@@ -132,8 +132,8 @@ class Settings_Manage extends MX_Controller {
 					$s = new Salary_grade_proposed_m();
 					$s->sg 					= $i;
 					$s->year 				= $data['year_selected'];
-					$s->salary_grade_type 	= ($this->input->post('salary_grade_type')) 
-											? $this->input->post('salary_grade_type') 
+					$s->salary_grade_type 	= (Input::get('salary_grade_type')) 
+											? Input::get('salary_grade_type') 
 											: '';
 					$s->save();
 					
@@ -145,14 +145,14 @@ class Settings_Manage extends MX_Controller {
 		
 		$data['hospital'] = '';
 		
-		if ( $this->Settings->get_selected_field('lgu_code') == 'marinduque_province' )
+		if ( Setting::getField('lgu_code') == 'marinduque_province' )
 		{
 			$data['hospital'] = 'yes';
 		}
 		
 		$s = new Salary_grade_proposed_m();
 		
-		$data['rows'] = $s->get_salary_grade($data['year_selected'], $this->input->post('salary_grade_type'));
+		$data['rows'] = $s->get_salary_grade($data['year_selected'], Input::get('salary_grade_type'));
 		
 		$data['main_content'] = 'salary_grade_proposed';
 		
@@ -186,26 +186,26 @@ class Settings_Manage extends MX_Controller {
 		
 		$data['rows'] 				= $this->Holiday->holiday_list($data['year_selected']);
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			if ($this->input->post('add_date'))
+			if (Input::get('add_date'))
 			{
-				if($this->input->post('description') != "" && 
-					checkdate($this->input->post('month'), $this->input->post('day'), $this->input->post('year')))
+				if(Input::get('description') != "" && 
+					checkdate(Input::get('month'), Input::get('day'), Input::get('year')))
 				{	
 					$info = array(
-							'date' 			=> $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('day'),
-							'description' 	=> $this->input->post('description'),
-							'half_day' 		=> $this->input->post('half_day'),
-							'am_pm' 		=> $this->input->post('am_pm'),
+							'date' 			=> Input::get('year').'-'.Input::get('month').'-'.Input::get('day'),
+							'description' 	=> Input::get('description'),
+							'half_day' 		=> Input::get('half_day'),
+							'am_pm' 		=> Input::get('am_pm'),
 							);
 					
 					$this->Holiday->add_holiday($info);	
 				}
 			}
 			
-			$data['year_selected'] 		= $this->input->post('year_select');
-			$data['rows'] 				= $this->Holiday->holiday_list($this->input->post('year_select'));
+			$data['year_selected'] 		= Input::get('year_select');
+			$data['rows'] 				= $this->Holiday->holiday_list(Input::get('year_select'));
 		}
 				
 		$data['main_content'] = 'holiday';
@@ -227,9 +227,9 @@ class Settings_Manage extends MX_Controller {
 			$this->Logs->delete_logs($delete_id);
 		}
 		
-		if ($this->input->post('remove_selected') && $this->input->post('log'))
+		if (Input::get('remove_selected') && Input::get('log'))
 		{	
-			$logs = $this->input->post('log');
+			$logs = Input::get('log');
 			
 			foreach ($logs as $log)
 			{
@@ -237,7 +237,7 @@ class Settings_Manage extends MX_Controller {
 			}
 		}
 		
-		if ($this->input->post('remove_all'))
+		if (Input::get('remove_all'))
 		{	
 			$this->Logs->delete_all_logs();
 		}
@@ -248,23 +248,23 @@ class Settings_Manage extends MX_Controller {
 	
 		$office_id					= $this->session->userdata('office_id');
 	
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
-			$data['selected'] 	= $this->input->post('office_id');
-			$office_id 			= $this->input->post('office_id');
+			$data['selected'] 	= Input::get('office_id');
+			$office_id 			= Input::get('office_id');
 			
-			if ($this->input->post('username'))
+			if (Input::get('username'))
 			{
-				$this->Logs->username = $this->input->post('username');
+				$this->Logs->username = Input::get('username');
 			}
-			if ($this->input->post('module'))
+			if (Input::get('module'))
 			{
-				$this->Logs->module = $this->input->post('module');
+				$this->Logs->module = Input::get('module');
 			}
-			if ($this->input->post('date1') and $this->input->post('date2'))
+			if (Input::get('date1') and Input::get('date2'))
 			{
-				$this->Logs->date1 = $this->input->post('date1');
-				$this->Logs->date2 = $this->input->post('date2');
+				$this->Logs->date1 = Input::get('date1');
+				$this->Logs->date2 = Input::get('date2');
 			}
 			
 		}
@@ -301,7 +301,7 @@ class Settings_Manage extends MX_Controller {
 		
 		$this->load->helper('string');
 		
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
 			// We get all the POST data. $key is the field name
 			// which is the name of settings in database table.
@@ -350,7 +350,7 @@ class Settings_Manage extends MX_Controller {
 		$data['page_name'] = '<b>Maintenance</b>';
 		$data['msg'] = '';
 		
-		if($this->input->post('repair'))
+		if(Input::get('repair'))
 		{
 			$this->load->dbutil();
 			$this->dbutil->repair_table('ats_dtr');

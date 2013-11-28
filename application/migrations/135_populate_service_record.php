@@ -4,7 +4,7 @@ class Migration_populate_service_record extends CI_Migration {
 	
 	function up() 
 	{			
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		if ($lgu_code == '')
 		{

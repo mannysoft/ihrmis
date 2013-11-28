@@ -52,9 +52,9 @@ class Pds extends MX_Controller  {
 		$data['msg'] 				= '';
 		
 		
-		if ( $this->input->post('employee_id'))
+		if ( Input::get('employee_id'))
 		{
-			$employee_id = $this->input->post('employee_id');
+			$employee_id = Input::get('employee_id');
 			redirect('pds/personal_info/'.$employee_id);
 		}
 		
@@ -90,39 +90,39 @@ class Pds extends MX_Controller  {
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$p = new Personal();
 			
 			$p->get_by_employee_id($employee_id);
 			
 			$p->employee_id			= $employee_id;
-			$p->lname				= $this->input->post('lname');
-			$p->fname				= $this->input->post('fname');
-			$p->mname 				= $this->input->post('mname');
-			$p->extension 			= $this->input->post('extension');
-			$p->birth_date			= $this->input->post('birth_date');
-			$p->birth_place			= $this->input->post('birth_place');
-			$p->sex					= $this->input->post('sex');
-			$p->civil_status		= $this->input->post('civil_status');
-			$p->citizenship			= $this->input->post('citizenship');
-			$p->height				= $this->input->post('height');
-			$p->weight				= $this->input->post('weight');
-			$p->blood_type			= $this->input->post('blood_type');
-			$p->gsis				= $this->input->post('gsis');
-			$p->pagibig				= $this->input->post('pagibig');
-			$p->philhealth			= $this->input->post('philhealth');
-			$p->sss					= $this->input->post('sss');
-			$p->res_address			= $this->input->post('res_address');
-			$p->res_zip				= $this->input->post('res_zip');
-			$p->res_tel				= $this->input->post('res_tel');
-			$p->permanent_address 	= $this->input->post('permanent_address');
-			$p->permanent_zip		= $this->input->post('permanent_zip');
-			$p->permanent_tel		= $this->input->post('permanent_tel');
-			$p->email				= $this->input->post('email');
-			$p->cp					= $this->input->post('cp');
-			$p->agency_employee_no	= $this->input->post('agency_employee_no');
-			$p->tin					= $this->input->post('tin');
+			$p->lname				= Input::get('lname');
+			$p->fname				= Input::get('fname');
+			$p->mname 				= Input::get('mname');
+			$p->extension 			= Input::get('extension');
+			$p->birth_date			= Input::get('birth_date');
+			$p->birth_place			= Input::get('birth_place');
+			$p->sex					= Input::get('sex');
+			$p->civil_status		= Input::get('civil_status');
+			$p->citizenship			= Input::get('citizenship');
+			$p->height				= Input::get('height');
+			$p->weight				= Input::get('weight');
+			$p->blood_type			= Input::get('blood_type');
+			$p->gsis				= Input::get('gsis');
+			$p->pagibig				= Input::get('pagibig');
+			$p->philhealth			= Input::get('philhealth');
+			$p->sss					= Input::get('sss');
+			$p->res_address			= Input::get('res_address');
+			$p->res_zip				= Input::get('res_zip');
+			$p->res_tel				= Input::get('res_tel');
+			$p->permanent_address 	= Input::get('permanent_address');
+			$p->permanent_zip		= Input::get('permanent_zip');
+			$p->permanent_tel		= Input::get('permanent_tel');
+			$p->email				= Input::get('email');
+			$p->cp					= Input::get('cp');
+			$p->agency_employee_no	= Input::get('agency_employee_no');
+			$p->tin					= Input::get('tin');
 						
 			$p->save();
 			
@@ -131,9 +131,9 @@ class Pds extends MX_Controller  {
 			$e2->where('id', $employee_id);
 						
 			$info = array(
-						'birth_date' 	=> $this->input->post('birth_date'),
-						'sex' 			=> $this->input->post('sex'),
-						'res_address' 	=> $this->input->post('res_address')
+						'birth_date' 	=> Input::get('birth_date'),
+						'sex' 			=> Input::get('sex'),
+						'res_address' 	=> Input::get('res_address')
 						);
 									
 			$e2->update($info);
@@ -189,25 +189,25 @@ class Pds extends MX_Controller  {
 		
 		$family = new Family();
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$family->get_by_employee_id($employee_id);
 			
 			$family->employee_id			= $employee_id;
 			
-			$family->spouse_lname			= $this->input->post('spouse_lname');
-			$family->spouse_fname			= $this->input->post('spouse_fname');
-			$family->spouse_mname 			= $this->input->post('spouse_mname');
-			$family->spouse_occupation 		= $this->input->post('spouse_occupation');
-			$family->spouse_employer		= $this->input->post('spouse_employer');
-			$family->spouse_biz_ad			= $this->input->post('spouse_biz_ad');
-			$family->spouse_tel				= $this->input->post('spouse_tel');
-			$family->father_lname			= $this->input->post('father_lname');
-			$family->father_fname			= $this->input->post('father_fname');
-			$family->father_mname			= $this->input->post('father_mname');
-			$family->mother_lname			= $this->input->post('mother_lname');
-			$family->mother_fname			= $this->input->post('mother_fname');
-			$family->mother_mname			= $this->input->post('mother_mname');
+			$family->spouse_lname			= Input::get('spouse_lname');
+			$family->spouse_fname			= Input::get('spouse_fname');
+			$family->spouse_mname 			= Input::get('spouse_mname');
+			$family->spouse_occupation 		= Input::get('spouse_occupation');
+			$family->spouse_employer		= Input::get('spouse_employer');
+			$family->spouse_biz_ad			= Input::get('spouse_biz_ad');
+			$family->spouse_tel				= Input::get('spouse_tel');
+			$family->father_lname			= Input::get('father_lname');
+			$family->father_fname			= Input::get('father_fname');
+			$family->father_mname			= Input::get('father_mname');
+			$family->mother_lname			= Input::get('mother_lname');
+			$family->mother_fname			= Input::get('mother_fname');
+			$family->mother_mname			= Input::get('mother_mname');
 			
 			$family->save();
 			
@@ -219,8 +219,8 @@ class Pds extends MX_Controller  {
 			
 			$c->delete_all();
 			
-			$children 			= $this->input->post('children');
-			$children_birth_day	= $this->input->post('children_birth_day');
+			$children 			= Input::get('children');
+			$children_birth_day	= Input::get('children_birth_day');
 						
 			$i = 0;
 			
@@ -311,14 +311,14 @@ class Pds extends MX_Controller  {
 		
 		$e = new Education();
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			
 			
 			// EDUCATIONAL BACKGROUND============================================
 			
 			// ELEMENTARY
-			if ($this->input->post('elem_school') != "")
+			if (Input::get('elem_school') != "")
 			{
 				
 				$e = new Education();
@@ -329,19 +329,19 @@ class Pds extends MX_Controller  {
 				
 				$e->employee_id 	= $employee_id;
 				$e->level			= 1;
-				$e->school_name		= $this->input->post('elem_school');
-				$e->degree_course 	= $this->input->post('elem_degree');
-				$e->year_graduated	= $this->input->post('elem_grad');
-				$e->highest_grade	= $this->input->post('elem_units');
-				$e->attend_from 	= $this->input->post('elem_date1');
-				$e->attend_to		= $this->input->post('elem_date2');
-				$e->scholarship		= $this->input->post('elem_scho');
+				$e->school_name		= Input::get('elem_school');
+				$e->degree_course 	= Input::get('elem_degree');
+				$e->year_graduated	= Input::get('elem_grad');
+				$e->highest_grade	= Input::get('elem_units');
+				$e->attend_from 	= Input::get('elem_date1');
+				$e->attend_to		= Input::get('elem_date2');
+				$e->scholarship		= Input::get('elem_scho');
 				
 				$e->save();
 			}
 			
 			// HIGHSCHOOL
-			if ($this->input->post('sec_school') != "")
+			if (Input::get('sec_school') != "")
 			{
 				$e = new Education();
 				
@@ -351,19 +351,19 @@ class Pds extends MX_Controller  {
 						
 				$e->employee_id 	= $employee_id;
 				$e->level			= 2;
-				$e->school_name		= $this->input->post('sec_school');
-				$e->degree_course 	= $this->input->post('sec_degree');
-				$e->year_graduated	= $this->input->post('sec_grad');
-				$e->highest_grade	= $this->input->post('sec_units');
-				$e->attend_from 	= $this->input->post('sec_date1');
-				$e->attend_to		= $this->input->post('sec_date2');
-				$e->scholarship		= $this->input->post('sec_scho');
+				$e->school_name		= Input::get('sec_school');
+				$e->degree_course 	= Input::get('sec_degree');
+				$e->year_graduated	= Input::get('sec_grad');
+				$e->highest_grade	= Input::get('sec_units');
+				$e->attend_from 	= Input::get('sec_date1');
+				$e->attend_to		= Input::get('sec_date2');
+				$e->scholarship		= Input::get('sec_scho');
 				
 				$e->save();
 			}
 			
 			// VOC
-			if ($this->input->post('voc_school') != "")
+			if (Input::get('voc_school') != "")
 			{
 				
 				$e = new Education();
@@ -374,19 +374,19 @@ class Pds extends MX_Controller  {
 						
 				$e->employee_id 	= $employee_id;
 				$e->level			= 3;
-				$e->school_name		= $this->input->post('voc_school');
-				$e->degree_course 	= $this->input->post('voc_degree');
-				$e->year_graduated	= $this->input->post('voc_grad');
-				$e->highest_grade	= $this->input->post('voc_units');
-				$e->attend_from 	= $this->input->post('voc_date1');
-				$e->attend_to		= $this->input->post('voc_date2');
-				$e->scholarship		= $this->input->post('voc_scho');
+				$e->school_name		= Input::get('voc_school');
+				$e->degree_course 	= Input::get('voc_degree');
+				$e->year_graduated	= Input::get('voc_grad');
+				$e->highest_grade	= Input::get('voc_units');
+				$e->attend_from 	= Input::get('voc_date1');
+				$e->attend_to		= Input::get('voc_date2');
+				$e->scholarship		= Input::get('voc_scho');
 				
 				$e->save();
 			}
 			
 			// COLLEGE
-			if ($this->input->post('col_school') != "")
+			if (Input::get('col_school') != "")
 			{
 				$e = new Education();
 				
@@ -396,19 +396,19 @@ class Pds extends MX_Controller  {
 						
 				$e->employee_id 	= $employee_id;
 				$e->level			= 4;
-				$e->school_name		= $this->input->post('col_school');
-				$e->degree_course 	= $this->input->post('col_degree');
-				$e->year_graduated	= $this->input->post('col_grad');
-				$e->highest_grade	= $this->input->post('col_units');
-				$e->attend_from 	= $this->input->post('col_date1');
-				$e->attend_to		= $this->input->post('col_date2');
-				$e->scholarship		= $this->input->post('col_scho');
+				$e->school_name		= Input::get('col_school');
+				$e->degree_course 	= Input::get('col_degree');
+				$e->year_graduated	= Input::get('col_grad');
+				$e->highest_grade	= Input::get('col_units');
+				$e->attend_from 	= Input::get('col_date1');
+				$e->attend_to		= Input::get('col_date2');
+				$e->scholarship		= Input::get('col_scho');
 				
 				$e->save();
 			}
 			
 			// GRAD SCHOOL
-			if ($this->input->post('grad_school') != "")
+			if (Input::get('grad_school') != "")
 			{
 				$e = new Education();
 				
@@ -418,13 +418,13 @@ class Pds extends MX_Controller  {
 						
 				$e->employee_id 	= $employee_id;
 				$e->level			= 5;
-				$e->school_name		= $this->input->post('grad_school');
-				$e->degree_course 	= $this->input->post('grad_degree');
-				$e->year_graduated	= $this->input->post('grad_grad');
-				$e->highest_grade	= $this->input->post('grad_units');
-				$e->attend_from 	= $this->input->post('grad_date1');
-				$e->attend_to		= $this->input->post('grad_date2');
-				$e->scholarship		= $this->input->post('grad_scho');
+				$e->school_name		= Input::get('grad_school');
+				$e->degree_course 	= Input::get('grad_degree');
+				$e->year_graduated	= Input::get('grad_grad');
+				$e->highest_grade	= Input::get('grad_units');
+				$e->attend_from 	= Input::get('grad_date1');
+				$e->attend_to		= Input::get('grad_date2');
+				$e->scholarship		= Input::get('grad_scho');
 				
 				$e->save();
 			}
@@ -473,7 +473,7 @@ class Pds extends MX_Controller  {
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			
 			$eligibility = new Eligibility();
@@ -483,12 +483,12 @@ class Pds extends MX_Controller  {
 			$eligibility->delete_all();
 				
 			// SERVICE ELIGIBILITY=================================
-			$types 					= $this->input->post('type');
-			$rating 				= $this->input->post('rating');
-			$date_exam_conferment 	= $this->input->post('date_exam_conferment');
-			$place_exam_conferment 	= $this->input->post('place_exam_conferment');
-			$license_no 			= $this->input->post('license_no');
-			$license_release_date 	= $this->input->post('license_release_date');
+			$types 					= Input::get('type');
+			$rating 				= Input::get('rating');
+			$date_exam_conferment 	= Input::get('date_exam_conferment');
+			$place_exam_conferment 	= Input::get('place_exam_conferment');
+			$license_no 			= Input::get('license_no');
+			$license_release_date 	= Input::get('license_release_date');
 						
 			$i = 0;
 			
@@ -582,19 +582,19 @@ class Pds extends MX_Controller  {
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			
 			// WORK EXPERIENCE=================================
-			$work_date1 	= $this->input->post('work_date1');
-			$work_date2 	= $this->input->post('work_date2');
-			$work_position 	= $this->input->post('work_position');
-			$work_office 	= $this->input->post('work_office');
-			$work_salary 	= $this->input->post('work_salary');
-			$work_sg 		= $this->input->post('work_sg');
-			$work_status 	= $this->input->post('work_status');
-			$movement 		= $this->input->post('movement');
-			$work_service 	= $this->input->post('work_service');
+			$work_date1 	= Input::get('work_date1');
+			$work_date2 	= Input::get('work_date2');
+			$work_position 	= Input::get('work_position');
+			$work_office 	= Input::get('work_office');
+			$work_salary 	= Input::get('work_salary');
+			$work_sg 		= Input::get('work_sg');
+			$work_status 	= Input::get('work_status');
+			$movement 		= Input::get('movement');
+			$work_service 	= Input::get('work_service');
 			
 			$work = new Work();
 			$work->get_by_employee_id($employee_id);
@@ -677,14 +677,14 @@ class Pds extends MX_Controller  {
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			// VOLUNTARY WORK OR INVOLVEMENT=========================
-			$org_name 					= $this->input->post('org_name');
-			$org_inclusive_date_from 	= $this->input->post('org_inclusive_date_from');
-			$org_inclusive_date_to 		= $this->input->post('org_inclusive_date_to');
-			$org_number_of_hours 		= $this->input->post('org_number_of_hours');
-			$org_position 				= $this->input->post('org_position');
+			$org_name 					= Input::get('org_name');
+			$org_inclusive_date_from 	= Input::get('org_inclusive_date_from');
+			$org_inclusive_date_to 		= Input::get('org_inclusive_date_to');
+			$org_number_of_hours 		= Input::get('org_number_of_hours');
+			$org_position 				= Input::get('org_position');
 			
 			$org = new Organization();
 		
@@ -754,15 +754,15 @@ class Pds extends MX_Controller  {
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			// TRAINING PROGRAMS=========================
-			$tra_name 		= $this->input->post('tra_name');
-			$tra_date_from 	= $this->input->post('tra_date_from');
-			$tra_date_to 	= $this->input->post('tra_date_to');
-			$tra_hours 		= $this->input->post('tra_hours');
-			$tra_conduct 	= $this->input->post('tra_conduct');
-			$tra_location 	= $this->input->post('tra_location');
+			$tra_name 		= Input::get('tra_name');
+			$tra_date_from 	= Input::get('tra_date_from');
+			$tra_date_to 	= Input::get('tra_date_to');
+			$tra_hours 		= Input::get('tra_hours');
+			$tra_conduct 	= Input::get('tra_conduct');
+			$tra_location 	= Input::get('tra_location');
 			
 			$t = new Training();
 			
@@ -850,12 +850,12 @@ class Pds extends MX_Controller  {
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			// OTHER INFORMATION=========================
-			$skills 					= $this->input->post('skill');
-			$recognition 				= $this->input->post('recognition');
-			$membership_organization 	= $this->input->post('membership_organization');
+			$skills 					= Input::get('skill');
+			$recognition 				= Input::get('recognition');
+			$membership_organization 	= Input::get('membership_organization');
 			
 			$o = new Other_info();
 			
@@ -880,9 +880,9 @@ class Pds extends MX_Controller  {
 			}
 			
 			// QUESTIONS=======================================
-			$questions 	= $this->input->post('q');
-			$answer 	= $this->input->post('q');
-			$details 	= $this->input->post('details');
+			$questions 	= Input::get('q');
+			$answer 	= Input::get('q');
+			$details 	= Input::get('details');
 			
 			$q = new Question();
 			
@@ -911,9 +911,9 @@ class Pds extends MX_Controller  {
 			}
 			
 			// REFERENCE
-			$names 	 = $this->input->post('ref_name');
-			$address = $this->input->post('ref_address');
-			$no 	 = $this->input->post('ref_tel');
+			$names 	 = Input::get('ref_name');
+			$address = Input::get('ref_address');
+			$no 	 = Input::get('ref_tel');
 			
 			$r = new Reference();
 			$r->get_by_employee_id($employee_id);
@@ -930,9 +930,9 @@ class Pds extends MX_Controller  {
 				$r->address 	  	= $address[$i];
 				$r->tel_no	  		= $no[$i];
 				
-				$r->ctc_no	  		= $this->input->post('ctc_no');
-				$r->issue_at	  	= $this->input->post('issue_at');
-				$r->issue_on	  	= $this->input->post('issue_on');
+				$r->ctc_no	  		= Input::get('ctc_no');
+				$r->issue_at	  	= Input::get('issue_at');
+				$r->issue_on	  	= Input::get('issue_on');
 				
 				$r->save();
 						
@@ -997,28 +997,28 @@ class Pds extends MX_Controller  {
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$p = new Profile();
 		
 			$p->get_by_id($employee_id);
 			
 			$p->employee_id	 	= $employee_id;
-			$p->item_number	 	= $this->input->post('item_number');
-			$p->position	   	= $this->input->post('position');
-			$p->office_id 		= $this->input->post('office_id');
-			$p->salary_grade 	= $this->input->post('salary_grade');
-			$p->step 			= $this->input->post('step');
-			$p->permanent	  	= $this->input->post('permanent');
-			$p->last_promotion 	= $this->input->post('last_promotion');
-			$p->last_increment 	= $this->input->post('last_increment');
-			$p->level			= $this->input->post('level');
-			$p->eligibility 	= $this->input->post('eligibility');
-			$p->first_day_of_service= $this->input->post('first_day_of_service');
-			$p->graduated	  	= $this->input->post('graduated');
-			$p->course  		= $this->input->post('course');
-			$p->units 		 	= $this->input->post('units');
-			$p->post_grad 	 	= $this->input->post('post_grad');
+			$p->item_number	 	= Input::get('item_number');
+			$p->position	   	= Input::get('position');
+			$p->office_id 		= Input::get('office_id');
+			$p->salary_grade 	= Input::get('salary_grade');
+			$p->step 			= Input::get('step');
+			$p->permanent	  	= Input::get('permanent');
+			$p->last_promotion 	= Input::get('last_promotion');
+			$p->last_increment 	= Input::get('last_increment');
+			$p->level			= Input::get('level');
+			$p->eligibility 	= Input::get('eligibility');
+			$p->first_day_of_service= Input::get('first_day_of_service');
+			$p->graduated	  	= Input::get('graduated');
+			$p->course  		= Input::get('course');
+			$p->units 		 	= Input::get('units');
+			$p->post_grad 	 	= Input::get('post_grad');
 					
 			$p->save();
 			
@@ -1066,17 +1066,17 @@ class Pds extends MX_Controller  {
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$date_from 			= $this->input->post('date_from');
-			$date_to 			= $this->input->post('date_to');
-			$designation 		= $this->input->post('designation');
-			$status 			= $this->input->post('status');
-			$salary 			= $this->input->post('salary');
-			$office_entity 		= $this->input->post('office_entity');
-			$lwop 				= $this->input->post('lwop');
-			$separation_date 	= $this->input->post('separation_date');
-			$separation_cause 	= $this->input->post('separation_cause');
+			$date_from 			= Input::get('date_from');
+			$date_to 			= Input::get('date_to');
+			$designation 		= Input::get('designation');
+			$status 			= Input::get('status');
+			$salary 			= Input::get('salary');
+			$office_entity 		= Input::get('office_entity');
+			$lwop 				= Input::get('lwop');
+			$separation_date 	= Input::get('separation_date');
+			$separation_cause 	= Input::get('separation_cause');
 			
 			$service = new Service_record();
 			
@@ -1161,47 +1161,47 @@ class Pds extends MX_Controller  {
 		
 		$data['records_found'] = '';
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$e = new Employee_m();
 		
-			if ( $this->input->post('lname') != '')
+			if ( Input::get('lname') != '')
 			{
-				$e->where('lname', $this->input->post('lname'));
+				$e->where('lname', Input::get('lname'));
 			}
-			if ( $this->input->post('fname') != '')
+			if ( Input::get('fname') != '')
 			{
-				$e->where('fname', $this->input->post('fname'));
+				$e->where('fname', Input::get('fname'));
 			}
-			if ( $this->input->post('position') != '')
+			if ( Input::get('position') != '')
 			{
-				$e->like('position', $this->input->post('position'));
+				$e->like('position', Input::get('position'));
 			}
-			if ( $this->input->post('permanent') != 'all')
+			if ( Input::get('permanent') != 'all')
 			{
-				$e->where('permanent', $this->input->post('permanent'));
+				$e->where('permanent', Input::get('permanent'));
 			}
-			if ( $this->input->post('office_id') != '0')
+			if ( Input::get('office_id') != '0')
 			{
-				$e->where('office_id', $this->input->post('office_id'));
+				$e->where('office_id', Input::get('office_id'));
 			}
-			if ( $this->input->post('salary_grade') != '')
+			if ( Input::get('salary_grade') != '')
 			{
-				list($salary_grade, $step) = explode("-", $this->input->post('salary_grade'));
+				list($salary_grade, $step) = explode("-", Input::get('salary_grade'));
 				$e->where('salary_grade', $salary_grade);
 				$e->where('step', $step);
 			}
 			
 			// =======================================================
-			if ( $this->input->post('years_service') != '')
+			if ( Input::get('years_service') != '')
 			{
 				// If blank search for exact year
-				if ( $this->input->post('years_service_above') == '')
+				if ( Input::get('years_service_above') == '')
 				{
 					
 				}
 				
-				$the_year = date('Y') - $this->input->post('years_service');
+				$the_year = date('Y') - Input::get('years_service');
 				$today = date('Y-m-d');
 				
 				$e->where('YEAR(first_day_of_service)', $the_year);
@@ -1209,31 +1209,31 @@ class Pds extends MX_Controller  {
 				
 	
 			}
-			if ( $this->input->post('eligibility') != '')
+			if ( Input::get('eligibility') != '')
 			{
-				$e->like('eligibility', $this->input->post('eligibility'), 'both'); 
+				$e->like('eligibility', Input::get('eligibility'), 'both'); 
 			}
-			if ( $this->input->post('course') != '')
+			if ( Input::get('course') != '')
 			{
-				$e->like('course', $this->input->post('course'), 'both'); 
+				$e->like('course', Input::get('course'), 'both'); 
 			}
-			if ( $this->input->post('sex') != '')
+			if ( Input::get('sex') != '')
 			{
-				$e->where('sex', $this->input->post('sex'));
+				$e->where('sex', Input::get('sex'));
 			}
 			
 			
-			if ( $this->input->post('age') != '')
+			if ( Input::get('age') != '')
 			{
-				$the_year = date('Y') - $this->input->post('age');
+				$the_year = date('Y') - Input::get('age');
 				
 				$e->where('YEAR(birth_date)', $the_year);
 				$e->where('MONTH(birth_date) >=', date('m'));
 			}
 			
-			if ( $this->input->post('location') != '')
+			if ( Input::get('location') != '')
 			{
-				$e->like('res_address', $this->input->post('location'));
+				$e->like('res_address', Input::get('location'));
 			}
 			
 			$e->order_by('lname');
@@ -1243,13 +1243,13 @@ class Pds extends MX_Controller  {
 			$data['records_found'] = $e->result_count();
 						
 			// if search and print preview
-			if ( $this->input->post('search_preview'))
+			if ( Input::get('search_preview'))
 			{
 				$data['pop_up'] = 1; 
 				
 				$preview = new Search_result_preview();
 		
-				$data['report_file'] = $preview->preview( $data['rows'] , $this->input->post('report_name'));
+				$data['report_file'] = $preview->preview( $data['rows'] , Input::get('report_name'));
 			}
 						
 		}
@@ -1266,16 +1266,16 @@ class Pds extends MX_Controller  {
 		//Use for office listbox
 		$data['options'] 						= $this->options->office_options( $add_select = TRUE );	
 		
-		$data['selected'] 						= $this->input->post('office_id');
+		$data['selected'] 						= Input::get('office_id');
 		
 		$data['permanent_options'] 				= $this->options->type_employment( $all = TRUE );
-		$data['permanent_selected'] 			= $this->input->post('permanent');
+		$data['permanent_selected'] 			= Input::get('permanent');
 		
 		$data['years_service_above_options'] 	= array('' => '', 'above' => 'above', 'below' => 'below');
-		$data['years_service_above_selected'] 	= $this->input->post('years_service_above');
+		$data['years_service_above_selected'] 	= Input::get('years_service_above');
 		
 		$data['age_above_options'] 				= array('' => '', 'above' => 'above', 'below' => 'below');
-		$data['age_above_selected']				= $this->input->post('age_above');
+		$data['age_above_selected']				= Input::get('age_above');
 		
 		$data['main_content'] = 'reports';
 		
@@ -1315,12 +1315,12 @@ class Pds extends MX_Controller  {
 		 
 		 $type_employment = $this->options->type_employment();
 		
-		$a = $this->Settings->get_selected_field( 'republic' );
-		$b = $this->Settings->get_selected_field( 'lgu_name' );
-		$c = $this->Settings->get_selected_field( 'lgu_office' );
-		$d = $this->Settings->get_selected_field( 'lgu_address' ); // this is for heading republic
+		$a = Setting::getField( 'republic' );
+		$b = Setting::getField( 'lgu_name' );
+		$c = Setting::getField( 'lgu_office' );
+		$d = Setting::getField( 'lgu_address' ); // this is for heading republic
 		
-		$lgu_code = $this->Settings->get_selected_field('lgu_code'); 
+		$lgu_code = Setting::getField('lgu_code'); 
 		
 		// Laguna Province
 		if ( $lgu_code == 'laguna_province' )
@@ -1461,10 +1461,10 @@ class Pds extends MX_Controller  {
 
 
 	// Signatories
-	$training_prepared 				= $this->Settings->get_selected_field( 'training_prepared' );
-	$training_prepared_position 	= $this->Settings->get_selected_field( 'training_prepared_position' );
-	$training_certified 			= $this->Settings->get_selected_field( 'training_certified' );
-	$training_certified_position 	= $this->Settings->get_selected_field( 'training_certified_position' );
+	$training_prepared 				= Setting::getField( 'training_prepared' );
+	$training_prepared_position 	= Setting::getField( 'training_prepared_position' );
+	$training_certified 			= Setting::getField( 'training_certified' );
+	$training_certified_position 	= Setting::getField( 'training_certified_position' );
 
 	$signatories.='
 	<table width="100%" border="0">
@@ -1510,12 +1510,12 @@ class Pds extends MX_Controller  {
 	function sr_print_preview( $employee_id = '' , $report_name = '')
 	{
 		
-		$a = $this->Settings->get_selected_field( 'republic' );
-		$b = $this->Settings->get_selected_field( 'lgu_name' );
-		$c = $this->Settings->get_selected_field( 'lgu_office' );
-		$d = $this->Settings->get_selected_field( 'lgu_address' ); // this is for heading republic
+		$a = Setting::getField( 'republic' );
+		$b = Setting::getField( 'lgu_name' );
+		$c = Setting::getField( 'lgu_office' );
+		$d = Setting::getField( 'lgu_address' ); // this is for heading republic
 		
-		$lgu_code = $this->Settings->get_selected_field('lgu_code'); 
+		$lgu_code = Setting::getField('lgu_code'); 
 		
 		// Laguna Province
 		if ( $lgu_code == 'laguna_province' )
@@ -1533,10 +1533,10 @@ class Pds extends MX_Controller  {
 		
 		
 		// Signatories
-		$sr_prepared 			= $this->Settings->get_selected_field( 'sr_prepared' );
-		$sr_prepared_position 	= $this->Settings->get_selected_field( 'sr_prepared_position' );
-		$sr_certified 			= $this->Settings->get_selected_field( 'sr_certified' );
-		$sr_certified_position 	= $this->Settings->get_selected_field( 'sr_certified_position' );
+		$sr_prepared 			= Setting::getField( 'sr_prepared' );
+		$sr_prepared_position 	= Setting::getField( 'sr_prepared_position' );
+		$sr_certified 			= Setting::getField( 'sr_certified' );
+		$sr_certified_position 	= Setting::getField( 'sr_certified_position' );
 
 $service = '<table width="100%" border="0" cellpadding="5" cellspacing="5">
   <tr>
@@ -1696,10 +1696,10 @@ mpdf-->
 	$i = 1; 
 	
 	// Number of entries to display per page
-	$first_page = $this->Settings->get_selected_field( 'service_record_entries_first_page' );
-	$second_page = $this->Settings->get_selected_field( 'service_record_entries_second_page' );
-	$third_page = $this->Settings->get_selected_field( 'service_record_entries_3rd_page' );
-	$fourth_page = $this->Settings->get_selected_field( 'service_record_entries_4th_page' );
+	$first_page = Setting::getField( 'service_record_entries_first_page' );
+	$second_page = Setting::getField( 'service_record_entries_second_page' );
+	$third_page = Setting::getField( 'service_record_entries_3rd_page' );
+	$fourth_page = Setting::getField( 'service_record_entries_4th_page' );
 	
 	//for ($i ==0; $i != 70; $i ++)
 	foreach ($rows as $row)
@@ -1817,7 +1817,7 @@ mpdf-->
 	function change_employee($office_id = '')
 	{
 		
-		echo $this->input->post('employee_id');
+		echo Input::get('employee_id');
 		
 		
 		

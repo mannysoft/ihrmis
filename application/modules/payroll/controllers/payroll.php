@@ -54,7 +54,7 @@ class Payroll extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 	
 		}
@@ -64,7 +64,7 @@ class Payroll extends MX_Controller {
 		
 		$e = new Employee_m();
 			
-		$e->where('office_id', ($this->input->post('office_id')) ? $this->input->post('office_id') : $this->session->userdata('office_id'));
+		$e->where('office_id', (Input::get('office_id')) ? Input::get('office_id') : $this->session->userdata('office_id'));
 		$e->where('permanent', 1);
 		$e->order_by('lname');
 		

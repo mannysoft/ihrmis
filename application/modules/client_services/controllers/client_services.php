@@ -25,7 +25,7 @@ class Client_services extends MX_Controller {
 		
 		
 		//$this->output->enable_profiler(TRUE);
-		//$this->update_server = $this->Settings->get_selected_field('update_server');
+		//$this->update_server = Setting::getField('update_server');
 		
 		//$this->output->enable_profiler(TRUE);
     }  
@@ -76,7 +76,7 @@ class Client_services extends MX_Controller {
 				
 		//Change to real client(IP address)
 		//$client = "localhost";
-		$client = $this->Settings->get_selected_field('client');
+		$client = Setting::getField('client');
 		
 		$clients = explode(",", $client);
 		

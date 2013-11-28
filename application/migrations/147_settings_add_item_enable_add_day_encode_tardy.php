@@ -5,7 +5,7 @@ class Migration_settings_add_item_enable_add_day_encode_tardy extends CI_Migrati
 	function up() 
 	{					
 		// Do only if Puerto
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		$allow = 'no';
 		

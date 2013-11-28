@@ -14,7 +14,7 @@
   <tr>
     <td align="right">&nbsp;</td>
     <td align="right">&nbsp;</td>
-    <td><?php $lgu_code = $this->Settings->get_selected_field( 'lgu_code' );?></td>
+    <td><?php $lgu_code = Setting::getField( 'lgu_code' );?></td>
     <td colspan="2" rowspan="6" align="left"><div id="outputname">
       <input name="no_record2" type="hidden" id="no_record2" />
     </div></td>
@@ -137,7 +137,7 @@
 	  echo form_dropdown('month', $month_options, $month_selected, $js);
 	  
 	  // Check if if the enable day textbox
-	  $enable_add_day_encode_tardy = $this->Settings->get_selected_field('enable_add_day_encode_tardy');
+	  $enable_add_day_encode_tardy = Setting::getField('enable_add_day_encode_tardy');
 	  
 	  if ($enable_add_day_encode_tardy == 'yes')
 	  {
@@ -158,7 +158,7 @@
     <td align="left">&nbsp;</td>
   </tr>
   
-  <?php $allow_encode_digit_undertime = $this->Settings->get_selected_field( 'allow_encode_digit_undertime' );?>
+  <?php $allow_encode_digit_undertime = Setting::getField( 'allow_encode_digit_undertime' );?>
   <?php if($allow_encode_digit_undertime == 'yes'): ?>
   <tr>
     <td align="right">&nbsp;</td>

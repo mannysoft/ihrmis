@@ -118,7 +118,7 @@ class Budget extends MX_Controller  {
 		$data['expenditure'] = $b->get_by_id($id);
 						
 		//If form submit
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{	
 			$this->form_validation->set_rules('expenditures', 'Expenditures', 'required');
 			$this->form_validation->set_rules('account_code', 'Account Code', 'required');
@@ -127,10 +127,10 @@ class Budget extends MX_Controller  {
 			
 			if ($this->form_validation->run($this) == TRUE)
 			{
-				$b->expenditures	= $this->input->post('expenditures');
-				$b->account_code	= $this->input->post('account_code');
-				$b->year 			= $this->input->post('year');
-				$b->budget_amount 	= $this->input->post('budget_amount');
+				$b->expenditures	= Input::get('expenditures');
+				$b->account_code	= Input::get('account_code');
+				$b->year 			= Input::get('year');
+				$b->budget_amount 	= Input::get('budget_amount');
 				
 				$b->save();
 																					 

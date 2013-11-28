@@ -5,7 +5,7 @@ class Migration_settings_add_item_encoded_leave_listing_order extends CI_Migrati
 	function up() 
 	{			
 		// Do only if Province of Laguna
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		$order = 'DESC';
 		

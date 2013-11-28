@@ -6,7 +6,6 @@ $config = $CI->db; // Get the DB object
 		
 $pdo = new PDO('mysql:host='.$config->hostname.';dbname='.$config->database, $config->username, $config->password);
 
-
 $drivers = array(
 		'mysql' => '\Illuminate\Database\MySqlConnection',
 		'pgsql' => '\Illuminate\Database\PostgresConnection',
@@ -25,7 +24,8 @@ $resolver->setDefaultConnection('default');
 
 //return 0;
 
-
+// We can also use this one
+//https://github.com/Jonhoo/laravel-former/blob/33f507363e6d19e80296be529f2eb84cd22199f3/tests/bootstrap.php
 
 $container = new Illuminate\Container\Container;
 
@@ -56,13 +56,13 @@ $container['config'] = array(
 
         'mysql' => array(
             'driver'    => 'mysql',
-            'host'      => 'localhost',
-            'database'  => 'ihrmis',
-            'username'  => 'root',
-            'password'  => 'pCt7DRVAqw6ENnVc',
+            'host'      => $config->hostname,
+            'database'  => $config->database,
+            'username'  => $config->username,
+            'password'  => $config->password,
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => 'ats_',
+            'prefix'    => $config->dbprefix,
         ),
 
         'pgsql' => array(
@@ -90,6 +90,7 @@ $container['config'] = array(
 	'app.aliases' => array(
 
 		'View'            => 'Illuminate\Support\Facades\View',
+		'Paginator'       => 'Illuminate\Support\Facades\Paginator',
 		
 		),
 );
@@ -101,6 +102,8 @@ $providers = array(
     'Illuminate\Database\DatabaseServiceProvider',
     'Illuminate\Translation\TranslationServiceProvider',
     'Illuminate\Validation\ValidationServiceProvider',
+	'Illuminate\Pagination\PaginationServiceProvider',
+	//'Illuminate\Session\SessionServiceProvider',
 	
 	
 	//'Illuminate\View\ViewServiceProvider',
@@ -178,17 +181,68 @@ Facade::setContainer($container);
 class DB extends Facade { protected static $key = 'db'; }
 class Lang extends Facade { protected static $key = 'translator'; }
 class Validator extends Facade { protected static $key = 'validator'; }
-//class View extends Facade { protected static $key = 'view'; }
-class Input extends Facade 
-{ 
-	
-	protected static $key = 'input'; 
-	
-	static function tae()
-	{
-		return 'tae';
-	}
+class Paginator extends Facade { protected static $key = 'paginator'; }
 
+//class View extends Facade { protected static $key = 'view'; }
+
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
+class BaseModel extends Eloquent{
+	
+	public $errors;	
+	
+	public static function boot()
+	{
+		parent::boot();
+		
+		static::saving(function($model)
+		{
+			//return $post->validate();	
+			if ( ! $model->force) return $model->validate();
+		});
+	}
+	
+	public function validate()
+	{
+		$rules = self::processRules(static::$rules);
+		
+		$messages = static::$messages;
+		
+		$validation = Validator::make($this->attributes, $rules, $messages);
+		
+		if($validation->passes()) return true;
+		
+		//$this->errors = $validation->messages();
+		$this->errors = $validation->messages()->all();
+		
+		return false;
+	}
+	
+	/**
+	 * Process validation rules.
+	 *
+	 * @param  array  $rules
+	 * @return array  $rules
+	 */
+	protected function processRules($rules)
+	{
+		$id = $this->getKey();
+		
+		array_walk($rules, function(&$item) use ($id)
+		{
+			// Replace placeholders
+			$item = stripos($item, ':id:') !== false ? str_ireplace(':id:', $id, $item) : $item;
+		});
+		
+		if($id != NULL)
+		{
+			if (array_key_exists('password', $rules)) {
+				unset($rules['password']);
+			}
+		}
+		
+		return $rules;
+	}
 }
 
 ?>

@@ -5,7 +5,7 @@ class Migration_settings_add_item_allow_monetize_using_vl_sl extends CI_Migratio
 	function up() 
 	{			
 		// Do only if Province of Laguna
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		$allow = 'no';
 		

@@ -24,7 +24,7 @@ if ( $hospital == 'yes')
                   'hospital'    => 'Hospital'
                 );
 				
-	$options_selected = $this->input->post('salary_grade_type');
+	$options_selected = Input::get('salary_grade_type');
 				
 	$js = 'id= "salary_grade_type"';echo form_dropdown('salary_grade_type', $options, $options_selected, $js);
 }

@@ -21,7 +21,7 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
     <th colspan="10" align="left" bgcolor="#D6D6D6"><strong>
       <?php $js = 'onchange="this.form.submit();"';echo form_dropdown('office_id', $options, $selected);?>
       <input name="op" type="hidden" id="op" value="1" />
-      <input name="employee_id" type="text" id="employee_id" value="<?php echo $this->input->post('employee_id');?>" size="10" placeholder="Employee ID" />
+      <input name="employee_id" type="text" id="employee_id" value="<?php echo Input::get('employee_id');?>" size="10" placeholder="Employee ID" />
       <input name="date" type="text" class="ilaw" id="date" onfocus="this.style.margin = '0'; this.style.borderWidth = '2px'; this.style.backgroundColor = '#FFFFFF';" onblur="this.style.margin = '1px'; this.style.borderWidth = '1px'; this.style.backgroundColor = '#E9F0F5';" value="<?php echo $date;?>" size="11" maxlength="10" />
       <input name="this_only" type="checkbox" id="this_only" value="1" />
     to 
@@ -38,7 +38,7 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
     <input name="new_val" type="hidden" id="new_val" value="<?php echo $am_initial = 0;?>" size="10" />
     <input name="arrow" type="hidden" id="arrow" value="1" size="6" />
     </strong>
-    <?php $show_incomplete_logs = $this->Settings->get_selected_field( 'show_incomplete_logs' );?>
+    <?php $show_incomplete_logs = Setting::getField( 'show_incomplete_logs' );?>
     <?php if ($show_incomplete_logs == 'yes'):?>
       <table width="385" border="0">
         <tr>
@@ -94,7 +94,7 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
 	$i = 1;
 	$array = '[';	
 	
-	$minutes_tardy = $this->Settings->get_selected_field('minutes_tardy');
+	$minutes_tardy = Setting::getField('minutes_tardy');
 		
 	foreach($rows as $row)
 	{

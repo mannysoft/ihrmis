@@ -393,7 +393,7 @@ $leave_earn2 = ($settings['leave_earn'] != 15) ? $checked : '';
     <td><a href="#" tab="general" class="click">General</a> | <a href="#" tab="users" class="click">Users</a> | <a href="#" tab="employees" class="click">Employees</a> | <a href="#" tab="attendance" class="click">Attendance</a> | <a href="#" tab="leave" class="click">Leave</a> | <a href="#" tab="payroll" class="click">Payroll</a> | <a href="#" tab="signatories" class="click">Signatories</a></td>
     <td>&nbsp;</td>
     <td><input name="active_tab" type="hidden" id="active_tab" 
-    value="<?php echo ($this->input->post('active_tabs')) ? $this->input->post('active_tabs'): 'general'?>" /></td>
+    value="<?php echo (Input::get('active_tabs')) ? Input::get('active_tabs'): 'general'?>" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

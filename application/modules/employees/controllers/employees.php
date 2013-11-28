@@ -39,7 +39,7 @@ class Employees extends MX_Controller  {
 	function __construct()
     {
         parent::__construct();
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 		
 		$this->load->model('options');
 		
@@ -124,15 +124,15 @@ class Employees extends MX_Controller  {
 
 		
 		//if form submit
-		if($this->input->post('op') == 1)
+		if(Input::get('op') == 1)
 		{
-			$employees = $this->input->post('employee');
+			$employees = Input::get('employee');
 			
 			if(is_array($employees))
 			{
 				foreach($employees as $employee)
 				{
-					$action = $this->input->post('action');
+					$action = Input::get('action');
 					//deactivate
 					if($action==0)
 					{
@@ -149,9 +149,9 @@ class Employees extends MX_Controller  {
 				
 			}
 			
-			$office_id 		= $this->input->post('office_id');
-			$employee_id 	= $this->input->post('employee_id');
-			$lname 			= $this->input->post('lname');
+			$office_id 		= Input::get('office_id');
+			$employee_id 	= Input::get('employee_id');
+			$lname 			= Input::get('lname');
 			
 			$this->Employee->get_employee_list($office_id, $employee_id);
 			
@@ -208,13 +208,13 @@ class Employees extends MX_Controller  {
 			
 			
 			
-			$data['selected'] = $this->input->post('office_id');
+			$data['selected'] = Input::get('office_id');
 		
 		}
 	
 			
 		//START -- maker buttons -- ADDED BY : MICHAEL RAFALLO ---			
-		if($this->input->post('cancel')) // cancel all the selected items from the ID maker
+		if(Input::get('cancel')) // cancel all the selected items from the ID maker
 		{
 			$ie = new Employee_id_request_m();
 			$ie->truncate();
@@ -245,7 +245,7 @@ class Employees extends MX_Controller  {
 		//END --- ID maker buttons -- ADDED BY : MICHAEL RAFALLO ---
 	
 		//START -- print preview -- ADDED BY : MICHAEL RAFALLO -------
-		if ($this->input->post('generate_id'))
+		if (Input::get('generate_id'))
 		{	
 			$ie = new Employee_id_request_m();
 			$id_cart = $ie->get();
@@ -366,7 +366,7 @@ class Employees extends MX_Controller  {
 		$this->mi_pagination->initialize($config);
 		
 		//START -- generate maker buttons -- ADDED BY : MICHAEL RAFALLO ---			
-		if($this->input->post('cancel')) // cancel all the selected items from the ID maker
+		if(Input::get('cancel')) // cancel all the selected items from the ID maker
 		{
 			$ie = new Employee_id_request_m();
 			$ie->truncate();
@@ -394,7 +394,7 @@ class Employees extends MX_Controller  {
 		//END --- ID maker buttons -- ADDED BY : MICHAEL RAFALLO ---
 	
 		//START -- print preview -- ADDED BY : MICHAEL RAFALLO -------
-		if ($this->input->post('generate_id'))
+		if (Input::get('generate_id'))
 		{	
 			$ie = new Employee_id_request_m();
 			$id_cart = $ie->get();
@@ -460,7 +460,7 @@ class Employees extends MX_Controller  {
 		$data['employee_id_readonly'] = '';
 		$data['auto_generate_employee_id'] = 'no';
 		
-		$auto_generate_employee_id = $this->Settings->get_selected_field( 'auto_generate_employee_id' );
+		$auto_generate_employee_id = Setting::getField( 'auto_generate_employee_id' );
 		
 		$data['auto_employee_id'] = '';
 		
@@ -482,7 +482,7 @@ class Employees extends MX_Controller  {
 		}
 				
 		//If form submit
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			
 			$this->form_validation->set_rules('employee_id', 'Employee ID', 'required|callback_employee_id_check');
@@ -496,48 +496,48 @@ class Employees extends MX_Controller  {
 			
 			if ($this->form_validation->run($this) == FALSE)
 			{
-				$data['selected'] 			= $this->input->post('office_id');
-				$data['detailed_selected'] 	= $this->input->post('detailed_office_id');
-				$data['permanent_selected'] = $this->input->post('permanent');
-				$data['sg_selected'] 		= $this->input->post('sg');
-				$data['step_selected'] 		= $this->input->post('step');
+				$data['selected'] 			= Input::get('office_id');
+				$data['detailed_selected'] 	= Input::get('detailed_office_id');
+				$data['permanent_selected'] = Input::get('permanent');
+				$data['sg_selected'] 		= Input::get('sg');
+				$data['step_selected'] 		= Input::get('step');
 			}
 			else
 			{
 			
-				$shift_id 				= $this->input->post('shift2');
-				$shift_type 			= $this->input->post('shift2');
+				$shift_id 				= Input::get('shift2');
+				$shift_type 			= Input::get('shift2');
 	
 				//File name of the photo
 				$file_register = $this->session->userdata('file_register');
 				$finger_pics = '/../'.current_work_dir().'/pics/'.$this->session->userdata('file_register');
 				
 				$info = array(
-				'employee_id' 			=> $this->input->post('employee_id'),
-				'lname' 				=> $this->input->post('lname'),
-				'fname' 				=> $this->input->post('fname'),
-				'mname' 				=> $this->input->post('mname'),
-				'extension' 			=> $this->input->post('extension'),
-				'position' 				=> $this->input->post('position'),
-				'assistant_dept_head' 	=> $this->input->post('assistant_dept_head'),
-				'office_id' 			=> $this->input->post('office_id'),
-				'division_id' 			=> $this->input->post('division_id'),
-				'section_id' 			=> $this->input->post('section_id'),
-				'detailed_office_id'	=> $this->input->post('detailed_office_id'),
-				'salut'					=> $this->input->post('salutation'),
+				'employee_id' 			=> Input::get('employee_id'),
+				'lname' 				=> Input::get('lname'),
+				'fname' 				=> Input::get('fname'),
+				'mname' 				=> Input::get('mname'),
+				'extension' 			=> Input::get('extension'),
+				'position' 				=> Input::get('position'),
+				'assistant_dept_head' 	=> Input::get('assistant_dept_head'),
+				'office_id' 			=> Input::get('office_id'),
+				'division_id' 			=> Input::get('division_id'),
+				'section_id' 			=> Input::get('section_id'),
+				'detailed_office_id'	=> Input::get('detailed_office_id'),
+				'salut'					=> Input::get('salutation'),
 				'pics' 					=> $file_register,
 				'finger_pics' 			=> $finger_pics,
 				'shift_id' 				=> $shift_id,
 				'shift_type' 			=> $shift_type,
 				'status' 				=> 1,
-				'permanent' 			=> $this->input->post('permanent'),
-				'first_day_of_service' 	=> $this->input->post('first_day_of_service'),
-				'salary_grade' 			=> $this->input->post('sg'),
-				'step'					=> $this->input->post('step'),
+				'permanent' 			=> Input::get('permanent'),
+				'first_day_of_service' 	=> Input::get('first_day_of_service'),
+				'salary_grade' 			=> Input::get('sg'),
+				'step'					=> Input::get('step'),
 				'newly_added' 			=> 1,
 				'updated'				=> 1,
-				'emergency_contact'		=> $this->input->post('emergency_contact'),
-				'emergency_contact_no'	=> $this->input->post('emergency_contact_no'),
+				'emergency_contact'		=> Input::get('emergency_contact'),
+				'emergency_contact_no'	=> Input::get('emergency_contact_no'),
 				);
 		
 				$id = $this->Employee->add_employee($info);
@@ -558,9 +558,9 @@ class Employees extends MX_Controller  {
 					$p->get_by_employee_id( $id );
 					
 					$p->employee_id		= $id;
-					$p->lname			= $this->input->post('lname');
-					$p->fname			= $this->input->post('fname');
-					$p->mname			= $this->input->post('mname');
+					$p->lname			= Input::get('lname');
+					$p->fname			= Input::get('fname');
+					$p->mname			= Input::get('mname');
 					
 					$p->save(); 
 					
@@ -624,7 +624,7 @@ class Employees extends MX_Controller  {
 		
 		if ($employee_id == '')
 		{
-			$employee_info = $this->Employee->get_employee_info($this->input->post('orig_id'));
+			$employee_info = $this->Employee->get_employee_info(Input::get('orig_id'));
 		}
 		
 		$shift_id_from_select = $employee_info['shift_id'];
@@ -688,13 +688,13 @@ class Employees extends MX_Controller  {
 		$data['emergency_contact'] = $employee_info['emergency_contact'];
 		$data['emergency_contact_no'] = $employee_info['emergency_contact_no'];
 						
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{			
-			$orig_id 		= $this->input->post('orig_id');
+			$orig_id 		= Input::get('orig_id');
 			
-			$id 			= $this->input->post('id');
+			$id 			= Input::get('id');
 			
-			if ($employee_id != $this->input->post('employee_id'))
+			if ($employee_id != Input::get('employee_id'))
 			{
 				$this->form_validation->set_rules('employee_id', 'Employee ID', 'required|callback_employee_id_check');
 			}
@@ -708,15 +708,15 @@ class Employees extends MX_Controller  {
 			
 			if ($this->form_validation->run($this) == FALSE)
 			{
-				$data['selected'] 			= $this->input->post('office_id');
-				$data['detailed_selected'] 	= $this->input->post('detailed_office_id');
-				$data['employee_id'] 		= $this->input->post('employee_id');
-				$data['page']				= $this->input->post('page');
-				$data['office_return']		= $this->input->post('office_return');
+				$data['selected'] 			= Input::get('office_id');
+				$data['detailed_selected'] 	= Input::get('detailed_office_id');
+				$data['employee_id'] 		= Input::get('employee_id');
+				$data['page']				= Input::get('page');
+				$data['office_return']		= Input::get('office_return');
 			}
 			else
 			{
-				if ($this->input->post('employee_id') != $employee_info['employee_id']) {
+				if (Input::get('employee_id') != $employee_info['employee_id']) {
 					
 					$em = new Employee_m();
 					$em->get_by_id($orig_id);
@@ -726,34 +726,34 @@ class Employees extends MX_Controller  {
 				}
 				//echo $orig_id;
 
-				//echo $this->input->post('employee_id');
+				//echo Input::get('employee_id');
 				//var_dump($employee_info['employee_id']);
 				//var_dump($employee_info['orig_id']);
 				//exit;
 
 				$info = array(
-						'employee_id' 			=> $this->input->post('employee_id'),
-						'lname' 				=> $this->input->post('lname'),
-						'fname' 				=> $this->input->post('fname'),
-						'mname' 				=> $this->input->post('mname'),
-						'extension' 			=> $this->input->post('extension'),
-						'office_id' 			=> $this->input->post('office_id'),
-						'division_id' 			=> $this->input->post('division_id'),
-						'section_id' 			=> $this->input->post('section_id'),
-						'detailed_office_id' 	=> $this->input->post('detailed_office_id'),
-						'salut' 				=> $this->input->post('salutation'),
-						'permanent' 			=> $this->input->post('permanent'),
-						'first_day_of_service' 	=> $this->input->post('first_day_of_service'),
-						'salary_grade' 			=> $this->input->post('sg'),
-						'step'					=> $this->input->post('step'),
-						'position' 				=> $this->input->post('position'),
-						'assistant_dept_head' 	=> $this->input->post('assistant_dept_head'),
-						'shift_id' 				=> $this->input->post('shift2'),
-						'shift_type' 			=> $this->input->post('shift2'),
-						'friday_exempted' 		=> $this->input->post('friday_exempted'),
+						'employee_id' 			=> Input::get('employee_id'),
+						'lname' 				=> Input::get('lname'),
+						'fname' 				=> Input::get('fname'),
+						'mname' 				=> Input::get('mname'),
+						'extension' 			=> Input::get('extension'),
+						'office_id' 			=> Input::get('office_id'),
+						'division_id' 			=> Input::get('division_id'),
+						'section_id' 			=> Input::get('section_id'),
+						'detailed_office_id' 	=> Input::get('detailed_office_id'),
+						'salut' 				=> Input::get('salutation'),
+						'permanent' 			=> Input::get('permanent'),
+						'first_day_of_service' 	=> Input::get('first_day_of_service'),
+						'salary_grade' 			=> Input::get('sg'),
+						'step'					=> Input::get('step'),
+						'position' 				=> Input::get('position'),
+						'assistant_dept_head' 	=> Input::get('assistant_dept_head'),
+						'shift_id' 				=> Input::get('shift2'),
+						'shift_type' 			=> Input::get('shift2'),
+						'friday_exempted' 		=> Input::get('friday_exempted'),
 						'updated' 				=> 1,
-						'emergency_contact'		=> $this->input->post('emergency_contact'),
-						'emergency_contact_no'	=> $this->input->post('emergency_contact_no'),
+						'emergency_contact'		=> Input::get('emergency_contact'),
+						'emergency_contact_no'	=> Input::get('emergency_contact_no'),
 						
 						);
 				
@@ -780,8 +780,8 @@ class Employees extends MX_Controller  {
 										 );
 				
 				
-				$page			= $this->input->post('page');
-				$office_return	= $this->input->post('office_return');
+				$page			= Input::get('page');
+				$office_return	= Input::get('office_return');
 				
 				// Use for messaging
 				$this->session->set_flashdata('msg', 'Employee updated!');
@@ -825,21 +825,21 @@ class Employees extends MX_Controller  {
 		$data['msg'] 				= '';
 		
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= (	$this->input->post('office_id') ) ? 
-										$this->input->post('office_id') : 
+		$data['selected'] 			= (	Input::get('office_id') ) ? 
+										Input::get('office_id') : 
 										$this->session->userdata('office_id');
 		
 		$data['month_options'] 		= $this->options->month_options();
-		$data['month_selected'] 	= (	$this->input->post('month') ) ? 
-										$this->input->post('month') :
+		$data['month_selected'] 	= (	Input::get('month') ) ? 
+										Input::get('month') :
 										date('m');
 		
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
-		$data['year_selected'] 		= (	$this->input->post('year') ) ? 
-										$this->input->post('year') :
+		$data['year_selected'] 		= (	Input::get('year') ) ? 
+										Input::get('year') :
 										date('Y');
 										
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
 			echo 'ok';
 		}								

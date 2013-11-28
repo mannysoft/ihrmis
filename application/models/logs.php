@@ -114,7 +114,7 @@ class Logs extends CI_Model {
 	{
 		$data = array();
 		
-		if ($office_id != '' and ! $this->input->post('office_id'))
+		if ($office_id != '' and ! Input::get('office_id'))
 		{
 			$this->db->where('office_id', $office_id);
 		}

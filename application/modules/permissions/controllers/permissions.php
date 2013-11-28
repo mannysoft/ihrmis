@@ -84,18 +84,18 @@ class Permissions extends MX_Controller {
 		
 		//print_r(array_combine($hours = range(0, 23), $hours));
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			if ( $this->input->post('modules') )
+			if ( Input::get('modules') )
 			{
-				foreach ($this->input->post('main_modules') as $module)
+				foreach (Input::get('main_modules') as $module)
 				{
 					$p = new Permission_m();
 					$p->where('group_id', $id);
 					$p->where('module', $module)->get();
 					$p->group_id 	= $id;
 					$p->module 		= $module;
-					$p->roles 		= ($this->input->post($module)) ? json_encode($this->input->post($module)) : NULL;
+					$p->roles 		= (Input::get($module)) ? json_encode(Input::get($module)) : NULL;
 					$p->save();
 					
 					// If no methods selected

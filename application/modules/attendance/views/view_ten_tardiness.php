@@ -17,11 +17,11 @@ to
       <input name="print2" type="submit" id="print2" value="Print" />
     </strong>
     <?php 
-	$lgu_code = $this->Settings->get_selected_field('lgu_code'); 
+	$lgu_code = Setting::getField('lgu_code'); 
 		
 	if ( $lgu_code == 'marinduque_province' )
 	{
-		$lgu_check = $this->input->post('all_tardiness') ? TRUE : FALSE;
+		$lgu_check = Input::get('all_tardiness') ? TRUE : FALSE;
 		echo form_checkbox('all_tardiness', 'all_tardiness', $lgu_check);
 		echo 'View all';
 	}

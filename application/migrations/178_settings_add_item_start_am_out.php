@@ -8,7 +8,7 @@ class Migration_settings_add_item_start_am_out extends CI_Migration {
 		$pm_in = '';
 		
 		// Do only if bataraza
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 				
 		if ($lgu_code == 'bataraza')
 		{

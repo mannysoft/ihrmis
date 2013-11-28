@@ -101,10 +101,10 @@ class Training_manage extends MX_Controller {
 		
 		$data['type'] = $type->get_by_id( $id );
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$type->training_type 		= $this->input->post('training_type');
-			$type->training_type_desc 	= $this->input->post('training_type_desc');
+			$type->training_type 		= Input::get('training_type');
+			$type->training_type_desc 	= Input::get('training_type_desc');
 			
 			$type->save();
 			
@@ -167,9 +167,9 @@ class Training_manage extends MX_Controller {
 		
 		$course->order_by('course_title');
 		
-		if ($this->input->post('training_type_id') != 0)
+		if (Input::get('training_type_id') != 0)
 		{
-			$course->where('training_type_id', $this->input->post('training_type_id'));
+			$course->where('training_type_id', Input::get('training_type_id'));
 		}
 		
 		$data['rows'] = $course->get($limit, $offset);
@@ -196,14 +196,14 @@ class Training_manage extends MX_Controller {
 		
 		$data['course'] = $course->get_by_id( $id );
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$course->training_type_id 		= $this->input->post('training_type_id');
-			$course->course_title 			= $this->input->post('course_title');
-			$course->course_description 	= $this->input->post('course_description');
-			$course->course_est_duration 	= $this->input->post('course_est_duration');
-			$course->course_est_cost 		= $this->input->post('course_est_cost');
-			$course->course_ave_eval 		= $this->input->post('course_ave_eval');
+			$course->training_type_id 		= Input::get('training_type_id');
+			$course->course_title 			= Input::get('course_title');
+			$course->course_description 	= Input::get('course_description');
+			$course->course_est_duration 	= Input::get('course_est_duration');
+			$course->course_est_cost 		= Input::get('course_est_cost');
+			$course->course_ave_eval 		= Input::get('course_ave_eval');
 			
 			$course->save();
 			
@@ -292,19 +292,19 @@ class Training_manage extends MX_Controller {
 		
 		$data['event'] = $event->get_by_id( $id );
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$event->course_id 			= $this->input->post('course_id');
-			$event->event_from 			= $this->input->post('event_from');
-			$event->event_to 			= $this->input->post('event_from');
-			$event->event_venue 		= $this->input->post('event_venue');
-			$event->contact_id 			= $this->input->post('contact_id');
-			//$event->funder_id 			= $this->input->post('funder_id');
-			$event->event_local_cost 	= $this->input->post('event_local_cost');
-			$event->event_other_cost 	= $this->input->post('event_other_cost');
-			$event->event_duration 		= $this->input->post('event_duration');
-			$event->event_eval 			= $this->input->post('event_eval');
-			$event->remarks 			= $this->input->post('remarks');
+			$event->course_id 			= Input::get('course_id');
+			$event->event_from 			= Input::get('event_from');
+			$event->event_to 			= Input::get('event_from');
+			$event->event_venue 		= Input::get('event_venue');
+			$event->contact_id 			= Input::get('contact_id');
+			//$event->funder_id 			= Input::get('funder_id');
+			$event->event_local_cost 	= Input::get('event_local_cost');
+			$event->event_other_cost 	= Input::get('event_other_cost');
+			$event->event_duration 		= Input::get('event_duration');
+			$event->event_eval 			= Input::get('event_eval');
+			$event->remarks 			= Input::get('remarks');
 			
 			$event->save();
 			
@@ -348,23 +348,23 @@ class Training_manage extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		$event_id  = ($this->input->post('event_id')) ? $this->input->post('event_id') : $event_id;
+		$event_id  = (Input::get('event_id')) ? Input::get('event_id') : $event_id;
 		
 		$this->load->helper('list_box');
 		$this->load->library('pagination');
 		
 		$attend = new Training_attendee();
 		
-		if ( $this->input->post('btn_save'))
+		if ( Input::get('btn_save'))
 		{
-			$attend->get_by_id($this->input->post('id'));
+			$attend->get_by_id(Input::get('id'));
 			$attend->event_id 				= $event_id;
-			$attend->employee_id 			= $this->input->post('employee_id');
-			$attend->employee_local_cost 	= $this->input->post('employee_local_cost');
-			$attend->employee_other_cost 	= $this->input->post('employee_other_cost');
-			$attend->relevant 				= $this->input->post('relevant');
-			$attend->certified 				= $this->input->post('certified');
-			$attend->remarks 				= $this->input->post('remarks');
+			$attend->employee_id 			= Input::get('employee_id');
+			$attend->employee_local_cost 	= Input::get('employee_local_cost');
+			$attend->employee_other_cost 	= Input::get('employee_other_cost');
+			$attend->relevant 				= Input::get('relevant');
+			$attend->certified 				= Input::get('certified');
+			$attend->remarks 				= Input::get('remarks');
 			
 			$attend->save();
 			
@@ -398,19 +398,19 @@ class Training_manage extends MX_Controller {
 		
 		$data['attendance'] = $attendance->get_by_id( $id );
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$event->course_id 			= $this->input->post('course_id');
-			$event->event_from 			= $this->input->post('event_from');
-			$event->event_to 			= $this->input->post('event_from');
-			$event->event_venue 		= $this->input->post('event_venue');
-			$event->contact_id 			= $this->input->post('contact_id');
-			//$event->funder_id 			= $this->input->post('funder_id');
-			$event->event_local_cost 	= $this->input->post('event_local_cost');
-			$event->event_other_cost 	= $this->input->post('event_other_cost');
-			$event->event_duration 		= $this->input->post('event_duration');
-			$event->event_eval 			= $this->input->post('event_eval');
-			$event->remarks 			= $this->input->post('remarks');
+			$event->course_id 			= Input::get('course_id');
+			$event->event_from 			= Input::get('event_from');
+			$event->event_to 			= Input::get('event_from');
+			$event->event_venue 		= Input::get('event_venue');
+			$event->contact_id 			= Input::get('contact_id');
+			//$event->funder_id 			= Input::get('funder_id');
+			$event->event_local_cost 	= Input::get('event_local_cost');
+			$event->event_other_cost 	= Input::get('event_other_cost');
+			$event->event_duration 		= Input::get('event_duration');
+			$event->event_eval 			= Input::get('event_eval');
+			$event->remarks 			= Input::get('remarks');
 			
 			$event->save();
 			
@@ -492,10 +492,10 @@ class Training_manage extends MX_Controller {
 		
 		$data['contact'] = $contact->get_by_id( $id );
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$contact->contact_type		= $this->input->post('contact_type');
-			$contact->contact_type_desc = $this->input->post('contact_type_desc');
+			$contact->contact_type		= Input::get('contact_type');
+			$contact->contact_type_desc = Input::get('contact_type_desc');
 			
 			$contact->save();
 			
@@ -558,9 +558,9 @@ class Training_manage extends MX_Controller {
 		
 		$contact->order_by('contact_name');
 		
-		if ($this->input->post('contact_type_id') != 0)
+		if (Input::get('contact_type_id') != 0)
 		{
-			$contact->where('contact_type_id', $this->input->post('contact_type_id'));
+			$contact->where('contact_type_id', Input::get('contact_type_id'));
 			//$limit = '';
 		}
 		
@@ -588,17 +588,17 @@ class Training_manage extends MX_Controller {
 		
 		$data['contact'] = $contact->get_by_id( $id );
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$contact->contact_name 		= $this->input->post('contact_name');
-			$contact->contact_co 		= $this->input->post('contact_co');
-			$contact->contact_address 	= $this->input->post('contact_address');
-			$contact->contact_city 		= $this->input->post('contact_city');
-			$contact->contact_phone 	= $this->input->post('contact_phone');
-			$contact->contact_fax 		= $this->input->post('contact_fax');
-			$contact->contact_email 	= $this->input->post('contact_email');
-			$contact->contact_specialty = $this->input->post('contact_specialty');
-			$contact->contact_type_id 	= $this->input->post('contact_type_id');
+			$contact->contact_name 		= Input::get('contact_name');
+			$contact->contact_co 		= Input::get('contact_co');
+			$contact->contact_address 	= Input::get('contact_address');
+			$contact->contact_city 		= Input::get('contact_city');
+			$contact->contact_phone 	= Input::get('contact_phone');
+			$contact->contact_fax 		= Input::get('contact_fax');
+			$contact->contact_email 	= Input::get('contact_email');
+			$contact->contact_specialty = Input::get('contact_specialty');
+			$contact->contact_type_id 	= Input::get('contact_type_id');
 			
 			$contact->save();
 			
@@ -641,11 +641,11 @@ class Training_manage extends MX_Controller {
 		
 		$data['msg'] 				= '';
 		
-		$employee_id = $this->input->post('employee_id');
+		$employee_id = Input::get('employee_id');
 		
 		$e = new Employee_m();
 		
-		$data['employee'] 			= $e->get_by_id ($this->input->post('employee_id'));
+		$data['employee'] 			= $e->get_by_id (Input::get('employee_id'));
 		
 		$data['pics'] = (file_exists('pics/'.$e->pics)) ? $e->pics : 'not_available.jpg';
 		
@@ -662,15 +662,15 @@ class Training_manage extends MX_Controller {
 		
 		$data['employment_movement'] = $em->employee_movement;
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			// TRAINING PROGRAMS=========================
-			$tra_name 		= $this->input->post('tra_name');
-			$tra_date_from 	= $this->input->post('tra_date_from');
-			$tra_date_to 	= $this->input->post('tra_date_to');
-			$tra_hours 		= $this->input->post('tra_hours');
-			$tra_conduct 	= $this->input->post('tra_conduct');
-			$tra_location 	= $this->input->post('tra_location');
+			$tra_name 		= Input::get('tra_name');
+			$tra_date_from 	= Input::get('tra_date_from');
+			$tra_date_to 	= Input::get('tra_date_to');
+			$tra_hours 		= Input::get('tra_hours');
+			$tra_conduct 	= Input::get('tra_conduct');
+			$tra_location 	= Input::get('tra_location');
 			
 			$t = new Training();
 			
@@ -706,14 +706,14 @@ class Training_manage extends MX_Controller {
 		}
 		
 		// Recommended trainings
-		if ( $this->input->post('op2'))
+		if ( Input::get('op2'))
 		{
-			$recommends = $this->input->post('recommend_id');
+			$recommends = Input::get('recommend_id');
 			
-			$reco_year 		= $this->input->post('reco_year');
-			$course_id 		= $this->input->post('course_id');
-			$relevant 		= $this->input->post('relevant');
-			$reco_remarks 	= $this->input->post('reco_remarks');
+			$reco_year 		= Input::get('reco_year');
+			$course_id 		= Input::get('course_id');
+			$relevant 		= Input::get('relevant');
+			$reco_remarks 	= Input::get('reco_remarks');
 			
 			$i = 0;
 			
@@ -741,9 +741,9 @@ class Training_manage extends MX_Controller {
 			}
 			
 			// Remove checked
-			if ($this->input->post('remove'))
+			if (Input::get('remove'))
 			{
-				foreach ($this->input->post('remove') as $recommended_id)
+				foreach (Input::get('remove') as $recommended_id)
 				{
 					$t = new Training_recomended_m();
 					$t->get_by_id($recommended_id);
@@ -755,13 +755,13 @@ class Training_manage extends MX_Controller {
 		}
 		
 		// Actual duties
-		if ( $this->input->post('op3'))
+		if ( Input::get('op3'))
 		{
-			$duties_ids = $this->input->post('duties_id');
+			$duties_ids = Input::get('duties_id');
 			
-			$duty_from 		= $this->input->post('duty_from');
-			$duty_to 		= $this->input->post('duty_to');
-			$duty_desc 		= $this->input->post('duty_desc');
+			$duty_from 		= Input::get('duty_from');
+			$duty_to 		= Input::get('duty_to');
+			$duty_desc 		= Input::get('duty_desc');
 			
 			$i = 0;
 			

@@ -90,7 +90,7 @@ class Offices extends MX_Controller {
 		
 		$data['office'] = $office->get_by_office_id( $id );
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			$this->form_validation->set_rules('office_name', 'Office Name', 'required');
 			
@@ -104,14 +104,14 @@ class Offices extends MX_Controller {
 			if ($this->form_validation->run($this) == TRUE)
 			{
 				
-				$office->office_code			= $this->input->post('office_code');
-				$office->office_name			= $this->input->post('office_name');
-				$office->office_address			= $this->input->post('office_address');
-				$office->salary_grade_type 		= $this->input->post('salary_grade_type');
-				$office->office_head 			= $this->input->post('office_head');
-				$office->employee_id 			= $this->input->post('employee_id');
-				$office->position  				= $this->input->post('position');
-				$office->office_location 		= $this->input->post('office_location');
+				$office->office_code			= Input::get('office_code');
+				$office->office_name			= Input::get('office_name');
+				$office->office_address			= Input::get('office_address');
+				$office->salary_grade_type 		= Input::get('salary_grade_type');
+				$office->office_head 			= Input::get('office_head');
+				$office->employee_id 			= Input::get('employee_id');
+				$office->position  				= Input::get('position');
+				$office->office_location 		= Input::get('office_location');
 								
 				$office->save();
 				
@@ -228,12 +228,12 @@ class Offices extends MX_Controller {
 		
 		$data['office_id'] = $office_id;
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$divisions->name 		= $this->input->post('name');
-			$divisions->description	= $this->input->post('description');
+			$divisions->name 		= Input::get('name');
+			$divisions->description	= Input::get('description');
 			$divisions->office_id 	= $office_id;
-			$divisions->order		= $this->input->post('order');
+			$divisions->order		= Input::get('order');
 						
 			$divisions->save();
 			

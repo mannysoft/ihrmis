@@ -341,7 +341,7 @@ to
     
     <?php endif; ?>
     
-    <?php $enable_id_maker = $this->Settings->get_selected_field( 'enable_id_maker' );?>
+    <?php $enable_id_maker = Setting::getField( 'enable_id_maker' );?>
     <?php if($enable_id_maker == 'yes'):?>
     <tr>
       <td align="right">Emergency Contact Name:</td>

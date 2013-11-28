@@ -133,7 +133,7 @@ $('#check_updates').click(function(){
 });
 </script>
 
-<?php $show_perform_leave_earnings_now = $this->Settings->get_selected_field( 'show_perform_leave_earnings_now' );?>
+<?php $show_perform_leave_earnings_now = Setting::getField( 'show_perform_leave_earnings_now' );?>
 
 <?php if($show_perform_leave_earnings_now == 'yes'):?>
 

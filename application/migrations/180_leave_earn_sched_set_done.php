@@ -5,7 +5,7 @@ class Migration_leave_earn_sched_set_done extends CI_Migration {
 	function up() 
 	{							
 		
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		// Do only if bataraza		
 		if ($lgu_code == 'bataraza')

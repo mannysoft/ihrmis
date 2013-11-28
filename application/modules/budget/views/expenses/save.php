@@ -19,7 +19,7 @@
 	  <?php echo form_dropdown(
 	  						'budget_expenditure_id', 
 							budget_expenditures_options(), 
-							$this->input->post('budget_expenditure_id') ? $this->input->post('budget_expenditure_id') : $expense->budget_expenditure_id
+							Input::get('budget_expenditure_id') ? Input::get('budget_expenditure_id') : $expense->budget_expenditure_id
 							);?></td>
       <td align="left">&nbsp;</td>
     </tr>
@@ -42,7 +42,7 @@
       <td align="right" class="type-one">&nbsp;</td>
       <td align="left" class="type-one"><strong>
         <input type="submit" name="button2" id="button" value="Save"/>
-        </strong><a href="<?=base_url().'budget/expenses/index/'; echo $this->input->post('budget_expenditure_id') ? $this->input->post('budget_expenditure_id') : $expense->budget_expenditure_id?>">Cancel</a></td>
+        </strong><a href="<?=base_url().'budget/expenses/index/'; echo Input::get('budget_expenditure_id') ? Input::get('budget_expenditure_id') : $expense->budget_expenditure_id?>">Cancel</a></td>
       <td align="left">&nbsp;</td>
     </tr>
 </table>

@@ -106,7 +106,7 @@ class Leave_earn_sched extends CI_Model {
 		
 		// check if the settings is set to 15/30 for the earning of leave
 		// much better if set to configuration class
-		$leave_earn =  $this->Settings->get_selected_field('leave_earn');
+		$leave_earn =  Setting::getField('leave_earn');
 		
 		if ($leave_earn == 15)
 		{

@@ -182,7 +182,7 @@ class Tardiness extends CI_Model {
 	function count_late($employee_id, $month, $year, $type1, $type2)
 	{
 		
-		$minutes_tardy 	= $this->Settings->get_selected_field('minutes_tardy');
+		$minutes_tardy 	= Setting::getField('minutes_tardy');
 
 		$this->db->select('SUM(seconds) as number_seconds, COUNT(log_type) as tardi_count');
 		$this->db->where('employee_id', $employee_id);
@@ -225,9 +225,9 @@ class Tardiness extends CI_Model {
 	 */
 	function count_tardiness($employee_id, $month, $year, $type1, $type2)
 	{
-		$is_undertime_tardi = $this->Settings->get_selected_field('undertime_tardi');
+		$is_undertime_tardi = Setting::getField('undertime_tardi');
 		
-		$minutes_tardy = $this->Settings->get_selected_field('minutes_tardy');
+		$minutes_tardy = Setting::getField('minutes_tardy');
 		
 		$data = array();
 		
@@ -395,7 +395,7 @@ class Tardiness extends CI_Model {
 		
 		$rows 			= array();
 		
-		$minutes_tardy 	= $this->Settings->get_selected_field('minutes_tardy');
+		$minutes_tardy 	= Setting::getField('minutes_tardy');
 		
 		$last_month 	= $month2;
 		$month1 		= $month;
@@ -619,7 +619,7 @@ class Tardiness extends CI_Model {
 		
 		$employee_ids = array();
 		
-		$minutes_tardy = $this->Settings->get_selected_field('minutes_tardy');
+		$minutes_tardy = Setting::getField('minutes_tardy');
 		
 		$this->db->select('DISTINCT(employee_id)');
 		$this->db->where('YEAR(date)', $year);
@@ -665,7 +665,7 @@ class Tardiness extends CI_Model {
 	{
 		$offices = array();
 		
-		$minutes_tardy = $this->Settings->get_selected_field('minutes_tardy');
+		$minutes_tardy = Setting::getField('minutes_tardy');
 		
 		$this->db->select('office_id, employee_id, date, seconds');
 		$this->db->where('YEAR(date)', $year);

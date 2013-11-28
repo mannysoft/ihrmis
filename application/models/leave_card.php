@@ -741,7 +741,7 @@ class Leave_card extends CI_Model {
 		// --------------------------------------------------------------------
 		// Updated 06072012 
 		// Theres a problem when earning the leave id leave_earn == 30
-		$leave_earn_sched =  $this->Settings->get_selected_field('leave_earn');
+		$leave_earn_sched =  Setting::getField('leave_earn');
 		
 		// if 15/30
 		//if ($leave_earn == 15 || $leave_earn == 30)

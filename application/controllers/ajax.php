@@ -248,17 +248,17 @@ class Ajax extends MX_Controller {
 		{
 			$c = new Compensatory_timeoff();
 		
-			$c->where('id', $this->input->post('rowid'));
+			$c->where('id', Input::get('rowid'));
 			
 			$c->get();
 			
-			if ( $this->input->post('colid') == 'days' )
+			if ( Input::get('colid') == 'days' )
 			{
-				$c->days = $this->input->post('new');
+				$c->days = Input::get('new');
 			}
-			if ( $this->input->post('colid') == 'dates' )
+			if ( Input::get('colid') == 'dates' )
 			{
-				$c->dates = $this->input->post('new');
+				$c->dates = Input::get('new');
 			}
 			
 			$c->save();
@@ -270,9 +270,9 @@ class Ajax extends MX_Controller {
 		
 		if ($mode == 'leave_forward')
 		{
-			$employee_id = $this->input->post('rowid');
+			$employee_id = Input::get('rowid');
 			
-			$this->Leave_forwarded->update_forward_leave($employee_id, $this->input->post('colid'), $this->input->post('new'));
+			$this->Leave_forwarded->update_forward_leave($employee_id, Input::get('colid'), Input::get('new'));
 			exit;
 		}
 		
@@ -281,11 +281,11 @@ class Ajax extends MX_Controller {
 		if ($mode == 'schedule')
 		{
 			//echo 'schedule';
-			$new = $this->input->post('new');
+			$new = Input::get('new');
 						
-			$this->Schedule_employees->update_Schedule($this->input->post('colid'), 
+			$this->Schedule_employees->update_Schedule(Input::get('colid'), 
 								   			 $new, 
-								   			 $this->input->post('rowid')
+								   			 Input::get('rowid')
 								   			);		   
 			exit;
 		}
@@ -294,10 +294,10 @@ class Ajax extends MX_Controller {
 		
 		if ($mode == 'salary_grade')
 		{			
-			$id = $this->input->post('rowid');
+			$id = Input::get('rowid');
 						
 			$data	= array(
-					$this->input->post('colid') => $this->input->post('new') 
+					Input::get('colid') => Input::get('new') 
 					);
 			
 			$this->Salary_grade->update_salary_grade($data, $id);
@@ -311,31 +311,31 @@ class Ajax extends MX_Controller {
 		// --------------------------------------------------------------------
 		
 		//$colid = table field, $new = new value, $rowid = table row id
-		if ($this->input->post('colid') == 'ob_leave')
+		if (Input::get('colid') == 'ob_leave')
 		{
 			
-			if(trim($this->input->post('new')) == '')
+			if(trim(Input::get('new')) == '')
 			{
-				$data	= array('notes' => $this->input->post('new') );
+				$data	= array('notes' => Input::get('new') );
 				
 				// Get manual_log_id in table dtr
-				$manual_log_id = $this->Dtr->get_manual_log_id($this->input->post('rowid'));
+				$manual_log_id = $this->Dtr->get_manual_log_id(Input::get('rowid'));
 				
 				// Execute the update
 				$this->Manual_log->update_manual_log($data, $manual_log_id);
 			}
 		
-			$is_ob = $this->Dtr->is_ob($this->input->post('rowid'));
-			$is_to = $this->Dtr->is_to($this->input->post('rowid'));
+			$is_ob = $this->Dtr->is_ob(Input::get('rowid'));
+			$is_to = $this->Dtr->is_to(Input::get('rowid'));
 
 			// This is for OB
 			if($is_ob == TRUE or $is_to == TRUE)
 			{
-				$dtr_details = $this->Dtr->get_dtr_details($this->input->post('rowid'));
+				$dtr_details = $this->Dtr->get_dtr_details(Input::get('rowid'));
 				//exit;
 				$office_id = $this->Employee->get_single_field('office_id', $dtr_details['employee_id']);
 				
-				$is_ob_half = $this->Dtr->is_ob_half($this->input->post('rowid'));
+				$is_ob_half = $this->Dtr->is_ob_half(Input::get('rowid'));
 				
 				$half_day = $dtr_details['log_date'];
 				
@@ -361,12 +361,12 @@ class Ajax extends MX_Controller {
 							'if_single_time' 		=> '',
 							'cover_if_ob_or_leave' 	=> $dtr_details['log_date'],
 							'cover_if_ob_or_leave2' => $half_day,
-							'notes' 				=> $this->input->post('new')
+							'notes' 				=> Input::get('new')
 							);
 							
 					$id = $this->Manual_log->insert_manual_log($data);
 					
-					$this->Dtr->update_dtr('manual_log_id', $id, $this->input->post('rowid'));
+					$this->Dtr->update_dtr('manual_log_id', $id, Input::get('rowid'));
 				}
 				
 				if($is_manual_log_exists != FALSE)
@@ -376,26 +376,26 @@ class Ajax extends MX_Controller {
 								'if_single_time' 			=> '', 
 								'cover_if_ob_or_leave' 		=> $dtr_details['log_date'],
 								'cover_if_ob_or_leave2' 	=> $half_day, 
-								'notes' 					=> $this->input->post('new')
+								'notes' 					=> Input::get('new')
 						);
 					
 					$this->Manual_log->update_manual_log($data, $is_manual_log_exists);
 					
-					$this->Dtr->update_dtr('manual_log_id', $is_manual_log_exists, $this->input->post('rowid'));
+					$this->Dtr->update_dtr('manual_log_id', $is_manual_log_exists, Input::get('rowid'));
 				}
 				
 			}
 			
 			// This is for leave===================================================================
-			$is_leave = $this->Dtr->is_leave($this->input->post('rowid'));
+			$is_leave = $this->Dtr->is_leave(Input::get('rowid'));
 			
 			if($is_leave == TRUE)
 			{
-				$dtr_details = $this->Dtr->get_dtr_details($this->input->post('rowid'));
+				$dtr_details = $this->Dtr->get_dtr_details(Input::get('rowid'));
 				
 				$office_id = $this->Employee->get_single_field('office_id', $dtr_details['employee_id']);
 				
-				$is_leave_half = $this->Dtr->is_leave_half($this->input->post('rowid'));
+				$is_leave_half = $this->Dtr->is_leave_half(Input::get('rowid'));
 				
 				$half_day = $dtr_details['log_date'];
 				
@@ -408,18 +408,18 @@ class Ajax extends MX_Controller {
 				}
 				
 				// Tell what kind of leave
-				if($this->input->post('new') == 'vl' or $this->input->post('new') == 'SL')
+				if(Input::get('new') == 'vl' or Input::get('new') == 'SL')
 				{
 					$notes = 'Vacation Leave';
 					$leave_type_id = 1;
 				}
-				if($this->input->post('new') == 'sl' or $this->input->post('new') == 'VL')
+				if(Input::get('new') == 'sl' or Input::get('new') == 'VL')
 				{
 					$notes = 'Sick Leave';
 					$leave_type_id = 2;
 				}
-				if($this->input->post('new') != 'sl' or $this->input->post('new') != 'VL' or 
-				   $this->input->post('new') != 'vl' or $this->input->post('new') != 'SL')
+				if(Input::get('new') != 'sl' or Input::get('new') != 'VL' or 
+				   Input::get('new') != 'vl' or Input::get('new') != 'SL')
 				{
 	
 				}
@@ -446,8 +446,8 @@ class Ajax extends MX_Controller {
 					
 					$manual_log_id = $id;
 					
-					$this->Dtr->update_dtr('manual_log_id', $id, $this->input->post('rowid'));
-					$this->Dtr->update_dtr('leave_type_id', $leave_type_id, $this->input->post('rowid'));
+					$this->Dtr->update_dtr('manual_log_id', $id, Input::get('rowid'));
+					$this->Dtr->update_dtr('leave_type_id', $leave_type_id, Input::get('rowid'));
 				}
 				if($is_manual_log_exists != FALSE)
 				{
@@ -460,8 +460,8 @@ class Ajax extends MX_Controller {
 					
 					$this->Manual_log->update_manual_log($data, $is_manual_log_exists);
 					
-					$this->Dtr->update_dtr('manual_log_id', $is_manual_log_exists, $this->input->post('rowid'));
-					$this->Dtr->update_dtr('leave_type_id', $leave_type_id, $this->input->post('rowid'));
+					$this->Dtr->update_dtr('manual_log_id', $is_manual_log_exists, Input::get('rowid'));
+					$this->Dtr->update_dtr('leave_type_id', $leave_type_id, Input::get('rowid'));
 					
 					$manual_log_id = $is_manual_log_exists;
 				}
@@ -471,27 +471,27 @@ class Ajax extends MX_Controller {
 		}
 		else // Use for editing attendance ===============================================
 		{
-			$old = strip_tags($this->input->post('old'));
+			$old = strip_tags(Input::get('old'));
 			
 			// Use to trap changes in logs with late
-			if ($this->input->post('new') == $old)
+			if (Input::get('new') == $old)
 			{
 				return;
 			}
 			
-			$new = $this->input->post('new');
+			$new = Input::get('new');
 			
-			$new_value = str_replace(':','', $this->input->post('new'));
+			$new_value = str_replace(':','', Input::get('new'));
 			
 			if ($new_value == 'OB' or $new_value == 'ob')
 			{
 				// Check if allow to accept late ob
-				$accept_late_ob = $this->Settings->get_selected_field('accept_late_ob'); 
+				$accept_late_ob = Setting::getField('accept_late_ob'); 
 
 				if ($accept_late_ob == 'no')
 				{
 					
-					$dtr_details = $this->Dtr->get_dtr_details($this->input->post('rowid'));
+					$dtr_details = $this->Dtr->get_dtr_details(Input::get('rowid'));
 
 					$now = time(); // or your date as well
      				$your_date = strtotime($dtr_details['log_date']);
@@ -518,7 +518,7 @@ class Ajax extends MX_Controller {
 			}
 			
 			// Check if employee PM IN is 12:00
-			$dtr_details = $this->Dtr->get_dtr_details($this->input->post('rowid'));
+			$dtr_details = $this->Dtr->get_dtr_details(Input::get('rowid'));
 			$se = $this->Schedule_employees->get_schedule( $dtr_details['employee_id'] );
 			
 			if ( !empty($se) )
@@ -529,9 +529,9 @@ class Ajax extends MX_Controller {
 				}
 			}
 			
-			$this->Dtr->update_dtr($this->input->post('colid'), 
+			$this->Dtr->update_dtr(Input::get('colid'), 
 								   $new, 
-								   $this->input->post('rowid')
+								   Input::get('rowid')
 								   );
 								   
 			
@@ -545,25 +545,25 @@ class Ajax extends MX_Controller {
 		}
 		
 		
-		$dtr_details = $this->Dtr->get_dtr_details($this->input->post('rowid'));
+		$dtr_details = $this->Dtr->get_dtr_details(Input::get('rowid'));
 		
 		
 		// Lets add the original logs
-		$old 		= $this->input->post('old');
-		$dtr_id 	= $this->input->post('rowid');
-		$column  	= $this->input->post('colid');
+		$old 		= Input::get('old');
+		$dtr_id 	= Input::get('rowid');
+		$column  	= Input::get('colid');
 		
 		$dtr = new Dtr_m();
-		$dtr->get_by_id($this->input->post('rowid'));
+		$dtr->get_by_id(Input::get('rowid'));
 		
 		
 		$orig_dtr = $dtr_details['orig_dtr'];
 		
 		$orig_dtr = json_decode($orig_dtr);
 						
-		$c = $this->input->post('colid');
+		$c = Input::get('colid');
 		
-		if ($this->input->post('old') == '')
+		if (Input::get('old') == '')
 		{
 			$old = 'No Log';
 		}
@@ -585,14 +585,14 @@ class Ajax extends MX_Controller {
 		$dtr->save();
 		
 			
-		$old = $this->input->post('old');
-		$new = $this->input->post('new');
+		$old = Input::get('old');
+		$new = Input::get('new');
 		
-		if ($this->input->post('old') == '')
+		if (Input::get('old') == '')
 		{
 			$old = 'No Log';
 		}
-		if ($this->input->post('new') == '')
+		if (Input::get('new') == '')
 		{
 			$new = 'No Log';
 		}
@@ -600,7 +600,7 @@ class Ajax extends MX_Controller {
 		// Use for use logs
 		$this->Logs->insert_logs('attendance',
 								 'EDIT LOGS', 
-								 'Edited '.$this->input->post('colid').'('.$dtr_details['log_date'].') Change from '.
+								 'Edited '.Input::get('colid').'('.$dtr_details['log_date'].') Change from '.
 								 $old.' to '.$new, 
 								 $dtr_details['employee_id']);
 
@@ -805,7 +805,7 @@ class Ajax extends MX_Controller {
 			if ( $this->leave->leave_type_id == 5)
 			{					
 				// check if auto 60 days
-				$auto_sixty_days = $this->Settings->get_selected_field('auto_sixty_days'); 
+				$auto_sixty_days = Setting::getField('auto_sixty_days'); 
 				
 				
 				if ( $auto_sixty_days == 'yes' )
@@ -819,7 +819,7 @@ class Ajax extends MX_Controller {
 			if ( $this->leave->leave_type_id == 4)
 			{					
 				// check if auto 7 days
-				$auto_seven_days = $this->Settings->get_selected_field('auto_seven_days'); 
+				$auto_seven_days = Setting::getField('auto_seven_days'); 
 				
 				
 				if ( $auto_seven_days == 'yes' )
@@ -958,7 +958,7 @@ class Ajax extends MX_Controller {
 																	  $this->leave->year;
 			
 			// If settings is not chrnological order in leave
-			$leave_order_chrono = $this->Settings->get_selected_field('leave_order_chrono');
+			$leave_order_chrono = Setting::getField('leave_order_chrono');
 			
 			if ($leave_order_chrono == 0)
 			{
@@ -986,7 +986,7 @@ class Ajax extends MX_Controller {
 			// If monetization
 			if ($this->leave->leave_type_id == 9)
 			{
-				$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+				$lgu_code = Setting::getField( 'lgu_code' );
 				
 				if ($lgu_code == 'laguna_province')
 				{
@@ -1144,7 +1144,7 @@ class Ajax extends MX_Controller {
 							"manual_log_id"		=> $manual_log_id	
 							);
 				
-				$auto_deduct_mc_vl = $this->Settings->get_selected_field( 'auto_deduct_mc_vl' );
+				$auto_deduct_mc_vl = Setting::getField( 'auto_deduct_mc_vl' );
 				
 				if ($auto_deduct_mc_vl == 'yes')
 				{
@@ -1399,7 +1399,7 @@ class Ajax extends MX_Controller {
 							"manual_log_id"		=> $manual_log_id	
 							);
 							
-				$lgu_code = $this->Settings->get_selected_field('lgu_code');
+				$lgu_code = Setting::getField('lgu_code');
 				
 				// We will not deduct rural service for tita henie
 				if ($lgu_code == 'laguna_province')
@@ -1594,7 +1594,7 @@ class Ajax extends MX_Controller {
 				echo '<b>Leave has been approved!</b>';
 			}
 			
-			$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+			$lgu_code = Setting::getField( 'lgu_code' );
 			
 			$this->Logs->insert_logs(
 									'leave', 
@@ -1727,7 +1727,7 @@ class Ajax extends MX_Controller {
 		$this->leave->action_taken = '<b>Disapproved due to exigency of the service</b>';														  
 		
 		// If settings is not chrnological order in leave
-		$leave_order_chrono = $this->Settings->get_selected_field('leave_order_chrono');
+		$leave_order_chrono = Setting::getField('leave_order_chrono');
 		
 		if ($leave_order_chrono == 0)
 		{
@@ -2001,12 +2001,12 @@ class Ajax extends MX_Controller {
 	
 	function file_cto( $process = '', $id = '' )
 	{
-		$employee_id 	=  $this->input->post('employee_id');
-		$month 			=  $this->input->post('month');
-		$year 			=  $this->input->post('year');
-		$allow_sat_sun 	=  $this->input->post('allow_sat_sun');
-		$process 		=  $this->input->post('process');
-		$multiple  		=  $this->input->post('multiple');
+		$employee_id 	=  Input::get('employee_id');
+		$month 			=  Input::get('month');
+		$year 			=  Input::get('year');
+		$allow_sat_sun 	=  Input::get('allow_sat_sun');
+		$process 		=  Input::get('process');
+		$multiple  		=  Input::get('multiple');
 		
 		
 		
@@ -2027,10 +2027,10 @@ class Ajax extends MX_Controller {
 		
 		$this->load->library('cto', $params);
 				
-		if ($this->input->post('id') != '')
+		if (Input::get('id') != '')
 		{
 						
-			$cto_apps = $this->Compensatory_timeoff->get_cto_apps_info($this->input->post('id'));
+			$cto_apps = $this->Compensatory_timeoff->get_cto_apps_info(Input::get('id'));
 						
 			$params = array(
 						'employee_id' 		=> $cto_apps['employee_id'],
@@ -2047,7 +2047,7 @@ class Ajax extends MX_Controller {
 			$this->cto->initialize($params);
 			
 			// Set the leave to approved
-			$this->Compensatory_timeoff->set_approved($this->input->post('id'));
+			$this->Compensatory_timeoff->set_approved(Input::get('id'));
 			
 			
 			
@@ -2183,7 +2183,7 @@ class Ajax extends MX_Controller {
 			$c->type 		= 'spent';
 			$c->status 		= 'active';
 			//$c->save();
-			//echo $this->input->post('id').'25333334455';
+			//echo Input::get('id').'25333334455';
 			//exit;
 			
 			
@@ -2239,7 +2239,7 @@ class Ajax extends MX_Controller {
 								"log_date" 					=> $day,
 								"employee_id" 				=> $this->cto->employee_id,
 								"office_id" 				=> $cto_apps['office_id'],
-								'compensatory_timeoff_id' 	=> $this->input->post('id')
+								'compensatory_timeoff_id' 	=> Input::get('id')
 								);
 				
 						$this->Dtr->insert_dtr($info);
@@ -2271,7 +2271,7 @@ class Ajax extends MX_Controller {
 					$info = array(
 								"employee_id" 				=> $this->cto->employee_id, 
 								"log_date" 					=> $date,
-								'compensatory_timeoff_id' 	=> $this->input->post('id'),
+								'compensatory_timeoff_id' 	=> Input::get('id'),
 								"am_login" 					=> 'offset',
 								"am_logout" 				=> 'offset',
 								"pm_login" 					=> 'offset',
@@ -2531,7 +2531,7 @@ class Ajax extends MX_Controller {
 		
 		foreach($employees as $employee_id)
 		{
-			if ( $employee_id != 0)
+			if ( $employee_id != '0')
 			{
 				$name = $this->Employee->get_employee_info($employee_id, 'lname, fname');
 				echo $name['lname'].', '.$name['fname'].'<br>';
@@ -2579,7 +2579,7 @@ class Ajax extends MX_Controller {
 		
 		//$data['rows'] 	= $this->Manual_log->office_manual_log($employee_id, 2, $include_hidden = 0);
 		
-		$encoded_leave_listing_order = $this->Settings->get_selected_field( 'encoded_leave_listing_order' );
+		$encoded_leave_listing_order = Setting::getField( 'encoded_leave_listing_order' );
 		
 		$this->Leave_card->encoded_leave_listing_order = $encoded_leave_listing_order;
 		

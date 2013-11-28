@@ -101,15 +101,15 @@ class Additional_compensation extends MX_Controller {
 		
 		$data['deduction'] = $p->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$p->code 		= $this->input->post('code');
-			$p->name 		= $this->input->post('name');
-			$p->taxable 	= $this->input->post('taxable');
-			$p->frequency 	= $this->input->post('frequency');
-			$p->order 		= $this->input->post('order');
-			$p->deductible 	= $this->input->post('deductible');
-			$p->basis 		= $this->input->post('basis');
+			$p->code 		= Input::get('code');
+			$p->name 		= Input::get('name');
+			$p->taxable 	= Input::get('taxable');
+			$p->frequency 	= Input::get('frequency');
+			$p->order 		= Input::get('order');
+			$p->deductible 	= Input::get('deductible');
+			$p->basis 		= Input::get('basis');
 			
 			$p->save();
 			
@@ -181,12 +181,12 @@ class Additional_compensation extends MX_Controller {
 			$data['deductions'] = $p->get($limit, $offset);
 		}
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$data['employee_id'] 	= $this->input->post('employee_id');
-			$data['selected'] 		= $this->input->post('office_id');
+			$data['employee_id'] 	= Input::get('employee_id');
+			$data['selected'] 		= Input::get('office_id');
 			
-			$p->where('employee_id', $this->input->post('employee_id'));
+			$p->where('employee_id', Input::get('employee_id'));
 			
 			$data['deductions'] = $p->get($limit, $offset);
 		}
@@ -210,7 +210,7 @@ class Additional_compensation extends MX_Controller {
 		
 		$data['employee_id'] = $employee_id;
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			// Add employee id if insert only
 			if ( $id == 0)
@@ -218,10 +218,10 @@ class Additional_compensation extends MX_Controller {
 				$di->employee_id 			= $employee_id;
 			}
 			
-			$di->additional_compensation_id 	= $this->input->post('additional_compensation_id');
-			$di->effectivity_date 				= $this->input->post('effectivity_date');
-			$di->ineffectivity_date 			= $this->input->post('ineffectivity_date');
-			$di->amount 						= $this->input->post('amount');	
+			$di->additional_compensation_id 	= Input::get('additional_compensation_id');
+			$di->effectivity_date 				= Input::get('effectivity_date');
+			$di->ineffectivity_date 			= Input::get('ineffectivity_date');
+			$di->amount 						= Input::get('amount');	
 			$di->save();
 			
 			redirect(base_url().'payroll/additional_compensation/staff_entitlement/'.$employee_id, 'refresh');

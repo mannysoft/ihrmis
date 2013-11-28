@@ -52,9 +52,9 @@ class Personnel extends MX_Controller
 		$data['msg'] 				= '';
 		
 		
-		if ( $this->input->post('employee_id'))
+		if ( Input::get('employee_id'))
 		{
-			$employee_id = $this->input->post('employee_id');
+			$employee_id = Input::get('employee_id');
 		}
 		
 		$e = new Employee_m();
@@ -88,18 +88,18 @@ class Personnel extends MX_Controller
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$a = new Asset_info();
 			
 			$a->where( 'employee_id',  $employee_id )->get();
 			
 			$a->employee_id			= $employee_id;
-			$a->s_lname 				= $this->input->post('s_lname');
-			$a->s_fname 				= $this->input->post('s_fname');
-			$a->s_mname 				= $this->input->post('s_mname');
-			$a->s_office 				= $this->input->post('s_office');
-			$a->s_position 				= $this->input->post('s_position');
+			$a->s_lname 				= Input::get('s_lname');
+			$a->s_fname 				= Input::get('s_fname');
+			$a->s_mname 				= Input::get('s_mname');
+			$a->s_office 				= Input::get('s_office');
+			$a->s_position 				= Input::get('s_position');
 			
 			$a->save();	
 						
@@ -138,7 +138,7 @@ class Personnel extends MX_Controller
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$unmarried = new Asset_unmarried();
 			
@@ -146,8 +146,8 @@ class Personnel extends MX_Controller
 			
 			$unmarried->delete_all();
 			
-			$names 					= $this->input->post('name');
-			$birth_date 			= $this->input->post('birth_date');
+			$names 					= Input::get('name');
+			$birth_date 			= Input::get('birth_date');
 			
 			$i = 0;
 			
@@ -205,7 +205,7 @@ class Personnel extends MX_Controller
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$a = new Asset_property();
 			
@@ -213,15 +213,15 @@ class Personnel extends MX_Controller
 			
 			$a->delete_all();
 			
-			$kinds 				= $this->input->post('kind');
-			$location 			= $this->input->post('location');
-			$year_acquired 		= $this->input->post('year_acquired');
-			$mode_acquisition 	= $this->input->post('mode_acquisition');
-			$nature_property 	= $this->input->post('nature_property');
-			$assessed_value 	= $this->input->post('assessed_value');
-			$market_value 		= $this->input->post('market_value');
-			$land_cost 			= $this->input->post('land_cost');
-			$improvement_cost 	= $this->input->post('improvement_cost');
+			$kinds 				= Input::get('kind');
+			$location 			= Input::get('location');
+			$year_acquired 		= Input::get('year_acquired');
+			$mode_acquisition 	= Input::get('mode_acquisition');
+			$nature_property 	= Input::get('nature_property');
+			$assessed_value 	= Input::get('assessed_value');
+			$market_value 		= Input::get('market_value');
+			$land_cost 			= Input::get('land_cost');
+			$improvement_cost 	= Input::get('improvement_cost');
 			
 			$i = 0;
 			
@@ -286,7 +286,7 @@ class Personnel extends MX_Controller
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$a = new Asset_personal();
 			
@@ -294,9 +294,9 @@ class Personnel extends MX_Controller
 			
 			$a->delete_all();
 			
-			$kinds 				= $this->input->post('kind');
-			$year_acquired 		= $this->input->post('year_acquired');
-			$acquisition_cost 	= $this->input->post('acquisition_cost');
+			$kinds 				= Input::get('kind');
+			$year_acquired 		= Input::get('year_acquired');
+			$acquisition_cost 	= Input::get('acquisition_cost');
 		
 			
 			$i = 0;
@@ -356,7 +356,7 @@ class Personnel extends MX_Controller
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$a = new Asset_liability();
 			
@@ -364,9 +364,9 @@ class Personnel extends MX_Controller
 			
 			$a->delete_all();
 			
-			$natures 			= $this->input->post('nature');
-			$name_creditors 	= $this->input->post('name_creditors');
-			$amount 			= $this->input->post('amount');
+			$natures 			= Input::get('nature');
+			$name_creditors 	= Input::get('name_creditors');
+			$amount 			= Input::get('amount');
 		
 			
 			$i = 0;
@@ -426,7 +426,7 @@ class Personnel extends MX_Controller
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$a = new Asset_business_interest();
 			
@@ -434,11 +434,11 @@ class Personnel extends MX_Controller
 			
 			$a->delete_all();
 			
-			$names 				= $this->input->post('name');
-			$company 			= $this->input->post('company');
-			$address 			= $this->input->post('address');
-			$nature_business 	= $this->input->post('nature_business');
-			$date_acquisition 	= $this->input->post('date_acquisition');
+			$names 				= Input::get('name');
+			$company 			= Input::get('company');
+			$address 			= Input::get('address');
+			$nature_business 	= Input::get('nature_business');
+			$date_acquisition 	= Input::get('date_acquisition');
 		
 			
 			$i = 0;
@@ -500,7 +500,7 @@ class Personnel extends MX_Controller
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$a = new Asset_relative();
 			
@@ -508,10 +508,10 @@ class Personnel extends MX_Controller
 			
 			$a->delete_all();
 			
-			$names 			= $this->input->post('name');
-			$position 		= $this->input->post('position');
-			$relationship 	= $this->input->post('relationship');
-			$name_address 	= $this->input->post('name_address');
+			$names 			= Input::get('name');
+			$position 		= Input::get('position');
+			$relationship 	= Input::get('relationship');
+			$name_address 	= Input::get('name_address');
 		
 			
 			$i = 0;
@@ -572,22 +572,22 @@ class Personnel extends MX_Controller
 		
 		$data['employee'] 			= $e->get_by_id ($employee_id);
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			$a = new Asset_info();
 			
 			$a->where( 'employee_id',  $employee_id )->get();
 			
 			$a->employee_id			= $employee_id;
-			$a->s_tin 				= $this->input->post('s_tin');
-			$a->s_cc_no 			= $this->input->post('s_cc_no');
-			$a->s_issue_at 			= $this->input->post('s_issue_at');
-			$a->s_issue_date 		= $this->input->post('s_issue_date');
+			$a->s_tin 				= Input::get('s_tin');
+			$a->s_cc_no 			= Input::get('s_cc_no');
+			$a->s_issue_at 			= Input::get('s_issue_at');
+			$a->s_issue_date 		= Input::get('s_issue_date');
 			
-			$a->tin 				= $this->input->post('tin');
-			$a->cc_no 				= $this->input->post('cc_no');
-			$a->issue_at 			= $this->input->post('issue_at');
-			$a->issue_date 			= $this->input->post('issue_date');
+			$a->tin 				= Input::get('tin');
+			$a->cc_no 				= Input::get('cc_no');
+			$a->issue_at 			= Input::get('issue_at');
+			$a->issue_date 			= Input::get('issue_date');
 			
 			$a->save();	
 						

@@ -4,7 +4,7 @@ class Migration_permissions_process_users extends CI_Migration {
 	
 	function up() 
 	{			
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 				
 		if ($lgu_code == 'marinduque_province')
 		{

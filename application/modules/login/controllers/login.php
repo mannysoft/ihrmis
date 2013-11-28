@@ -63,10 +63,10 @@ class Login extends MX_Controller
 		
 		$data['system_message'] = '';
 		
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
-			$username = $this->input->post('username');
-			$password = $this->input->post('password');
+			$username = Input::get('username');
+			$password = Input::get('password');
 					
 			if (($username=="")||($password==""))
 			{
@@ -89,7 +89,7 @@ class Login extends MX_Controller
 				{
 					// Lets check if the idle function is enable
 					// Seconds before logout if user is idle
-					$seconds_user_idle = $this->Settings->get_selected_field('seconds_user_idle');
+					$seconds_user_idle = Setting::getField('seconds_user_idle');
 					
 					if ($seconds_user_idle != '')
 					{

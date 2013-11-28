@@ -54,17 +54,17 @@ class Ajax extends MX_Controller {
 		{
 			$e = new Employee_m();
 		
-			$e->where('id', $this->input->post('rowid'));
+			$e->where('id', Input::get('rowid'));
 			
 			$e->get();
 			
-			if ( $this->input->post('colid') == 'tax_status' )
+			if ( Input::get('colid') == 'tax_status' )
 			{
-				$e->tax_status = $this->input->post('new');
+				$e->tax_status = Input::get('new');
 			}
-			if ( $this->input->post('colid') == 'dependents' )
+			if ( Input::get('colid') == 'dependents' )
 			{
-				$e->dependents = $this->input->post('new');
+				$e->dependents = Input::get('new');
 			}
 			
 			$e->save();

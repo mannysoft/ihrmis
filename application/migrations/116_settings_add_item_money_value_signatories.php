@@ -10,7 +10,7 @@ class Migration_settings_add_item_money_value_signatories extends CI_Migration {
 		$money_value_signatory_certified_position 	= '';
 		
 		// Do only if Province of Laguna
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 				
 		if ($lgu_code == 'laguna_province')
 		{

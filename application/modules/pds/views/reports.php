@@ -27,19 +27,19 @@ if ($pop_up == 1){
   </tr>
   <tr>
     <td align="right">Last Name:</td>
-    <td><input name="lname" type="text" id="lname" value="<?php echo $this->input->post('lname');?>" /></td>
+    <td><input name="lname" type="text" id="lname" value="<?php echo Input::get('lname');?>" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">First Name:</td>
-    <td><input name="fname" type="text" id="fname" value="<?php echo $this->input->post('fname');?>" /></td>
+    <td><input name="fname" type="text" id="fname" value="<?php echo Input::get('fname');?>" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">Position/Designation:</td>
-    <td><input name="position" type="text" id="position" value="<?php echo $this->input->post('position');?>" /></td>
+    <td><input name="position" type="text" id="position" value="<?php echo Input::get('position');?>" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
@@ -57,49 +57,49 @@ if ($pop_up == 1){
   </tr>
   <tr>
     <td align="right">Salary Grade:</td>
-    <td><input name="salary_grade" type="text" id="salary_grade" value="<?php echo $this->input->post('salary_grade');?>" size="4" />
+    <td><input name="salary_grade" type="text" id="salary_grade" value="<?php echo Input::get('salary_grade');?>" size="4" />
       Ex: 18-5</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">Number of Years in service:</td>
-    <td><input name="years_service" type="text" id="years_service" value="<?php echo $this->input->post('years_service');?>" size="4" />
+    <td><input name="years_service" type="text" id="years_service" value="<?php echo Input::get('years_service');?>" size="4" />
       <?php //$js = 'id = "years_service_above"';echo form_dropdown('years_service_above', $years_service_above_options, $years_service_above_selected, $js);?></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">Civil Service Eligibility: </td>
-    <td><input name="eligibility" type="text" id="eligibility" value="<?php echo $this->input->post('eligibility');?>" /></td>
+    <td><input name="eligibility" type="text" id="eligibility" value="<?php echo Input::get('eligibility');?>" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">Course:</td>
-    <td><input name="course" type="text" id="course" value="<?php echo $this->input->post('course');?>" /></td>
+    <td><input name="course" type="text" id="course" value="<?php echo Input::get('course');?>" /></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">Age:</td>
-    <td><input name="age" type="text" id="age" value="<?php echo $this->input->post('age');?>" size="4" />
+    <td><input name="age" type="text" id="age" value="<?php echo Input::get('age');?>" size="4" />
       <?php //$js = 'id = "age_above"';echo form_dropdown('age_above', $age_above_options, $age_above_selected, $js);?></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">Sex:</td>
-    <td><input name="sex" type="text" id="sex" value="<?php echo $this->input->post('sex');?>" size="4" />
+    <td><input name="sex" type="text" id="sex" value="<?php echo Input::get('sex');?>" size="4" />
       ex: M or F</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right">Address:</td>
-    <td><input name="location" type="text" id="location" value="<?php echo $this->input->post('location');?>" /></td>
+    <td><input name="location" type="text" id="location" value="<?php echo Input::get('location');?>" /></td>
     <td colspan="2">Report Name:
-      <input name="report_name" type="text" id="report_name" value="<?php echo $this->input->post('report_name');?>" /></td>
+      <input name="report_name" type="text" id="report_name" value="<?php echo Input::get('report_name');?>" /></td>
     </tr>
   <tr>
     <td align="right"><input type="button" name="Button" id="reset" value="Reset" /></td>

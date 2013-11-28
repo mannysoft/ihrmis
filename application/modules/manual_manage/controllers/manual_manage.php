@@ -136,19 +136,21 @@ class Manual_Manage extends MX_Controller {
 	
 	function cto_apps()
 	{
+		CompensatoryTimeoff::paginate(15);
+		return
 		
 		$data['page_name'] = '<b>CTO Applications</b>';
 		$data['msg'] = '';
 		
 		$this->load->library('pagination');
 		
-		$data['rows'] = $this->Compensatory_timeoff->get_cto_apps();
+		$data['rows'] = CompensatoryTimeoff::getApps();
 		
 		// If leave manager get only the leave apps for his/ her office
 		if ($this->session->userdata('user_type') == 5)
 		{
 			$this->Compensatory_timeoff->office_id = $this->session->userdata('office_id');
-			$this->Compensatory_timeoff->get_cto_apps();
+			CompensatoryTimeoff::getApps();
 		}
 		
 		$config['base_url'] = base_url().'manual_manage/cto_apps';
@@ -163,24 +165,26 @@ class Manual_Manage extends MX_Controller {
 		
 		$this->pagination->initialize($config);
 		
+		 
+		
 		// If leave manager get only the leave apps for his/ her office
 		if ($this->session->userdata('user_type') == 5)
 		{
 			$this->Compensatory_timeoff->office_id = $this->session->userdata('office_id');
 		}
 		
-		$data['rows'] = $this->Compensatory_timeoff->get_cto_apps($config['per_page'], $this->uri->segment(3));
+		$data['rows'] = CompensatoryTimeoff::getApps($config['per_page'], $this->uri->segment(3));
 
-		if ($this->input->post('op') == 1)
+		if (Input::get('op') == 1)
 		{
-			$data['rows'] = $this->Compensatory_timeoff->search_cto_apps($this->input->post('tracking_no'));
+			$data['rows'] = $this->Compensatory_timeoff->search_cto_apps(Input::get('tracking_no'));
 			
-			if ( $this->input->post('tracking_no') == '' )
+			if ( Input::get('tracking_no') == '' )
 			{
-				$data['rows'] = $this->Compensatory_timeoff->get_cto_apps($config['per_page'], $this->uri->segment(3));
+				$data['rows'] = CompensatoryTimeoff::getApps($config['per_page'], $this->uri->segment(3));
 			}
 			
-			if ( $this->input->post('tracking_no') != '')
+			if ( Input::get('tracking_no') != '')
 			{
 				$config['total_rows'] = 0;
 				$this->pagination->initialize($config);
@@ -236,26 +240,26 @@ class Manual_Manage extends MX_Controller {
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
 		$data['year_selected'] 		= date('Y');
 		
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{
 			
-			$seconds = strtotime($this->input->post('hour2').':'.$this->input->post('minute2'). ' '.$this->input->post('am_pm2')) - 
-					   strtotime($this->input->post('hour').':'.$this->input->post('minute'). ' '.$this->input->post('am_pm'));
+			$seconds = strtotime(Input::get('hour2').':'.Input::get('minute2'). ' '.Input::get('am_pm2')) - 
+					   strtotime(Input::get('hour').':'.Input::get('minute'). ' '.Input::get('am_pm'));
 			
-			if ($this->input->post('am_pm') == 'AM' && $this->input->post('am_pm2') == 'PM')
+			if (Input::get('am_pm') == 'AM' && Input::get('am_pm2') == 'PM')
 			{
-				$seconds = strtotime('12:00 PM') - strtotime($this->input->post('hour').':'.$this->input->post('minute'). ' '.$this->input->post('am_pm'));
+				$seconds = strtotime('12:00 PM') - strtotime(Input::get('hour').':'.Input::get('minute'). ' '.Input::get('am_pm'));
 				
-				$seconds += strtotime($this->input->post('hour2').':'.$this->input->post('minute2'). ' '.$this->input->post('am_pm2')) - strtotime("01:00 PM");
+				$seconds += strtotime(Input::get('hour2').':'.Input::get('minute2'). ' '.Input::get('am_pm2')) - strtotime("01:00 PM");
 			}
 			
 			$info = array(
-						'employee_id' 	=> $this->input->post('employee_id'),
-						'date'		 	=> $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('day'),
-						'time_out'	  	=> $this->input->post('hour').':'.$this->input->post('minute'). ' '.$this->input->post('am_pm'),
-						'time_in'	 	=> $this->input->post('hour2').':'.$this->input->post('minute2'). ' '.$this->input->post('am_pm2'),
+						'employee_id' 	=> Input::get('employee_id'),
+						'date'		 	=> Input::get('year').'-'.Input::get('month').'-'.Input::get('day'),
+						'time_out'	  	=> Input::get('hour').':'.Input::get('minute'). ' '.Input::get('am_pm'),
+						'time_in'	 	=> Input::get('hour2').':'.Input::get('minute2'). ' '.Input::get('am_pm2'),
 						'seconds'	  	=> $seconds,
-						'pass_slip_type'=> $this->input->post('pass_slip_type'),
+						'pass_slip_type'=> Input::get('pass_slip_type'),
 						'date_acquired'	=> date('Y-m-d')
 			);
 			
@@ -264,24 +268,24 @@ class Manual_Manage extends MX_Controller {
 			// Insert to leave card but not yet active
 			// Modified 10.9.2013 9.55am
 			// If Personal Add to Leave card otherwise dont add
-			if ($this->input->post('pass_slip_type') == 'Personal')
+			if (Input::get('pass_slip_type') == 'Personal')
 			{
-				$card_month = $this->Helps->get_month_name($this->input->post('month'));
+				$card_month = $this->Helps->get_month_name(Input::get('month'));
 				
 				$particulars = 'Pass Slip';
 				
-				$last_day = $this->Helps->get_last_day($this->input->post('month'), $this->input->post('year'));
+				$last_day = $this->Helps->get_last_day(Input::get('month'), Input::get('year'));
 			
-				$last_day = $this->input->post('year').'-'.$this->input->post('month').'-'.$last_day;
+				$last_day = Input::get('year').'-'.Input::get('month').'-'.$last_day;
 				
 				$v_abs = $this->Leave_conversion_table->compute_hour_minute($seconds);
 				
-				$action_take = substr($card_month, 0, 3).'. '.$this->input->post('year').' Pass Slip'; 
+				$action_take = substr($card_month, 0, 3).'. '.Input::get('year').' Pass Slip'; 
 				
-				$pass_slip_date = $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('day');
+				$pass_slip_date = Input::get('year').'-'.Input::get('month').'-'.Input::get('day');
 				
 				$this->Leave_card->insert_entry(
-												$this->input->post('employee_id'), 
+												Input::get('employee_id'), 
 												$particulars, 
 												$v_abs, 
 												$action_take, 

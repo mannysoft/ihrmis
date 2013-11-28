@@ -98,11 +98,11 @@ class Deduction extends MX_Controller {
 		
 		$data['deduction'] = $p->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$p->code 			= $this->input->post('code');
-			$p->agency_name 	= $this->input->post('agency_name');
-			$p->report_order 	= $this->input->post('report_order');
+			$p->code 			= Input::get('code');
+			$p->agency_name 	= Input::get('agency_name');
+			$p->report_order 	= Input::get('report_order');
 			
 			$p->save();
 			
@@ -183,22 +183,22 @@ class Deduction extends MX_Controller {
 		
 		$data['deduction'] = $di->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$di->code 					= $this->input->post('code');
-			$di->desc 					= $this->input->post('desc');
-			$di->deduction_agency_id 	= $this->input->post('agency_id');
-			$di->type 					= $this->input->post('type');
-			$di->mandatory 				= $this->input->post('mandatory');
-			$di->tax_exempted 			= $this->input->post('tax_exempted');
-			$di->er_share 				= $this->input->post('er_share');
-			$di->official 				= $this->input->post('official');
-			$di->optional_amount 		= $this->input->post('optional_amount');
-			$di->amount 				= $this->input->post('amount');
-			$di->reference_table 		= $this->input->post('reference_table');
-			$di->amount_exempted 		= $this->input->post('amount_exempted');
-			$di->report_order 			= $this->input->post('report_order');
-			$di->line_no 				= $this->input->post('line_no');
+			$di->code 					= Input::get('code');
+			$di->desc 					= Input::get('desc');
+			$di->deduction_agency_id 	= Input::get('agency_id');
+			$di->type 					= Input::get('type');
+			$di->mandatory 				= Input::get('mandatory');
+			$di->tax_exempted 			= Input::get('tax_exempted');
+			$di->er_share 				= Input::get('er_share');
+			$di->official 				= Input::get('official');
+			$di->optional_amount 		= Input::get('optional_amount');
+			$di->amount 				= Input::get('amount');
+			$di->reference_table 		= Input::get('reference_table');
+			$di->amount_exempted 		= Input::get('amount_exempted');
+			$di->report_order 			= Input::get('report_order');
+			$di->line_no 				= Input::get('line_no');
 			
 			$di->save();
 			
@@ -273,12 +273,12 @@ class Deduction extends MX_Controller {
 			$data['deductions'] = $p->get($limit, $offset);
 		}
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$data['employee_id'] 	= $this->input->post('employee_id');
-			$data['selected'] 		= $this->input->post('office_id');
+			$data['employee_id'] 	= Input::get('employee_id');
+			$data['selected'] 		= Input::get('office_id');
 			
-			$p->where('employee_id', $this->input->post('employee_id'));
+			$p->where('employee_id', Input::get('employee_id'));
 			
 			$data['deductions'] = $p->get($limit, $offset);
 		}
@@ -300,7 +300,7 @@ class Deduction extends MX_Controller {
 		
 		$data['deduction'] = $di->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			// Add employee id if insert only
 			if ( $id == 0)
@@ -308,10 +308,10 @@ class Deduction extends MX_Controller {
 				$di->employee_id 			= $employee_id;
 			}
 			
-			$di->deduction_information_id 	= $this->input->post('deduction_information_id');
-			$di->date_from 					= $this->input->post('date_from');
-			$di->date_to 					= $this->input->post('date_to');
-			$di->status 					= $this->input->post('status') ? $this->input->post('status') : 'inactive';			
+			$di->deduction_information_id 	= Input::get('deduction_information_id');
+			$di->date_from 					= Input::get('date_from');
+			$di->date_to 					= Input::get('date_to');
+			$di->status 					= Input::get('status') ? Input::get('status') : 'inactive';			
 			$di->save();
 			
 			redirect(base_url().'payroll/deduction/optional/'.$employee_id, 'refresh');
@@ -391,12 +391,12 @@ class Deduction extends MX_Controller {
 			$data['deductions'] = $p->get($limit, $offset);
 		}
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$data['employee_id'] 	= $this->input->post('employee_id');
-			$data['selected'] 		= $this->input->post('office_id');
+			$data['employee_id'] 	= Input::get('employee_id');
+			$data['selected'] 		= Input::get('office_id');
 			
-			$p->where('employee_id', $this->input->post('employee_id'));
+			$p->where('employee_id', Input::get('employee_id'));
 			
 			$data['deductions'] = $p->get($limit, $offset);
 		}
@@ -420,7 +420,7 @@ class Deduction extends MX_Controller {
 		
 		$data['deduction'] = $di->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 			// Add employee id if insert only
 			if ( $id == 0)
@@ -428,14 +428,14 @@ class Deduction extends MX_Controller {
 				$di->employee_id 			= $employee_id;
 			}
 			
-			$di->deduction_information_id 	= $this->input->post('deduction_information_id');
-			$di->date_loan 					= $this->input->post('date_loan');
-			$di->loan_gross 				= $this->input->post('loan_gross');
-			$di->months_pay 				= $this->input->post('months_pay');
-			$di->monthly_pay 				= $this->input->post('monthly_pay');
-			$di->date_from 					= $this->input->post('date_from');
-			$di->date_to 					= $this->input->post('date_to');
-			$di->status 					= $this->input->post('status') ? $this->input->post('status') : 'inactive';			
+			$di->deduction_information_id 	= Input::get('deduction_information_id');
+			$di->date_loan 					= Input::get('date_loan');
+			$di->loan_gross 				= Input::get('loan_gross');
+			$di->months_pay 				= Input::get('months_pay');
+			$di->monthly_pay 				= Input::get('monthly_pay');
+			$di->date_from 					= Input::get('date_from');
+			$di->date_to 					= Input::get('date_to');
+			$di->status 					= Input::get('status') ? Input::get('status') : 'inactive';			
 			$di->save();
 			
 			redirect(base_url().'payroll/deduction/loan/'.$employee_id, 'refresh');

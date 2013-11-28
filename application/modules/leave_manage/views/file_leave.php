@@ -24,7 +24,7 @@
     <td align="right">&nbsp;</td>
     <td align="right"><strong>Date:</strong></td>
     <td>
-      <?php $lgu_code = $this->Settings->get_selected_field( 'lgu_code' );?>
+      <?php $lgu_code = Setting::getField( 'lgu_code' );?>
       
       <?php if($lgu_code == 'laguna_province'):?>
       <?php $js = 'id= "month4_extra" size="3" autocomplete="off" class="ilaw" maxlength="2"';echo form_input('month4', '', $js);?>
@@ -122,7 +122,7 @@
     <td align="right">&nbsp;</td>
     <td align="right">&nbsp;</td>
     <td>
-    <?php $show_calendar = $this->Settings->get_selected_field( 'show_calendar' );?>
+    <?php $show_calendar = Setting::getField( 'show_calendar' );?>
     <?php if($show_calendar == 'yes'):?>
     <input name="first_day_of_service" type="text" id="first_day_of_service" value="" size="10"/>
       &nbsp; <img src="<?php echo base_url(); ?>images/img.gif" width="20" height="14" align="middle" class="calimg" id="f_trigger_a" style="" title="Date selector" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" />

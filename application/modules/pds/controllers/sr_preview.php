@@ -182,10 +182,10 @@ class Sr_preview extends MX_Controller
 		
 		$pdf->Ln(10);
 		 
-		$sr_prepared 			= $this->Settings->get_selected_field( 'sr_prepared' );
-		$sr_prepared_position 	= $this->Settings->get_selected_field( 'sr_prepared_position' );
-		$sr_certified 			= $this->Settings->get_selected_field( 'sr_certified' );
-		$sr_certified_position 	= $this->Settings->get_selected_field( 'sr_certified_position' );
+		$sr_prepared 			= Setting::getField( 'sr_prepared' );
+		$sr_prepared_position 	= Setting::getField( 'sr_prepared_position' );
+		$sr_certified 			= Setting::getField( 'sr_certified' );
+		$sr_certified_position 	= Setting::getField( 'sr_certified_position' );
 		
 		$pdf->SetX(20);
 		

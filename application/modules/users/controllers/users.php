@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+use Mannysoft\User;
 /**
  * Integrated Human Resource Management Information System
  *
@@ -55,27 +56,29 @@ class Users extends MX_Controller  {
 	 */
 	function index()
 	{
+		//echo Input::get('op');
+		
 		$data['page_name'] = '<b>Manage Users</b>';
 		
 		$data['msg'] = '';
 				
 		//if form submit
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$users = $office_id	= $this->input->post('user');
+			$users = $office_id	= Input::get('user');
 			
 			if(is_array($users))
 			{
 				foreach($users as $user)
 				{
 					//deactivate
-					if($this->input->post('action') == 0)
+					if(Input::get('action') == 0)
 					{
 						$this->User->update_user(array('stat' => 'Inactive'), $user);
 					}
 					
 					//if activate
-					if($this->input->post('action') == 1)
+					if(Input::get('action') == 1)
 					{
 						$this->User->update_user(array('stat' => 'Active'), $user);
 					}
@@ -134,7 +137,7 @@ class Users extends MX_Controller  {
 		}						
 				
 		//If form submit
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			//http://codeigniter.com/forums/viewthread/161740/#776966
 			//solved the callback functions problem
@@ -154,26 +157,26 @@ class Users extends MX_Controller  {
 			if ($this->form_validation->run($this) == TRUE)
 			{
 				//Encript password
-				$password = do_hash($this->input->post('password'), 'md5');
+				$password = do_hash(Input::get('password'), 'md5');
 				
 				if ($u->password == $password)
 				{
 					$password = $u->password;
 				}
 				
-				$u->username	= $this->input->post('username');
-				$u->lname		= $this->input->post('lname');
-				$u->fname 		= $this->input->post('fname');
-				$u->mname 		= $this->input->post('middle');
+				$u->username	= Input::get('username');
+				$u->lname		= Input::get('lname');
+				$u->fname 		= Input::get('fname');
+				$u->mname 		= Input::get('middle');
 				$u->password 	= $password;
-				$u->office_id 	= $this->input->post('office_id');
-				$u->group_id 	= $this->input->post('group_id');
-				$u->user_type 	= $this->input->post('group_id');
+				$u->office_id 	= Input::get('office_id');
+				$u->group_id 	= Input::get('group_id');
+				$u->user_type 	= Input::get('group_id');
 				$u->stat		= 'Active';
 				
 				$u->save();
 							
-				$user = $this->User->get_user_data($this->input->post('username'));
+				$user = $this->User->get_user_data(Input::get('username'));
 														 
 				$this->session->set_flashdata('msg', 'User has been saved!');
 						
@@ -217,15 +220,15 @@ class Users extends MX_Controller  {
 		$username = $this->session->userdata('username');
 		
 		
-		$op = $this->input->post('op');
+		$op = Input::get('op');
 		
 		if($op == 1)
 		{
 			
-			$hidden_password = $this->input->post('hidden_password');
+			$hidden_password = Input::get('hidden_password');
 			
-			$new_pass 		= $this->input->post('new_pass');
-			$re_new_pass 	= $this->input->post('re_new_pass');
+			$new_pass 		= Input::get('new_pass');
+			$re_new_pass 	= Input::get('re_new_pass');
 			
 			$this->form_validation->set_rules('password2', 'Current Password', 'required|callback_current_password');
 			$this->form_validation->set_rules('new_pass', 'New Password', 'required|matches[re_new_pass]');

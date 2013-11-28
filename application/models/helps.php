@@ -45,7 +45,7 @@ class Helps extends CI_Model {
 	{
 		parent::__construct();
 		
-		$this->minutes_tardy = $this->Settings->get_selected_field('minutes_tardy');
+		$this->minutes_tardy = Setting::getField('minutes_tardy');
 	}
 	
 	// --------------------------------------------------------------------
@@ -148,7 +148,7 @@ class Helps extends CI_Model {
 		
 		// 200 = red
 		// 100 = maroon
-		//$minutes_tardy = $this->Settings->get_selected_field('minutes_tardy');
+		//$minutes_tardy = Setting::getField('minutes_tardy');
 			
 		// Black font
 		$this->font_color_am_login = 0;
@@ -189,7 +189,7 @@ class Helps extends CI_Model {
 				if ($this->minutes_tardy != 1)
 				{
 					// LGU CODE
-					$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+					$lgu_code = Setting::getField( 'lgu_code' );
 					
 					if ( $this->employee_id == '69' && $lgu_code == 'marinduque_province' )
 					{
@@ -262,7 +262,7 @@ class Helps extends CI_Model {
 				if ($this->minutes_tardy != 1)
 				{
 					// We need to check if the grace period is not applied on afternoon
-					$minutes_tardy_am_only = $this->Settings->get_selected_field( 'minutes_tardy_am_only' );
+					$minutes_tardy_am_only = Setting::getField( 'minutes_tardy_am_only' );
 					
 					// Count the Late
 					if ( $minutes_tardy_am_only == 1 )
@@ -433,7 +433,7 @@ class Helps extends CI_Model {
 	{
 		$this->font_color_am_logout = 0;
 		
-		$is_undertime_tardi = $this->Settings->get_selected_field('undertime_tardi');
+		$is_undertime_tardi = Setting::getField('undertime_tardi');
 		
 		// am logout
 		if($am_logout!="")
@@ -497,7 +497,7 @@ class Helps extends CI_Model {
 		}
 		
 		// If undertime is not mark as tardi
-		$is_undertime_tardi = $this->Settings->get_selected_field('undertime_tardi');
+		$is_undertime_tardi = Setting::getField('undertime_tardi');
 		
 		if ($is_undertime_tardi == 0) 
 		{
@@ -525,7 +525,7 @@ class Helps extends CI_Model {
 		$this->font_color_am_logout = 0;
 		$this->font_color_pm_logout = 0;
 		
-		$is_undertime_tardi = $this->Settings->get_selected_field('undertime_tardi');
+		$is_undertime_tardi = Setting::getField('undertime_tardi');
 		
 		// Check if on call
 		$pos = false;
@@ -596,7 +596,7 @@ class Helps extends CI_Model {
 		}
 		
 		// If undertime is not mark as tardi
-		$is_undertime_tardi = $this->Settings->get_selected_field('undertime_tardi');
+		$is_undertime_tardi = Setting::getField('undertime_tardi');
 		
 		if ($is_undertime_tardi == 0) 
 		{
@@ -987,7 +987,7 @@ class Helps extends CI_Model {
 	 */
 	function footer()
 	{
-		$system_name = $this->Settings->get_selected_field('system_name');
+		$system_name = Setting::getField('system_name');
 		
 		echo $system_name;
 	}

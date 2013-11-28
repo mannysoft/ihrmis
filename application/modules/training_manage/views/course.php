@@ -11,7 +11,7 @@
     <td><strong>
       <?php 
 	  $js = 'id = "training_type_id"';
-	  echo form_dropdown('training_type_id', $this->options->training_type_options(), $this->input->post('training_type_id'), $js);?>
+	  echo form_dropdown('training_type_id', $this->options->training_type_options(), Input::get('training_type_id'), $js);?>
     </strong></td>
     <td><a href="<?php echo base_url();?>training_manage/course_save">Add Training Course</a></td>
   </tr>
@@ -51,7 +51,7 @@
         <tr>
           <td colspan="3">
 		  <?php 
-		  if (! $this->input->post('training_type_id'))
+		  if (! Input::get('training_type_id'))
 		  {
 			  echo $this->pagination->create_links(); 
 			}

@@ -8,7 +8,7 @@ class Migration_settings_add_item_autogenerate_employee_id extends CI_Migration 
 		$setting_value = 'no';
 		
 		// Do only if Province of Laguna
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		if ($lgu_code == 'laguna_province')
 		{

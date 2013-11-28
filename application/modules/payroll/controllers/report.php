@@ -1,8 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-use Mannysoft\Decoration\Decoration;
+//use Mannysoft\Decoration\Decoration;
 //use Illuminate\View\View;
 //use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\Facades\Input;
 /**
  * Integrated Human Resource Management Information System
  *
@@ -59,9 +58,9 @@ class Report extends MX_Controller {
 	
 	function sortable()
 	{
-		$headings = $this->input->post('headings');
+		$headings = Input::get('headings');
 		
-		$headings2 = $this->input->post('headings2');
+		$headings2 = Input::get('headings2');
 		
 		if ($headings2 != '')
 		{
@@ -176,7 +175,7 @@ class Report extends MX_Controller {
 		
 		$data['msg'] = '';
 								
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
 
 		}
@@ -206,12 +205,12 @@ class Report extends MX_Controller {
 		
 		$data['loans'] = array();
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$data['employee_id'] 	= $this->input->post('employee_id');
-			$data['selected'] 		= $this->input->post('office_id');
+			$data['employee_id'] 	= Input::get('employee_id');
+			$data['selected'] 		= Input::get('office_id');
 			
-			$e = Employee_Eloquent::find($this->input->post('employee_id'));
+			$e = Employee_Eloquent::find(Input::get('employee_id'));
 			
 			$data['loans'] = $e->loan;
 			
@@ -234,12 +233,12 @@ class Report extends MX_Controller {
 		
 		$data['loans'] = array();
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$data['employee_id'] 	= $this->input->post('employee_id');
-			$data['selected'] 		= $this->input->post('office_id');
+			$data['employee_id'] 	= Input::get('employee_id');
+			$data['selected'] 		= Input::get('office_id');
 			
-			$e = Employee_Eloquent::find($this->input->post('employee_id'));
+			$e = Employee_Eloquent::find(Input::get('employee_id'));
 			
 			$data['loans'] = $e->loan;
 			
@@ -296,7 +295,7 @@ class Report extends MX_Controller {
 	
 	function headings($line = '1')
 	{		
-		
+		Setting::create(array('name' => 'test123'));
 		
 		$data['page_name'] = '<b>Payroll Headings</b>';
 		
@@ -308,7 +307,7 @@ class Report extends MX_Controller {
 		
 		$data['main_content'] = 'report/headings';
 	
-		$validator = Validator::make($data1 = array('name' => '', 'email' => 'as'), $rules = array('name' => 'email|required|min:30', 'email' => 'email|required'));
+		$validator = Validator::make($data1 = array('name' => '', 'email' => 'mannysoft@gmail.com'), $rules = array('name' => 'email|required|max:5', 'email' => 'email|required|max:5'));
 		
 		
 		if ($validator->fails())
@@ -319,7 +318,7 @@ class Report extends MX_Controller {
 			foreach ($messages as $message)
 			{
 				//
-				//echo $message;
+				echo $message;
 			}
 		}
 		
@@ -371,14 +370,14 @@ class Report extends MX_Controller {
 						
 		$data['row'] = PayrollHeading::blankRecord();
 		
-		if ($this->input->post('op'))
+		if (Input::get('op'))
 		{			
 			$info = array(
-					'type' 							=> $this->input->post('type'),
-					'line' 							=> $this->input->post('line'),
-					'additional_compensation_id' 	=> $this->input->post('additional_compensation_id'),
-					'deduction_id' 					=> $this->input->post('deduction_id'),
-					'caption' 						=> $this->input->post('caption'),
+					'type' 							=> Input::get('type'),
+					'line' 							=> Input::get('line'),
+					'additional_compensation_id' 	=> Input::get('additional_compensation_id'),
+					'deduction_id' 					=> Input::get('deduction_id'),
+					'caption' 						=> Input::get('caption'),
 					);
 					
 			$data['row'] = $row = PayrollHeading::find($id);		
@@ -462,11 +461,11 @@ class Report extends MX_Controller {
 		$period_page1 = $period_text_arr[0];
 		$period_page2 = $period_text_arr[1];
 		
-		$agency_accountant = $this->Settings->get_selected_field('agency_accountant');
-		$agency_accountant_position = $this->Settings->get_selected_field('agency_accountant_position');
+		$agency_accountant = Setting::getField('agency_accountant');
+		$agency_accountant_position = Setting::getField('agency_accountant_position');
 		
-		$head_of_office = $this->Settings->get_selected_field('head_of_office');
-		$head_of_office_position = $this->Settings->get_selected_field('head_of_office_position');
+		$head_of_office = Setting::getField('head_of_office');
+		$head_of_office_position = Setting::getField('head_of_office_position');
 						
 		$heading = '<table width="100%" border="0">
   <tr>

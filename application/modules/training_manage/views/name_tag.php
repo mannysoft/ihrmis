@@ -11,7 +11,7 @@
       <option value="0">--All--</option>
       </select>
       <input type="submit" name="go" id="go" value="-- G O --" /></td>
-    <td width="48%"><input name="active_tab_name_tag" type="hidden" id="active_tab_name_tag" value="<?php echo ($this->input->post('active_tabs')) ? $this->input->post('active_tabs') : $this->input->post('active_tab_name_tag')?>" /></td>
+    <td width="48%"><input name="active_tab_name_tag" type="hidden" id="active_tab_name_tag" value="<?php echo (Input::get('active_tabs')) ? Input::get('active_tabs') : Input::get('active_tab_name_tag')?>" /></td>
   </tr>
 </table>
 </form>

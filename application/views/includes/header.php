@@ -8,7 +8,7 @@ if(!$this->session->userdata('username'))
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang=""><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="<?php echo base_url();?>images/favicon.ico" rel="shortcut icon">
-    <title>Integrated Human Resources Management Information System <?php echo $this->Settings->get_selected_field('version');?></title>
+    <title>Integrated Human Resources Management Information System <?php echo Setting::getField('version');?></title>
 <link href="<?php echo base_url();?>css/edo-style.css" rel="stylesheet" type="text/css" >	
 <link href="<?php echo base_url();?>css/style.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url();?>css/message.css" rel="stylesheet" type="text/css">
@@ -59,7 +59,7 @@ if(!$this->session->userdata('username'))
 </head>
 <body><script type="text/javascript" src="<?php echo base_url();?>js/wz_tooltip.js"></script>
 <div id="header" class="layout_header">
-<div class="system_name"><br />&nbsp;&nbsp;&nbsp;<span class="integrated">Integrated </span>Human Resources Management Information System<span class="version"> ver. <?php echo $this->Settings->get_selected_field('version');?></span></div>
+<div class="system_name"><br />&nbsp;&nbsp;&nbsp;<span class="integrated">Integrated </span>Human Resources Management Information System<span class="version"> ver. <?php echo Setting::getField('version');?></span></div>
 </div>
 <div id="menu_over" class="layout_menu_over">
 <div>

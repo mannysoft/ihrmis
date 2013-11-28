@@ -312,7 +312,7 @@ class Server_services extends Controller  {
 	
 	function get_latest_version()
 	{		
-		return $this->Settings->get_selected_field('latest_version');
+		return Setting::getField('latest_version');
 	}
 	
 	// --------------------------------------------------------------------

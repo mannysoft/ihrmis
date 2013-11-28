@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang=""><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="Copyright" content="Docebo srl"><link rel="Copyright" href="http://www.docebo.com/" title="Copyright Notice"><link href="<?php echo base_url();?>images/favicon.ico" rel="shortcut icon"><title>Integrated Human Resources Management Information System <?php echo $this->Settings->get_selected_field('version');?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="Copyright" content="Docebo srl"><link rel="Copyright" href="http://www.docebo.com/" title="Copyright Notice"><link href="<?php echo base_url();?>images/favicon.ico" rel="shortcut icon"><title>Integrated Human Resources Management Information System <?php echo Setting::getField('version');?></title>
 			
 		<link type="text/css" href="<?php echo base_url();?>css/reset-min.css" rel="stylesheet">
 		<link type="text/css" href="<?php echo base_url();?>css/style_home.css" rel="stylesheet">

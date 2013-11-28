@@ -82,19 +82,19 @@ class Reports extends MX_Controller
 		
 		$employees =  $this->Tardiness->get_employees_ten_tardy(
 		
-										$this->input->post('month1'), 
-										$this->input->post('month2'), 
-										$this->input->post('year'), 
+										Input::get('month1'), 
+										Input::get('month2'), 
+										Input::get('year'), 
 										''
 										);
 		
 		$offices =  $this->Tardiness->offices_tardy;
 		
-		$year1 =  $this->input->post('year');
+		$year1 =  Input::get('year');
 		//$month1 = $_GET['month'];
 		//$month2 = $_GET['month2'];
 		
-		if ($this->input->post('month1') == '01' && $this->input->post('month2') == '06')
+		if (Input::get('month1') == '01' && Input::get('month2') == '06')
 		{
 			$m1 = 'Jan';
 			$m2 = 'Feb';
@@ -111,7 +111,7 @@ class Reports extends MX_Controller
 			$mo6 = '06';
 		}
 		
-		if ($this->input->post('month1') == '07' && $this->input->post('month2') == '12')
+		if (Input::get('month1') == '07' && Input::get('month2') == '12')
 		{
 			$m1 = 'Jul';
 			$m2 = 'Aug';
@@ -271,13 +271,13 @@ class Reports extends MX_Controller
 		// set font, font style, font size.
 		$pdf->SetFont('Arial','',8);
 		
-		$rows =  $this->Tardiness->get_employees_with_tardy($this->input->post('month'),
-															$this->input->post('year'), 
-															$this->input->post('office_id')
+		$rows =  $this->Tardiness->get_employees_with_tardy(Input::get('month'),
+															Input::get('year'), 
+															Input::get('office_id')
 															);
 															
-		$month 	= $this->input->post('month');
-		$year 	= $this->input->post('year');											
+		$month 	= Input::get('month');
+		$year 	= Input::get('year');											
 		
 		$pdf->Ln(3);
 		
@@ -378,7 +378,7 @@ class Reports extends MX_Controller
 		$hrm_head_position_other 	=  '(City Personnel Officer)              ';	
 
 		
-		$lgu_code = $this->Settings->get_selected_field('lgu_code'); 
+		$lgu_code = Setting::getField('lgu_code'); 
 		
 		if ( $lgu_code == 'marinduque_province' )
 		{	
@@ -392,8 +392,8 @@ class Reports extends MX_Controller
 			$hrm_head_position 			= ' Chief Administrative Officer      ';			   
 			$hrm_head_position_other 	=  '             ';	
 
-			$hrm_head  			= $this->Settings->get_selected_field( 'statement_certified' );
-			$hrm_head_position 	= $this->Settings->get_selected_field( 'statement_certified_position' );
+			$hrm_head  			= Setting::getField( 'statement_certified' );
+			$hrm_head_position 	= Setting::getField( 'statement_certified_position' );
 
 		}
 		
@@ -404,12 +404,12 @@ class Reports extends MX_Controller
 		$pdf->useTemplate($tplIdx);
 		
 		
-		$month1 = $this->input->post('month1');
-		$month2 = $this->input->post('month2');
-		$year1 =  $this->input->post('year');
+		$month1 = Input::get('month1');
+		$month2 = Input::get('month2');
+		$year1 =  Input::get('year');
 		
 		
-		$offices = $this->input->post('offices');
+		$offices = Input::get('offices');
 		
 		$office_id = $offices[0];
 		
@@ -689,7 +689,7 @@ class Reports extends MX_Controller
 		// use the page we imported
 		$pdf->useTemplate($tplIdx);
 		
-		$offices = $this->input->post('offices');
+		$offices = Input::get('offices');
 		
 		$office_id = $offices[0];
 		
@@ -780,7 +780,7 @@ class Reports extends MX_Controller
 		
 		$pdf->SetFillColor(215, 255, 215);
 		
-		$year1 = $this->input->post('year');
+		$year1 = Input::get('year');
 			
 		$tardis = $second_offenders;
 		

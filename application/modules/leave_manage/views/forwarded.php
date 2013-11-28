@@ -56,7 +56,7 @@
         <input name="lname" type="hidden" id="lname" />
         <input name="fname" type="hidden" id="fname" />
         <strong>
-        <?php $lgu_code = $this->Settings->get_selected_field( 'lgu_code' );?>
+        <?php $lgu_code = Setting::getField( 'lgu_code' );?>
         <?php $js = 'id= "month2"';echo form_dropdown('month2', $month_options, $month_selected, $js);?>
         </strong><strong>
         <?php $js = 'id= "day2"';echo form_dropdown('day2', $days_options, $days_selected, $js);?>

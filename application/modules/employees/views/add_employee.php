@@ -340,7 +340,7 @@ function jsUpload(upload_field)
     
     <?php endif; ?>
     
-    <?php $enable_id_maker = $this->Settings->get_selected_field( 'enable_id_maker' );?>
+    <?php $enable_id_maker = Setting::getField( 'enable_id_maker' );?>
     <?php if($enable_id_maker == 'yes'):?>
     <tr>
       <td align="right">Emergency Contact Name:</td>
@@ -378,7 +378,7 @@ $(document).ready(function(){
 				
 		$.each(data, function (key, val) {
 			
-			if ( key == "<?php echo $this->input->post('division_id');?>")
+			if ( key == "<?php echo Input::get('division_id');?>")
 			{
 				selected = "selected";
 			}
@@ -407,7 +407,7 @@ $('#office_id').change(function(){
 				
 		$.each(data, function (key, val) {
 			
-			if ( key == "<?php echo $this->input->post('division_id');?>")
+			if ( key == "<?php echo Input::get('division_id');?>")
 			{
 				selected = "selected";
 			}

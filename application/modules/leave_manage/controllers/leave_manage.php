@@ -162,7 +162,7 @@ class Leave_Manage extends MX_Controller {
 		// Remove duplicate values
 		$dates = array_unique($all_date);
 		
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		if ($lgu_code == 'laguna_province')
 		{
@@ -296,7 +296,7 @@ class Leave_Manage extends MX_Controller {
 		// End modification	
 	
 		// Additional features (autodeduct forced leave) 3.27.2012
-		$auto_deduct_forced_leave = $this->Settings->get_selected_field( 'auto_deduct_forced_leave' );
+		$auto_deduct_forced_leave = Setting::getField( 'auto_deduct_forced_leave' );
 		
 		if ($auto_deduct_forced_leave == 'yes')
 		{
@@ -429,9 +429,9 @@ class Leave_Manage extends MX_Controller {
 		$data['selected'] 			= $this->session->userdata('office_id');
 		
 		// If office id is selected
-		if ($this->input->post('office_id') != 0)
+		if (Input::get('office_id') != 0)
 		{
-			$office_id = $this->input->post('office_id'); 
+			$office_id = Input::get('office_id'); 
 			
 			$data['selected'] = $office_id;
 		}
@@ -449,12 +449,12 @@ class Leave_Manage extends MX_Controller {
 			 
 		$data['rows'] = $this->Employee->get_permanent($office_id);
 				
-		if( $this->input->post('op') == 1 && $this->input->post('employee_id') != "")
+		if( Input::get('op') == 1 && Input::get('employee_id') != "")
 		{	 
 			 $rows = array();
 			  
 			 $data['rows'] = $this->Employee->get_employee_list($office_id = '', 
-															   $this->input->post('employee_id'),
+															   Input::get('employee_id'),
 															   $per_page = "", 
 															   $off_set = "", 
 															   '', 
@@ -463,14 +463,14 @@ class Leave_Manage extends MX_Controller {
 			 
 		}
 		
-		if ( ($this->input->post('lname'))  && $this->input->post('lname') != "")
+		if ( (Input::get('lname'))  && Input::get('lname') != "")
 		{
 			
 			$data['rows'] = $this->Employee->get_employee_list($office_id = '', 
 															   $employee_id = '', 
 															   $per_page = "", 
 															   $off_set = "", 
-															   $this->input->post('lname'), 
+															   Input::get('lname'), 
 															   ''
 															   );
 		}
@@ -499,7 +499,7 @@ class Leave_Manage extends MX_Controller {
 		$data['leave_type_options'] = $this->options->leave_type_options();
 		$data['leave_type_selected']= '';
 		
-		$data['hospital_view_leave_days'] = $this->Settings->get_selected_field('hospital_view_leave_days');
+		$data['hospital_view_leave_days'] = Setting::getField('hospital_view_leave_days');
 				
 		$data['employee_id']		= $employee_id;
 				
@@ -576,9 +576,9 @@ class Leave_Manage extends MX_Controller {
 		
 		$data['rows'] = $this->Leave_apps->get_leave_apps($config['per_page'], $this->uri->segment(3));
 		
-		if ($this->input->post('op') == 1 and $this->input->post('tracking_no') != '')
+		if (Input::get('op') == 1 and Input::get('tracking_no') != '')
 		{
-			$data['rows'] = $this->Leave_apps->search_leave_apps($this->input->post('tracking_no'));
+			$data['rows'] = $this->Leave_apps->search_leave_apps(Input::get('tracking_no'));
 		}
 				
 		$data['main_content'] = 'leave_apps';
@@ -613,46 +613,46 @@ class Leave_Manage extends MX_Controller {
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
 		$data['year_selected'] 		= date('Y');
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$is_employee_id_exists = $this->Employee->is_employee_id_exists($this->input->post('employee_id'));
+			$is_employee_id_exists = $this->Employee->is_employee_id_exists(Input::get('employee_id'));
 		
 			if($is_employee_id_exists == FALSE)
 			{
 				$data['error_msg'] = 'Invalid Employee No.';
 			}
 			
-			$date_cutoff = $this->input->post('year2').'-'.
-						   $this->input->post('month2').'-'.
-						   $this->input->post('day2');
+			$date_cutoff = Input::get('year2').'-'.
+						   Input::get('month2').'-'.
+						   Input::get('day2');
 			
 			$forwarded_note = 'Bal. forwarded as of '.
-							$this->input->post('month2').'-'.
-							$this->input->post('day2').'-'.
-							$this->input->post('year2');
+							Input::get('month2').'-'.
+							Input::get('day2').'-'.
+							Input::get('year2');
 			
-			$data['msg'] = $this->Leave_forwarded->add_forwarded_leave( $this->input->post('employee_id'), 
-																 		$this->input->post('vacation'), 
-																 		$this->input->post('sick'),
+			$data['msg'] = $this->Leave_forwarded->add_forwarded_leave( Input::get('employee_id'), 
+																 		Input::get('vacation'), 
+																 		Input::get('sick'),
 																 		$forwarded_note,
 																		$date_cutoff
 																		);
 			
 			// Remove balance forwarded
-			$this->Leave_card->delete_balance_forwarded($this->input->post('employee_id'));
+			$this->Leave_card->delete_balance_forwarded(Input::get('employee_id'));
 			
 			// Delete all entry less than the date forwarded
-			$this->Leave_card->delete_less_forwarded($this->input->post('employee_id'), $date_cutoff);
+			$this->Leave_card->delete_less_forwarded(Input::get('employee_id'), $date_cutoff);
 					
 			// Put to leave card			
 			$info = array(
-						"employee_id"	=> $this->input->post('employee_id'),
+						"employee_id"	=> Input::get('employee_id'),
 						"particulars"	=> $forwarded_note,
-						"v_balance" 	=> $this->input->post('vacation'),
-						"s_balance" 	=> $this->input->post('sick'),
-						"date"			=> $this->input->post('year2').'-'.
-										   $this->input->post('month2').'-'.
-										   $this->input->post('day2')
+						"v_balance" 	=> Input::get('vacation'),
+						"s_balance" 	=> Input::get('sick'),
+						"date"			=> Input::get('year2').'-'.
+										   Input::get('month2').'-'.
+										   Input::get('day2')
 						);
 						
 			$this->Leave_card->add_leave_card($info);				
@@ -718,19 +718,19 @@ class Leave_Manage extends MX_Controller {
 		
 		$data['employee_id'] = $employee_id;
 		
-		if ($this->input->post('employee_id') != '')
+		if (Input::get('employee_id') != '')
 		{
-			$data['employee_id'] = $this->input->post('employee_id');
+			$data['employee_id'] = Input::get('employee_id');
 		}
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			$this->form_validation->set_rules('employee_id', 'Employee ID', 'required');
 			$this->form_validation->set_rules('stop_date', 'Stop of earnings', 'required');
 			
 			if ($this->form_validation->run($this) == TRUE)
 			{
-				$stop_date = $this->input->post('stop_date');
+				$stop_date = Input::get('stop_date');
 			
 				// Get number of days from first day of the month up to
 				// stop date
@@ -741,11 +741,11 @@ class Leave_Manage extends MX_Controller {
 				
 				// Delete any earnings from first day of the 
 				// month up to stop date
-				$this->Leave_card->delete_earning($this->input->post('employee_id'), $year.'-'.$month.'-1', $stop_date);
+				$this->Leave_card->delete_earning(Input::get('employee_id'), $year.'-'.$month.'-1', $stop_date);
 				
 				// Insert the last earnings
 				$info = array(
-							'employee_id'	=> $this->input->post('employee_id'),
+							'employee_id'	=> Input::get('employee_id'),
 							'period'		=> $stop_date,
 							'v_earned'		=> $days_equivalent,
 							's_earned'		=> $days_equivalent,
@@ -758,7 +758,7 @@ class Leave_Manage extends MX_Controller {
 				// Disable the employee
 				
 				$this->Employee->fields = array('employee_id');
-				$employee_id = $this->Employee->get_employee_info($this->input->post('employee_id'));
+				$employee_id = $this->Employee->get_employee_info(Input::get('employee_id'));
 				$this->Employee->update_employee(array('status' => 0), $employee_id['employee_id']);
 				
 				$data['msg'] = 'Done!';
@@ -783,16 +783,16 @@ class Leave_Manage extends MX_Controller {
 		$data['page_name'] = '<b>Settings</b>';
 		$data['msg'] = '';
 		
-		$data['leave_certification_template'] = $this->Settings->get_selected_field('leave_certification_template');
+		$data['leave_certification_template'] = Setting::getField('leave_certification_template');
 		
 		$data['leave_certification_template'] = '';
 				
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			
-			$this->Settings->update_settings('leave_certification_template', $this->input->post('leave_certification_template'));	
+			$this->Settings->update_settings('leave_certification_template', Input::get('leave_certification_template'));	
 			
-			$data['leave_certification_template'] = $this->Settings->get_selected_field('leave_certification_template');	
+			$data['leave_certification_template'] = Setting::getField('leave_certification_template');	
 		}	
 				
 		$data['main_content'] = 'settings';
@@ -825,9 +825,9 @@ class Leave_Manage extends MX_Controller {
 		
 		$data['employee_id'] = $employee_id;
 		
-		if ($this->input->post('employee_id') != '')
+		if (Input::get('employee_id') != '')
 		{
-			$data['employee_id'] = $this->input->post('employee_id');
+			$data['employee_id'] = Input::get('employee_id');
 		}
 		
 		$days 		= 0;
@@ -836,68 +836,68 @@ class Leave_Manage extends MX_Controller {
 		
 		$minutes 	= 0;
 						
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$data['month_selected'] 	= $this->input->post('month');
+			$data['month_selected'] 	= Input::get('month');
 		
-			$data['year_selected'] 		= $this->input->post('year');
+			$data['year_selected'] 		= Input::get('year');
 			
 			$this->form_validation->set_rules('employee_id', 'Employee ID', 'required|callback_employee_check');
 			
 			if ($this->form_validation->run($this) == TRUE)
 			{
 				
-				if ($this->input->post('days') != 0)
+				if (Input::get('days') != 0)
 				{			
-					$days = $this->input->post('days') * 8 * 60 * 60;
+					$days = Input::get('days') * 8 * 60 * 60;
 				}
 				
-				if ($this->input->post('hours') != 0)
+				if (Input::get('hours') != 0)
 				{
-					$hours = $this->input->post('hours') * 60 * 60;
+					$hours = Input::get('hours') * 60 * 60;
 				}
 				
-				if ($this->input->post('minutes') != 0)
+				if (Input::get('minutes') != 0)
 				{
-					$minutes = $this->input->post('minutes') * 60;
+					$minutes = Input::get('minutes') * 60;
 				}
 				
 				
 				$total = $days + $hours + $minutes;
 				
-				$card_month = $this->Helps->get_month_name($this->input->post('month'));
+				$card_month = $this->Helps->get_month_name(Input::get('month'));
 				
-				$action_take = substr($card_month, 0, 3).'. '.$this->input->post('year').' Undertime / Tardy'; 
+				$action_take = substr($card_month, 0, 3).'. '.Input::get('year').' Undertime / Tardy'; 
 						
-				$particulars = 'UT-'.$this->input->post('days').'-'.$this->input->post('hours').'-'.$this->input->post('minutes');		
+				$particulars = 'UT-'.Input::get('days').'-'.Input::get('hours').'-'.Input::get('minutes');		
 				
-				$last_day = $this->Helps->get_last_day($this->input->post('month'), $this->input->post('year'));
+				$last_day = $this->Helps->get_last_day(Input::get('month'), Input::get('year'));
 		
-				$last_day = $this->input->post('year').'-'.$this->input->post('month').'-'.$last_day;
+				$last_day = Input::get('year').'-'.Input::get('month').'-'.$last_day;
 						
 				$vl = $this->Leave_conversion_table->compute_hour_minute($total);
 				
 				// If the user encode the v_abs in textbox
 				// use the value of textbox
-				if ($this->input->post('v_abs'))
+				if (Input::get('v_abs'))
 				{
-					$vl = $this->input->post('v_abs');
+					$vl = Input::get('v_abs');
 					
 					$particulars = 'UT-';
 				}
 				
 				// modified 7.7.2012 4.39pm
-				 $enable_add_day_encode_tardy = $this->Settings->get_selected_field('enable_add_day_encode_tardy');
+				 $enable_add_day_encode_tardy = Setting::getField('enable_add_day_encode_tardy');
 	  
 				 if ($enable_add_day_encode_tardy == 'yes')
 				 {
-					  $last_day = $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('day');
+					  $last_day = Input::get('year').'-'.Input::get('month').'-'.Input::get('day');
 				 }
 				
 								
 				// Insert the last earnings
 				$info = array(
-							'employee_id'	=> $this->input->post('employee_id'),
+							'employee_id'	=> Input::get('employee_id'),
 							'particulars'	=> $particulars,
 							'v_abs'			=> $vl,
 							'action_take'	=> $action_take,

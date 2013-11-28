@@ -220,14 +220,14 @@ class Remittance extends MX_Controller {
 		
 		$data['deduction'] = $p->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$p->start_range 	= $this->input->post('start_range');
-			$p->end_range 		= $this->input->post('end_range');
-			$p->salary_based 	= $this->input->post('salary_based');
-			$p->monthly_share 	= $this->input->post('monthly_share');
-			$p->employee_share 	= $this->input->post('employee_share');
-			$p->employer_share 	= $this->input->post('employer_share');
+			$p->start_range 	= Input::get('start_range');
+			$p->end_range 		= Input::get('end_range');
+			$p->salary_based 	= Input::get('salary_based');
+			$p->monthly_share 	= Input::get('monthly_share');
+			$p->employee_share 	= Input::get('employee_share');
+			$p->employer_share 	= Input::get('employer_share');
 			
 			$p->save();
 			
@@ -290,14 +290,14 @@ class Remittance extends MX_Controller {
 		
 		$data['deduction'] = $p->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$p->start_range 	= $this->input->post('start_range');
-			$p->end_range 		= $this->input->post('end_range');
-			$p->salary_based 	= $this->input->post('salary_based');
-			$p->monthly_share 	= $this->input->post('monthly_share');
-			$p->employee_share 	= $this->input->post('employee_share');
-			$p->employer_share 	= $this->input->post('employer_share');
+			$p->start_range 	= Input::get('start_range');
+			$p->end_range 		= Input::get('end_range');
+			$p->salary_based 	= Input::get('salary_based');
+			$p->monthly_share 	= Input::get('monthly_share');
+			$p->employee_share 	= Input::get('employee_share');
+			$p->employer_share 	= Input::get('employer_share');
 			
 			$p->save();
 			
@@ -381,13 +381,13 @@ class Remittance extends MX_Controller {
 		
 		$data['deduction'] = $p->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$p->tax_status 			= $this->input->post('tax_status');
-			$p->description 		= $this->input->post('description');
-			$p->effectivity_date 	= $this->input->post('effectivity_date');
-			$p->effectivity_date_to = $this->input->post('effectivity_date_to');
-			$p->exemption 			= $this->input->post('exemption');
+			$p->tax_status 			= Input::get('tax_status');
+			$p->description 		= Input::get('description');
+			$p->effectivity_date 	= Input::get('effectivity_date');
+			$p->effectivity_date_to = Input::get('effectivity_date_to');
+			$p->exemption 			= Input::get('exemption');
 			
 			$p->save();
 			
@@ -472,13 +472,13 @@ class Remittance extends MX_Controller {
 		
 		$data['deduction'] = $p->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$p->start_range 	= $this->input->post('start_range');
-			$p->end_range 		= $this->input->post('end_range');
-			$p->fix_amount 		= $this->input->post('fix_amount');
-			$p->percentage 		= $this->input->post('percentage');
-			$p->over_limit 		= $this->input->post('over_limit');
+			$p->start_range 	= Input::get('start_range');
+			$p->end_range 		= Input::get('end_range');
+			$p->fix_amount 		= Input::get('fix_amount');
+			$p->percentage 		= Input::get('percentage');
+			$p->over_limit 		= Input::get('over_limit');
 			
 			$p->save();
 			

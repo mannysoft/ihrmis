@@ -6,7 +6,7 @@ if($name['first_day_of_service'] == '')
 
 $name['first_day_of_service'] = convert_long_date($name['first_day_of_service']);
 
-$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+$lgu_code = Setting::getField( 'lgu_code' );
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -93,8 +93,8 @@ WOP</td>
         FOR<br />
       LEAVE</td>
     </tr>
-    <?php $leave_card_print_period_from = $this->Settings->get_selected_field( 'leave_card_print_period_from' );?>
-    <?php $leave_card_print_period_to 	= $this->Settings->get_selected_field( 'leave_card_print_period_to' );?>
+    <?php $leave_card_print_period_from = Setting::getField( 'leave_card_print_period_from' );?>
+    <?php $leave_card_print_period_to 	= Setting::getField( 'leave_card_print_period_to' );?>
 	<?php $this->load->helper('text');?>
 	<?php $this->load->library('leave/leave');?>
 	<?php foreach ($cards as $card):?>

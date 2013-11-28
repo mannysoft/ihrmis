@@ -5,7 +5,7 @@ class Migration_laguna_modify_emp_nos extends CI_Migration {
 	function up() 
 	{	
 		// Do only if Province of Laguna
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		if ($lgu_code == 'laguna_province')
 		{

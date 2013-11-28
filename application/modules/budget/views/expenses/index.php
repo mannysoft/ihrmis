@@ -11,7 +11,7 @@
 	echo form_dropdown(
 	'budget_expenditure_id', 
 	budget_expenditures_options(), 
-	$this->input->post('budget_expenditure_id') ? $this->input->post('budget_expenditure_id') : $id, 
+	Input::get('budget_expenditure_id') ? Input::get('budget_expenditure_id') : $id, 
 	$js);?>
     
     <?php //if ($from_budget != ''):?>
@@ -19,7 +19,7 @@
 	<?php //endif;?>
       <div id="added"></div></td>
     <td width="1%">&nbsp;</td>
-    <td width="11%"><a href="<?php echo base_url();?>budget/expenses/save/0/<?php echo $this->input->post('budget_expenditure_id') ? $this->input->post('budget_expenditure_id') : $id?>">Add</a> </td>
+    <td width="11%"><a href="<?php echo base_url();?>budget/expenses/save/0/<?php echo Input::get('budget_expenditure_id') ? Input::get('budget_expenditure_id') : $id?>">Add</a> </td>
   </tr>
 </table>
 <table width="100%" border="0" class="type-one">

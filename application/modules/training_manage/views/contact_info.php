@@ -11,7 +11,7 @@
     <td><strong>
       <?php 
 	  $js = 'id = "contact_type_id"';
-	  echo form_dropdown('contact_type_id', $this->options->training_contact_type_options(), $this->input->post('contact_type_id'), $js);?>
+	  echo form_dropdown('contact_type_id', $this->options->training_contact_type_options(), Input::get('contact_type_id'), $js);?>
     </strong></td>
     <td><a href="<?php echo base_url();?>training_manage/contact_info_save">Add Training Contact Information</a></td>
   </tr>
@@ -57,7 +57,7 @@
 		<?php endforeach;?>
         <tr>
           <td colspan="4">
-		  <?php if (! $this->input->post('contact_type_id'))
+		  <?php if (! Input::get('contact_type_id'))
 		  {
 			  echo $this->pagination->create_links(); 
 			} ?></td>

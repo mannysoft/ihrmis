@@ -57,11 +57,11 @@ class Plantilla extends MX_Controller
 		
 		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= ($this->input->post('office_id')) ? $this->input->post('office_id') : 
+		$data['selected'] 			= (Input::get('office_id')) ? Input::get('office_id') : 
 										$this->session->userdata('office_id');		
 		
 		$data['year_options'] 		= $this->options->year_options(date('Y') - 5, date('Y') + 3);//2010 - 2020
-		$data['year_selected'] 		= ($this->input->post('year')) ? $this->input->post('year') : date('Y');
+		$data['year_selected'] 		= (Input::get('year')) ? Input::get('year') : date('Y');
 		
 		$office_id = $data['selected'];
 				
@@ -106,7 +106,7 @@ class Plantilla extends MX_Controller
 			}
 		}
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 					
 		}
@@ -125,12 +125,12 @@ class Plantilla extends MX_Controller
 		{
 			$c = new Plantilla();
 		
-			$c->where('id', $this->input->post('rowid'));
+			$c->where('id', Input::get('rowid'));
 			
 			$c->get();
 			
-			$field = $this->input->post('colid');	
-			$c->$field = $this->input->post('new');
+			$field = Input::get('colid');	
+			$c->$field = Input::get('new');
 			
 			$c->save();
 			

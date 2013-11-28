@@ -15,7 +15,7 @@ else if ($this->config->item('active_apps') == 'hris')
 }
 else
 {
-	$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+	$lgu_code = Setting::getField( 'lgu_code' );
 				
 	if ($lgu_code == 'marinduque_province')
 	{

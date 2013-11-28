@@ -5,7 +5,7 @@ class Migration_settings_add_item_show_leave_credits_leave_apps extends CI_Migra
 	function up() 
 	{					
 		// Do only if Puerto
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		$allow = 'no';
 		

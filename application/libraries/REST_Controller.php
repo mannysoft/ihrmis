@@ -568,9 +568,9 @@ abstract class REST_Controller extends MX_Controller
 
 		if ($this->config->item('enable_emulate_request'))
 		{
-			if ($this->input->post('_method'))
+			if (Input::get('_method'))
 			{
-				$method = strtolower($this->input->post('_method'));
+				$method = strtolower(Input::get('_method'));
 			}
 			elseif ($this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE'))
 			{

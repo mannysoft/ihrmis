@@ -7,7 +7,7 @@ class Migration_settings_add_minutes_between_logs extends CI_Migration {
 		$minutes_between_logs = '';
 		
 		// Do only if bataraza
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 				
 		if ($lgu_code == 'bataraza')
 		{

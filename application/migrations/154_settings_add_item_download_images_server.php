@@ -5,7 +5,7 @@ class Migration_settings_add_item_download_images_server extends CI_Migration {
 	function up() 
 	{							
 		// Do only if Puerto
-		$lgu_code = $this->Settings->get_selected_field( 'lgu_code' );
+		$lgu_code = Setting::getField( 'lgu_code' );
 		
 		$download_images_server = 'no';
 		

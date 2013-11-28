@@ -35,7 +35,7 @@
     <td width="8%" align="right">Office:</td>
     <td colspan="5"><?php echo form_office_dropdown();?>
       
-      Document:<?php $js = 'id= "document"';echo form_dropdown('document', array('monthly_salary'=> 'Monthly Salary', 'pera'=> 'PERA/ADCOM', 'rata' => 'RATA'), $this->input->post('document'));?>
+      Document:<?php $js = 'id= "document"';echo form_dropdown('document', array('monthly_salary'=> 'Monthly Salary', 'pera'=> 'PERA/ADCOM', 'rata' => 'RATA'), Input::get('document'));?>
       <input type="submit" name="go" id="go" value="-- G O --" /></td>
     <td width="13%">&nbsp;
       <input name="op" type="hidden" id="op" value="1" /></td>

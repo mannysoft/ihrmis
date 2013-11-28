@@ -34,7 +34,7 @@ Include not active </strong></td>
       <div id="loading"></div></td>
     <td>&nbsp;</td>
     <td width="11%" align="right">
-	     <?php $enable_id_maker = $this->Settings->get_selected_field( 'enable_id_maker' );?>
+	     <?php $enable_id_maker = Setting::getField( 'enable_id_maker' );?>
     
     <?php if($enable_id_maker == 'yes'):?>
 	<?php echo $cart; ?> <?php echo $btn_cart; ?></a>

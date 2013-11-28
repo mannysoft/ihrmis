@@ -43,9 +43,9 @@ class Disbursing extends MX_Controller {
 		
 		$data['row'] = $d->get_by_id( $id );
 		
-		if ( $this->input->post('op'))
+		if ( Input::get('op'))
 		{
-			$d->name 	= $this->input->post('name');
+			$d->name 	= Input::get('name');
 			
 			$d->save();
 			

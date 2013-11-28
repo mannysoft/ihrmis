@@ -1,5 +1,5 @@
 <div id="messages"></div>
-<?php $show_leave_credits_leave_apps = $this->Settings->get_selected_field( 'show_leave_credits_leave_apps' );?>
+<?php $show_leave_credits_leave_apps = Setting::getField( 'show_leave_credits_leave_apps' );?>
 <form action="<?php echo base_url().'leave_manage/leave_apps'?>" method="post">
 <table width="100%" border="0">
   <tr>

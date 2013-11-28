@@ -53,7 +53,7 @@ class Office_Manage extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			$this->form_validation->set_rules('office_name', 'Office Name', 'required|callback_office_check');
 			
@@ -61,15 +61,15 @@ class Office_Manage extends MX_Controller {
 			{
 				//Add the office
 				$data = array(
-								'office_code' 		=> $this->input->post('office_code'),
-								'office_name' 		=> $this->input->post('office_name'),
-								'office_address' 	=> $this->input->post('office_address'),
-								'salary_grade_type' => $this->input->post('salary_grade_type'),
-								'office_head' 		=> $this->input->post('office_head'),
-								'employee_id' 		=> $this->input->post('employee_id'),
-								'position'	  		=> $this->input->post('position'),
-								'office_location' 	=> $this->input->post('office_location'),
-								'disbursing_officer'=> $this->input->post('disbursing_officer'),
+								'office_code' 		=> Input::get('office_code'),
+								'office_name' 		=> Input::get('office_name'),
+								'office_address' 	=> Input::get('office_address'),
+								'salary_grade_type' => Input::get('salary_grade_type'),
+								'office_head' 		=> Input::get('office_head'),
+								'employee_id' 		=> Input::get('employee_id'),
+								'position'	  		=> Input::get('position'),
+								'office_location' 	=> Input::get('office_location'),
+								'disbursing_officer'=> Input::get('disbursing_officer'),
 							);
 							
 				$this->Office->add_office($data);
@@ -95,22 +95,22 @@ class Office_Manage extends MX_Controller {
 		
 		$data['office'] = $this->Office->get_office_info($office_id);
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
 			$this->form_validation->set_rules('office_name', 'Office Name', 'required');
 			
 			if ($this->form_validation->run($this) == TRUE)
 			{
 				$data = array(
-								'office_code' 		=> $this->input->post('office_code'),
-								'office_name' 		=> $this->input->post('office_name'),
-								'office_address' 	=> $this->input->post('office_address'),
-								'salary_grade_type' => $this->input->post('salary_grade_type'),
-								'office_head'		=> $this->input->post('office_head'),
-								'employee_id' 		=> $this->input->post('employee_id'),
-								'position'	  		=> $this->input->post('position'),
-								'office_location' 	=> $this->input->post('office_location'),
-								'disbursing_officer'=> $this->input->post('disbursing_officer'),
+								'office_code' 		=> Input::get('office_code'),
+								'office_name' 		=> Input::get('office_name'),
+								'office_address' 	=> Input::get('office_address'),
+								'salary_grade_type' => Input::get('salary_grade_type'),
+								'office_head'		=> Input::get('office_head'),
+								'employee_id' 		=> Input::get('employee_id'),
+								'position'	  		=> Input::get('position'),
+								'office_location' 	=> Input::get('office_location'),
+								'disbursing_officer'=> Input::get('disbursing_officer'),
 							);
 							
 				$this->Office->update_office($data, $office_id);	
@@ -265,12 +265,12 @@ class Office_Manage extends MX_Controller {
 		
 		$data['office_id'] = $office_id;
 		
-		if($this->input->post('op'))
+		if(Input::get('op'))
 		{
-			$divisions->name 		= $this->input->post('name');
-			$divisions->description	= $this->input->post('description');
+			$divisions->name 		= Input::get('name');
+			$divisions->description	= Input::get('description');
 			$divisions->office_id 	= $office_id;
-			$divisions->order		= $this->input->post('order');
+			$divisions->order		= Input::get('order');
 						
 			$divisions->save();
 			
