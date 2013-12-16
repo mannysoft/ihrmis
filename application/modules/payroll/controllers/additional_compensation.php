@@ -76,7 +76,7 @@ class Additional_compensation extends MX_Controller {
 		
 		$data['main_content'] = 'additional_compensation/add_compensation/add_compensation';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -113,13 +113,13 @@ class Additional_compensation extends MX_Controller {
 			
 			$p->save();
 			
-			redirect(base_url().'payroll/additional_compensation/add_compensation', 'refresh');
+			return Redirect::to('payroll/additional_compensation/add_compensation', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'additional_compensation/add_compensation/add_compensation_save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -132,7 +132,7 @@ class Additional_compensation extends MX_Controller {
 		
 		$p->delete();
 		
-		redirect(base_url().'payroll/additional_compensation/add_compensation', 'refresh');
+		return Redirect::to('payroll/additional_compensation/add_compensation', 'refresh');
 		
 	}
 	
@@ -193,7 +193,7 @@ class Additional_compensation extends MX_Controller {
 		
 		$data['main_content'] = 'additional_compensation/staff_entitlement/staff_entitlement';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -224,7 +224,7 @@ class Additional_compensation extends MX_Controller {
 			$di->amount 						= Input::get('amount');	
 			$di->save();
 			
-			redirect(base_url().'payroll/additional_compensation/staff_entitlement/'.$employee_id, 'refresh');
+			return Redirect::to('payroll/additional_compensation/staff_entitlement/'.$employee_id, 'refresh');
 			
 		}
 		
@@ -237,7 +237,7 @@ class Additional_compensation extends MX_Controller {
 		
 		$data['main_content'] = 'additional_compensation/staff_entitlement/staff_entitlement_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -250,7 +250,7 @@ class Additional_compensation extends MX_Controller {
 		
 		$di->delete();
 		
-		redirect(base_url().'payroll/additional_compensation/staff_entitlement/'.$employee_id, 'refresh');
+		return Redirect::to('payroll/additional_compensation/staff_entitlement/'.$employee_id, 'refresh');
 		
 	}
 	

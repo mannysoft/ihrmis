@@ -105,7 +105,7 @@ class Ajax extends MX_Controller {
 		
 		$data['options'] = $p->options();
 		
-		$this->load->view('ajax/tax', $data);
+		return View::make('ajax/tax', $data);
 	}
 	
 	// --------------------------------------------------------------------

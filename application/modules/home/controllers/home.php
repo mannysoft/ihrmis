@@ -226,9 +226,9 @@ class Home extends MX_Controller
 				
 		$data['main_content'] = 'home';
 		
-		$this->load->view('includes/template', $data);
-		
 		//return View::make('includes/template', $data);
+		
+		return View::make('includes/template', $data);
 	}
 }
 

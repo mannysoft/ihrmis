@@ -72,7 +72,7 @@ class Utility extends MX_Controller {
 			print_r( $error);
 			
 			
-			//$this->load->view('upload_form', $error);
+			//return View::make('upload_form', $error);
 		}	
 		else
 		{
@@ -486,7 +486,7 @@ class Utility extends MX_Controller {
 		if ( ! $this->upload->do_upload('file'))
 		{
 			$error = array('error' => $this->upload->display_errors());
-			//$this->load->view('upload_form', $error);
+			//return View::make('upload_form', $error);
 			//echo 'whahahahhaa';
 		}	
 		else
@@ -510,7 +510,7 @@ class Utility extends MX_Controller {
 			$this->session->set_userdata('file_register', $data['upload_data']['file_name']);
 			
 			echo '<img src="'.base_url().'pics/'.$data['upload_data']['file_name'].'" />';
-			//$this->load->view('upload_success', $data);
+			//return View::make('upload_success', $data);
 		}
 	}
 	

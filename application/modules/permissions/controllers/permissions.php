@@ -113,13 +113,13 @@ class Permissions extends MX_Controller {
 				$data['msg'] = 'Permissions has been saved!';
 			}
 					
-			//redirect(base_url().'groups', 'refresh');
+			//return Redirect::to('groups', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'group';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -156,7 +156,7 @@ class Permissions extends MX_Controller {
 				
 		$data['main_content'] = 'index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	
 	}
 }	

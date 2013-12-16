@@ -60,7 +60,7 @@ class Manual_Manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Office Pass/ Pass slip cancelled!');
 		
-		redirect(base_url().'manual_manage/office_pass', 'refresh');
+		return Redirect::to('manual_manage/office_pass', 'refresh');
 	}
 	
 	// --------------------------------------------------------------------
@@ -75,7 +75,7 @@ class Manual_Manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Compensatory Timeoff has been cancelled!');
 		
-		redirect(base_url().'manual_manage/cto/'.$employee_id, 'refresh');
+		return Redirect::to('manual_manage/cto/'.$employee_id, 'refresh');
 	}
 	
 	// --------------------------------------------------------------------
@@ -103,7 +103,7 @@ class Manual_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'login';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -128,7 +128,7 @@ class Manual_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'cto';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -136,21 +136,20 @@ class Manual_Manage extends MX_Controller {
 	
 	function cto_apps()
 	{
-		CompensatoryTimeoff::paginate(15);
-		return
+		
 		
 		$data['page_name'] = '<b>CTO Applications</b>';
 		$data['msg'] = '';
 		
 		$this->load->library('pagination');
 		
-		$data['rows'] = CompensatoryTimeoff::getApps();
+		$data['rows'] = $this->Compensatory_timeoff->get_cto_apps();
 		
 		// If leave manager get only the leave apps for his/ her office
 		if ($this->session->userdata('user_type') == 5)
 		{
 			$this->Compensatory_timeoff->office_id = $this->session->userdata('office_id');
-			CompensatoryTimeoff::getApps();
+			$this->Compensatory_timeoff->get_cto_apps();
 		}
 		
 		$config['base_url'] = base_url().'manual_manage/cto_apps';
@@ -165,26 +164,24 @@ class Manual_Manage extends MX_Controller {
 		
 		$this->pagination->initialize($config);
 		
-		 
-		
 		// If leave manager get only the leave apps for his/ her office
 		if ($this->session->userdata('user_type') == 5)
 		{
 			$this->Compensatory_timeoff->office_id = $this->session->userdata('office_id');
 		}
 		
-		$data['rows'] = CompensatoryTimeoff::getApps($config['per_page'], $this->uri->segment(3));
+		$data['rows'] = $this->Compensatory_timeoff->get_cto_apps($config['per_page'], $this->uri->segment(3));
 
-		if (Input::get('op') == 1)
+		if ($this->input->post('op') == 1)
 		{
-			$data['rows'] = $this->Compensatory_timeoff->search_cto_apps(Input::get('tracking_no'));
+			$data['rows'] = $this->Compensatory_timeoff->search_cto_apps($this->input->post('tracking_no'));
 			
-			if ( Input::get('tracking_no') == '' )
+			if ( $this->input->post('tracking_no') == '' )
 			{
-				$data['rows'] = CompensatoryTimeoff::getApps($config['per_page'], $this->uri->segment(3));
+				$data['rows'] = $this->Compensatory_timeoff->get_cto_apps($config['per_page'], $this->uri->segment(3));
 			}
 			
-			if ( Input::get('tracking_no') != '')
+			if ( $this->input->post('tracking_no') != '')
 			{
 				$config['total_rows'] = 0;
 				$this->pagination->initialize($config);
@@ -194,7 +191,7 @@ class Manual_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'cto_apps';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -213,7 +210,7 @@ class Manual_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'cto_forward_balance';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -303,7 +300,7 @@ class Manual_Manage extends MX_Controller {
 		
 		$data['main_content'] = 'office_pass';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 }	

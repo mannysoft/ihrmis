@@ -80,7 +80,7 @@ class Installer extends CI_Controller
 		$data['page_output'] = $this->parser->parse('main', $this->lang->language, TRUE);
 
 		// Load the view file
-		$this->load->view('global',$data);
+		return View::make('global',$data);
 	}
 
 	/**
@@ -160,7 +160,7 @@ class Installer extends CI_Controller
 		$data = array_merge((array) $data,$this->lang->language);
 
 		// Load the view file
-		$this->load->view('global', array(
+		return View::make('global', array(
 			'page_output' => $this->parser->parse('step_1', $data, TRUE)
 		));
 	}
@@ -260,8 +260,8 @@ class Installer extends CI_Controller
 		$this->session->set_userdata('step_2_passed', $data->step_passed);
 
 		// Load the view files
-		$final_data['page_output'] = $this->load->view('step_2', $data, TRUE);
-		$this->load->view('global',$final_data);
+		$final_data['page_output'] = return View::make('step_2', $data, TRUE);
+		return View::make('global',$final_data);
 	}
 
 	/**
@@ -316,7 +316,7 @@ class Installer extends CI_Controller
 
 		// Load the view file
 		$final_data['page_output'] = $this->parser->parse('step_3', $data, TRUE);
-		$this->load->view('global', $final_data);
+		return View::make('global', $final_data);
 	}
 
 	/**
@@ -378,7 +378,7 @@ class Installer extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$final_data['page_output'] = $this->parser->parse('step_4', $this->lang->language, TRUE);
-			$this->load->view('global', $final_data);
+			return View::make('global', $final_data);
 		}
 
 		// If the form validation passed
@@ -394,7 +394,7 @@ class Installer extends CI_Controller
 				$this->session->set_flashdata('message', $this->lang->line('error_'.$install['code']) . $install['message']);
 
 				$final_data['page_output'] = $this->parser->parse('step_4', $this->lang->language, TRUE);
-				$this->load->view('global', $final_data);
+				return View::make('global', $final_data);
 			}
 
 			// Success!
@@ -455,7 +455,7 @@ class Installer extends CI_Controller
 
 		// Load the view files
 		$data['page_output'] = $this->parser->parse('complete',$data, TRUE);
-		$this->load->view('global',$data);
+		return View::make('global',$data);
 	}
 
 	/**

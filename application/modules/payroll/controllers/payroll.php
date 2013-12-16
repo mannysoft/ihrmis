@@ -72,7 +72,7 @@ class Payroll extends MX_Controller {
 				
 		$data['main_content'] = 'monthly';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	 
 

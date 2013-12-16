@@ -9,7 +9,7 @@ class Welcome extends CI_Controller {
 
 	function index()
 	{
-		$this->load->view('welcome_message');
+		return View::make('welcome_message');
 	}
 }
 

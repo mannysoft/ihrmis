@@ -99,7 +99,7 @@ class Settings_Manage extends MX_Controller {
 		
 		$data['main_content'] = 'salary_grade';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -156,7 +156,7 @@ class Settings_Manage extends MX_Controller {
 		
 		$data['main_content'] = 'salary_grade_proposed';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -210,7 +210,7 @@ class Settings_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'holiday';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -287,7 +287,7 @@ class Settings_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'audit_trail';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -324,7 +324,7 @@ class Settings_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'general_settings';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -338,7 +338,7 @@ class Settings_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'backup';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -357,13 +357,13 @@ class Settings_Manage extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Table has been repaired.');
 				
-			redirect(base_url().'settings_manage/maintenance', 'refresh');
+			return Redirect::to('settings_manage/maintenance', 'refresh');
 			
 		}
 				
 		$data['main_content'] = 'maintenance';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	

@@ -63,4 +63,4 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-<?php $this->load->view('ajax/js'); // located at views/ajax/js.php?>
+<?php return View::make('ajax/js'); // located at views/ajax/js.php?>

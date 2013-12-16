@@ -79,7 +79,7 @@ class Groups extends MX_Controller {
 				
 		$data['main_content'] = 'index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	
 	}
 	
@@ -116,13 +116,13 @@ class Groups extends MX_Controller {
 				$s->amount_discount 	= Input::get('amount_discount');
 				$s->save();
 				
-				redirect(base_url().'groups', 'refresh');
+				return Redirect::to('groups', 'refresh');
 			}
 		}
 	
 		$data['main_content'] = 'save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -135,7 +135,7 @@ class Groups extends MX_Controller {
 		
 		$p->delete();
 		
-		redirect(base_url().'students', 'refresh');
+		return Redirect::to('students', 'refresh');
 		
 	}
 }	

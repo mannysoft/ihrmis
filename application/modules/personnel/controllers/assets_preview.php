@@ -43,7 +43,7 @@ class Assets_preview extends MX_Controller
 	
 	function hehe()
 	{
-		redirect(base_url().'dtr/template/Statement_of_Assets_and_Liabilities.pdf');
+		return Redirect::to('dtr/template/Statement_of_Assets_and_Liabilities.pdf');
 		//echo 'coolll';	
 	}
 	

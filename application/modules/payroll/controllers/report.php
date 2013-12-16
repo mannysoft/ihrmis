@@ -190,7 +190,7 @@ class Report extends MX_Controller {
 				
 		$data['main_content'] = 'report/salary_index';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -218,7 +218,7 @@ class Report extends MX_Controller {
 		
 		$data['main_content'] = 'report/loan_balance';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -246,7 +246,7 @@ class Report extends MX_Controller {
 		
 		$data['main_content'] = 'report/loan_balance';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -288,7 +288,7 @@ class Report extends MX_Controller {
 		
 		$data['main_content'] = 'report/signatory';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -357,7 +357,7 @@ class Report extends MX_Controller {
 		
 		
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -391,7 +391,7 @@ class Report extends MX_Controller {
 				PayrollHeading::where('id', '=', $id)->update($info);
 			}
 			
-			redirect(base_url().'payroll/report/headings');
+			return Redirect::to('payroll/report/headings');
 		}
 				
 		$data['compensations'] 	= AdditionalCompensation::listBox($id);
@@ -399,7 +399,7 @@ class Report extends MX_Controller {
 				
 		$data['main_content'] = 'report/headings_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------

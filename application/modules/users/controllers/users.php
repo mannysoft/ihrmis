@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-use Mannysoft\User;
+
 /**
  * Integrated Human Resource Management Information System
  *
@@ -44,6 +44,7 @@ class Users extends MX_Controller  {
 		$this->load->helper('security');
 		
 		$this->load->model('options');
+		//return DtrEloquent::all();
 		
 		//$this->output->enable_profiler(TRUE);
     }  
@@ -56,32 +57,22 @@ class Users extends MX_Controller  {
 	 */
 	function index()
 	{
-		//echo Input::get('op');
-		
 		$data['page_name'] = '<b>Manage Users</b>';
 		
 		$data['msg'] = '';
 				
-		//if form submit
+		// If form submit
 		if(Input::get('op'))
 		{
-			$users = $office_id	= Input::get('user');
+			$users = Input::get('user');
 			
 			if(is_array($users))
 			{
 				foreach($users as $user)
 				{
-					//deactivate
-					if(Input::get('action') == 0)
-					{
-						$this->User->update_user(array('stat' => 'Inactive'), $user);
-					}
-					
-					//if activate
-					if(Input::get('action') == 1)
-					{
-						$this->User->update_user(array('stat' => 'Active'), $user);
-					}
+					$stat = Input::get('action') == '0' ? 'Inactive' : 'Active';
+
+					$this->User->update_user(array('stat' => $stat), $user);
 				}
 			}	
 		}
@@ -94,7 +85,7 @@ class Users extends MX_Controller  {
 						
 		$data['main_content'] = 'index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -106,8 +97,6 @@ class Users extends MX_Controller  {
 	 */
 	function save($id = '')
 	{
-		//var_dump(Input::file('group_id'));
-		
 		$data['page_name'] = '<b>Add User</b>';
 		
 		if ($id != '')
@@ -180,14 +169,14 @@ class Users extends MX_Controller  {
 														 
 				$this->session->set_flashdata('msg', 'User has been saved!');
 						
-				redirect(base_url().'users/', 'refresh');		
+				return Redirect::to('users/', 'refresh');		
 			}
 					
 		}
 				
 		$data['main_content'] = 'save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -205,7 +194,7 @@ class Users extends MX_Controller  {
 				
 		$this->session->set_flashdata('msg', 'User has been deleted!');
 		
-		redirect(base_url().'users/', 'refresh');
+		return Redirect::to('users/', 'refresh');
 		
 	}
 	
@@ -250,7 +239,7 @@ class Users extends MX_Controller  {
 				
 		$data['main_content'] = 'my_account';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------

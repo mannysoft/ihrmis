@@ -90,7 +90,7 @@ class Budget extends MX_Controller  {
 				
 		$data['main_content'] = 'index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -136,14 +136,14 @@ class Budget extends MX_Controller  {
 																					 
 				$this->session->set_flashdata('msg', 'Object of Expenditures has been saved!');
 						
-				redirect(base_url().'budget/', 'refresh');		
+				return Redirect::to('budget/', 'refresh');		
 			}
 					
 		}
 				
 		$data['main_content'] = 'save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -162,7 +162,7 @@ class Budget extends MX_Controller  {
 				
 		$this->session->set_flashdata('msg', 'User has been deleted!');
 		
-		redirect(base_url().'budget/', 'refresh');
+		return Redirect::to('budget/', 'refresh');
 		
 	}
 	

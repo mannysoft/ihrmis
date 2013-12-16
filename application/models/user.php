@@ -52,31 +52,6 @@ class User extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	/**
-	 * Add new user
-	 *
-	 * @param unknown_type $info
-	 * @return unknown
-	 */
-	function add_user($data)
-	{
-		$this->db->insert('users', $data);
-	}
-	
-	// --------------------------------------------------------------------
-	
-	/**
-	 * Delete user
-	 *
-	 * @param varchar $username
-	 */
-	function delete_user($username)
-	{
-		$this->db->delete('users', array('username' => $username)); 
-	}
-	
-	// --------------------------------------------------------------------
-	
 	function get_current_password($username)
 	{
 		$current_password = '';

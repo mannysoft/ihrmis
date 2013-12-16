@@ -62,7 +62,7 @@ class Leave_Manage extends MX_Controller {
 									$employee_id
 									);
 		
-		redirect(base_url().'leave_manage/file_leave/'.$employee_id, 'refresh');
+		return Redirect::to('leave_manage/file_leave/'.$employee_id, 'refresh');
 	}
 	
 	// --------------------------------------------------------------------
@@ -81,7 +81,7 @@ class Leave_Manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Undertime / Tardy Cancelled!');
 		
-		redirect(base_url().'leave_manage/undertime/'.$employee_id, 'refresh');
+		return Redirect::to('leave_manage/undertime/'.$employee_id, 'refresh');
 	}
 	
 	// --------------------------------------------------------------------
@@ -399,7 +399,7 @@ class Leave_Manage extends MX_Controller {
 		
 		$data['cards'] = $this->Leave_card->get_card($id);
 		
-		$this->load->view('leave_card', $data);
+		return View::make('leave_card', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -410,7 +410,7 @@ class Leave_Manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', '<b><font color= red>Done leave earnings!</font></b>');
 		
-		redirect(base_url().'home/home_page', 'refresh');
+		return Redirect::to('home/home_page', 'refresh');
 
 	}
 	
@@ -477,7 +477,7 @@ class Leave_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'records';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -507,7 +507,7 @@ class Leave_Manage extends MX_Controller {
 		
 		$this->load->library('leave/leave');
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -533,7 +533,7 @@ class Leave_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'add_earning';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -583,7 +583,7 @@ class Leave_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'leave_apps';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -660,7 +660,7 @@ class Leave_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'forwarded';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -704,7 +704,7 @@ class Leave_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'wop';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -771,7 +771,7 @@ class Leave_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'stop_earning';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -797,7 +797,7 @@ class Leave_Manage extends MX_Controller {
 				
 		$data['main_content'] = 'settings';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -917,13 +917,13 @@ class Leave_Manage extends MX_Controller {
 				
 		if ($pop_up == 1)
 		{
-			$this->load->view('encode_undertime', $data);
+			return View::make('encode_undertime', $data);
 		}
 		else
 		{
 			$data['main_content'] = 'encode_undertime';
 		
-			$this->load->view('includes/template', $data);
+			return View::make('includes/template', $data);
 		}
 				
 		

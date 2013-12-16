@@ -111,6 +111,6 @@ function delete_employee(delete_id, msg, url)
 
 <?php 
 if($count == 0):
-	redirect(base_url().'employees');
+	return Redirect::to('employees');
 endif;
 ?>

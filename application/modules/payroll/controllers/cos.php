@@ -82,7 +82,7 @@ class Cos extends MX_Controller {
 		
 		$data['main_content'] = 'cos/status';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -139,7 +139,7 @@ class Cos extends MX_Controller {
 		
 		$data['main_content'] = 'cos/index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -172,7 +172,7 @@ class Cos extends MX_Controller {
 		
 		$data['main_content'] = 'cos/rates';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -249,7 +249,7 @@ class Cos extends MX_Controller {
 		
 		$data['main_content'] = 'cos/jo';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------

@@ -829,7 +829,7 @@ class Template
 
 			else
 			{
-				// Load it directly, bypassing $this->load->view() as ME resets _ci_view
+				// Load it directly, bypassing return View::make() as ME resets _ci_view
 				$content = $this->_ci->load->_ci_load(array(
 					'_ci_path' => $override_view_path.$view.self::_ext($view),
 					'_ci_vars' => $data,

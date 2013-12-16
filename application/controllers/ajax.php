@@ -572,11 +572,11 @@ class Ajax extends MX_Controller {
 		// We need to update only if the orig log is not exists.
 		if ( ! isset($orig_dtr->$c))
 		{
-			$orig_dtr->$c = $old;
+			//$orig_dtr->$c = $old;
 		}
 		if ($orig_dtr->$c == NULL )
 		{
-			$orig_dtr->$c = $old;
+			//$orig_dtr->$c = $old;
 		}
 		
 		$orig_dtr = json_encode($orig_dtr);
@@ -2343,7 +2343,7 @@ class Ajax extends MX_Controller {
 		$data['rows'] 	= $this->Employee->get_employee_list( $office_id );
 		$total_results 	= $this->Employee->num_rows;
 		
-		$this->load->view('ajax/manual_log_employees', $data);
+		return View::make('ajax/manual_log_employees', $data);
 		
 	}
 	
@@ -2363,7 +2363,7 @@ class Ajax extends MX_Controller {
 		$data['rows'] 	= $this->Employee->get_employee_shifting( $office_id );
 		$total_results 	= $this->Employee->num_rows;
 		
-		$this->load->view('ajax/employees_schedule', $data);
+		return View::make('ajax/employees_schedule', $data);
 		
 	}
 	
@@ -2566,7 +2566,7 @@ class Ajax extends MX_Controller {
 			
 			$data['rows'] = $this->Employee->get_employee_list($office_id);
 			
-			$this->load->view('ajax/show_employees', $data);
+			return View::make('ajax/show_employees', $data);
 		}
 
 	}
@@ -2592,7 +2592,7 @@ class Ajax extends MX_Controller {
 		
 		$data['rows']	= $this->Leave_card->get_encoded_card($employee_id);
 		
-		$this->load->view('ajax/show_leave_card', $data);
+		return View::make('ajax/show_leave_card', $data);
 		
 	}
 	
@@ -2612,7 +2612,7 @@ class Ajax extends MX_Controller {
 		
 		$data['name'] = $this->Employee->get_employee_info($employee_id);
 		
-		$this->load->view('ajax/show_cto', $data);
+		return View::make('ajax/show_cto', $data);
 		
 	}
 	
@@ -2634,7 +2634,7 @@ class Ajax extends MX_Controller {
 		$data['rows']	= $this->Leave_card->get_undertime($employee_id);
 		
 		
-		$this->load->view('ajax/show_undertime', $data);
+		return View::make('ajax/show_undertime', $data);
 		
 	}
 	
@@ -2686,7 +2686,7 @@ class Ajax extends MX_Controller {
 			}
 		}
 		
-		$this->load->view('ajax/show_cto_balance', $data);
+		return View::make('ajax/show_cto_balance', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -2710,7 +2710,7 @@ class Ajax extends MX_Controller {
 			$data['rows'] = $this->Employee->get_employee_list($office_id, '');
 		}
 		
-		$this->load->view('ajax/show_leave_forwarded', $data);
+		return View::make('ajax/show_leave_forwarded', $data);
 	}
 	
 	// --------------------------------------------------------------------

@@ -66,16 +66,16 @@ class Schedule extends MX_Controller {
 		//Use for office listbox
 		$data['options'] = $options;
 		
-		$this->load->view('includes/header');
+		return View::make('includes/header');
 		
-		$this->load->view('includes/menu', $data);
-		$this->load->view('includes/body_top', $data);
+		return View::make('includes/menu', $data);
+		return View::make('includes/body_top', $data);
 		
-		$this->load->view('schedules/loan', $data);
+		return View::make('schedules/loan', $data);
 		
-		$this->load->view('index', $data);
+		return View::make('index', $data);
 		
-		$this->load->view('includes/footer');
+		return View::make('includes/footer');
 		
 	}
 	
@@ -87,16 +87,16 @@ class Schedule extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		$this->load->view('includes/header');
+		return View::make('includes/header');
 		
-		$this->load->view('includes/menu', $data);
-		$this->load->view('includes/body_top', $data);
+		return View::make('includes/menu', $data);
+		return View::make('includes/body_top', $data);
 		
-		$this->load->view('remittances/premiums', $data);
+		return View::make('remittances/premiums', $data);
 		
-		$this->load->view('index', $data);
+		return View::make('index', $data);
 		
-		$this->load->view('includes/footer');
+		return View::make('includes/footer');
 		
 	}
 

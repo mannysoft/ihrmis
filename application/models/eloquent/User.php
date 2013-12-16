@@ -1,20 +1,14 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require_once('connection.php');
+<?php
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
+
+require_once('connection.php');
  
-class User extends Eloquent {
+class User extends BaseModel {
 
 	public $timestamps = false;
 	
-	public $table = "users"; 
-	
-	// --------------------------------------------------------------------
-	
-	public function addcom()
-    {
-		return self::belongsTo('AdditionalCompensation', 'additional_compensation_id');
-    }
+	protected $table = "users"; 
 	
 	// --------------------------------------------------------------------
 	

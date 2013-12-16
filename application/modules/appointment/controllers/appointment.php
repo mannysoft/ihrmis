@@ -81,7 +81,7 @@ class Appointment extends MX_Controller {
 				
 		$data['main_content'] = 'issued';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	

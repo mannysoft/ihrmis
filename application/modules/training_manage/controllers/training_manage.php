@@ -83,7 +83,7 @@ class Training_manage extends MX_Controller {
 		
 		$data['main_content'] = 'type';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -110,12 +110,12 @@ class Training_manage extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Training Type saved!');
 			
-			redirect(base_url().'training_manage/type/'.$page, 'refresh');
+			return Redirect::to('training_manage/type/'.$page, 'refresh');
 		}
 		
 		$data['main_content'] = 'type_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -131,7 +131,7 @@ class Training_manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Training Type Deleted!');
 		
-		redirect(base_url().'training_manage/type/'.$page, 'refresh');
+		return Redirect::to('training_manage/type/'.$page, 'refresh');
 		
 	}
 	
@@ -178,7 +178,7 @@ class Training_manage extends MX_Controller {
 				
 		$data['main_content'] = 'course';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -209,14 +209,14 @@ class Training_manage extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Training Course saved!');
 			
-			redirect(base_url().'training_manage/course/'.$page, 'refresh');
+			return Redirect::to('training_manage/course/'.$page, 'refresh');
 		}
 		
 		$data['selected'] = $course->training_type_id;
 		
 		$data['main_content'] = 'course_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -232,7 +232,7 @@ class Training_manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Training Course Deleted!');
 		
-		redirect(base_url().'training_manage/course/'.$page, 'refresh');
+		return Redirect::to('training_manage/course/'.$page, 'refresh');
 		
 	}
 	
@@ -274,7 +274,7 @@ class Training_manage extends MX_Controller {
 		
 		$data['main_content'] = 'event';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -310,7 +310,7 @@ class Training_manage extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Training Event saved!');
 			
-			redirect(base_url().'training_manage/event/'.$page, 'refresh');
+			return Redirect::to('training_manage/event/'.$page, 'refresh');
 		}
 		
 		$data['selected'] 				= $event->course_id;
@@ -319,7 +319,7 @@ class Training_manage extends MX_Controller {
 		
 		$data['main_content'] = 'event_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -335,7 +335,7 @@ class Training_manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Training Event Deleted!');
 		
-		redirect(base_url().'training_manage/event/'.$page, 'refresh');
+		return Redirect::to('training_manage/event/'.$page, 'refresh');
 		
 	}
 	
@@ -380,7 +380,7 @@ class Training_manage extends MX_Controller {
 		
 		$data['main_content'] = 'attendance';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -416,7 +416,7 @@ class Training_manage extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Training Attendance saved!');
 			
-			redirect(base_url().'training_manage/attendance/'.$page, 'refresh');
+			return Redirect::to('training_manage/attendance/'.$page, 'refresh');
 		}
 		
 		$data['selected'] 				= $attendance->course_id;
@@ -425,7 +425,7 @@ class Training_manage extends MX_Controller {
 		
 		$data['main_content'] = 'attendance_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -474,7 +474,7 @@ class Training_manage extends MX_Controller {
 		
 		$data['main_content'] = 'contact_type';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -501,12 +501,12 @@ class Training_manage extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Training Contact Type saved!');
 			
-			redirect(base_url().'training_manage/contact_type/'.$page, 'refresh');
+			return Redirect::to('training_manage/contact_type/'.$page, 'refresh');
 		}
 		
 		$data['main_content'] = 'contact_type_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -522,7 +522,7 @@ class Training_manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Training Contact Type Deleted!');
 		
-		redirect(base_url().'training_manage/contact_type/'.$page, 'refresh');
+		return Redirect::to('training_manage/contact_type/'.$page, 'refresh');
 		
 	}
 	
@@ -570,7 +570,7 @@ class Training_manage extends MX_Controller {
 		
 		$data['main_content'] = 'contact_info';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -604,14 +604,14 @@ class Training_manage extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Training Contact Information saved!');
 			
-			redirect(base_url().'training_manage/contact_info/'.$page, 'refresh');
+			return Redirect::to('training_manage/contact_info/'.$page, 'refresh');
 		}
 		
 		$data['selected'] 	= $contact->contact_type_id;
 		
 		$data['main_content'] = 'contact_info_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -627,7 +627,7 @@ class Training_manage extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Training Contact Information Deleted!');
 		
-		redirect(base_url().'training_manage/contact_info/'.$page, 'refresh');
+		return Redirect::to('training_manage/contact_info/'.$page, 'refresh');
 		
 	}
 	
@@ -828,7 +828,7 @@ class Training_manage extends MX_Controller {
 		
 		$data['main_content'] = 'employees';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	

@@ -73,7 +73,7 @@ class Offices extends MX_Controller {
 				
 		$data['main_content'] = 'index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -117,13 +117,13 @@ class Offices extends MX_Controller {
 				
 				$this->session->set_flashdata('msg', 'Office has been saved!');
 				
-				redirect(base_url().'offices', 'refresh');
+				return Redirect::to('offices', 'refresh');
 			}
 		}
 				
 		$data['main_content'] = 'save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -140,14 +140,14 @@ class Offices extends MX_Controller {
 		{
 			$this->session->set_flashdata('error_msg', 'Unable to delete office. 
 														Please delete all employee associated with the office.');
-			redirect(base_url().'office_manage/view_offices', 'refresh');
+			return Redirect::to('office_manage/view_offices', 'refresh');
 		}
 				
 		$this->Office->delete_office($office_id);
 		
 		$this->session->set_flashdata('msg', 'Office deleted!');
 		
-		redirect(base_url().'office_manage/view_offices', 'refresh');
+		return Redirect::to('office_manage/view_offices', 'refresh');
 	}
 	
 	// --------------------------------------------------------------------
@@ -210,7 +210,7 @@ class Offices extends MX_Controller {
 				
 		$data['main_content'] = 'divisions';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -239,12 +239,12 @@ class Offices extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Division has been saved!');
 			
-			redirect(base_url().'office_manage/divisions/'.$office_id, 'refresh');
+			return Redirect::to('office_manage/divisions/'.$office_id, 'refresh');
 		}
 		
 		$data['main_content'] = 'division_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -260,7 +260,7 @@ class Offices extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Division has been deleted!');
 		
-		redirect(base_url().'office_manage/divisions/'.$office_id, 'refresh');
+		return Redirect::to('office_manage/divisions/'.$office_id, 'refresh');
 		
 	}
 }	

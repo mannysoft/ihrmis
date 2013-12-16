@@ -50,7 +50,7 @@ class Login extends MX_Controller
 	{
 		if($this->session->userdata('username'))
 		{
-			redirect(base_url().'home/home_page', 'refresh');
+			return Redirect::to('home/home_page', 'refresh');
 		}
 		redirect('login/show_login', 'refresh');
 	}
@@ -121,7 +121,7 @@ class Login extends MX_Controller
 			
 		}
 	
-		$this->load->view('login', $data);
+		return View::make('login', $data);
 	}
 	
 	// --------------------------------------------------------------------

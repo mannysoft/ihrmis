@@ -3,15 +3,15 @@ View::make('includes/header');
 
 if ($this->config->item('active_apps') == 'leave_only' )
 {
-	$this->load->view('includes/menu_leave');
+	return View::make('includes/menu_leave');
 }
 else if ($this->config->item('active_apps') == 'ats_only')
 {
-	$this->load->view('includes/menu_ats');
+	return View::make('includes/menu_ats');
 }
 else if ($this->config->item('active_apps') == 'hris')
 {
-	$this->load->view('includes/menu_hris');
+	return View::make('includes/menu_hris');
 }
 else
 {
@@ -22,16 +22,16 @@ else
 		// We need to check the access of each user
 		if ( $this->session->userdata('user_type') == 1 || $this->session->userdata('user_type') == 2)
 		{
-			$this->load->view('includes/menu');
+			return View::make('includes/menu');
 		}
 		else
 		{
-			$this->load->view('includes/menu_mrdq');
+			return View::make('includes/menu_mrdq');
 		}
 	}
 	else
 	{
-		$this->load->view('includes/menu');
+		return View::make('includes/menu');
 	}
 	
 	
@@ -41,9 +41,9 @@ else
 }
 
 
-$this->load->view('includes/body_top');
+return View::make('includes/body_top');
 
-$this->load->view($main_content); // This is the main content
+return View::make($main_content); // This is the main content
 
-$this->load->view('includes/footer');
+return View::make('includes/footer');
 ?>

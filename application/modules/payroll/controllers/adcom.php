@@ -76,7 +76,7 @@ class Adcom extends MX_Controller {
 		
 		$data['main_content'] = 'adcom/adcom/index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -113,13 +113,13 @@ class Adcom extends MX_Controller {
 			
 			$p->save();
 			
-			redirect(base_url().'payroll/adcom', 'refresh');
+			return Redirect::to('payroll/adcom', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'adcom/adcom/save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -132,7 +132,7 @@ class Adcom extends MX_Controller {
 		
 		$p->delete();
 		
-		redirect(base_url().'payroll/adcom', 'refresh');
+		return Redirect::to('payroll/adcom', 'refresh');
 		
 	}
 	
@@ -176,7 +176,7 @@ class Adcom extends MX_Controller {
 		
 		$data['main_content'] = 'adcom/staff/staff_entitlement';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -209,7 +209,7 @@ class Adcom extends MX_Controller {
 			$di->amount 						= Input::get('amount');	
 			$di->save();
 			
-			redirect(base_url().'payroll/adcom/staff_entitlement/'.$employee_id, 'refresh');
+			return Redirect::to('payroll/adcom/staff_entitlement/'.$employee_id, 'refresh');
 			
 		}
 		
@@ -223,7 +223,7 @@ class Adcom extends MX_Controller {
 		
 		$data['main_content'] = 'adcom/staff/staff_entitlement_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -236,7 +236,7 @@ class Adcom extends MX_Controller {
 		
 		$di->delete();
 		
-		redirect(base_url().'payroll/adcom/staff_entitlement/'.$employee_id, 'refresh');
+		return Redirect::to('payroll/adcom/staff_entitlement/'.$employee_id, 'refresh');
 		
 	}
 	

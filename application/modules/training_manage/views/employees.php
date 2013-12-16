@@ -1,4 +1,4 @@
-<?php $this->load->view('name_tag');?>
+<?php return View::make('name_tag');?>
 <table width="100%" border="0">
   <tr>
     <td><a href="#" tab="general" class="click">Trainings</a> | <a href="#" tab="users" class="click">Recommended Trainings</a> | <a href="#" tab="employees" class="click">Actual Duties</a><!-- | <a href="#" tab="attendance" class="click">Attendance</a> | <a href="#" tab="leave" class="click">Leave</a> | <a href="#" tab="signatories" class="click">Signatories</a>--></td>

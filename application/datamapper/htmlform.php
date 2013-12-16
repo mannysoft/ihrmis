@@ -356,7 +356,7 @@ class DMZ_HTMLForm {
 		}
 		else
 		{
-			return $this->load->view($row_template, $view_data, TRUE);
+			return return View::make($row_template, $view_data, TRUE);
 		}
 	}
 
@@ -398,7 +398,7 @@ class DMZ_HTMLForm {
 			'rows' => $rows
 		);
 
-		return $this->load->view($template, $view_data, TRUE);
+		return return View::make($template, $view_data, TRUE);
 	}
 
 	// --------------------------------------------------------------------------

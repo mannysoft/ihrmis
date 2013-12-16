@@ -56,16 +56,16 @@ class Remittance extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		$this->load->view('includes/header');
+		return View::make('includes/header');
 		
-		$this->load->view('includes/menu', $data);
-		$this->load->view('includes/body_top', $data);
+		return View::make('includes/menu', $data);
+		return View::make('includes/body_top', $data);
 		
-		$this->load->view('remittances/deductions_agency', $data);
+		return View::make('remittances/deductions_agency', $data);
 		
-		$this->load->view('index', $data);
+		return View::make('index', $data);
 		
-		$this->load->view('includes/footer');
+		return View::make('includes/footer');
 		
 	}
 	
@@ -77,16 +77,16 @@ class Remittance extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		$this->load->view('includes/header');
+		return View::make('includes/header');
 		
-		$this->load->view('includes/menu', $data);
-		$this->load->view('includes/body_top', $data);
+		return View::make('includes/menu', $data);
+		return View::make('includes/body_top', $data);
 		
-		$this->load->view('remittances/premiums', $data);
+		return View::make('remittances/premiums', $data);
 		
-		$this->load->view('index', $data);
+		return View::make('index', $data);
 		
-		$this->load->view('includes/footer');
+		return View::make('includes/footer');
 		
 	}
 	
@@ -98,16 +98,16 @@ class Remittance extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		$this->load->view('includes/header');
+		return View::make('includes/header');
 		
-		$this->load->view('includes/menu', $data);
-		$this->load->view('includes/body_top', $data);
+		return View::make('includes/menu', $data);
+		return View::make('includes/body_top', $data);
 		
-		$this->load->view('remittances/premiums', $data);
+		return View::make('remittances/premiums', $data);
 		
-		$this->load->view('index', $data);
+		return View::make('index', $data);
 		
-		$this->load->view('includes/footer');
+		return View::make('includes/footer');
 		
 	}
 	
@@ -119,16 +119,16 @@ class Remittance extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		$this->load->view('includes/header');
+		return View::make('includes/header');
 		
-		$this->load->view('includes/menu', $data);
-		$this->load->view('includes/body_top', $data);
+		return View::make('includes/menu', $data);
+		return View::make('includes/body_top', $data);
 		
-		$this->load->view('remittances/premiums', $data);
+		return View::make('remittances/premiums', $data);
 		
-		$this->load->view('index', $data);
+		return View::make('index', $data);
 		
-		$this->load->view('includes/footer');
+		return View::make('includes/footer');
 		
 	}
 	
@@ -166,7 +166,7 @@ class Remittance extends MX_Controller {
 		
 		$data['main_content'] = 'remittance/deduction_refund/deduction_refund';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	
 	}
 	
@@ -200,7 +200,7 @@ class Remittance extends MX_Controller {
 		
 		$data['main_content'] = 'remittance/philhealth_sched/philhealth_sched';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -231,13 +231,13 @@ class Remittance extends MX_Controller {
 			
 			$p->save();
 			
-			redirect(base_url().'payroll/remittance/philhealth_sched', 'refresh');
+			return Redirect::to('payroll/remittance/philhealth_sched', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'payroll/remittance/philhealth_sched/philhealth_sched_save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -250,7 +250,7 @@ class Remittance extends MX_Controller {
 		
 		$p->delete();
 		
-		redirect(base_url().'payroll/remittance/philhealth_sched', 'refresh');
+		return Redirect::to('payroll/remittance/philhealth_sched', 'refresh');
 		
 	}
 	
@@ -270,7 +270,7 @@ class Remittance extends MX_Controller {
 		
 		$data['main_content'] = 'remittance/sss_sched/sss_sched';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -301,13 +301,13 @@ class Remittance extends MX_Controller {
 			
 			$p->save();
 			
-			redirect(base_url().'payroll/remittance/philhealth_sched', 'refresh');
+			return Redirect::to('payroll/remittance/philhealth_sched', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'payroll/remittance/philhealth_sched/philhealth_sched_save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -320,7 +320,7 @@ class Remittance extends MX_Controller {
 		
 		$p->delete();
 		
-		redirect(base_url().'payroll/remittance/philhealth_sched', 'refresh');
+		return Redirect::to('payroll/remittance/philhealth_sched', 'refresh');
 		
 	}
 	
@@ -356,7 +356,7 @@ class Remittance extends MX_Controller {
 		
 		$data['main_content'] = 'remittance/pae/pae';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -391,13 +391,13 @@ class Remittance extends MX_Controller {
 			
 			$p->save();
 			
-			redirect(base_url().'payroll/remittance/pae', 'refresh');
+			return Redirect::to('payroll/remittance/pae', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'remittance/pae/pae_save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -410,7 +410,7 @@ class Remittance extends MX_Controller {
 		
 		$p->delete();
 		
-		redirect(base_url().'payroll/remittance/pae', 'refresh');
+		return Redirect::to('payroll/remittance/pae', 'refresh');
 		
 	}
 	
@@ -447,7 +447,7 @@ class Remittance extends MX_Controller {
 		
 		$data['main_content'] = 'remittance/tax_table/tax_table';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -482,13 +482,13 @@ class Remittance extends MX_Controller {
 			
 			$p->save();
 			
-			redirect(base_url().'payroll/remittance/tax_table', 'refresh');
+			return Redirect::to('payroll/remittance/tax_table', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'remittance/tax_table/tax_table_save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -501,7 +501,7 @@ class Remittance extends MX_Controller {
 		
 		$p->delete();
 		
-		redirect(base_url().'payroll/remittance/tax_table', 'refresh');
+		return Redirect::to('payroll/remittance/tax_table', 'refresh');
 		
 	}
 	

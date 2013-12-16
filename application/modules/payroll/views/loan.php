@@ -59,7 +59,7 @@
 </table>
 </form>
 <div id="loan_list">
-<?php $this->load->view('ajax/loan_list'); ?>
+<?php return View::make('ajax/loan_list'); ?>
 </div>
 
 <script>

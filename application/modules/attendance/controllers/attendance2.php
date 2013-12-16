@@ -255,7 +255,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'view_attendance';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -1471,7 +1471,7 @@ class Attendance extends MX_Controller {
 		{			
 			$data['main_content'] = 'dtr';
 		
-			$this->load->view('includes/template', $data);
+			return View::make('includes/template', $data);
 		}
 		
 	}
@@ -1509,7 +1509,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'schedules';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -1525,7 +1525,7 @@ class Attendance extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Schedule deleted!');
 			
-		redirect(base_url().'attendance/schedules/'.$page, 'refresh');
+		return Redirect::to('attendance/schedules/'.$page, 'refresh');
 		
 	}
 	
@@ -1566,7 +1566,7 @@ class Attendance extends MX_Controller {
 			
 			$this->session->set_flashdata('msg', 'Schedule saved!');
 			
-			redirect(base_url().'attendance/schedules/'.$page, 'refresh');
+			return Redirect::to('attendance/schedules/'.$page, 'refresh');
 		}
 		
 		$times = $s->times;
@@ -1588,7 +1588,7 @@ class Attendance extends MX_Controller {
 		
 		$data['main_content'] = 'schedules_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -1612,7 +1612,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'employee_schedule';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -1838,7 +1838,7 @@ class Attendance extends MX_Controller {
 			//$this->session->set_userdata($employees);
 			$this->session->unset_userdata('employees');
 			
-			//redirect(base_url().'settings_manage/schedules/'.$page, 'refresh');
+			//return Redirect::to('settings_manage/schedules/'.$page, 'refresh');
 			$this->session->set_flashdata('msg', 'Schedule saved!');
 			$data['msg'] = 'Employee Schedule has been saved!';
 		}
@@ -1863,7 +1863,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'employee_schedule_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -1893,7 +1893,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'employee_schedule_view_employees';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -1909,7 +1909,7 @@ class Attendance extends MX_Controller {
 		
 		$this->session->set_flashdata('msg', 'Employee Schedule deleted!');
 			
-		redirect(base_url().'attendance/employee_schedule/'.$page, 'refresh');
+		return Redirect::to('attendance/employee_schedule/'.$page, 'refresh');
 		
 	}
 	
@@ -1943,7 +1943,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'jo';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -2006,7 +2006,7 @@ class Attendance extends MX_Controller {
 			
 		$data['main_content'] = 'double_entries';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -3033,7 +3033,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'view_absences';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -3068,7 +3068,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'view_late';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -3101,7 +3101,7 @@ class Attendance extends MX_Controller {
 		
 		$data['main_content'] = 'view_ob';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -3164,7 +3164,7 @@ class Attendance extends MX_Controller {
 				
 		$data['main_content'] = 'view_tardiness';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -3376,7 +3376,7 @@ class Attendance extends MX_Controller {
 			
 		$data['main_content'] = 'view_ten_tardiness';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	

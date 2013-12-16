@@ -71,7 +71,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] 		= 'employee_profile';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -160,14 +160,14 @@ class Pds extends MX_Controller  {
 		
 		$data['selected'] = $e->office_id;
 		
-		//Use for office listbox
+		// Use for office listbox
 		$data['options'] = $this->options->office_options();
 		
 		$data['employee_id'] 		= $employee_id;
 		
 		$data['main_content'] = 'personal_info';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}	
 	
@@ -289,7 +289,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'family';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}	
 	
@@ -453,7 +453,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'education';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -562,7 +562,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'examination';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -657,7 +657,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'work';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -734,7 +734,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'voluntary_work';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -830,7 +830,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'trainings';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -977,7 +977,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'other_info';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -1046,7 +1046,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'position_details';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -1136,7 +1136,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'service_record';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -1279,7 +1279,7 @@ class Pds extends MX_Controller  {
 		
 		$data['main_content'] = 'reports';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	

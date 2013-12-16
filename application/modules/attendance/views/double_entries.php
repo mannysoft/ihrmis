@@ -54,7 +54,7 @@
   </tr>
 </table>
 </form>
-<?php //$this->load->view('ajax/js'); // located at views/ajax/js.php?>
+<?php //return View::make('ajax/js'); // located at views/ajax/js.php?>
 <script>
 
 $(".remove_dtr").click(function(){

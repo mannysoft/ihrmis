@@ -109,7 +109,7 @@ class Expenses extends MX_Controller  {
 				
 		$data['main_content'] = 'expenses/index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -158,14 +158,14 @@ class Expenses extends MX_Controller  {
 																					 
 				$this->session->set_flashdata('msg', 'Expenses has been saved!');
 						
-				redirect(base_url().'budget/expenses/index/'.Input::get('budget_expenditure_id'), 'refresh');		
+				return Redirect::to('budget/expenses/index/'.Input::get('budget_expenditure_id'), 'refresh');		
 			}
 					
 		}
 				
 		$data['main_content'] = 'expenses/save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -184,7 +184,7 @@ class Expenses extends MX_Controller  {
 				
 		$this->session->set_flashdata('msg', 'User has been deleted!');
 		
-		redirect(base_url().'budget/expenses/', 'refresh');
+		return Redirect::to('budget/expenses/', 'refresh');
 		
 	}
 	

@@ -256,7 +256,7 @@ class Reports extends MX_Controller
 		
 		$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'F'); 
 		
-		redirect(base_url().'dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
+		return Redirect::to('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
 		
 		
 	}
@@ -393,7 +393,7 @@ class Reports extends MX_Controller
 		//$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'F'); 
 		$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'I'); 
 		
-		//redirect(base_url().'dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
+		//return Redirect::to('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
 		
 		
 	}
@@ -545,7 +545,7 @@ class Reports extends MX_Controller
 		//$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'F'); 
 		$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'I'); 
 		
-		//redirect(base_url().'dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
+		//return Redirect::to('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
 		
 		
 	}
@@ -683,7 +683,7 @@ class Reports extends MX_Controller
 		//$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'F'); 
 		$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'I'); 
 		
-		//redirect(base_url().'dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
+		//return Redirect::to('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
 		
 		
 	}
@@ -1340,7 +1340,7 @@ class Reports extends MX_Controller
 		//$pdf->Output('dtr/reports/statement_leave'.$employee_id.'.pdf', 'F'); 
 		$pdf->Output('dtr/reports/statement_leave'.$employee_id.'.pdf', 'I');
 		
-		//redirect(base_url().'dtr/reports/statement_leave'.$employee_id.'.pdf', 'refresh');
+		//return Redirect::to('dtr/reports/statement_leave'.$employee_id.'.pdf', 'refresh');
 	}
 	
 	// --------------------------------------------------------------------
@@ -1358,7 +1358,7 @@ class Reports extends MX_Controller
 		{			
 			$data['date_retired'] = $e->date_retired;
 			
-			$this->load->view('date_retired', $data);
+			return View::make('date_retired', $data);
 			return;
 			
 		}
@@ -2120,7 +2120,7 @@ class Reports extends MX_Controller
 		
 		$pdf->Output('dtr/reports/leave-apps-'.$rows['employee_id'].'.pdf', 'I'); 
 		
-		//redirect(base_url().'dtr/reports/leave-apps-'.$rows['employee_id'].'.pdf', 'refresh');
+		//return Redirect::to('dtr/reports/leave-apps-'.$rows['employee_id'].'.pdf', 'refresh');
 		
 	}
 	
@@ -3114,7 +3114,7 @@ class Reports extends MX_Controller
 		
 		$pdf->Output('dtr/reports/cto-apps-'.intval($c->employee_id).'.pdf', 'I'); 
 		
-		//redirect(base_url().'dtr/reports/leave-apps-'.$rows['employee_id'].'.pdf', 'refresh');
+		//return Redirect::to('dtr/reports/leave-apps-'.$rows['employee_id'].'.pdf', 'refresh');
 		
 	}
 

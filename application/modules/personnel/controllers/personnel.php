@@ -70,7 +70,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] 		= 'assets';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -120,7 +120,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] = 'assets_spouse';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -187,7 +187,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] = 'assets_unmarried';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -268,7 +268,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] = 'assets_real_properties';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -338,7 +338,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] = 'assets_personals';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -408,7 +408,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] = 'assets_liabilities';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -482,7 +482,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] = 'assets_business_interests';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -554,7 +554,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] = 'assets_relatives';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	
@@ -608,7 +608,7 @@ class Personnel extends MX_Controller
 		
 		$data['main_content'] = 'assets_other_info';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	

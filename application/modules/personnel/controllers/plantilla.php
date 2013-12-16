@@ -113,7 +113,7 @@ class Plantilla extends MX_Controller
 				
 		$data['main_content'] = 'plantilla/index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}
 	

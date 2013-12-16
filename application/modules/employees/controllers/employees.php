@@ -218,7 +218,7 @@ class Employees extends MX_Controller  {
 		{
 			$ie = new Employee_id_request_m();
 			$ie->truncate();
-			redirect(base_url().'employees/index');
+			return Redirect::to('employees/index');
 		}
 		
 		//cancel button
@@ -268,7 +268,7 @@ class Employees extends MX_Controller  {
 				
 		$data['main_content'] = 'index';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	// -------------------------------------------------------------------------------------
 	
@@ -292,7 +292,8 @@ class Employees extends MX_Controller  {
 		
 		$e->save();
 		
-		redirect(base_url().'employees/index/'.$page.'/'.$office_id);
+		//return Redirect::to('employees/index/'.$page.'/'.$office_id);
+		return Redirect::to('employees/index/'.$page.'/'.$office_id);
 	}
 	//---------------------------------------------------------------------------------
 	
@@ -309,11 +310,11 @@ class Employees extends MX_Controller  {
 
 		if($url == 1)
 		{
-			redirect(base_url().'employees/id_request/');
+			return Redirect::to('employees/id_request/');
 		}
 		else
 		{
-			redirect(base_url().'employees/index/'.$page.'/'.$office_id);
+			return Redirect::to('employees/index/'.$page.'/'.$office_id);
 		}
 	}
 	// --------------------------------------------------------------------
@@ -370,7 +371,7 @@ class Employees extends MX_Controller  {
 		{
 			$ie = new Employee_id_request_m();
 			$ie->truncate();
-			redirect(base_url().'employees/id_request');
+			return Redirect::to('employees/id_request');
 		}
 		
 		//cancel button
@@ -414,7 +415,7 @@ class Employees extends MX_Controller  {
 		$data['count'] = $config['total_rows'];
 		$data['main_content'] = 'id_request';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	// --------------------------------------------------------------------
 	
@@ -566,18 +567,18 @@ class Employees extends MX_Controller  {
 					
 					
 					// Redirect to pds page
-					//redirect(base_url().'pds/employee_profile/'.$id, 'refresh');		
+					//return Redirect::to('pds/employee_profile/'.$id, 'refresh');		
 				}
 				
 				// Redirect to adding new employee form
-				redirect(base_url().'employees/add_employee', 'refresh');				
+				return Redirect::to('employees/add_employee', 'refresh');				
 			}
 					
 		}
 		
 		$data['main_content'] = 'add_employee';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 		
 	}	
 
@@ -786,7 +787,7 @@ class Employees extends MX_Controller  {
 				// Use for messaging
 				$this->session->set_flashdata('msg', 'Employee updated!');
 				
-				redirect(base_url().'employees/index/'.$page.'/'.$office_return, 'refresh');
+				return Redirect::to('employees/index/'.$page.'/'.$office_return, 'refresh');
 			}
 			
 			
@@ -794,7 +795,7 @@ class Employees extends MX_Controller  {
 				
 		$data['main_content'] = 'edit_employee';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -813,7 +814,7 @@ class Employees extends MX_Controller  {
 									$employee_id
 									);
 		
-		redirect(base_url().'employees/index/'.$office_return.'/'.$page, 'refresh');
+		return Redirect::to('employees/index/'.$office_return.'/'.$page, 'refresh');
 	}
 	
 	// --------------------------------------------------------------------
@@ -847,7 +848,7 @@ class Employees extends MX_Controller  {
 		
 		$data['main_content'] = 'step_increment';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------

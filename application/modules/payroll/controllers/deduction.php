@@ -82,7 +82,7 @@ class Deduction extends MX_Controller {
 		
 		$data['main_content'] = 'deduction/agency/agency';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 		
 	}
 	
@@ -106,13 +106,13 @@ class Deduction extends MX_Controller {
 			
 			$p->save();
 			
-			redirect(base_url().'payroll/deduction/agency', 'refresh');
+			return Redirect::to('payroll/deduction/agency', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'deduction/agency/agency_save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -125,7 +125,7 @@ class Deduction extends MX_Controller {
 		
 		$p->delete();
 		
-		redirect(base_url().'payroll/deduction/agency', 'refresh');
+		return Redirect::to('payroll/deduction/agency', 'refresh');
 		
 	}
 	
@@ -161,7 +161,7 @@ class Deduction extends MX_Controller {
 				
 		$data['main_content'] = 'deduction/information/information';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -202,7 +202,7 @@ class Deduction extends MX_Controller {
 			
 			$di->save();
 			
-			redirect(base_url().'payroll/deduction/information', 'refresh');
+			return Redirect::to('payroll/deduction/information', 'refresh');
 			
 		}
 		
@@ -212,7 +212,7 @@ class Deduction extends MX_Controller {
 		
 		$data['main_content'] = 'deduction/information/information_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -225,7 +225,7 @@ class Deduction extends MX_Controller {
 		
 		$di->delete();
 		
-		redirect(base_url().'payroll/deduction/information', 'refresh');
+		return Redirect::to('payroll/deduction/information', 'refresh');
 		
 	}
 	
@@ -285,7 +285,7 @@ class Deduction extends MX_Controller {
 		
 		$data['main_content'] = 'deduction/optional/optional';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -314,7 +314,7 @@ class Deduction extends MX_Controller {
 			$di->status 					= Input::get('status') ? Input::get('status') : 'inactive';			
 			$di->save();
 			
-			redirect(base_url().'payroll/deduction/optional/'.$employee_id, 'refresh');
+			return Redirect::to('payroll/deduction/optional/'.$employee_id, 'refresh');
 			
 		}
 		
@@ -327,7 +327,7 @@ class Deduction extends MX_Controller {
 		
 		$data['main_content'] = 'deduction/optional/optional_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -340,7 +340,7 @@ class Deduction extends MX_Controller {
 		
 		$di->delete();
 		
-		redirect(base_url().'payroll/deduction/optional/'.$employee_id, 'refresh');
+		return Redirect::to('payroll/deduction/optional/'.$employee_id, 'refresh');
 		
 	}
 	
@@ -403,7 +403,7 @@ class Deduction extends MX_Controller {
 		
 		$data['main_content'] = 'deduction/loan/loan';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -438,7 +438,7 @@ class Deduction extends MX_Controller {
 			$di->status 					= Input::get('status') ? Input::get('status') : 'inactive';			
 			$di->save();
 			
-			redirect(base_url().'payroll/deduction/loan/'.$employee_id, 'refresh');
+			return Redirect::to('payroll/deduction/loan/'.$employee_id, 'refresh');
 			
 		}
 		
@@ -451,7 +451,7 @@ class Deduction extends MX_Controller {
 		
 		$data['main_content'] = 'deduction/loan/loan_save';
 		
-		$this->load->view('includes/template', $data);
+		return View::make('includes/template', $data);
 	}
 	
 	// --------------------------------------------------------------------
@@ -464,7 +464,7 @@ class Deduction extends MX_Controller {
 		
 		$di->delete();
 		
-		redirect(base_url().'payroll/deduction/loan/'.$employee_id, 'refresh');
+		return Redirect::to('payroll/deduction/loan/'.$employee_id, 'refresh');
 		
 	}
 	
@@ -484,7 +484,7 @@ class Deduction extends MX_Controller {
 		
 		$data['main_content'] = 'deduction/tax/tax';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 		
 	}
 	

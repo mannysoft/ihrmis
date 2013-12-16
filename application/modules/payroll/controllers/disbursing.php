@@ -27,7 +27,7 @@ class Disbursing extends MX_Controller {
 		
 		$data['main_content'] = 'disbursing/index';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 		
 	}
 	
@@ -49,13 +49,13 @@ class Disbursing extends MX_Controller {
 			
 			$d->save();
 			
-			redirect(base_url().'payroll/disbursing', 'refresh');
+			return Redirect::to('payroll/disbursing', 'refresh');
 			
 		}
 	
 		$data['main_content'] = 'disbursing/save';
 		
-		$this->load->view('includes/template', $data);	
+		return View::make('includes/template', $data);	
 	}
 	
 	// --------------------------------------------------------------------
@@ -68,7 +68,7 @@ class Disbursing extends MX_Controller {
 		
 		$d->delete();
 		
-		redirect(base_url().'payroll/disbursing', 'refresh');
+		return Redirect::to('payroll/disbursing', 'refresh');
 		
 	}
 
