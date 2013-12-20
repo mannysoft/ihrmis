@@ -18,9 +18,11 @@ class Bootup
 {
     static function initAll()
     {
+        ini_set('default_charset', 'UTF-8');
+
         self::initUtf8Encode();
-        self::initMbstring();
         self::initIconv();
+        self::initMbstring();
         self::initExif();
         self::initIntl();
         self::initLocale();
@@ -75,6 +77,8 @@ class Bootup
         }
         else if (!defined('MB_OVERLOAD_MAIL'))
         {
+            extension_loaded('iconv') or static::initIconv();
+
             require __DIR__ . '/Bootup/mbstring.php';
         }
     }
@@ -127,10 +131,6 @@ class Bootup
     {
         if (defined('GRAPHEME_CLUSTER_RX')) return;
 
-        preg_match('/^.$/u', '§') or user_error('PCRE is compiled without UTF-8 support', E_USER_WARNING);
-
-        extension_loaded('intl') or require __DIR__ . '/Bootup/intl.php';
-
         if (PCRE_VERSION < '8.32')
         {
             // (CRLF|([ZWNJ-ZWJ]|T+|L*(LV?V+|LV|LVT)T*|L+|[^Control])[Extend]*|[Control])
@@ -143,6 +143,14 @@ class Bootup
         {
             define('GRAPHEME_CLUSTER_RX', '\X');
         }
+
+        if (! extension_loaded('intl'))
+        {
+            extension_loaded('iconv') or static::initIconv();
+            extension_loaded('mbstring') or static::initMbstring();
+
+            require __DIR__ . '/Bootup/intl.php';
+        }
     }
 
     static function initLocale()
@@ -154,7 +162,7 @@ class Bootup
         if ('' === basename('§'))
         {
             setlocale(LC_ALL, 'C.UTF-8', 'C');
-            setlocale(LC_CTYPE, 'en_US.UTF-8', 'fr_FR.UTF-8', 'es_ES.UTF-8', 'de_DE.UTF-8', 'ru_RU.UTF-8', 'pt_BR.UTF-8', 'it_IT.UTF-8', 'ja_JP.UTF-8', 'zh_CN.UTF-8', 0);
+            setlocale(LC_CTYPE, 'en_US.UTF-8', 'fr_FR.UTF-8', 'es_ES.UTF-8', 'de_DE.UTF-8', 'ru_RU.UTF-8', 'pt_BR.UTF-8', 'it_IT.UTF-8', 'ja_JP.UTF-8', 'zh_CN.UTF-8', '0');
         }
     }
 
@@ -182,42 +190,58 @@ class Bootup
         }
     }
 
-    static function filterRequestInputs($normalization_form = /* n::NFC = */ 4, $pre_lead_comb = '◌')
+    static function filterRequestInputs($normalization_form = 4 /* n::NFC */, $leading_combining = '◌')
     {
         // Ensures inputs are well formed UTF-8
         // When not, assumes Windows-1252 and converts to UTF-8
         // Tests only values, not keys
 
-        $a = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST, &$_ENV);
-        foreach ($_FILES as &$v) $a[] = array(&$v['name'], &$v['type']);
+        $a = array(&$_FILES, &$_ENV, &$_GET, &$_POST, &$_COOKIE, &$_SERVER, &$_REQUEST);
 
-        $len = count($a);
-        for ($i = 0; $i < $len; ++$i)
+        foreach ($a[0] as &$r) $a[] = array(&$r['name'], &$r['type']);
+        unset($a[0]);
+
+        $len = count($a) + 1;
+        for ($i = 1; $i < $len; ++$i)
         {
-            foreach ($a[$i] as &$v)
+            foreach ($a[$i] as &$r)
             {
-                if (is_array($v)) $a[$len++] =& $v;
-                else if (preg_match('/[\x80-\xFF]/', $v))
-                {
-                    if (n::isNormalized($v, $normalization_form)) $w = '';
-                    else
-                    {
-                        $w = n::normalize($v, $normalization_form);
-                        if (false === $w) $v = u::utf8_encode($v);
-                        else $v = $w;
-                    }
-
-                    if ($v[0] >= "\x80" && false !== $w && isset($pre_lead_comb[0]) && preg_match('/^\p{Mn}/u', $v))
-                    {
-                        // Prevent leading combining chars
-                        // for NFC-safe concatenations.
-                        $v = $pre_lead_comb . $v;
-                    }
-                }
+                $s = $r; // $r is a ref, $s a copy
+                if (is_array($s)) $a[$len++] =& $r;
+                else $r = static::filterString($s, $normalization_form, $leading_combining);
             }
 
-            reset($a[$i]);
             unset($a[$i]);
         }
+    }
+
+    static function filterString($s, $normalization_form = 4 /* n::NFC */, $leading_combining = '◌')
+    {
+        if (false !== strpos($s, "\r"))
+        {
+            // Workaround https://bugs.php.net/65732
+            $s = str_replace("\r\n", "\n", $s);
+            $s = strtr($s, "\r", "\n");
+        }
+
+        if (preg_match('/[\x80-\xFF]/', $s))
+        {
+            if (n::isNormalized($s, $normalization_form)) $n = '';
+            else
+            {
+                $n = n::normalize($s, $normalization_form);
+                if (false === $n) $s = u::utf8_encode($s);
+                else $s = $n;
+            }
+
+            if ($s[0] >= "\x80" && false !== $n && isset($leading_combining[0]) && preg_match('/^\p{Mn}/u', $s))
+            {
+                // Prevent leading combining chars
+                // for NFC-safe concatenations.
+                $s = $leading_combining . $s;
+            }
+        }
+
+        return $s;
     }
 }

@@ -34,12 +34,18 @@
  */
 class Employees extends MX_Controller  {
 
+	protected $employee;
+	
 	// --------------------------------------------------------------------
 	
 	function __construct()
     {
         parent::__construct();
 		//$this->output->enable_profiler(TRUE);
+		
+		//$this->employee = new EmployeeEloquent();
+		
+		//var_dump($this->employee->all());
 		
 		$this->load->model('options');
 		

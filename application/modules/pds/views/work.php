@@ -33,7 +33,7 @@
                                     (yyyy-mm-dd)</td>
                                   <td width="18%" align="center">Position/Title <br />
                                     (Write in full) </td>
-                                  <td width="18%" align="center">DEPARTMENT/ OFFICE/COPANY<br />
+                                  <td width="18%" align="center">DEPARTMENT/ OFFICE/COMPANY<br />
                                     (Write in full)</td>
                                   <td width="7%" align="center">Monthly Salary</td>
                                   <td width="7%" align="center">SG &amp; STEP INC.<br />

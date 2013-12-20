@@ -1075,6 +1075,8 @@ class Pds extends MX_Controller  {
 			$salary 			= Input::get('salary');
 			$office_entity 		= Input::get('office_entity');
 			$lwop 				= Input::get('lwop');
+			$branch 			= Input::get('branch');
+			$remarks 			= Input::get('remarks');
 			$separation_date 	= Input::get('separation_date');
 			$separation_cause 	= Input::get('separation_cause');
 			
@@ -1100,6 +1102,8 @@ class Pds extends MX_Controller  {
 					$service->salary			= $salary[$i];
 					$service->office_entity		= $office_entity[$i];
 					$service->lwop				= $lwop[$i];
+					$service->branch			= $branch[$i];
+					$service->remarks			= $remarks[$i];
 					$service->separation_date	= $separation_date[$i];
 					$service->separation_cause	= $separation_cause[$i];
 					
@@ -1117,7 +1121,7 @@ class Pds extends MX_Controller  {
 		
 		// Service Record====================================================
 		$service = new Service_record();
-		$service->order_by('date_from');
+		$service->order_by('date_from', 'DESC');
 		
 		$data['services'] = $service->get_by_employee_id($employee_id);
 		

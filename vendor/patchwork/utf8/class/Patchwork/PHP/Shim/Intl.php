@@ -28,9 +28,7 @@ class Intl
 {
     static function grapheme_extract($s, $size, $type = GRAPHEME_EXTR_COUNT, $start = 0, &$next = 0)
     {
-        if (is_array($s)) return !user_error(__METHOD__ . '() expects parameter 1 to be string, array given', E_USER_WARNING);
-
-        $s     = (string) $s;
+        $s = substr($s, $start) . '';
         $size  = (int) $size;
         $type  = (int) $type;
         $start = (int) $start;
@@ -39,38 +37,33 @@ class Intl
         if (0 === $size) return '';
 
         $next = $start;
-        $s = substr($s, $start); //TODO: seek to the first character boundary when needed
 
-        if (GRAPHEME_EXTR_COUNT === $type)
+        $s = preg_split('/(' . GRAPHEME_CLUSTER_RX . ')/u', "\r\n" .  $s, $size + 1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+
+        if (!isset($s[1])) return false;
+
+        $i = 1;
+        $ret = '';
+
+        do
         {
-            if ($size > 65635)
-            {
-                // Workaround PCRE limiting quantifiers to 65635.
-                $rx = floor(sqrt($size));
-                $size -= $rx * $rx; // This can't be greather than 65635: the native intl is limited to 2Gio strings
-                $rx = '(?:' . GRAPHEME_CLUSTER_RX . "{{$rx}}){{$rx}}" . GRAPHEME_CLUSTER_RX . "{1,{$size}}";
-            }
-            else $rx = GRAPHEME_CLUSTER_RX . "{1,{$size}}";
+            if (GRAPHEME_EXTR_COUNT === $type) --$size;
+            else if (GRAPHEME_EXTR_MAXBYTES === $type) $size -= strlen($s[$i]);
+            else $size -= iconv_strlen($s[$i], 'UTF-8//IGNORE');
 
-            $s = preg_split("/({$rx})/u", $s, 2, PREG_SPLIT_DELIM_CAPTURE);
-            $next += strlen($s[0]);
-            $s = isset($s[1]) ? $s[1] : '';
+            if ($size >= 0) $ret .= $s[$i];
         }
-        else
-        {
-            //TODO
-            return !user_error(__METHOD__ . '() with GRAPHEME_EXTR_MAXBYTES or GRAPHEME_EXTR_MAXCHARS is not implemented', E_USER_WARNING);
-        }
+        while (isset($s[++$i]) && $size > 0);
 
-        $next += strlen($s);
+        $next += strlen($ret);
 
-        return $s;
+        return $ret;
     }
 
     static function grapheme_strlen($s)
     {
-        preg_replace('/' . GRAPHEME_CLUSTER_RX . '/u', '', $s, -1, $s);
-        return $s;
+        preg_replace('/' . GRAPHEME_CLUSTER_RX . '/u', '', $s, -1, $len);
+        return 0 === $len && '' !== $s ? null : $len;
     }
 
     static function grapheme_substr($s, $start, $len = 2147483647)
@@ -100,6 +93,7 @@ class Intl
 
         if (2147483647 == $len) return grapheme_substr($s, $start);
 
+        $s .= '';
         $slen = grapheme_strlen($s);
         $start = (int) $start;
 
@@ -127,10 +121,10 @@ class Intl
 
     protected static function grapheme_position($s, $needle, $offset, $mode)
     {
-        if ($offset > 0) $s = (string) self::grapheme_substr($s, $offset);
+        if (! preg_match('/./us', $needle .= '')) return false;
+        if (! preg_match('/./us', $s .= '')) return false;
+        if ($offset > 0) $s = self::grapheme_substr($s, $offset);
         else if ($offset < 0) $offset = 0;
-        if ('' === (string) $needle) return false;
-        if ('' === (string) $s) return false;
 
         switch ($mode)
         {

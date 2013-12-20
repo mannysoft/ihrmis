@@ -34,7 +34,7 @@
                                     (yyyy-mm-dd)</td>
                                   <td colspan="3" align="center" valign="middle">RECORDS OF APPOINTMENT</td>
                                   <td width="7%" align="center" valign="middle">OFFICE ENTITY /DIVISION</td>
-                                  <td width="13%" align="center" valign="middle">L/V ABS W/O Pay</td>
+                                  <td width="13%" align="center" valign="middle"></td>
                                   <td colspan="2" align="center">SEPARATION</td>
                                 </tr>
                                 <tr>
@@ -43,10 +43,10 @@
                                   <td width="18%" align="center">Designation</td>
                                   <td width="18%" align="center">Status</td>
                                   <td width="7%" align="center">Salary</td>
-                                  <td>Station / Place of Assignment /Branch</td>
-                                  <td>&nbsp;</td>
-                                  <td width="16%" align="center" valign="middle">Date</td>
-                                  <td width="8%" align="center" valign="middle">Cause</td>
+                                  <td>Station</td>
+                                  <td>Branch</td>
+                                  <td width="16%" align="center" valign="middle">Remarks</td>
+                                  <td width="8%" align="center" valign="middle"></td>
                                 </tr>
                                 <?php $i = 0;?>
                 <?php foreach ($services as $service): ?>
@@ -57,8 +57,8 @@
 				  <td><input name="status[]" type="text" id="status[]" value="<?php echo $service->status;?>" size="10" /></td>
 				  <td><input name="salary[]" type="text" id="salary[]" value="<?php echo $service->salary;?>" size="8" /></td>
 				  <td><input name="office_entity[]" type="text" id="office_entity[]" value="<?php echo $service->office_entity;?>" /></td>
-				  <td><input name="lwop[]" type="text" id="lwop[]" value="<?php echo $service->lwop;?>" size="5" /></td>
-				  <td><input name="separation_date[]" type="text" id="separation_date[]" value="<?php echo $service->separation_date;?>" size="10" /></td>
+				  <td><input name="branch[]" type="text" id="branch[]" value="<?php echo $service->branch;?>" size="5" /></td>
+				  <td><input name="remarks[]" type="text" id="remarks[]" value="<?php echo $service->remarks;?>" size="10" /></td>
 				  <td><input name="separation_cause[]" type="text" id="separation_cause[]" value="<?php echo $service->separation_cause;?>" size="10" /></td>
 				</tr>
                 <?php $i ++;?>
@@ -76,8 +76,8 @@
                           <td><input name="status[]" type="text" id="status[]" value="" size="10" /></td>
                           <td><input name="salary[]" type="text" id="salary[]" value="" size="8" /></td>
                           <td><input name="office_entity[]" type="text" id="office_entity[]" value="" /></td>
-                          <td><input name="lwop[]" type="text" id="lwop[]" value="" size="5" /></td>
-                          <td><input name="separation_date[]" type="text" id="separation_date[]" size="10" /></td>
+                          <td><input name="branch[]" type="text" id="branch[]" value="" size="5" /></td>
+                          <td><input name="remarks[]" type="text" id="remarks[]" size="10" /></td>
                           <td><input name="separation_cause[]" type="text" id="separation_cause[]" size="10" /></td>
                         </tr>
                         <?php $i ++;?>

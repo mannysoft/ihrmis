@@ -171,7 +171,7 @@ class Home extends MX_Controller
 		
 		//$this->load->model('eloquent/AdditionalCompensation');
 		
-		//echo AdditionalCompensation::all();
+		//echo AdditionalCompensation::paginate(3);
 		
 		$data = array();
 		
