@@ -1666,5 +1666,71 @@
             "framework",
             "laravel"
         ]
+    },
+    {
+        "name": "itbz/fpdf",
+        "version": "1.7.2",
+        "version_normalized": "1.7.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/iio/fpdf.git",
+            "reference": "06d02a7bf227a62d37691a4e7e9c3a35efcb41c3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/iio/fpdf/zipball/06d02a7bf227a62d37691a4e7e9c3a35efcb41c3",
+            "reference": "06d02a7bf227a62d37691a4e7e9c3a35efcb41c3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2013-12-27 14:18:15",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "fpdf": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "no usage restriction"
+        ],
+        "description": "Unofficial PSR-0 compliant version of the FPDF library",
+        "homepage": "http://www.fpdf.org/"
+    },
+    {
+        "name": "itbz/fpdi",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/iio/fpdi.git",
+            "reference": "5ffc978cfa1dbec99019c9efa1a914b4a29c8270"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/iio/fpdi/zipball/5ffc978cfa1dbec99019c9efa1a914b4a29c8270",
+            "reference": "5ffc978cfa1dbec99019c9efa1a914b4a29c8270",
+            "shasum": ""
+        },
+        "require": {
+            "itbz/fpdf": "1.7.*",
+            "php": ">=5.3.0"
+        },
+        "time": "2013-12-17 05:23:09",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "fpdi": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Unofficial PSR-0 compliant version of the FPDI library"
     }
 ]
