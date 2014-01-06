@@ -10,7 +10,7 @@ use Mannysoft\Date\Date;
  *
  * @package		iHRMIS
  * @author		Manny Isles
- * @copyright	Copyright (c) 2008 - 2013, Charliesoft
+ * @copyright	Copyright (c) 2008 - 2014, Charliesoft
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
  * @github	    http://github.com/mannysoft/ihrmis
