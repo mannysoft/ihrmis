@@ -59,7 +59,7 @@
     <td><?php echo $this->Helps->get_month_name($row['month']).' '.$row['dates'].' ,'.$row['year'];?></td>
     <td>
       <!--If leave manager -->
-	  <?php if ( $this->session->userdata('user_type') == 5):?>
+	  <?php if ( Session::get('user_type') == 5):?>
       	<a href="#" onClick="print_preview(<?php echo intval($row['id']);?>)" style="cursor: pointer;">Print Preview</a>
       	<?php if($row['status'] == 'active'):?>
 		<?php else:?>

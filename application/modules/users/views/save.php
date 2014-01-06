@@ -1,7 +1,7 @@
 <?php if (validation_errors()): ?>
-<div class="clean-red"><?php echo validation_errors(); ?><?php echo $this->session->flashdata('msg');?></div>
-<?php elseif ($this->session->flashdata('msg')): ?>
-<div class="clean-green"><?php echo validation_errors(); ?><?php echo $this->session->flashdata('msg');?></div>
+<div class="clean-red"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
+<?php elseif (Session::flashData('msg')): ?>
+<div class="clean-green"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
 <?php else: ?>
 <?php endif; ?>
 <form id="myform" method="post" action="" target="" enctype="multipart/form-data">

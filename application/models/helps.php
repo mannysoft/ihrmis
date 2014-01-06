@@ -987,9 +987,7 @@ class Helps extends CI_Model {
 	 */
 	function footer()
 	{
-		$system_name = Setting::getField('system_name');
-		
-		echo $system_name;
+		return Setting::getField('system_name');
 	}
 	
 	// --------------------------------------------------------------------

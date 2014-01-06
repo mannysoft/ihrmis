@@ -15,7 +15,7 @@ class Cos extends MX_Controller {
 		
 		$this->office_id = (Input::get('office_id')) ? 
 					  		Input::get('office_id') :
-					 		$this->session->userdata('office_id');
+					 		Session::get('office_id');
 							
 		$this->period 	= 	Input::get('month').'-'.
 							Input::get('period_from').'-'.

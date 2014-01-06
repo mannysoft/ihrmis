@@ -155,7 +155,7 @@
 <a name="bottom">	</a>
 <div class="textFooter">
 <a name="bottom">.		<br>
-		<?php $this->Helps->footer(); echo ' (Database Version '.$this->Migrations->get_version().')';?> | Copyright © 2008 - <?php echo date('Y');?> <a href="http://www.charliesoft.net/" class="footerLink" target="_new">Charliesoft</a>. All Rights Reserved.
+		<?php echo $this->Helps->footer(); echo ' (Database Version '.$this->Migrations->get_version().')';?> | Copyright © 2008 - <?php echo date('Y');?> <a href="http://www.charliesoft.net/" class="footerLink" target="_new">Charliesoft</a>. All Rights Reserved.
 
 		<br>
 		<br>

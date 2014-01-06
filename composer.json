@@ -4,8 +4,7 @@
     "require": {
         "laravel/framework": "4.1.*",
 	   "mannysoft/decoration": "*",
-	   "mannysoft/date": "*",
-	   "itbz/fpdi": "dev-master"
+	   "mannysoft/date": "*"
 	
     },
     

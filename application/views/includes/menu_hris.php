@@ -64,7 +64,7 @@ $leave_management = 	array(
 						$base.'leave_manage/settings">'.$image.'Settings</a>',
             			);
 						
-if ( $this->session->userdata('user_type') == 5)
+if ( Session::get('user_type') == 5)
 {
 	$leave_management = array(
 						$base.'leave_manage/file_leave">'.$image.'File Leave</a>',
@@ -84,7 +84,7 @@ $settings_management =  array(
 <li class="menu_close" onMouseOver="adminOpenMenu(this, 'menu_open');" onMouseOut="adminCloseMenu(this, 'menu_close');"><a class="first_line" href="<?php echo base_url();?>home/home_page" onClick="return true;"><img src="<?php echo base_url();?>/images/classroom_classroom.png" alt=".:" width="22" height="22" class="little_icon"><br>
   Home</a></li>
  
- <?php if ( $this->session->userdata('user_type') == 1 || $this->session->userdata('user_type') == 2):?>
+ <?php if ( Session::get('user_type') == 1 || Session::get('user_type') == 2):?>
  
    <li class="menu_close" onMouseOver="adminOpenMenu(this, 'menu_open');" onMouseOut="adminCloseMenu(this, 'menu_close');"><a class="first_line" href="#" onClick="return false;"><img src="<?php echo base_url();?>images/admin_manager_view.png" alt=".:" width="22" height="22" class="little_icon"><br>
   User<br /> Management</a>
@@ -105,14 +105,14 @@ $settings_management =  array(
   
   <?php endif; ?>
   
- <?php if ( $this->session->userdata('user_type') == 1 || $this->session->userdata('user_type') == 2):?>
+ <?php if ( Session::get('user_type') == 1 || Session::get('user_type') == 2):?>
 <!--View this if the user is administrator-->
   <li class="menu_close" onMouseOver="adminOpenMenu(this, 'menu_open');" onMouseOut="adminCloseMenu(this, 'menu_close');"><a class="first_line" href="<?php echo base_url();?>office_manage/view_offices" onClick="return true;"><img src="<?php echo base_url();?>/images/report_reportlist.png" alt=".:" width="22" height="22" class="little_icon"><br>
   Office<br /> Management</a></li>
 <?php endif;?>
 	 
    
-  <?php if ( $this->session->userdata('user_type') == 1 || $this->session->userdata('user_type') == 2):?>
+  <?php if ( Session::get('user_type') == 1 || Session::get('user_type') == 2):?>
   <li class="menu_close" onMouseOver="adminOpenMenu(this, 'menu_open');" onMouseOut="adminCloseMenu(this, 'menu_close');"><a class="first_line" href="index.php?q=22" onClick="return false;"><img src="<?php echo base_url();?>/images/configuration_config.png" alt=".:" width="22" height="22" class="little_icon"><br>
   Settings</a>
   <?php echo ul($settings_management, $attributes);?>
@@ -121,7 +121,7 @@ $settings_management =  array(
   <?php endif; ?>
   
   </ul>
-Welcome, <a href="<?php echo base_url();?>user_manage/my_account/"><?php echo $this->session->userdata('fname').' '.$this->session->userdata('username');?></a>&nbsp;<a href="<?php echo base_url();?>login/log_out">Logout</a> | <a href="#" id="check_updates">Check for updates</a> | <a href="#" onclick="bug_show_form2('<?php echo $this->session->userdata('username');?>')">Report Bugs</a>
+Welcome, <a href="<?php echo base_url();?>user_manage/my_account/"><?php echo Session::get('fname').' '.Session::get('username');?></a>&nbsp;<a href="<?php echo base_url();?>login/log_out">Logout</a> | <a href="#" id="check_updates">Check for updates</a> | <a href="#" onclick="bug_show_form2('<?php echo Session::get('username');?>')">Report Bugs</a>
 <div id="updates_out"></div>
 
 <script>

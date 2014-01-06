@@ -113,8 +113,8 @@ $leave_earn2 = ($settings['leave_earn'] != 15) ? $checked : '';
 
 <?php if (validation_errors()): ?>
 <div class="clean-red"><?php echo validation_errors(); ?></div><br />
-<?php elseif ($this->session->flashdata('msg') || $msg != ''): ?>
-<div class="clean-green"><?php echo $this->session->flashdata('msg');?><?php echo $msg;?></div><br />
+<?php elseif (Session::flashData('msg') || $msg != ''): ?>
+<div class="clean-green"><?php echo Session::flashData('msg');?><?php echo $msg;?></div><br />
 <?php else: ?>
 <?php endif; ?>
 
@@ -440,7 +440,7 @@ $('.click').click(function(){
     <td>
 	<?php 
 	$u = new User_m();
-	$u->get_by_username($this->session->userdata('username'));
+	$u->get_by_username(Session::get('username'));
 	?>
     <?php if ($u->group_id == '1000'):?>
     <?php echo ' LGU Code: '.form_input('lgu_code', $settings['lgu_code']);?>

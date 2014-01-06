@@ -1,12 +1,12 @@
 <?php if (validation_errors()): ?>
 <div class="clean-red"><?php echo validation_errors(); ?></div>
-<?php elseif ($this->session->flashdata('msg')): ?>
-<div class="clean-green"><?php echo $this->session->flashdata('msg');?></div>
+<?php elseif (Session::flashData('msg')): ?>
+<div class="clean-green"><?php echo Session::flashData('msg');?></div>
 <?php else: ?>
 <?php endif; ?>
 
-<?php if($this->session->flashdata('error_msg')): ?>
-	<div class="clean-red"><?php echo $this->session->flashdata('error_msg');?></div>
+<?php if(Session::flashData('error_msg')): ?>
+	<div class="clean-red"><?php echo Session::flashData('error_msg');?></div>
 <?php endif; ?>
 
 <form action="" method="post">

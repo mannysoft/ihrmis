@@ -34,18 +34,12 @@
  */
 class Employees extends MX_Controller  {
 
-	protected $employee;
-	
 	// --------------------------------------------------------------------
 	
 	function __construct()
     {
         parent::__construct();
 		//$this->output->enable_profiler(TRUE);
-		
-		//$this->employee = new EmployeeEloquent();
-		
-		//var_dump($this->employee->all());
 		
 		$this->load->model('options');
 		
@@ -70,8 +64,7 @@ class Employees extends MX_Controller  {
 		
 		if ($off == 0)
 		{
-			$office_id = $this->session->userdata('office_id');
-			$data['selected'] = $this->session->userdata('office_id');
+			$data['selected'] = $office_id = Session::get('office_id');
 		}
 		else
 		{
@@ -341,8 +334,8 @@ class Employees extends MX_Controller  {
 		//echo $off;
 		if ($off == 0)
 		{
-			$office_id = $this->session->userdata('office_id');
-			$data['selected'] = $this->session->userdata('office_id');
+			$office_id = Session::get('office_id');
+			$data['selected'] = Session::get('office_id');
 		}
 		else
 		{
@@ -436,10 +429,10 @@ class Employees extends MX_Controller  {
 				
 		//Office
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		// Divisions options		
-		$data['division_options'] 	= $this->options->division_options($this->session->userdata('office_id'));
+		$data['division_options'] 	= $this->options->division_options(Session::get('office_id'));
 		
 		//Detailed office
 		$detailed_options 			= $this->options->office_options($add_select = TRUE);
@@ -478,7 +471,7 @@ class Employees extends MX_Controller  {
 			
 			// Lets get the maximum employee_id
 			$e = new Employee_m();
-			$e->where('office_id', $this->session->userdata('office_id'));
+			$e->where('office_id', Session::get('office_id'));
 			$e->select_max('employee_id');
 			$e->get();
 			
@@ -516,8 +509,8 @@ class Employees extends MX_Controller  {
 				$shift_type 			= Input::get('shift2');
 	
 				//File name of the photo
-				$file_register = $this->session->userdata('file_register');
-				$finger_pics = '/../'.current_work_dir().'/pics/'.$this->session->userdata('file_register');
+				$file_register = Session::get('file_register');
+				$finger_pics = '/../'.current_work_dir().'/pics/'.Session::get('file_register');
 				
 				$info = array(
 				'employee_id' 			=> Input::get('employee_id'),
@@ -555,7 +548,7 @@ class Employees extends MX_Controller  {
 										$id);
 										
 				// Use for messaging
-				$this->session->set_flashdata('msg', 'New Employee added!');
+				Session::flash('msg', 'New Employee added!');
 				
 				if ($this->config->item('active_apps') == 'hris')
 				{
@@ -769,13 +762,13 @@ class Employees extends MX_Controller  {
 				//$data['emergency_contact'] = $employee_info['emergency_contact'];
 				
 				//File name of the photo
-				$file_register = $this->session->userdata('file_register');
+				$file_register = Session::get('file_register');
 						
 				if ($file_register)
 				{
 					$info['pics'] = $file_register;
 										
-					$info['finger_pics'] = '/../'.current_work_dir().'/pics/'.$this->session->userdata('file_register');
+					$info['finger_pics'] = '/../'.current_work_dir().'/pics/'.Session::get('file_register');
 				}
 				
 				$this->Employee->update_employee($info, $id);
@@ -791,7 +784,7 @@ class Employees extends MX_Controller  {
 				$office_return	= Input::get('office_return');
 				
 				// Use for messaging
-				$this->session->set_flashdata('msg', 'Employee updated!');
+				Session::flash('msg', 'Employee updated!');
 				
 				return Redirect::to('employees/index/'.$page.'/'.$office_return, 'refresh');
 			}
@@ -811,7 +804,7 @@ class Employees extends MX_Controller  {
 		$this->Employee->delete_employee($employee_id);
 		
 		// Use for messaging
-		$this->session->set_flashdata('msg', 'Employee deleted!');
+		Session::flash('msg', 'Employee deleted!');
 		
 		$this->Logs->insert_logs(
 									'employees', 
@@ -834,7 +827,7 @@ class Employees extends MX_Controller  {
 		$data['options'] 			= $this->options->office_options();
 		$data['selected'] 			= (	Input::get('office_id') ) ? 
 										Input::get('office_id') : 
-										$this->session->userdata('office_id');
+										Session::get('office_id');
 		
 		$data['month_options'] 		= $this->options->month_options();
 		$data['month_selected'] 	= (	Input::get('month') ) ? 

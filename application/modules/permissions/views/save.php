@@ -1,7 +1,7 @@
 <?php if (validation_errors()): ?>
 <div class="clean-red"><?php echo validation_errors(); ?></div>
-<?php elseif ($this->session->flashdata('msg')): ?>
-<div class="clean-green"><?php echo $this->session->flashdata('msg');?></div><br />
+<?php elseif (Session::flashData('msg')): ?>
+<div class="clean-green"><?php echo Session::flashData('msg');?></div><br />
 <?php else: ?>
 <?php endif; ?>
 <fieldset><legend><?php echo $legend;?></legend>

@@ -8,7 +8,7 @@
  * Personnel Schedule(Plantilla) and more...
  *
  * @package		iHRMIS
- * @author		Manolito Isles
+ * @author		Manny Isles
  * @copyright	Copyright (c) 2008 - 2013, Charliesoft
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
@@ -145,7 +145,7 @@ class Additional_compensation extends MX_Controller {
 		
 		//Use for office listbox
 		$data['options'] = $this->options->office_options();
-		$data['selected'] = $this->session->userdata('office_id');
+		$data['selected'] = Session::get('office_id');
 		
 		$data['employee_id'] = $employee_id;
 		

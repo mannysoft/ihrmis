@@ -142,9 +142,9 @@
         
         $checked = '';
         
-        if(is_array($this->session->userdata('employees')))
+        if(is_array(Session::get('employees')))
         {
-            if(in_array($id, $this->session->userdata('employees')))
+            if(in_array($id, Session::get('employees')))
             {
                 $checked = 'checked="checked"';
             }

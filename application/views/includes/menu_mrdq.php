@@ -10,7 +10,7 @@ $image = '<img class="menu_icon" src="'.base_url().'images/blank.gif">';
 
 $attributes = array('class' => 'list_modules');
 
-if ( $this->session->userdata('user_type') == 5)
+if ( Session::get('user_type') == 5)
 {
 	$attendance_management = array(
 						$base.'attendance/view_attendance">'.$image.'View Attendance</a>',
@@ -48,7 +48,7 @@ if ( $this->session->userdata('user_type') == 5)
 						
 } 
 
-if ( $this->session->userdata('user_type') == 3)
+if ( Session::get('user_type') == 3)
 {
 	$attendance_management = array(
 						$base.'attendance/view_attendance">'.$image.'View Attendance</a>',
@@ -120,7 +120,7 @@ if ( $this->session->userdata('user_type') == 3)
   <br />
   <br />
   <br />
-&nbsp;&nbsp;&nbsp;Welcome, <a href="<?php echo base_url();?>users/my_account/"><?php echo $this->session->userdata('fname').' '.$this->session->userdata('username');?></a>&nbsp;<a href="<?php echo base_url();?>login/log_out">Logout</a> | <a href="#" id="check_updates">Check for updates</a><!--| <a href="#" onclick="bug_show_form2('<?php echo $this->session->userdata('username');?>')">Report Bugs</a>--> 
+&nbsp;&nbsp;&nbsp;Welcome, <a href="<?php echo base_url();?>users/my_account/"><?php echo Session::get('fname').' '.Session::get('username');?></a>&nbsp;<a href="<?php echo base_url();?>login/log_out">Logout</a> | <a href="#" id="check_updates">Check for updates</a><!--| <a href="#" onclick="bug_show_form2('<?php echo Session::get('username');?>')">Report Bugs</a>--> 
 <div id="updates_out"></div>
 
 <script>

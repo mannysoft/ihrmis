@@ -48,7 +48,7 @@ class Login extends MX_Controller
 	
 	function index()
 	{
-		if($this->session->userdata('username'))
+		if(Session::get('username'))
 		{
 			return Redirect::to('home/home_page', 'refresh');
 		}
@@ -108,7 +108,7 @@ class Login extends MX_Controller
 									'user_type' => $u->user_type
 									);
 		
-					$this->session->set_userdata($session_data);					
+					Session::put($session_data);					
 					
 					redirect('home/home_page', 'refresh');
 				}
@@ -128,7 +128,7 @@ class Login extends MX_Controller
 	
 	function log_out()
 	{
-		$this->session->sess_destroy();
+		Session::flush();
 		redirect('login/show_login', 'refresh');
 	}
 	

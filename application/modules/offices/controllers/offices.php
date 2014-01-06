@@ -115,7 +115,7 @@ class Offices extends MX_Controller {
 								
 				$office->save();
 				
-				$this->session->set_flashdata('msg', 'Office has been saved!');
+				Session::flash('msg', 'Office has been saved!');
 				
 				return Redirect::to('offices', 'refresh');
 			}
@@ -138,14 +138,14 @@ class Offices extends MX_Controller {
 		// If exists
 		if ($e->exists())
 		{
-			$this->session->set_flashdata('error_msg', 'Unable to delete office. 
+			Session::flash('error_msg', 'Unable to delete office. 
 														Please delete all employee associated with the office.');
 			return Redirect::to('office_manage/view_offices', 'refresh');
 		}
 				
 		$this->Office->delete_office($office_id);
 		
-		$this->session->set_flashdata('msg', 'Office deleted!');
+		Session::flash('msg', 'Office deleted!');
 		
 		return Redirect::to('office_manage/view_offices', 'refresh');
 	}
@@ -237,7 +237,7 @@ class Offices extends MX_Controller {
 						
 			$divisions->save();
 			
-			$this->session->set_flashdata('msg', 'Division has been saved!');
+			Session::flash('msg', 'Division has been saved!');
 			
 			return Redirect::to('office_manage/divisions/'.$office_id, 'refresh');
 		}
@@ -258,7 +258,7 @@ class Offices extends MX_Controller {
 		
 		$division->delete();
 		
-		$this->session->set_flashdata('msg', 'Division has been deleted!');
+		Session::flash('msg', 'Division has been deleted!');
 		
 		return Redirect::to('office_manage/divisions/'.$office_id, 'refresh');
 		

@@ -819,10 +819,10 @@ class Dtr extends CI_Model {
 			// If leave manager
 			$this->load->library('session');
 			
-			if ( $this->session->userdata('user_type') == 5)
+			if ( Session::get('user_type') == 5)
   			{
 				// If the office is not equal to office id of user logged
-				if ($this->session->userdata('office_id') != $employee['office_id'])
+				if (Session::get('office_id') != $employee['office_id'])
 				{
 					//echo '<font color="red">You are not allowed to view this records!</font>';
 					//return ;

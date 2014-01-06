@@ -187,7 +187,7 @@ function show_leave_details(process)
 	});
 	
 	// View leave card if not leave manager
-	<?php if ($this->session->userdata('user_type') != 5): ?>
+	<?php if (Session::get('user_type') != 5): ?>
 	// Show leave card 
 	$('#leave_card').load("<?php echo base_url().('ajax/show_cto/'); ?>" + $('#employee_id').val());
 	<?php endif; ?>

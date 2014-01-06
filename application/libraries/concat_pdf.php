@@ -7,7 +7,7 @@
  * Training, Service Records, Performance, Recruitment and more...
  *
  * @package		iHRMIS
- * @author		Manolito Isles
+ * @author		Manny Isles
  * @copyright	Copyright (c) 2008 - 2012, Charliesoft
  * @license		http://charliesoft.net/hrmis/user_guide/license.html
  * @link		http://charliesoft.net

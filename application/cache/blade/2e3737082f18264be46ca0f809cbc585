@@ -20,7 +20,7 @@ else
 	if ($lgu_code == 'marinduque_province')
 	{
 		// We need to check the access of each user
-		if ( $this->session->userdata('user_type') == 1 || $this->session->userdata('user_type') == 2)
+		if ( Session::get('user_type') == 1 || Session::get('user_type') == 2)
 		{
 			return View::make('includes/menu');
 		}

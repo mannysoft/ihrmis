@@ -68,7 +68,8 @@ class Home extends MX_Controller
 	
 	function home_page()
 	{
-		//var_dump(AppointmentIssued::create(array('id' => 25)));
+		//echo Session::get('office_id');
+		//var_dump(Test::paginate(2));
 		//return View::make('home.index', array('test' => '25654'));
 		
 		//https://gist.github.com/mannysoft/7594099
@@ -171,7 +172,7 @@ class Home extends MX_Controller
 		
 		//$this->load->model('eloquent/AdditionalCompensation');
 		
-		//echo AdditionalCompensation::paginate(3);
+		//echo AdditionalCompensation::all();
 		
 		$data = array();
 		

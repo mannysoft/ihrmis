@@ -4,7 +4,7 @@
 $this->Tardiness->get_employees_ten_tardy(date('m'), date('m'), date('Y'), '');
 $tardis =  $this->Tardiness->employees;
 
-echo $this->session->flashdata('msg');
+echo Session::flashData('msg');
 
 //echo $msg;
 

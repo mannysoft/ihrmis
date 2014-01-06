@@ -58,7 +58,7 @@ class Plantilla extends MX_Controller
 		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
 		$data['selected'] 			= (Input::get('office_id')) ? Input::get('office_id') : 
-										$this->session->userdata('office_id');		
+										Session::get('office_id');		
 		
 		$data['year_options'] 		= $this->options->year_options(date('Y') - 5, date('Y') + 3);//2010 - 2020
 		$data['year_selected'] 		= (Input::get('year')) ? Input::get('year') : date('Y');

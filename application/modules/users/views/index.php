@@ -1,7 +1,7 @@
 <?php if (validation_errors()): ?>
-<div class="clean-red"><?php echo validation_errors(); ?><?php echo $this->session->flashdata('msg');?></div>
-<?php elseif ($this->session->flashdata('msg')): ?>
-<div class="clean-green"><?php echo validation_errors(); ?><?php echo $this->session->flashdata('msg');?></div>
+<div class="clean-red"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
+<?php elseif (Session::flashData('msg')): ?>
+<div class="clean-green"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
 <?php else: ?>
 <?php endif; ?>
 <form id="myform" method="post" action="" target="" enctype="multipart/form-data">
@@ -41,7 +41,7 @@
         <td bgcolor=""><?php echo $o->office_name;?></td>
         <td bgcolor=""><?php echo $row->stat;?></td>
         <td bgcolor=""><?php echo $g->name;?></td>
-        <td bgcolor=""><?php //if($this->session->userdata('user_type')==1){?>
+        <td bgcolor=""><?php //if(Session::get('user_type')==1){?>
           <a href="<?php echo base_url();?>users/save/<?php echo $row->id;?>">Edit</a> | 
 		  <a href="#" onclick="delete_user('<?php echo $row->username;?>','Delete User <?php echo $row->lname.', '.$row->fname;?>?', '<?php echo base_url();?>users/delete/<?php echo $row->id;?>')">Delete</a>
         </td>

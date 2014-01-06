@@ -4,8 +4,8 @@
 <?php endif?>
 <?php if (validation_errors() || $error_msg != ''): ?>
 <div class="clean-red"><?php echo validation_errors(); ?><?php echo $msg; ?></div><br />
-<?php elseif ($this->session->flashdata('msg') || $msg != ''): ?>
-<div class="clean-green"><?php echo $this->session->flashdata('msg');?><?php echo $msg;?></div><br />
+<?php elseif (Session::flashData('msg') || $msg != ''): ?>
+<div class="clean-green"><?php echo Session::flashData('msg');?><?php echo $msg;?></div><br />
 <?php else: ?>
 <?php endif; ?>
 <script type="text/javascript" src="<?php echo base_url();?>js/edit_place/sack.js"></script>

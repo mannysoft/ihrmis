@@ -170,8 +170,8 @@ class Logs extends CI_Model {
 		
 		$data = array(
                'module'					=> $module,
-			   'username' 				=> $this->session->userdata('username'),
-               'office_id' 				=> $this->session->userdata('office_id'),
+			   'username' 				=> Session::get('username'),
+               'office_id' 				=> Session::get('office_id'),
                'command' 				=> $command,
                'details'				=> $details,
                'employee_id_affected' 	=> $employee_id_affected,

@@ -5,8 +5,8 @@
 
 <?php if (validation_errors()): ?>
 <div class="clean-red"><?php echo validation_errors(); ?></div>
-<?php elseif ($this->session->flashdata('msg')): ?>
-<div class="clean-green"><?php echo $this->session->flashdata('msg');?></div><br />
+<?php elseif (Session::flashData('msg')): ?>
+<div class="clean-green"><?php echo Session::flashData('msg');?></div><br />
 <?php else: ?>
 <?php endif; ?>
 <form id="myform" method="post" action="<?php echo base_url();?>employees" target="" enctype="multipart/form-data">
@@ -81,7 +81,7 @@ Include not active </strong></td>
 		$e = new Employee_id_request_m();
 		$results = $e->get();
 		
-		$office = $this->session->userdata('office_id');
+		$office = Session::get('office_id');
 		$add_to_cart ="<a href='".base_url()."employees/add_cart/".$page."/".$id."/".$office."'>Add to Request<a>";
 				
 		if($e->count() >= '1'):

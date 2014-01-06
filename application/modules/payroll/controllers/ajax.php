@@ -93,7 +93,7 @@ class Ajax extends MX_Controller {
 								'dependents',
                                 );
         
-		$data['rows'] = $this->Employee->get_employee_list($this->session->userdata('office_id'), '');
+		$data['rows'] = $this->Employee->get_employee_list(Session::get('office_id'), '');
 		
 		if ($office_id != '')
 		{

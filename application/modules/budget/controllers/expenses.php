@@ -156,7 +156,7 @@ class Expenses extends MX_Controller  {
 				
 				$e->save();
 																					 
-				$this->session->set_flashdata('msg', 'Expenses has been saved!');
+				Session::flash('msg', 'Expenses has been saved!');
 						
 				return Redirect::to('budget/expenses/index/'.Input::get('budget_expenditure_id'), 'refresh');		
 			}
@@ -182,7 +182,7 @@ class Expenses extends MX_Controller  {
 		$e = new Budget_expenses_m();
 		$e->get_by_id( $id )->delete();
 				
-		$this->session->set_flashdata('msg', 'User has been deleted!');
+		Session::flash('msg', 'User has been deleted!');
 		
 		return Redirect::to('budget/expenses/', 'refresh');
 		

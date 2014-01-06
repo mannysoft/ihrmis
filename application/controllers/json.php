@@ -39,7 +39,7 @@ class Json extends MX_Controller {
     {
         parent::__construct();
 				
-		if(!$this->session->userdata('username'))
+		if(!Session::get('username'))
 		{
 			//redirect(base_url(), 'refresh');
 		}

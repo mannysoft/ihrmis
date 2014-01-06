@@ -1,5 +1,5 @@
 <?php 
-if(!$this->session->userdata('username'))
+if(!Session::get('username'))
 {
  	redirect(base_url(), 'refresh');
 }

@@ -286,7 +286,7 @@ class User extends CI_Model{
 							'user_type' => $row->user_type
 							);
 
-			$this->session->set_userdata($session_data);
+			Session::put($session_data);
 				
 			$data['system_message'] = 'valid';
 				

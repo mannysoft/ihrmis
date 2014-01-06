@@ -331,7 +331,7 @@ function show_leave_details()
 	//ajax/file_leave/10-1/0/07/2011/1/07/2011/0/1/0/1
 	
 	// View leave card if not leave manager
-	<?php if ($this->session->userdata('user_type') != 5): ?>
+	<?php if (Session::get('user_type') != 5): ?>
 	// Show leave card 
 	$('#leave_card').load("<?php echo base_url().('ajax/show_leave_card/'); ?>" + $('#employee_id').val());
 	<?php endif; ?>

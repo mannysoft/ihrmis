@@ -64,7 +64,7 @@ class Payroll extends MX_Controller {
 		
 		$e = new Employee_m();
 			
-		$e->where('office_id', (Input::get('office_id')) ? Input::get('office_id') : $this->session->userdata('office_id'));
+		$e->where('office_id', (Input::get('office_id')) ? Input::get('office_id') : Session::get('office_id'));
 		$e->where('permanent', 1);
 		$e->order_by('lname');
 		

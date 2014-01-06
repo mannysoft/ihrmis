@@ -1,7 +1,7 @@
 <?php if (validation_errors()): ?>
-<div class="clean-red"><?php echo validation_errors(); ?><?php echo $this->session->flashdata('msg');?></div>
-<?php elseif ($this->session->flashdata('msg')): ?>
-<div class="clean-green"><?php echo validation_errors(); ?><?php echo $this->session->flashdata('msg');?></div>
+<div class="clean-red"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
+<?php elseif (Session::flashData('msg')): ?>
+<div class="clean-green"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
 <?php else: ?>
 <?php endif; ?>
 <form id="budget_expenses" method="post" action="<?php echo base_url();?>budget/expenses" target="" enctype="multipart/form-data">
@@ -42,7 +42,7 @@
 		<td bgcolor=""><?php echo $row->date;?></td>
         <td bgcolor=""><strong><?php echo $row->description;?></strong></td>
         <td align="right" bgcolor=""><?php echo number_format($row->amount, 2);?></td>
-        <td bgcolor=""><?php //if($this->session->userdata('user_type')==1){?>
+        <td bgcolor=""><?php //if(Session::get('user_type')==1){?>
           <a href="<?php echo base_url();?>budget/expenses/save/<?php echo $row->id;?>">Edit</a> | 
 		  <a href="#" onclick="delete_user('<?php echo $row->username;?>','Delete?', '<?php echo base_url();?>budget/expenses/delete/<?php echo $row->id;?>')">Delete</a>
         </td>

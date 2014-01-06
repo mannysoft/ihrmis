@@ -12,7 +12,7 @@
 <table width="100%" border="0" class="type-one">
   <tr class="type-one-header">
     <th colspan="6" bgcolor="#D6D6D6">
-    <?php echo $msg;?><?php echo $this->session->flashdata('msg');?></th>
+    <?php echo $msg;?><?php echo Session::flashData('msg');?></th>
   </tr>
   <tr>
     <td colspan="2" align="right">
@@ -125,7 +125,7 @@
 		$include_hidden = 1;
 	}
 	
-	$rows = $this->Manual_log->office_manual_log($this->session->userdata('office_id'), $log_type = 1, 0);
+	$rows = $this->Manual_log->office_manual_log(Session::get('office_id'), $log_type = 1, 0);
 	
 	foreach($rows as $row)
 	{

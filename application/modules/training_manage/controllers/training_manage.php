@@ -108,7 +108,7 @@ class Training_manage extends MX_Controller {
 			
 			$type->save();
 			
-			$this->session->set_flashdata('msg', 'Training Type saved!');
+			Session::flash('msg', 'Training Type saved!');
 			
 			return Redirect::to('training_manage/type/'.$page, 'refresh');
 		}
@@ -129,7 +129,7 @@ class Training_manage extends MX_Controller {
 		
 		$type->delete();
 		
-		$this->session->set_flashdata('msg', 'Training Type Deleted!');
+		Session::flash('msg', 'Training Type Deleted!');
 		
 		return Redirect::to('training_manage/type/'.$page, 'refresh');
 		
@@ -207,7 +207,7 @@ class Training_manage extends MX_Controller {
 			
 			$course->save();
 			
-			$this->session->set_flashdata('msg', 'Training Course saved!');
+			Session::flash('msg', 'Training Course saved!');
 			
 			return Redirect::to('training_manage/course/'.$page, 'refresh');
 		}
@@ -230,7 +230,7 @@ class Training_manage extends MX_Controller {
 		
 		$course->delete();
 		
-		$this->session->set_flashdata('msg', 'Training Course Deleted!');
+		Session::flash('msg', 'Training Course Deleted!');
 		
 		return Redirect::to('training_manage/course/'.$page, 'refresh');
 		
@@ -308,7 +308,7 @@ class Training_manage extends MX_Controller {
 			
 			$event->save();
 			
-			$this->session->set_flashdata('msg', 'Training Event saved!');
+			Session::flash('msg', 'Training Event saved!');
 			
 			return Redirect::to('training_manage/event/'.$page, 'refresh');
 		}
@@ -333,7 +333,7 @@ class Training_manage extends MX_Controller {
 		
 		$event->delete();
 		
-		$this->session->set_flashdata('msg', 'Training Event Deleted!');
+		Session::flash('msg', 'Training Event Deleted!');
 		
 		return Redirect::to('training_manage/event/'.$page, 'refresh');
 		
@@ -414,7 +414,7 @@ class Training_manage extends MX_Controller {
 			
 			$event->save();
 			
-			$this->session->set_flashdata('msg', 'Training Attendance saved!');
+			Session::flash('msg', 'Training Attendance saved!');
 			
 			return Redirect::to('training_manage/attendance/'.$page, 'refresh');
 		}
@@ -499,7 +499,7 @@ class Training_manage extends MX_Controller {
 			
 			$contact->save();
 			
-			$this->session->set_flashdata('msg', 'Training Contact Type saved!');
+			Session::flash('msg', 'Training Contact Type saved!');
 			
 			return Redirect::to('training_manage/contact_type/'.$page, 'refresh');
 		}
@@ -520,7 +520,7 @@ class Training_manage extends MX_Controller {
 		
 		$contact->delete();
 		
-		$this->session->set_flashdata('msg', 'Training Contact Type Deleted!');
+		Session::flash('msg', 'Training Contact Type Deleted!');
 		
 		return Redirect::to('training_manage/contact_type/'.$page, 'refresh');
 		
@@ -602,7 +602,7 @@ class Training_manage extends MX_Controller {
 			
 			$contact->save();
 			
-			$this->session->set_flashdata('msg', 'Training Contact Information saved!');
+			Session::flash('msg', 'Training Contact Information saved!');
 			
 			return Redirect::to('training_manage/contact_info/'.$page, 'refresh');
 		}
@@ -625,7 +625,7 @@ class Training_manage extends MX_Controller {
 		
 		$contact->delete();
 		
-		$this->session->set_flashdata('msg', 'Training Contact Information Deleted!');
+		Session::flash('msg', 'Training Contact Information Deleted!');
 		
 		return Redirect::to('training_manage/contact_info/'.$page, 'refresh');
 		

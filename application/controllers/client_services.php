@@ -196,9 +196,9 @@ class Client_services extends Controller {
 				   'pass'			=> $version['pass']
                );
 				
-				//echo $this->session->userdata('filename');
+				//echo Session::get('filename');
 				
-				$this->session->set_userdata($updates_data);
+				Session::put($updates_data);
 				
 				echo 'ATS '.$version['latest_version'].' is available! <a href="#" onclick="download_updates(1)">Please update now.</a>';
 			}
@@ -218,11 +218,11 @@ class Client_services extends Controller {
 		//do this if online update
 		if($online == 1)
 		{
-			$file_name = $this->session->userdata('filename');
+			$file_name = Session::get('filename');
 			
-			$config['hostname'] = $this->session->userdata('ftp');
-			$config['username'] = $this->session->userdata('user');
-			$config['password'] = $this->session->userdata('pass');
+			$config['hostname'] = Session::get('ftp');
+			$config['username'] = Session::get('user');
+			$config['password'] = Session::get('pass');
 			$config['debug'] = TRUE;
 			
 			$this->my_ftp->connect($config);
@@ -304,7 +304,7 @@ class Client_services extends Controller {
 		$this->load->helper('file');
 		
 		//update the settings(set the latest version installed)
-		$this->Settings->set_latest_version($this->session->userdata('latest_version'));
+		$this->Settings->set_latest_version(Session::get('latest_version'));
 		
 		//if $online equal to zero or offline update
 		$offline_file = 'updates/version.txt';

@@ -109,7 +109,7 @@ class Users extends MX_Controller  {
 		//Use for office listbox
 		$data['options'] = $this->options->office_options();
 		
-		$data['selected'] = $this->session->userdata('office_id');
+		$data['selected'] = Session::get('office_id');
 		
 		$u = new User_m();
 		
@@ -167,7 +167,7 @@ class Users extends MX_Controller  {
 							
 				$user = $this->User->get_user_data(Input::get('username'));
 														 
-				$this->session->set_flashdata('msg', 'User has been saved!');
+				Session::flash('msg', 'User has been saved!');
 						
 				return Redirect::to('users/', 'refresh');		
 			}
@@ -192,7 +192,7 @@ class Users extends MX_Controller  {
 		$u = new User_m();
 		$u->get_by_id( $id )->delete();
 				
-		$this->session->set_flashdata('msg', 'User has been deleted!');
+		Session::flash('msg', 'User has been deleted!');
 		
 		return Redirect::to('users/', 'refresh');
 		
@@ -206,7 +206,7 @@ class Users extends MX_Controller  {
 		
 		$data['msg'] = '';
 		
-		$username = $this->session->userdata('username');
+		$username = Session::get('username');
 		
 		
 		$op = Input::get('op');
@@ -270,7 +270,7 @@ class Users extends MX_Controller  {
 	
 	function current_password($password2)
 	{
-		$current_password = $this->User->get_current_password($this->session->userdata('username'));
+		$current_password = $this->User->get_current_password(Session::get('username'));
 		
 		// Encript password
 		$password = do_hash($password2, 'md5');

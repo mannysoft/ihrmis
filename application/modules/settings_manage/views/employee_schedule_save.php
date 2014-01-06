@@ -1,7 +1,7 @@
 <?php if (validation_errors()): ?>
 <div class="clean-red"><?php echo validation_errors(); ?></div>
-<?php elseif ($this->session->flashdata('msg')): ?>
-<div class="clean-green"><?php echo $this->session->flashdata('msg'); echo $msg;?></div>
+<?php elseif (Session::flashData('msg')): ?>
+<div class="clean-green"><?php echo Session::flashData('msg'); echo $msg;?></div>
 <?php else: ?>
 <?php endif; ?>
 
@@ -127,7 +127,7 @@ $('#office_id').change(function(){
 $(document).ready(function() {
 	
    $('#div15').html("Loading... Please wait...");
-   $('#div15').load("<?php echo base_url().('ajax/manual_log_employees/'); ?>" + <?php echo $this->session->userdata('office_id');?>);
+   $('#div15').load("<?php echo base_url().('ajax/manual_log_employees/'); ?>" + <?php echo Session::get('office_id');?>);
    
     //Display name in the yellow box if there is names selected
 	$('#divTopLeft').load("<?php echo base_url().('ajax/set_selected/'); ?>" + "0/1");

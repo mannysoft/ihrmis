@@ -237,7 +237,7 @@ class Deduction extends MX_Controller {
 		
 		//Use for office listbox
 		$data['options'] = $this->options->office_options();
-		$data['selected'] = $this->session->userdata('office_id');
+		$data['selected'] = Session::get('office_id');
 		
 		$data['employee_id'] = $employee_id;
 		
@@ -353,7 +353,7 @@ class Deduction extends MX_Controller {
 		
 		//Use for office listbox
 		$data['options'] = $this->options->office_options();
-		$data['selected'] = $this->session->userdata('office_id');
+		$data['selected'] = Session::get('office_id');
 		
 		$data['employee_id'] = $employee_id;
 		
@@ -476,7 +476,7 @@ class Deduction extends MX_Controller {
 		
 		//Use for office listbox
 		$data['options'] = $this->options->office_options();
-		$data['selected'] = $this->session->userdata('office_id');
+		$data['selected'] = Session::get('office_id');
 				
 		$data['error_msg'] = '';
 		

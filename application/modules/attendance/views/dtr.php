@@ -73,7 +73,7 @@ To:
       </tr>
       
       
-      <?php if ( $this->session->userdata('user_type') == 1 or $this->session->userdata('user_type') == 2): ?>
+      <?php if ( Session::get('user_type') == 1 or Session::get('user_type') == 2): ?>
       <tr>
         <td align="right">&nbsp;</td>
         <td>

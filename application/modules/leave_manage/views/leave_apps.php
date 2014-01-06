@@ -89,7 +89,7 @@
     </td>
     <?php endif?>
     <td>
-    <?php if ( $this->session->userdata('user_type') == 5):?>
+    <?php if ( Session::get('user_type') == 5):?>
 	
 		<a href="#" onClick="openBrWindow('<?php echo base_url();?>leave_manage/reports/leave_apps/<?php echo $row['id'];?>','','scrollbars=yes,width=900,height=600')" style="cursor: pointer;">Print Preview</a>
 			

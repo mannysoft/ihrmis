@@ -53,7 +53,7 @@ class Leave_Manage extends MX_Controller {
 		
 		$this->Dtr->cancel_leave($id, $employee_id, $csc, $cpo);
 		
-		$this->session->set_flashdata('msg', 'Leave has been cancelled!');
+		Session::flash('msg', 'Leave has been cancelled!');
 		
 		$this->Logs->insert_logs(
 									'leave', 
@@ -79,7 +79,7 @@ class Leave_Manage extends MX_Controller {
 		
 		$this->Leave_card->cancel_undertime($id); 
 		
-		$this->session->set_flashdata('msg', 'Undertime / Tardy Cancelled!');
+		Session::flash('msg', 'Undertime / Tardy Cancelled!');
 		
 		return Redirect::to('leave_manage/undertime/'.$employee_id, 'refresh');
 	}
@@ -408,7 +408,7 @@ class Leave_Manage extends MX_Controller {
 	{
 		$this->Leave_card->process_leave_earnings($month, $year, $leave_earn);
 		
-		$this->session->set_flashdata('msg', '<b><font color= red>Done leave earnings!</font></b>');
+		Session::flash('msg', '<b><font color= red>Done leave earnings!</font></b>');
 		
 		return Redirect::to('home/home_page', 'refresh');
 
@@ -422,11 +422,11 @@ class Leave_Manage extends MX_Controller {
 		$data['page_name'] = '<b>Leave Credits</b>';
 		$data['msg'] = '';
 		
-		$office_id = $this->session->userdata('office_id');
+		$office_id = Session::get('office_id');
 		
 		//Use for office listbox
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		// If office id is selected
 		if (Input::get('office_id') != 0)
@@ -550,9 +550,9 @@ class Leave_Manage extends MX_Controller {
 		$data['rows'] = $this->Leave_apps->get_leave_apps();
 		
 		// If leave manager get only the leave apps for his/ her office
-		if ($this->session->userdata('user_type') == 5)
+		if (Session::get('user_type') == 5)
 		{
-			$this->Leave_apps->office_id = $this->session->userdata('office_id');
+			$this->Leave_apps->office_id = Session::get('office_id');
 			$this->Leave_apps->get_leave_apps();
 		}
 		
@@ -569,9 +569,9 @@ class Leave_Manage extends MX_Controller {
 		$this->pagination->initialize($config);
 		
 		// If leave manager get only the leave apps for his/ her office
-		if ($this->session->userdata('user_type') == 5)
+		if (Session::get('user_type') == 5)
 		{
-			$this->Leave_apps->office_id = $this->session->userdata('office_id');
+			$this->Leave_apps->office_id = Session::get('office_id');
 		}
 		
 		$data['rows'] = $this->Leave_apps->get_leave_apps($config['per_page'], $this->uri->segment(3));
@@ -599,7 +599,7 @@ class Leave_Manage extends MX_Controller {
 		
 		//Use for office listbox
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		//Months
 		$data['month_options'] 		= $this->options->month_options();
@@ -673,7 +673,7 @@ class Leave_Manage extends MX_Controller {
 		
 		//Use for office listbox
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		$this->Employee->fields = array('id', 'office_id');
 		

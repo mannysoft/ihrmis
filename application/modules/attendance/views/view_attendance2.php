@@ -65,7 +65,7 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
   
   <?php 
   $p = new Permission_m();
-	$permissions = $p->get_by_group_id($this->session->userdata('group_id'));
+	$permissions = $p->get_by_group_id(Session::get('group_id'));
 			
 	$read_only = FALSE;
 	
@@ -201,7 +201,7 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
 		$onclick6 = "onClick=\"dg_editCell(dtr,'".$id."','ob_leave','dtr.6.$i','ob_leave')\"";
 		
 		
-		if ( $this->session->userdata('user_type') == 6 or $this->session->userdata('user_type') == 8 or $this->session->userdata('user_type') == 5)
+		if ( Session::get('user_type') == 6 or Session::get('user_type') == 8 or Session::get('user_type') == 5)
   		{
 			$onclick0 = "";
 			$onclick1 = "";
@@ -296,7 +296,7 @@ dtr.m_columns['ob_leave']={'coltype':'text','style':''};
 </table>
 </form>
 </span>
-<?php if ( $this->session->userdata('user_type') == 6 or $this->session->userdata('user_type') == 8 or $this->session->userdata('user_type') == 5 or $read_only == TRUE):?>
+<?php if ( Session::get('user_type') == 6 or Session::get('user_type') == 8 or Session::get('user_type') == 5 or $read_only == TRUE):?>
 
 <?php else:?>
 	<script>

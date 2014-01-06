@@ -147,13 +147,13 @@ class Adcom extends MX_Controller {
 		
 		//Use for office listbox
 		$data['options'] = $this->options->office_options();
-		$data['selected'] = $this->session->userdata('office_id');
+		$data['selected'] = Session::get('office_id');
 		
 		$data['additional_compensation_id'] = Input::get('additional_compensation_id') ? Input::get('additional_compensation_id') : 1;
 				
 		$data['msg'] = '';
 		
-		$office_id = $this->session->userdata('office_id');
+		$office_id = Session::get('office_id');
 		
 		if ( Input::get('op'))
 		{

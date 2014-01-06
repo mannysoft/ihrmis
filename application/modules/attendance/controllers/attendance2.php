@@ -194,13 +194,13 @@ class Attendance extends MX_Controller {
 		}
 		
 		$data['options'] 					= $this->options->office_options();
-		$data['selected'] 					= $this->session->userdata('office_id');
+		$data['selected'] 					= Session::get('office_id');
 		
 		// Added 1.11.2012
-		if ( $this->session->userdata('user_type') == 5)
+		if ( Session::get('user_type') == 5)
   		{
-			$office_name 		= $this->Office->get_office_name($this->session->userdata('office_id'));
-			$data['options'] 	= array($this->session->userdata('office_id') => $office_name);
+			$office_name 		= $this->Office->get_office_name(Session::get('office_id'));
+			$data['options'] 	= array(Session::get('office_id') => $office_name);
 		}
 		// end add
 		
@@ -244,7 +244,7 @@ class Attendance extends MX_Controller {
 		else // If view DTR initial
 		{
 			$data['rows'] = $this->Dtr->get_office_dtr(
-										$this->session->userdata('office_id'), 
+										Session::get('office_id'), 
 										$data['date'], 
 										$data['date']
 										);
@@ -272,7 +272,7 @@ class Attendance extends MX_Controller {
 		
 		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		// Type of employment
 		$data['permanent_options'] 	= $this->options->type_employment($all = TRUE);
@@ -393,10 +393,10 @@ class Attendance extends MX_Controller {
 				// If leave manager
 				$this->load->library('session');
 				
-				if ( $this->session->userdata('user_type') == 5)
+				if ( Session::get('user_type') == 5)
 				{
 					// If the office is not equal to office id of user logged
-					if ($this->session->userdata('office_id') != $name['office_id'])
+					if (Session::get('office_id') != $name['office_id'])
 					{
 						echo '<font color="red">You are not allowed to view this records!</font>';
 						exit;
@@ -1523,7 +1523,7 @@ class Attendance extends MX_Controller {
 		
 		$s->delete();
 		
-		$this->session->set_flashdata('msg', 'Schedule deleted!');
+		Session::flash('msg', 'Schedule deleted!');
 			
 		return Redirect::to('attendance/schedules/'.$page, 'refresh');
 		
@@ -1564,7 +1564,7 @@ class Attendance extends MX_Controller {
 			
 			$s->save();
 			
-			$this->session->set_flashdata('msg', 'Schedule saved!');
+			Session::flash('msg', 'Schedule saved!');
 			
 			return Redirect::to('attendance/schedules/'.$page, 'refresh');
 		}
@@ -1600,7 +1600,7 @@ class Attendance extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		$this->session->unset_userdata('employees');
+		Session::forget('employees');
 		
 		$s = new schedule_detail();
 		
@@ -1623,7 +1623,7 @@ class Attendance extends MX_Controller {
 		$data['page_name'] = '<b>Save Employee Schedule</b>';
 		$data['msg'] = '';
 		
-		$data['selected'] = $this->session->userdata('office_id');
+		$data['selected'] = Session::get('office_id');
 		
 		if ($id != '')
 		{
@@ -1665,20 +1665,20 @@ class Attendance extends MX_Controller {
 			// if the database has value on it add the value from database to session
 			if (is_array($db_employees))
 			{
-				if (! is_array($this->session->userdata('employees')))
+				if (! is_array(Session::get('employees')))
 				{
-					$this->session->set_userdata('employees', array());
+					Session::put('employees', array());
 				}
 				
-				$employees = array_merge($this->session->userdata('employees'), $db_employees);
+				$employees = array_merge(Session::get('employees'), $db_employees);
 				
-				$this->session->set_userdata('employees', $employees);
+				Session::put('employees', $employees);
 			}
 		}
 		
 		if(Input::get('op'))
 		{
-			$employees = $this->session->userdata('employees');
+			$employees = Session::get('employees');
 			
 			$month_year = Input::get('year').'-'.Input::get('month');
 			
@@ -1713,7 +1713,7 @@ class Attendance extends MX_Controller {
 			
 			$sd->save();
 			
-			$this->session->set_flashdata('msg', 'Schedule saved!');
+			Session::flash('msg', 'Schedule saved!');
 			
 			// Get the schedule
 			$s = new Schedule();
@@ -1835,11 +1835,11 @@ class Attendance extends MX_Controller {
 			
 			//Unset the session
 			//$employees = array();
-			//$this->session->set_userdata($employees);
-			$this->session->unset_userdata('employees');
+			//Session::put($employees);
+			Session::forget('employees');
 			
 			//return Redirect::to('settings_manage/schedules/'.$page, 'refresh');
-			$this->session->set_flashdata('msg', 'Schedule saved!');
+			Session::flash('msg', 'Schedule saved!');
 			$data['msg'] = 'Employee Schedule has been saved!';
 		}
 		
@@ -1907,7 +1907,7 @@ class Attendance extends MX_Controller {
 		
 		$s->delete();
 		
-		$this->session->set_flashdata('msg', 'Employee Schedule deleted!');
+		Session::flash('msg', 'Employee Schedule deleted!');
 			
 		return Redirect::to('attendance/employee_schedule/'.$page, 'refresh');
 		
@@ -3010,12 +3010,12 @@ class Attendance extends MX_Controller {
 		$data['msg'] = '';
 		
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		$data['date'] 				= date("Y-m-d");
 		
 		$data['rows']				= $this->Dtr->get_absences(
-													$this->session->userdata('office_id'), 
+													Session::get('office_id'), 
 													$data['date']
 													);
 		
@@ -3045,14 +3045,14 @@ class Attendance extends MX_Controller {
 		$data['msg'] = '';
 		
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		$data['date'] = date("Y-m-d");
 	  
 		$is_log_pm = FALSE;
 
 		$data['rows'] = $this->Dtr->get_late_employee(
-											$this->session->userdata('office_id'), 
+											Session::get('office_id'), 
 											$data['date'], 
 											$is_log_pm
 											);
@@ -3080,7 +3080,7 @@ class Attendance extends MX_Controller {
 		$data['msg'] = '';
 		
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		$data['date'] 				= date("Y-m-d");
 	  
@@ -3088,7 +3088,7 @@ class Attendance extends MX_Controller {
 		
 		$this->Dtr->fields 			= array('employee_id', 'manual_log_id');
 		
-		$data['rows'] 				= $this->Dtr->get_ob_employee($this->session->userdata('office_id'), $data['date']);
+		$data['rows'] 				= $this->Dtr->get_ob_employee(Session::get('office_id'), $data['date']);
 		
 		if(Input::get('op'))
 		{
@@ -3113,7 +3113,7 @@ class Attendance extends MX_Controller {
 		$data['msg'] 				= '';
 		
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		$data['month_options'] 		= $this->options->month_options();
 		$data['month_selected'] 	= date('m');
@@ -3129,7 +3129,7 @@ class Attendance extends MX_Controller {
 		$data['rows'] 				=  $this->Tardiness->get_employees_with_tardy(
 																	$data['month1'], 
 																	$data['year1'], 
-																	$this->session->userdata('office_id')
+																	Session::get('office_id')
 																	);
 		
 		if(isset($_POST['month']))
@@ -3177,7 +3177,7 @@ class Attendance extends MX_Controller {
 		$data['msg'] = '';
 		
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 		
 		$data['year_options'] 		= $this->options->year_options(2009, 2020);//2010 - 2020
 		$data['year_selected'] 		= date('Y');
@@ -3209,7 +3209,7 @@ class Attendance extends MX_Controller {
 			$this->Tardiness->all_tardiness = TRUE;
 		}
 		
-		$data['office_id'] = $this->session->userdata('office_id');
+		$data['office_id'] = Session::get('office_id');
 		
 		if (Input::get('op'))
 		{

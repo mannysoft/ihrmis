@@ -58,7 +58,7 @@ class Manual_Manage extends MX_Controller {
 		
 		$data['msg'] =  'Office Pass set!';
 		
-		$this->session->set_flashdata('msg', 'Office Pass/ Pass slip cancelled!');
+		Session::flash('msg', 'Office Pass/ Pass slip cancelled!');
 		
 		return Redirect::to('manual_manage/office_pass', 'refresh');
 	}
@@ -73,7 +73,7 @@ class Manual_Manage extends MX_Controller {
 		
 		$this->Dtr->cancel_cto($id, $employee_id);
 		
-		$this->session->set_flashdata('msg', 'Compensatory Timeoff has been cancelled!');
+		Session::flash('msg', 'Compensatory Timeoff has been cancelled!');
 		
 		return Redirect::to('manual_manage/cto/'.$employee_id, 'refresh');
 	}
@@ -88,7 +88,7 @@ class Manual_Manage extends MX_Controller {
 		$data['msg'] = '';
 	
 		$data['options'] 					= $this->options->office_options();
-		$data['selected'] 					= $this->session->userdata('office_id');
+		$data['selected'] 					= Session::get('office_id');
 	
 		//Months
 		$data['month_options'] 		= $this->options->month_options();
@@ -146,9 +146,9 @@ class Manual_Manage extends MX_Controller {
 		$data['rows'] = $this->Compensatory_timeoff->get_cto_apps();
 		
 		// If leave manager get only the leave apps for his/ her office
-		if ($this->session->userdata('user_type') == 5)
+		if (Session::get('user_type') == 5)
 		{
-			$this->Compensatory_timeoff->office_id = $this->session->userdata('office_id');
+			$this->Compensatory_timeoff->office_id = Session::get('office_id');
 			$this->Compensatory_timeoff->get_cto_apps();
 		}
 		
@@ -165,9 +165,9 @@ class Manual_Manage extends MX_Controller {
 		$this->pagination->initialize($config);
 		
 		// If leave manager get only the leave apps for his/ her office
-		if ($this->session->userdata('user_type') == 5)
+		if (Session::get('user_type') == 5)
 		{
-			$this->Compensatory_timeoff->office_id = $this->session->userdata('office_id');
+			$this->Compensatory_timeoff->office_id = Session::get('office_id');
 		}
 		
 		$data['rows'] = $this->Compensatory_timeoff->get_cto_apps($config['per_page'], $this->uri->segment(3));
@@ -206,7 +206,7 @@ class Manual_Manage extends MX_Controller {
 		
 		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 				
 		$data['main_content'] = 'cto_forward_balance';
 		
@@ -294,7 +294,7 @@ class Manual_Manage extends MX_Controller {
 			
 			$data['msg'] =  'Office Pass/ Pass slip set!';
 			
-			$this->session->set_flashdata('msg', 'Office Pass/ Pass slip set!');
+			Session::flash('msg', 'Office Pass/ Pass slip set!');
 		}
 		
 		

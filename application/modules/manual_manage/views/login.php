@@ -659,7 +659,7 @@ $('#office_id').change(function(){
 $(document).ready(function() {
 	
    $('#div15').html("Loading... Please wait...");
-   $('#div15').load("<?php echo base_url().('ajax/manual_log_employees/'); ?>" + <?php echo $this->session->userdata('office_id');?>);
+   $('#div15').load("<?php echo base_url().('ajax/manual_log_employees/'); ?>" + <?php echo Session::get('office_id');?>);
    
     //Display name in the yellow box if there is names selected
 	$('#divTopLeft').load("<?php echo base_url().('ajax/set_selected/'); ?>" + "0/1");

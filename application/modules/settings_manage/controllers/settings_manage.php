@@ -244,9 +244,9 @@ class Settings_Manage extends MX_Controller {
 		
 		// Use for office listbox
 		$data['options'] 			= $this->options->office_options();
-		$data['selected'] 			= $this->session->userdata('office_id');
+		$data['selected'] 			= Session::get('office_id');
 	
-		$office_id					= $this->session->userdata('office_id');
+		$office_id					= Session::get('office_id');
 	
 		if (Input::get('op'))
 		{
@@ -355,7 +355,7 @@ class Settings_Manage extends MX_Controller {
 			$this->load->dbutil();
 			$this->dbutil->repair_table('ats_dtr');
 			
-			$this->session->set_flashdata('msg', 'Table has been repaired.');
+			Session::flash('msg', 'Table has been repaired.');
 				
 			return Redirect::to('settings_manage/maintenance', 'refresh');
 			

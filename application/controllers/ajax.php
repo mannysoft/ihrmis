@@ -865,7 +865,7 @@ class Ajax extends MX_Controller {
 				
 		if ($process || $process == 2)
 		{
-			if ( $this->session->userdata('user_type') == 5)
+			if ( Session::get('user_type') == 5)
 			{	
 				// Check if the application exists
 				$info = array(
@@ -916,7 +916,7 @@ class Ajax extends MX_Controller {
 						'mone'				=> $this->leave->mone,
 						'date_encode'		=> date('Y-m-d'),
 						'allow_sat_sun'		=> $this->leave->allow_sat_sun,
-						'username'			=> $this->session->userdata('username')
+						'username'			=> Session::get('username')
 						);		
 						
 				$leave_apps_id = $this->Leave_apps->insert_leave_apps($info);
@@ -2142,7 +2142,7 @@ class Ajax extends MX_Controller {
 		if ($process || $process == 2)
 		{
 							
-			if ( $this->session->userdata('user_type') == 5 )
+			if ( Session::get('user_type') == 5 )
 			{	
 				$c = new Compensatory_timeoff();
 			
@@ -2381,7 +2381,7 @@ class Ajax extends MX_Controller {
 			$dates = array($date1);
 		}
 		
-		$employees = $this->session->userdata('employees');
+		$employees = Session::get('employees');
 		
 		foreach($employees as $employee_id)
 		{
@@ -2479,7 +2479,7 @@ class Ajax extends MX_Controller {
 		
 		//Unset the session
 		$employees = array();
-		$this->session->set_userdata($employees);
+		Session::put($employees);
 		
 		echo 'Done!';
 		
@@ -2494,7 +2494,7 @@ class Ajax extends MX_Controller {
 		//Add
 		if($stat == 1)
 		{
-			$employees = $this->session->userdata('employees');
+			$employees = Session::get('employees');
 			
 			if ($employees == FALSE)
 			{
@@ -2511,23 +2511,23 @@ class Ajax extends MX_Controller {
 			
 			$employees = array_unique($employees);
 			
-			$this->session->set_userdata('employees', $employees);
+			Session::put('employees', $employees);
 		}
 		else // Remove
 		{
 			
 			//search empoyee id in array and delete
-			$employees = $this->session->userdata('employees');
+			$employees = Session::get('employees');
 			
 			$key = array_search($employee_id, $employees); 
 			
 			//Unset
 			unset($employees[$key]);
 			
-			$this->session->set_userdata('employees', $employees);
+			Session::put('employees', $employees);
 		}
 		
-		$employees = $this->session->userdata('employees');
+		$employees = Session::get('employees');
 		
 		foreach($employees as $employee_id)
 		{
@@ -2654,7 +2654,7 @@ class Ajax extends MX_Controller {
                                 'mname'
                                 );
         
-		$data['rows'] = $this->Employee->get_employee_list($this->session->userdata('office_id'), '');
+		$data['rows'] = $this->Employee->get_employee_list(Session::get('office_id'), '');
 		
 		if ($office_id != '')
 		{
@@ -2703,7 +2703,7 @@ class Ajax extends MX_Controller {
                                 'mname'
                                 );
         
-		$data['rows'] = $this->Employee->get_employee_list($this->session->userdata('office_id'), '');
+		$data['rows'] = $this->Employee->get_employee_list(Session::get('office_id'), '');
 		
 		if ($office_id != '')
 		{
@@ -2881,12 +2881,12 @@ class Ajax extends MX_Controller {
 			)
 			); 
 		
-		$this->Zipper->output("logs/".$this->session->userdata('office_id').'-'.date('Y-m-d').".zip");
+		$this->Zipper->output("logs/".Session::get('office_id').'-'.date('Y-m-d').".zip");
 		
 		
 		if ($download_zip == 'true')
 		{
-			echo anchor(base_url().'logs/'.$this->session->userdata('office_id').'-'.date('Y-m-d').".zip", 'Download File');
+			echo anchor(base_url().'logs/'.Session::get('office_id').'-'.date('Y-m-d').".zip", 'Download File');
 			$this->Logs->insert_logs('attendance', 
 									 'DOWNLOAD ZIP FILE', 'Download zip file from computer', 
 									 ''

@@ -507,7 +507,7 @@ class Utility extends MX_Controller {
 			echo $this->image_lib->display_errors();
 			
 			// Put the file name to session
-			$this->session->set_userdata('file_register', $data['upload_data']['file_name']);
+			Session::put('file_register', $data['upload_data']['file_name']);
 			
 			echo '<img src="'.base_url().'pics/'.$data['upload_data']['file_name'].'" />';
 			//return View::make('upload_success', $data);

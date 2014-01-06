@@ -42,7 +42,7 @@ class Aja extends CI_Controller {
 		
 		//$this->load->add_package_path('c:/xampp/htdocs/system_common/foo_bar');
 		
-		if(!$this->session->userdata('username'))
+		if(!Session::get('username'))
 		{
 			//redirect(base_url(), 'refresh');
 		}

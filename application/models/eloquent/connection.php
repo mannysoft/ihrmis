@@ -89,9 +89,9 @@ $container['config'] = array(
 	
 	'app.aliases' => array(
 
-		//'View'            => 'Illuminate\Support\Facades\View',
-		//'Paginator'       => 'Illuminate\Support\Facades\Paginator',
-		//'Eloquent'        => 'Illuminate\Database\Eloquent\Model',
+		'View'            => 'Illuminate\Support\Facades\View',
+		'Paginator'       => 'Illuminate\Support\Facades\Paginator',
+		
 		),
 );
 
@@ -102,7 +102,7 @@ $providers = array(
     'Illuminate\Database\DatabaseServiceProvider',
     'Illuminate\Translation\TranslationServiceProvider',
     'Illuminate\Validation\ValidationServiceProvider',
-	//'Illuminate\Pagination\PaginationServiceProvider',
+	'Illuminate\Pagination\PaginationServiceProvider',
 	//'Illuminate\Session\SessionServiceProvider',
 	
 	
@@ -181,7 +181,7 @@ Facade::setContainer($container);
 class DB extends Facade { protected static $key = 'db'; }
 class Lang extends Facade { protected static $key = 'translator'; }
 class Validator extends Facade { protected static $key = 'validator'; }
-class Paginator extends Facade { protected static $key = 'paginator'; }
+//class Paginator extends Facade { protected static $key = 'paginator'; }
 
 //class View extends Facade { protected static $key = 'view'; }
 
