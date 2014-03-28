@@ -1,9 +1,3 @@
-<?php if (validation_errors()): ?>
-<div class="clean-red"><?php echo validation_errors(); ?></div>
-<?php elseif (Session::flashData('msg')): ?>
-<div class="clean-green"><?php echo Session::flashData('msg');?></div><br />
-<?php else: ?>
-<?php endif; ?>
 <fieldset><legend><?php echo $legend;?></legend>
 <form action="" method="post">
   <table width="100%" border="0" cellpadding="5" cellspacing="5" class="table-form">
@@ -27,7 +21,7 @@
     <tr>
       <td>&nbsp;</td>
       <td><input type="submit" name="button" id="button" value="Save" />
-        <a href="<?=base_url().'groups'?>">Cancel</a>
+        <a href="<?php echo Request::root().'/groups'?>">Cancel</a>
         <input name="op" type="hidden" id="op" value="1" />
         <input name="id" type="hidden" id="id" value="<?php ?>" /></td>
       <td>&nbsp;</td>

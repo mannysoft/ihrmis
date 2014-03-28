@@ -48,7 +48,16 @@ $lgu_code = Setting::getField( 'lgu_code' );
     </tr>
     <tr>
       <td align="left">&nbsp;</td>
-      <td colspan="4" align="left"><strong><?php echo $name['lname'].', '.$name['fname'].' '.$name['mname'];?></strong></td>
+      <td colspan="4" align="left">
+	  <?php $whole_name = $name['lname'].', '.$name['fname'].' '.$name['mname'];?>
+      <?php 
+	  if($name['extension'] !='')
+	  {
+		  $whole_name = $name['lname'].', '.$name['fname'].' '.$name['extension'].' '.$name['mname'];
+	  }
+	  ?>
+      <strong><?php echo $whole_name;?></strong>
+      </td>
       <td colspan="4" align="left"><strong><?php echo $this->Office->get_office_name($name['office_id']);?></strong></td>
       <td colspan="2" align="left"><strong><?php echo $name['first_day_of_service'];?></strong></td>
     </tr>
@@ -105,11 +114,11 @@ WOP</td>
               <td align="center"><?php echo $this->leave->period;?></td>
               <td align="center"><?php echo $this->leave->particulars;?></td>
               <td align="center"><?php echo ($this->leave->v_earned != '') ? number_format($this->leave->v_earned, 3) : $this->leave->v_earned;?></td>
-              <td align="center"><?php echo $this->leave->v_abs;?></td>
+              <td align="center"><?php echo (is_int($this->leave->v_abs)) ? number_format($this->leave->v_abs, 1) : $this->leave->v_abs;?></td>
               <td align="center"><?php echo number_format($this->leave->vacation_leave_balance, 3);?></td>
               <td align="center"><?php echo $this->leave->v_abs_wop;?></td>
               <td align="center"><?php echo ($this->leave->s_earned != '') ? number_format($this->leave->s_earned, 3) : $this->leave->s_earned;?></td>
-              <td align="center"><?php echo $this->leave->s_abs;?></td>
+              <td align="center"><?php echo (is_int($this->leave->s_abs)) ? number_format($this->leave->s_abs, 1) : $this->leave->s_abs;?></td>
               <td align="center"><?php echo number_format($this->leave->sick_leave_balance, 3)?></td>
               <td align="center"><?php echo $this->leave->s_abs_wop;?></td>
               <td align="center"><?php echo $this->leave->action_take;?></td>
@@ -120,11 +129,11 @@ WOP</td>
                   <td align="center"><?php echo $this->leave->period;?></td>
                   <td align="center"><?php echo $this->leave->particulars;?></td>
                   <td align="center"><?php echo ($this->leave->v_earned != '') ? number_format($this->leave->v_earned, 3) : $this->leave->v_earned;?></td>
-                  <td align="center"><?php echo $this->leave->v_abs;?></td>
+                  <td align="center"><?php echo (is_int($this->leave->v_abs)) ? number_format($this->leave->v_abs, 1) : $this->leave->v_abs;?></td>
                   <td align="center"><?php echo number_format($this->leave->vacation_leave_balance, 3);?></td>
                   <td align="center"><?php echo $this->leave->v_abs_wop;?></td>
                   <td align="center"><?php echo ($this->leave->s_earned != '') ? number_format($this->leave->s_earned, 3) : $this->leave->s_earned;?></td>
-                  <td align="center"><?php echo $this->leave->s_abs;?></td>
+                  <td align="center"><?php echo (is_int($this->leave->s_abs)) ? number_format($this->leave->s_abs, 1) : $this->leave->s_abs;?></td>
                   <td align="center"><?php echo number_format($this->leave->sick_leave_balance, 3)?></td>
                   <td align="center"><?php echo $this->leave->s_abs_wop;?></td>
                   <td align="center"><?php echo $this->leave->action_take;?></td>

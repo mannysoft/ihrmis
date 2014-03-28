@@ -35,6 +35,8 @@
  */
 class Users extends MX_Controller  {
 
+	protected $user;
+	
 	// --------------------------------------------------------------------
 	
 	function __construct()
@@ -44,7 +46,8 @@ class Users extends MX_Controller  {
 		$this->load->helper('security');
 		
 		$this->load->model('options');
-		//return DtrEloquent::all();
+		
+		$this->user = new UserEloquent;
 		
 		//$this->output->enable_profiler(TRUE);
     }  
@@ -60,7 +63,7 @@ class Users extends MX_Controller  {
 		$data['page_name'] = '<b>Manage Users</b>';
 		
 		$data['msg'] = '';
-				
+		
 		// If form submit
 		if(Input::get('op'))
 		{
@@ -72,18 +75,59 @@ class Users extends MX_Controller  {
 				{
 					$stat = Input::get('action') == '0' ? 'Inactive' : 'Active';
 
-					$this->User->update_user(array('stat' => $stat), $user);
+					$u = $this->user->find($user);
+					$u->stat = $stat;
+					$u->save();
 				}
 			}	
 		}
 		
-		$u = new User_m();
-		
-		$u->where('group_id !=', '1000');
-				
-		$data['users'] = $u->get();
+		$data['users'] = $this->user->with('office', 'group')->where('group_id', '!=', '1000')->get();
 						
 		$data['main_content'] = 'index';
+		
+		return View::make('includes/template', $data);
+		
+	}
+	
+	function add()
+	{
+		$data['page_name'] = '<b>Add User</b>';
+		
+		$data['msg'] = '';
+		
+		// Use for office listbox
+		$data['options'] = $this->options->office_options();
+		
+		$data['selected'] = Session::get('office_id');
+				
+		// Groups options
+		$data['groups_options'] = $this->options->group_options();
+									
+		$data['groups_selected'] = 3;
+						
+		// If form submit
+		if(Input::get('op'))
+		{
+			// Encript password
+			$password = do_hash(Input::get('password'), 'md5');
+			
+			$u = $this->user->fill(Input::all());
+			$u->password = (Input::get('password') == '') ? '' : $password;
+			$u->user_type 	= Input::get('group_id');
+			
+			if($u->save())
+			{				
+				Session::flash('msg', 'User has been saved!');
+						
+				return Redirect::to('users/', 'refresh');		
+			}
+			
+			$data['errors'] = $u->errors;
+			
+		}
+				
+		$data['main_content'] = 'add';
 		
 		return View::make('includes/template', $data);
 		
@@ -97,12 +141,7 @@ class Users extends MX_Controller  {
 	 */
 	function save($id = '')
 	{
-		$data['page_name'] = '<b>Add User</b>';
-		
-		if ($id != '')
-		{
-			$data['page_name'] = '<b>Edit User</b>';
-		}
+		$data['page_name'] = '<b>Edit User</b>';
 		
 		$data['msg'] = '';
 		
@@ -111,67 +150,38 @@ class Users extends MX_Controller  {
 		
 		$data['selected'] = Session::get('office_id');
 		
-		$u = new User_m();
-		
-		$data['user'] = $u->get_by_id($id);
-		
+		$u = $data['user'] = $this->user->find($id);
+				
 		// Groups options
 		$data['groups_options'] = $this->options->group_options();
-									
-		$data['groups_selected'] = 3;
-		
+											
 		if ( $u->exists())
 		{
 			$data['groups_selected'] = $u->group_id;
 		}						
 				
-		//If form submit
+		// If form submit
 		if(Input::get('op'))
 		{
-			//http://codeigniter.com/forums/viewthread/161740/#776966
-			//solved the callback functions problem
-			$this->form_validation->set_rules('username', 'Username', 'required|min_length[4]|max_length[12]');
+			// Update Data
+			$u = $this->user->find($id);
+			$u->fill(Input::all());
+			$u->user_type 	= Input::get('group_id');
 			
-			// If add check the if username exists
-			if ($id == '')
+			if (Input::get('password') != '')
 			{
-				$this->form_validation->set_rules('username', 'Username','required|min_length[4]|max_length[12]|callback_username_check');
-				$this->form_validation->set_rules('password', 'Password', 'required|matches[repassword]');
+				$u->password = do_hash(Input::get('password'), 'md5');
 			}
-			
-			$this->form_validation->set_rules('lname', 'Last Name', 'required');
-			$this->form_validation->set_rules('fname', 'First Name', 'required');
-			
-			
-			if ($this->form_validation->run($this) == TRUE)
+		
+			if($u->save())
 			{
-				//Encript password
-				$password = do_hash(Input::get('password'), 'md5');
-				
-				if ($u->password == $password)
-				{
-					$password = $u->password;
-				}
-				
-				$u->username	= Input::get('username');
-				$u->lname		= Input::get('lname');
-				$u->fname 		= Input::get('fname');
-				$u->mname 		= Input::get('middle');
-				$u->password 	= $password;
-				$u->office_id 	= Input::get('office_id');
-				$u->group_id 	= Input::get('group_id');
-				$u->user_type 	= Input::get('group_id');
-				$u->stat		= 'Active';
-				
-				$u->save();
-							
-				$user = $this->User->get_user_data(Input::get('username'));
-														 
 				Session::flash('msg', 'User has been saved!');
 						
 				return Redirect::to('users/', 'refresh');		
 			}
-					
+			
+			$data['errors'] = $u->errors;
+														 		
 		}
 				
 		$data['main_content'] = 'save';
@@ -188,10 +198,9 @@ class Users extends MX_Controller  {
 	 * @param int $id
 	 */
 	function delete($id = '')
-	{
-		$u = new User_m();
-		$u->get_by_id( $id )->delete();
-				
+	{		
+		$this->user->find($id)->delete();
+		
 		Session::flash('msg', 'User has been deleted!');
 		
 		return Redirect::to('users/', 'refresh');
@@ -205,15 +214,9 @@ class Users extends MX_Controller  {
 		$data['page_name'] = '<b>My Account</b>';
 		
 		$data['msg'] = '';
-		
-		$username = Session::get('username');
-		
-		
-		$op = Input::get('op');
-		
-		if($op == 1)
+				
+		if(Input::get('op'))
 		{
-			
 			$hidden_password = Input::get('hidden_password');
 			
 			$new_pass 		= Input::get('new_pass');
@@ -225,17 +228,13 @@ class Users extends MX_Controller  {
 			
 			if ($this->form_validation->run($this) == TRUE)
 			{
-				$this->User->update_user_pass(do_hash($re_new_pass, 'md5'), $username);
+				$u = $this->user->find(Session::get('user_id'));
+				$u->password = do_hash($re_new_pass, 'md5');
+				$u->save();
 			}
 		}
-		
-		$user = $this->User->get_user_data($username);
-
-		$data['office_name'] = $this->Office->get_office_name($user['office_id']);
-		
-		$data['user_type']   = $this->User_type->get_user_type($user['user_type']);
-		
-		$data['user'] = $user;
+				
+		$data['user'] = $this->user->with('office', 'group')->find(Session::get('user_id'));
 				
 		$data['main_content'] = 'my_account';
 		
@@ -244,33 +243,9 @@ class Users extends MX_Controller  {
 	
 	// --------------------------------------------------------------------
 	
-	/**
-	 * Check if the username exist
-	 *
-	 * @param string $username
-	 * @return boolean
-	 */
-	function username_check($username)
-	{
-		$is_username_exists = $this->User->is_username_exists($username);
-		
-		if ($is_username_exists == TRUE)
-		{
-			$this->form_validation->set_message('username_check', 
-												'The Username exists! Please enter another username.');
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
-	}
-	
-	// --------------------------------------------------------------------
-	
 	function current_password($password2)
 	{
-		$current_password = $this->User->get_current_password(Session::get('username'));
+		$current_password = $this->user->find(Session::get('user_id'))->password;
 		
 		// Encript password
 		$password = do_hash($password2, 'md5');

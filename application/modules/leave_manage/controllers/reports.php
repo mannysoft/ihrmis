@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+use Carbon\Carbon;
 /**
  * Integrated Human Resource Management Information System
  *
@@ -77,6 +78,15 @@ class Reports extends MX_Controller
 		{
 	
 			$this->leave_certification_bataraza($vl, $sl, $employee_id);
+			
+			return;
+		}
+		
+		// Province of Quezon
+		if ( $lgu_code == 'quezon_province' )
+		{
+	
+			$this->leave_certification_quezon($vl, $sl, $employee_id);
 			
 			return;
 		}
@@ -687,6 +697,180 @@ class Reports extends MX_Controller
 		
 		
 	}
+	
+	
+	function leave_certification_quezon($vl = 0, $sl = 0, $employee_id = '1')
+	{
+		
+		$this->load->library('fpdf');
+		
+		define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+						
+		$this->load->library('fpdi');
+		
+		// initiate FPDI   
+		$pdf = new FPDI('P', 'mm', 'Letter');
+		
+		
+		// Margin
+		$pdf->SetRightMargin(22);
+		
+		// add a page
+		$pdf->AddPage();
+		
+		// set the sourcefile
+		$pdf->setSourceFile('dtr/template/certification/quezon_certification.pdf');
+		
+		// select the first page
+		$tplIdx = $pdf->importPage(1);
+		
+		// use the page we imported
+		$pdf->useTemplate($tplIdx);
+		
+		$vacation_leave =  $vl;
+		$sick_leave 	=  $sl;
+		
+		$name = $this->Employee->get_employee_info($employee_id);
+		
+		
+		$office_name = $this->Office->get_office_name($name['office_id']);
+		
+		// set font, font style, font size.
+		$pdf->SetFont('Arial','',12);
+		
+		
+		// set initial placement
+		$pdf->SetXY(136,50.5);
+		
+		// line break
+		
+		$last_earn = $this->Leave_card->get_last_earn($rows['employee_id']);
+		
+		if ( $last_earn != '')
+		{			
+			$last_earn = date('F d, Y', strtotime($last_earn));
+			
+		}
+		else
+		{
+			
+			$dt = new Carbon();
+			$dt->subMonth();
+						
+			$date = new Carbon('last day of '. $this->Helps->get_month_name($dt->month).' '.$dt->year);
+			
+			$last_earn = $this->Helps->get_month_name($date->month).' '.$date->day.', '.$date->year;
+		}
+		
+		//$pdf->Write(0, date('F').' '.date('d').', '.date('Y'));
+		
+		$pdf->Ln(37);
+		// go to 25 X (indent)
+		$pdf->SetX(35);
+		
+		$extension = '';
+		
+		if ($name['extension'] != '')
+		{
+			$extension = ', '.$name['extension'];
+		}
+		
+										  
+		$pdf->MultiCell(0,6,"                This is to certify that as per our office records, ".$name['salut'].' '.ucwords(strtolower(utf8_decode($name['fname']))).' '.
+										 ucwords(strtolower(utf8_decode($name['mname']))).' '.
+										  ucwords(strtolower(utf8_decode($name['lname']))).$extension.', '.$name['position'] .' in the '.utf8_decode($office_name).
+										  ' has the following leave balances as of '.$last_earn.
+										  '.' ,0,'J',false);								  
+		
+		$pdf->Ln(5.5);
+		
+		$pdf->SetX(35);
+		
+		// set font, font style, font size.
+		$pdf->SetFont('Arial','',12);
+		//$pdf->Write(0, $name['position']);
+		
+				
+		$pdf->Ln(5.5);
+		
+		$pdf->SetX(35);
+		
+		//$pdf->Write(0, $office_name);
+		
+		$pdf->Ln(5.5);
+		
+		$pdf->SetX(35);		
+		
+		$pdf->Ln(4);
+		
+		$pdf->SetX(35);
+		
+		// set font, font style, font size.
+		$pdf->SetFont('Arial','',12);
+		
+		//get the last month that earned leave credit
+		$last_month_last_day = date('Y-m-d',strtotime('-1 second',strtotime(date('m').'/01/'.date('Y').' 00:00:00')));
+		
+		//list($year, $month, $day) = split('[-.-]', $last_month_last_day);deprecated
+		list($year, $month, $day) = explode('-', $last_month_last_day);
+		
+		$last_month_last_day = date("F d, Y", mktime(0, 0, 0, $month, $day, $year));
+		
+		$pdf->SetX(136);
+		
+		$pdf->SetXY(128, 119);
+		
+		$pdf->Write(0, number_format($vacation_leave, 3));
+		
+		//sick		
+		$pdf->SetXY(128, 125);
+		
+		$pdf->Write(0, number_format($sick_leave, 3));
+		
+		//total		
+		$pdf->SetXY(128, 131);
+		
+		$pdf->Write(0, number_format($vacation_leave + $sick_leave, 3));
+		
+		
+		$pdf->Ln(5);
+		$pdf->SetX(35);
+		
+		$pdf->MultiCell(0,6,"                This certification is being issued for whatever legal purpose it may serve." ,0,'L',false);
+
+		
+		$pdf->Ln(5);
+		$pdf->SetX(35);
+		
+		$pdf->MultiCell(0,6,"                Issued this ".date('jS')." day of ".date('F, Y').", in Lucena City." ,0,'L',false);
+
+		$pdf->Ln(15);
+		$pdf->SetX(110);
+
+		$statement_prepared 			= Setting::getField( 'statement_prepared' );
+		$statement_prepared_position 	= Setting::getField( 'statement_prepared_position' );
+		$statement_certified 			= Setting::getField( 'statement_certified' );
+		$statement_certified_position 	= Setting::getField( 'statement_certified_position' );
+		
+		$pdf->SetFont('Arial','B',12);
+		//$pdf->Cell(90,5, $statement_prepared,			'0',	0,'C',false); //4th param border
+		$pdf->Cell(90,5, utf8_decode($statement_certified),			'0',	1,'C',false);
+		$pdf->SetFont('Arial','',12);
+		//$pdf->Cell(90,5, $statement_prepared_position,	'0',	0,'C',false);
+		$pdf->SetX(110);
+		$pdf->Cell(90,5, $statement_certified_position,	'0',	1,'C',false);
+		
+		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
+		
+		header('Pragma: public');
+		
+		//$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'F'); 
+		$pdf->Output('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'I'); 
+		
+		//return Redirect::to('dtr/reports/leave_certification_'.$employee_id.'.pdf', 'refresh');
+		
+		
+	}
 	// --------------------------------------------------------------------
 	
 	function leave_certification_training($vl = 0, $sl = 0, $employee_id = '1')
@@ -903,7 +1087,7 @@ class Reports extends MX_Controller
 		
 		//name
 		$pdf->SetX(26);
-		$pdf->Write(0, '  '.$name['salut'].' '.utf8_decode($name['fname'].' '.$name['mname'].' '.$name['lname']));
+		$pdf->Write(0, '  '.$name['salut'].' '.utf8_decode($name['fname'].' '.utf8_decode($name['mname']).' '.utf8_decode($name['lname'])));
 		
 		
 		//first day of sevice
@@ -1325,8 +1509,8 @@ class Reports extends MX_Controller
 		$statement_certified 			= Setting::getField( 'statement_certified' );
 		$statement_certified_position 	= Setting::getField( 'statement_certified_position' );
 		
-		$pdf->Cell(90,5, $statement_prepared,			'0',	0,'C',false); //4th param border
-		$pdf->Cell(90,5, $statement_certified,			'0',	1,'C',false);
+		$pdf->Cell(90,5, utf8_decode($statement_prepared),			'0',	0,'C',false); //4th param border
+		$pdf->Cell(90,5, utf8_decode($statement_certified),			'0',	1,'C',false);
 		$pdf->Cell(90,5, $statement_prepared_position,	'0',	0,'C',false);
 		$pdf->Cell(90,5, $statement_certified_position,	'0',	1,'C',false);
 		
@@ -2567,15 +2751,26 @@ class Reports extends MX_Controller
 		
 		//lname
 		$pdf->SetX(90);
-		$pdf->Write(0, $name['lname']);
+		$pdf->Write(0, utf8_decode($name['lname']));
 		
 		//fname
 		$pdf->SetX(145);
-		$pdf->Write(0, $name['fname']);
+		$pdf->Write(0, utf8_decode($name['fname']));
+		
+		$extension = '';
+		
+		if ($name['extension'] != '')
+		{
+			$extension = $name['extension'].' ';
+			$pdf->SetX(186);
+		}
+		else
+		{
+			$pdf->SetX(192);
+		}
 		
 		//mname
-		$pdf->SetX(192);
-		$pdf->Write(0, $name['mname'][0].'.');
+		$pdf->Write(0, utf8_decode($extension.$name['mname'][0].'.'));
 		
 		$pdf->Ln(13);
 		
@@ -2583,10 +2778,13 @@ class Reports extends MX_Controller
 		$pdf->SetX(25);
 		$pdf->Write(0, date("F d, Y", strtotime($rows['date_encode'])));
 		
+		$pdf->SetFont('Arial','',9);
 		//position
 		$pdf->SetX(70);
 		$pdf->Write(0, $name['position']);
 		
+		
+		$pdf->SetFont('Arial','B',12);
 		// We need to check what salary grade the office use
 		if ( $office['salary_grade_type'] == 'hospital' )
 		{
@@ -2610,9 +2808,9 @@ class Reports extends MX_Controller
 			$pdf->SetX(28);
 			$pdf->Write(0, 'X');
 			
-			$pdf->Ln(18);
+			$pdf->Ln(15);
 			
-			$pdf->SetX(32);
+			$pdf->SetX(34);
 			
 			if ( $rows['leave_type_id'] == 1 )
 			{
@@ -2680,14 +2878,33 @@ class Reports extends MX_Controller
 		
 		if ( $last_earn != '')
 		{
+			$record_limit_date = $last_earn;
+			
 			$last_earn = date('F d, Y', strtotime($last_earn));
+			
+			
 		}
 		else
 		{
-			$last_earn = date('F d, Y');
+			
+			$dt = new Carbon();
+			$dt->subMonth();
+			
+			//echo 'last day of '. $this->Helps->get_month_name($dt->month).' '.$dt->year;
+			
+			$date = new Carbon('last day of '. $this->Helps->get_month_name($dt->month).' '.$dt->year);
+			//return;
+			
+			$last_earn = $this->Helps->get_month_name($date->month).' '.$date->day.', '.$date->year;
+			
+			$record_limit_date = $date->year.'-'.$date->month.'-'.$date->day;
+			
+			//$last_earn = date('F d, Y');
 		}
-				
-		$credits = $this->Leave_card->get_total_leave_credits($rows['employee_id']);
+		
+		
+		
+		$credits = $this->Leave_card->get_total_leave_credits($rows['employee_id'], $record_limit_date);
 
 		
 		$pdf->Ln(39);
@@ -2698,16 +2915,16 @@ class Reports extends MX_Controller
 		$pdf->Ln(18);
 		$pdf->SetX(25);
 		//$pdf->Write(0, $vbalance);
-		$pdf->Write(0, $credits['vacation']);
+		$pdf->Write(0, number_format($credits['vacation'], 3));
 		
 		$pdf->SetX(54);
 		//$pdf->Write(0, $sbalance);
-		$pdf->Write(0, $credits['sick']);
+		$pdf->Write(0, number_format($credits['sick'], 3));
 		
 		$total_leave_balance = $credits['vacation'] + $credits['sick'];
 		
 		$pdf->SetX(80);
-		$pdf->Write(0, $total_leave_balance);
+		$pdf->Write(0, number_format($total_leave_balance, 3));
 		
 		
 		// set font, font style, font size.
@@ -2771,13 +2988,13 @@ class Reports extends MX_Controller
 		$pdf->SetXY(35,205);
 		$pdf->SetFillColor(255, 255, 255); 
 		
-		$pdf->Cell(65,5,strtoupper($statement_certified),'',0,'C',1);
+		$pdf->Cell(65,5,strtoupper(utf8_decode($statement_certified)),'',0,'C',1);
 		$pdf->SetXY(35,211);
 		$pdf->SetFont('Arial','I',11);
 		$pdf->Cell(65,5,$statement_certified_position,'',0,'C',1);
 		
-				$pdf->SetXY(129, 139);
-		$pdf->Cell(65,5, $name['fname'] . ' ' . $name['mname'] . ' '. $name['lname'],'',0,'C',1);
+		$pdf->SetXY(129, 139);
+		$pdf->Cell(65,5, utf8_decode($name['fname'] . ' ' . $name['mname'] . ' '. $name['lname']),'',0,'C',1);
 		
 		
 		
@@ -2785,7 +3002,10 @@ class Reports extends MX_Controller
 		//$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
 		
 		$pdf->SetXY(129, 206);
-		$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
+		//$pdf->Cell(65,5, utf8_decode($office['office_head']),'',0,'C',1);
+		
+		
+		
 		//$pdf->Cell(65,5, $office['position'],'',0,'C',1);
 		//$pdf->Cell(65,5, $office['office_head'],'',0,'C',1);
 		
@@ -2795,7 +3015,7 @@ class Reports extends MX_Controller
 		$final_approval_leave_application_designation = Setting::getField('final_approval_leave_application_designation');
 		
 		$pdf->SetXY(70, 255);
-		$pdf->Cell(65,5, $final_approval_leave_application,'',0,'C',1);
+		$pdf->Cell(65,5, utf8_decode($final_approval_leave_application),'',0,'C',1);
 		$pdf->SetXY(70, 260);
 		$pdf->Cell(65,5, $final_approval_leave_application_designation,'',0,'C',1);
 		
@@ -2812,8 +3032,7 @@ class Reports extends MX_Controller
 	
 	function cto_apps($id = '')
 	{
-		$c = new Compensatory_timeoff();
-		$c->get_by_id($id);
+		$c = CompensatoryTimeoff::find($id);
 		
 		$name = $this->Employee->get_employee_info($c->employee_id);
 		
@@ -2922,41 +3141,30 @@ class Reports extends MX_Controller
 		$cto_balances_as_of = date("F d, Y", strtotime($c->date_file."-1 day"));
 		
 		$pdf->SetXY(30, 106);
-		//$pdf->Write(0, $cto_balances_as_of);
+		$pdf->Write(0, $cto_balances_as_of);
 		
 		// Compute balances
 		// (balance + earn) - spent
-		$cto = new Compensatory_timeoff();
-		$cto->where('employee_id',$c->employee_id);
-		$cto->where('type','balance');
-		$cto->where('status','active');
-		$cto->select_sum('days');
-		$cto->get();
 		
-		$balance = $cto->days;
+		
+		$cto = CompensatoryTimeoff::getBalance($c->employee_id);
+		//$balance = $cto->days;
+		$balance = $cto;
 				
-		$cto = new Compensatory_timeoff();
-		$cto->where('employee_id',$c->employee_id);
-		$cto->where('type','earn');
-		$cto->where('status','active');
-		$cto->select_sum('days');
-		$cto->get();
 		
-		$earn = $cto->days;
+		$cto = CompensatoryTimeoff::getEarnedSpent($c->employee_id);
+		//$earn = $cto->days;
+		$earn = $cto;
 				
-		$cto = new Compensatory_timeoff();
-		$cto->where('employee_id',$c->employee_id);
-		$cto->where('type','spent');
-		$cto->where('status','active');
-		$cto->select_sum('days');
-		$cto->get();
 		
-		$spent = $cto->days;
+		$cto = CompensatoryTimeoff::getEarnedSpent($c->employee_id, 'spent');
+		//$spent = $cto->days;
+		$spent = $cto;
 		
 		$total_balance = ($balance + $earn) - $spent;
 		
 		$pdf->SetXY(35, 116);
-		//$pdf->Write(0, $total_balance);
+		$pdf->Write(0, $total_balance);
 		
 		
 		$pdf->SetX(87);

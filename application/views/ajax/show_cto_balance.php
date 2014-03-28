@@ -15,14 +15,11 @@
           <th width="29%" bgcolor="#D6D6D6">As of (yyyy-mm-dd)</th>
         </tr>
         <?php $i = 0;?>
-        <?php $c = new Compensatory_timeoff();?>
 		<?php foreach($rows as $row):?>
 		<?php 
 			
-			$c->where('type', 'balance');
-			$c->where('employee_id', $row['employee_id']);
-			$c->get();
-        
+			$c = CompensatoryTimeoff::getId($row['employee_id']);
+			
 			$onclick0 = "onClick=\"dg_editCell(offices,'".$c->id."','days','offices.0.$i', 'cto_balance')\"";
 			$onclick1 = "onClick=\"dg_editCell(offices,'".$c->id."','dates','offices.1.$i', 'cto_balance')\"";
 	

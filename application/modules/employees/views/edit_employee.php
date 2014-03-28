@@ -171,7 +171,7 @@ function jsUpload(upload_field)
       <td align="left"><span class="type-one">
         <?php 
 	  $js = 'id = "shift2"';
-	  echo form_dropdown('shift2', $shifts_options, 1, $js); 
+	  echo form_dropdown('shift2', $shifts_options, $shift2, $js); 
 	  ?>
         <select name="hour1" id="hour1" disabled="disabled">
           <option value="01">01</option>
@@ -405,6 +405,50 @@ $(document).ready(function(){
 
 		});
 	});
+	
+	
+	var other_shift = $('#shift2').val();
+	
+	$('#shift_description').addClass("clean-green");
+	
+	if ( other_shift == 1)
+	{
+		$('#shift_description').html("Working hours - 8am-12noon 01pm-5pm");
+	}
+	if ( other_shift == 2)
+	{
+		$('#shift_description').html("Working hours like 7am - 3pm, 3pm - 11pm , 11pm - 7am");
+	}
+	if ( other_shift == 3)
+	{
+		$('#shift_description').html("Working hours like 6am - 12noon - 3pm - 5pm");
+	}
+	if ( other_shift == 4)
+	{
+		$('#shift_description').html("Working hours like Doctors.");
+	}
+	
+	if(other_shift == 0)
+	{
+		$('#hour1').attr("disabled", false)
+		$('#minute1').attr("disabled", false)
+		$('#am_pm1').attr("disabled", false)
+		$('#hour2').attr("disabled", false)
+		$('#minute2').attr("disabled", false)
+		$('#am_pm2').attr("disabled", false)
+		
+	}
+	
+	else
+	{
+		$('#hour1').attr("disabled", true)
+		$('#minute1').attr("disabled", true)
+		$('#am_pm1').attr("disabled", true)
+		$('#hour2').attr("disabled", true)
+		$('#minute2').attr("disabled", true)
+		$('#am_pm2').attr("disabled", true)
+		
+	}
 	
 
 });

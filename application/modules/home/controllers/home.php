@@ -68,6 +68,10 @@ class Home extends MX_Controller
 	
 	function home_page()
 	{
+		//echo EmployeeEloquent::where('lname', '=', 'ABADILLA')->paginate1(5);
+		//$this->Dtr_temp->double_entries();
+		//$this->Dtr_temp->get_dtr_temp();
+		
 		//echo Session::get('office_id');
 		//var_dump(Test::paginate(2));
 		//return View::make('home.index', array('test' => '25654'));

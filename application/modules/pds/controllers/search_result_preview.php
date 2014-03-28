@@ -96,13 +96,13 @@ class Search_result_preview extends MX_Controller
 			
 			$entry='
 			<tr>
-				<td>'.$row->id.'</td>
+				<td>'.$row->employee_id.'</td>
 				 <td>'.$row->lname.','. $row->fname.' '.$row->mname.'</td>
 				 <td>'.$row->sex.'</td>
 				 <td>'.$row->position.'</td>
 				 <td>'.$office->office_name.'</td>
 				 <td>'.$type_employment[$row->permanent].'</td>
-				 <td>'.$row->salary_grade.'-'.$row->step.'</td>
+				 <td>'.$row->salary_grade.'/'.$row->step.'</td>
 				 <td>'.$row->eligibility.'</td>
 				 <td>'.$row->education.'</td>
 				 <td>'.$birth_date.'</td>

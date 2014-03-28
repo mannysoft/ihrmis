@@ -11,3 +11,42 @@
 </ul>
 </div>
 <div class="std_block">
+
+<!--If bootstrap-->
+<?php if($this->config->item('twitter_bootstrap_css')):?>
+    <!--This is for massaging-->
+    <?php if(isset($errors) and count($errors) >= 1):?>
+        <div class="alert alert-danger">
+            <?php foreach ($errors as $error):?>
+                <div class="error"><?php echo $error; ?></div>
+            <?php endforeach;?>
+        </div>
+    <?php endif;?>
+    
+    <?php if(Session::flashData('msg')):?>
+        <div class="alert alert-success">
+            <?php echo Session::flashData('msg');?>
+        </div>
+    <?php endif;?>
+
+<!--If not bootstrap-->   
+<?php else: ?>
+    
+    
+	<?php if(isset($errors) and count($errors) >= 1):?>
+        <div class="alert alert-danger">
+            <?php foreach ($errors as $error):?>
+                <div class="error"><?php echo $error; ?></div>
+            <?php endforeach;?>
+        </div>
+    <?php endif;?>
+	
+	<?php if (validation_errors()): ?>
+    	<div class="clean-red"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
+    <?php elseif (Session::flashData('msg')): ?>
+    	<div class="clean-green"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
+    <?php else: ?>
+    <?php endif; ?>
+    
+    
+<?php endif;?>

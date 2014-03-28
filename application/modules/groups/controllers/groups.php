@@ -34,6 +34,8 @@
  */
 class Groups extends MX_Controller {
 
+	protected $group;
+	
 	// --------------------------------------------------------------------
 	
 	function __construct()
@@ -41,6 +43,8 @@ class Groups extends MX_Controller {
         parent::__construct();
 		
 		$this->load->model('options');
+		
+		$this->group = new GroupEloquent;
 		
 		//$this->output->enable_profiler(TRUE);
     }  
@@ -53,34 +57,41 @@ class Groups extends MX_Controller {
 		
 		$data['msg'] = '';
 		
-		$this->load->library('pagination');
-		
-		$s = new Group_m();
-		
-		$config['base_url'] = base_url().'groups/index';
-		$config['total_rows'] = $s->count();
-		$config['per_page'] = '15';
-		$config['full_tag_open'] = '<p>';
-	    $config['full_tag_close'] = '</p>';
-		
-		$this->pagination->initialize($config);
-		
-		// How many related records we want to limit ourselves to
-		$limit = $config['per_page'];
-		
-		// Set the offset for our paging
-		$offset = $this->uri->segment(3);
-		
-		$s->order_by('name');
-		
-		$data['rows'] = $s->get($limit, $offset);
-		
-		$data['page'] = $this->uri->segment(3);
-				
+		$data['rows'] = $this->group->orderBy('name')->get();
+			
 		$data['main_content'] = 'index';
 		
 		return View::make('includes/template', $data);
 	
+	}
+	
+	function add()
+	{
+		$data['page_name'] 	= '<b>Groups</b>';
+		$data['legend'] 	= '<b>Add</b>';
+		$data['focus_field'] 	= 'name';
+		
+		$data['msg'] = '';
+						
+		// If form submit
+		if(Input::get('op'))
+		{			
+			$g = $this->group->fill(Input::all());
+			
+			if($g->save())
+			{				
+				Session::flash('msg', 'Group has been saved!');
+						
+				return Redirect::to('groups', 'refresh');
+			}
+			
+			$data['errors'] = $g->errors;
+		}
+				
+		$data['main_content'] = 'add';
+		
+		return View::make('includes/template', $data);
+		
 	}
 	
 	// --------------------------------------------------------------------
@@ -88,36 +99,27 @@ class Groups extends MX_Controller {
 	function save( $id = '' )
 	{		
 		$data['page_name'] 	= '<b>Groups</b>';
-		$data['legend'] 	= '<b>Add</b>';
+		
 		$data['focus_field'] 	= '';
 		
-		if ( $id != '' )
-		{
-			$data['legend'] 	= '<b>Edit</b>';
-		}
+		$data['legend'] 	= '<b>Edit</b>';
 		
 		$data['msg'] = '';
-			
-		$s = new Group_m();
-		
-		$data['row'] = $s->get_by_id( $id );
+					
+		$data['row'] = $g = $this->group->find( $id );
 				
-		
 		if ( Input::get('op'))
 		{
-			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('description', 'Description', 'required');
+			$g->fill(Input::all());
+			
+			if($g->save())
+			{				
+				Session::flash('msg', 'Group has been saved!');
 						
-			if ($this->form_validation->run($this) == TRUE)
-			{
-				$s->name 				= Input::get('name');
-				$s->description 		= Input::get('description');
-				$s->percent_discount 	= Input::get('percent_discount');
-				$s->amount_discount 	= Input::get('amount_discount');
-				$s->save();
-				
 				return Redirect::to('groups', 'refresh');
 			}
+			
+			$data['errors'] = $g->errors;
 		}
 	
 		$data['main_content'] = 'save';
@@ -126,18 +128,6 @@ class Groups extends MX_Controller {
 	}
 	
 	// --------------------------------------------------------------------
-	
-	function delete( $id = '' )
-	{
-		$p = new Student_m();
-		
-		$p->get_by_id( $id );
-		
-		$p->delete();
-		
-		return Redirect::to('students', 'refresh');
-		
-	}
 }	
 
 /* End of file groups.php */

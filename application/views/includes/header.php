@@ -23,7 +23,7 @@ if(!Session::get('username'))
 <script type="text/javascript" src="<?php echo base_url();?>js/calendar-setup.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/row_highlight.js"></script>
 <script type="text/JavaScript" src="<?php echo base_url();?>js/function.js"></script>
-<script type="text/JavaScript" src="<?php echo base_url();?>js/jquery-1.8.1.js"></script>
+<script type="text/JavaScript" src="<?php echo base_url();?>js/jquery-1.10.2.min.js"></script>
 <script type="text/JavaScript" src="<?php echo base_url();?>js/jquery.labelify.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/lib.js"></script>
 <script type="text/JavaScript" src="<?php echo base_url();?>js/jquery.tablednd.js"></script>
@@ -56,6 +56,11 @@ if(!Session::get('username'))
 }
 
 </style>
+<?php if($this->config->item('twitter_bootstrap_css')):?>
+	<link href="<?php echo Request::root();?>/assets/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo Request::root();?>/assets/bootstrap-3.1.1/js/bootstrap.min.js" rel="stylesheet" type="text/css">
+<?php endif;?>
+
 </head>
 <body><script type="text/javascript" src="<?php echo base_url();?>js/wz_tooltip.js"></script>
 <div id="header" class="layout_header">

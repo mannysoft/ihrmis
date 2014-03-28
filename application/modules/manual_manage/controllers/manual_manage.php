@@ -67,9 +67,7 @@ class Manual_Manage extends MX_Controller {
 	
 	function cancel_cto($id = '', $employee_id = '')
 	{
-		$c = new Compensatory_timeoff();
-		$c->get_by_id($id);
-		$c->delete();
+		CompensatoryTimeoff::find($id)->delete();
 		
 		$this->Dtr->cancel_cto($id, $employee_id);
 		

@@ -275,12 +275,12 @@ $('#set_leave').click(function(){
 		
 		var allow_sat_sun = 0;
 		
-		if ($('#allow_sat_sun').attr("checked") == "checked")
+		if ($('#allow_sat_sun').prop("checked") == true)
 		{
 			allow_sat_sun = 1;
 		}
 		
-		if ($('#mone1').attr("checked") == "checked")
+		if ($('#mone1').prop("checked") == true)
 		{
 			mone = 1
 		}
@@ -345,6 +345,15 @@ $('#set_leave').click(function(){
 		
 		hospital_leave_days = $('#hospital_leave_days').val();
 		
+		if(hospital_leave_days)
+		{
+			hospital_leave_days = hospital_leave_days;
+		}
+		else
+		{
+			hospital_leave_days = 0;
+		}
+		
 		// Change the comma to underscore to allow the url to request.
 		// Codeigniter doesnt allow comma on the url.
 		if (multiple != "")
@@ -392,7 +401,30 @@ $('#set_leave').click(function(){
 		
 		
 		//alert(url)
-		$('#outputtime').load("<?php echo base_url().('ajax/file_leave/'); ?>" + url);
+		//$('#outputtime').load("<?php echo base_url().('ajax/file_leave/'); ?>" + url);
+		
+		$.post( "<?php echo base_url().('ajax/file_leave/'); ?>",
+			{ 
+			employee_id: employee_id, 
+			multiple: multiple,
+			month: month4,
+			year: year4,
+			leave_type_id: $('#leave_type_id').val(),
+			month5: month5,
+			multiple5: multiple5,
+			year5: year5,
+			special_priv_id: $('#special_priv_id').val(),
+			days: days,
+			mone: mone,
+			process: 1,
+			allow_sat_sun: allow_sat_sun,
+			hospital_leave_days: hospital_leave_days,
+		})
+		
+		.done(function( data ) {
+			$('#outputtime').html(data);
+  		});
+		
 		//show the leave card
 		//show_leave_card($('#employee_id').val())
 		
@@ -523,12 +555,12 @@ function show_leave_details()
 	
 	var allow_sat_sun = 0;
 	
-	if ($('#allow_sat_sun').attr("checked") == "checked")
+	if ($('#allow_sat_sun').prop("checked") == true)
 	{
 		allow_sat_sun = 1;
 	}
 	
-	if ($('#mone1').attr("checked") == "checked")
+	if ($('#mone1').prop("checked") == true)
 	{
 		mone = 1
 	}
@@ -594,6 +626,15 @@ function show_leave_details()
 	
 	hospital_leave_days = $('#hospital_leave_days').val();
 	
+	if(hospital_leave_days)
+	{
+		hospital_leave_days = hospital_leave_days;
+	}
+	else
+	{
+		hospital_leave_days = 0;
+	}
+	
 	// Change the comma to underscore to allow the url to request.
 	// Codeigniter doesnt allow comma on the url.
 	if (multiple != "")
@@ -641,7 +682,30 @@ function show_leave_details()
     
 	//alert(url) 
 	
-	$('#outputtime').load("<?php echo base_url().('ajax/file_leave/'); ?>" + url);
+	//$('#outputtime').load("<?php echo base_url().('ajax/file_leave/'); ?>" + url);
+	
+	
+	$.post( "<?php echo base_url().('ajax/file_leave/'); ?>",
+			{ 
+			employee_id: employee_id, 
+			multiple: multiple,
+			month: month4,
+			year: year4,
+			leave_type_id: $('#leave_type_id').val(),
+			month5: month5,
+			multiple5: multiple5,
+			year5: year5,
+			special_priv_id: $('#special_priv_id').val(),
+			days: days,
+			mone: mone,
+			process: 0,
+			allow_sat_sun: allow_sat_sun,
+			hospital_leave_days: hospital_leave_days,
+		})
+		
+		.done(function( data ) {
+			$('#outputtime').html(data);
+  		});
 	
 	//ajax/file_leave/10-1/0/07/2011/1/07/2011/0/1/0/1
 	

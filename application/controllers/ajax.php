@@ -246,11 +246,7 @@ class Ajax extends MX_Controller {
 		
 		if ($mode == 'cto_balance')
 		{
-			$c = new Compensatory_timeoff();
-		
-			$c->where('id', Input::get('rowid'));
-			
-			$c->get();
+			$c = CompensatoryTimeoff::find(Input::get('rowid'));
 			
 			if ( Input::get('colid') == 'days' )
 			{
@@ -614,6 +610,27 @@ class Ajax extends MX_Controller {
 						$allow_sat_sun = 0, $hospital_leave_days = '')
 	{
 		
+		
+		$employee_id 			= Input::get('employee_id');
+		$multiple 				= Input::get('multiple');
+		$month 					= Input::get('month');
+		$year 					= Input::get('year');
+		$leave_type_id 			= Input::get('leave_type_id');
+		$month5 				= Input::get('month5');
+		$year5 					= Input::get('year5');
+		$multiple5 				= Input::get('multiple5');
+		$special_priv_id 		= Input::get('special_priv_id');
+		$days 					= Input::get('days');
+		$mone 					= Input::get('mone');
+		$process 				= Input::get('process');
+		$allow_sat_sun 			= Input::get('allow_sat_sun');
+		$hospital_leave_days 	= Input::get('hospital_leave_days');
+		
+		//echo $month5;
+		//var_dump($multiple5);
+		//var_dump($year5);
+		
+		
 		// If not approved_leave replace dash with underscore
 		if ( $employee_id != 'approved_leave' )
 		{
@@ -659,7 +676,7 @@ class Ajax extends MX_Controller {
 		
 		
 		// if hospital entered days equivalent
-		if ( $hospital_leave_days != 'undefined')
+		if ( $hospital_leave_days != '0')
 		{
 			$days = $hospital_leave_days;
 		}
@@ -685,7 +702,8 @@ class Ajax extends MX_Controller {
 		if ($this->leave->employee_id == 'approved_leave')
 		{
 			
-			$leave_apps_id = $this->leave->multiple;
+			//$leave_apps_id = $this->leave->multiple;
+			$leave_apps_id = Input::get('leave_apps_id');
 			
 			$leave_apps = $this->Leave_apps->get_leave_apps_info($leave_apps_id);
 			
@@ -735,6 +753,8 @@ class Ajax extends MX_Controller {
 			
 		}
 		
+		
+		
 		$this->leave->multiple  = str_replace ("_", ",", $this->leave->multiple);
 		
 		$this->leave->multiple  = str_replace (" ", "",  $this->leave->multiple);
@@ -748,6 +768,7 @@ class Ajax extends MX_Controller {
 		{
 			// Output name if exists
 			$this->leave->is_employee($name);
+			//echo $this->leave->special_priv_id; exit;
 		}
 		
 		$invalid = '';
@@ -768,17 +789,20 @@ class Ajax extends MX_Controller {
 			$this->leave->count_leave = $this->leave->days;
 		}
 		
+		
 		// If multiple months
 		
 		if ($this->leave->multiple !='' && $this->leave->multiple5 !='')
 		{
-			$this->leave->multiple_months();
+			$this->leave->multiple_months($this->leave->days);
 		}
 		
 		if ( $this->leave->leave_type_id == 9)
 		{
 			$this->leave->count_leave = $this->leave->days;
 		}
+		
+		
 		
 		// View only if not online apps
 		if ($process != 2)
@@ -862,6 +886,8 @@ class Ajax extends MX_Controller {
 		// We will use this variable to count the number of SPL, 
 		// Forced leave and others
 		$max_leave_date = $max_date;
+		
+		
 				
 		if ($process || $process == 2)
 		{
@@ -878,7 +904,7 @@ class Ajax extends MX_Controller {
 						'month5'			=> $this->leave->month5,
 						'year5'				=> $this->leave->year5,
 						'multiple5'			=> $this->leave->multiple5,
-						'special_priv_id'	=> $this->leave->special_priv_id,
+						'special_priv_id'	=> Input::get('special_priv_id'),
 						'days'				=> $this->leave->count_leave,
 						'mone'				=> $this->leave->mone
 						);
@@ -901,6 +927,9 @@ class Ajax extends MX_Controller {
 					exit;
 				}
 				
+				//echo $this->leave->special_priv_id;
+				//exit;
+				
 				$info = array(
 						'employee_id' 		=> $this->leave->employee_id,
 						'office_id'			=> $office_id,
@@ -911,13 +940,15 @@ class Ajax extends MX_Controller {
 						'month5'			=> $this->leave->month5,
 						'year5'				=> $this->leave->year5,
 						'multiple5'			=> $this->leave->multiple5,
-						'special_priv_id'	=> $this->leave->special_priv_id,
+						'special_priv_id'	=> Input::get('special_priv_id'),
 						'days'				=> $this->leave->count_leave,
 						'mone'				=> $this->leave->mone,
 						'date_encode'		=> date('Y-m-d'),
 						'allow_sat_sun'		=> $this->leave->allow_sat_sun,
 						'username'			=> Session::get('username')
-						);		
+						);
+						
+						//var_dump($info);exit;
 						
 				$leave_apps_id = $this->Leave_apps->insert_leave_apps($info);
 				
@@ -2029,14 +2060,13 @@ class Ajax extends MX_Controller {
 				
 		if (Input::get('id') != '')
 		{
-						
-			$cto_apps = $this->Compensatory_timeoff->get_cto_apps_info(Input::get('id'));
+			$cto_apps = CompensatoryTimeoff::find(Input::get('id'));
 						
 			$params = array(
-						'employee_id' 		=> $cto_apps['employee_id'],
-						'multiple'			=> $cto_apps['dates'],
-						'month'				=> $cto_apps['month'],
-						'year'				=> $cto_apps['year'],
+						'employee_id' 		=> $cto_apps->employee_id,
+						'multiple'			=> $cto_apps->dates,
+						'month'				=> $cto_apps->month,
+						'year'				=> $cto_apps->year,
 						'process'			=> 2,
 						'allow_sat_sun'		=> 1						
 						);
@@ -2047,7 +2077,7 @@ class Ajax extends MX_Controller {
 			$this->cto->initialize($params);
 			
 			// Set the leave to approved
-			$this->Compensatory_timeoff->set_approved(Input::get('id'));
+			CompensatoryTimeoff::setApproved(Input::get('id'));
 			
 			
 			
@@ -2144,7 +2174,7 @@ class Ajax extends MX_Controller {
 							
 			if ( Session::get('user_type') == 5 )
 			{	
-				$c = new Compensatory_timeoff();
+				$c = new CompensatoryTimeoff();
 			
 				$c->employee_id = $this->cto->employee_id;
 				$c->office_id 	= $office_id;
@@ -2172,7 +2202,7 @@ class Ajax extends MX_Controller {
 				exit;
 			}
 			
-			$c = new Compensatory_timeoff();
+			$c = new CompensatoryTimeoff();
 			
 			$c->employee_id = $this->cto->employee_id;
 			$c->office_id 	= $office_id;
@@ -2182,7 +2212,7 @@ class Ajax extends MX_Controller {
 			$c->dates 		= $this->cto->multiple;
 			$c->type 		= 'spent';
 			$c->status 		= 'active';
-			//$c->save();
+			$c->save();
 			//echo Input::get('id').'25333334455';
 			//exit;
 			
@@ -2238,7 +2268,7 @@ class Ajax extends MX_Controller {
 								$field2 					=> 'offset',
 								"log_date" 					=> $day,
 								"employee_id" 				=> $this->cto->employee_id,
-								"office_id" 				=> $cto_apps['office_id'],
+								"office_id" 				=> $office_id,
 								'compensatory_timeoff_id' 	=> Input::get('id')
 								);
 				
@@ -2276,7 +2306,7 @@ class Ajax extends MX_Controller {
 								"am_logout" 				=> 'offset',
 								"pm_login" 					=> 'offset',
 								"pm_logout" 				=> 'offset',
-								"office_id" 				=> $cto_apps['office_id'],
+								"office_id" 				=> $office_id,
 								);
 						
 					$this->Dtr->insert_dtr($info);
@@ -2601,12 +2631,8 @@ class Ajax extends MX_Controller {
 	function show_cto($employee_id = '')
 	{
 		$data 			= array();
-		
-		$c = new Compensatory_timeoff();
-		
-		$c->where('status', 'active');
-		
-		$data['rows']	= $c->get_by_employee_id( $employee_id );
+				
+		$data['rows']	= CompensatoryTimeoff::where('employee_id', '=', $employee_id)->get();
 		
 		$this->Employee->fields = array('fname', 'mname', 'lname');
 		
@@ -2666,24 +2692,19 @@ class Ajax extends MX_Controller {
 		
 		foreach ( $data['rows'] as $row)
 		{
-			$c = new Compensatory_timeoff();
-			
-			$c->where('employee_id', $row['employee_id']);
-			$c->where('type', 'balance');
-			$c->get();
-			
-			if ( $c->exists())// Do nothing
+			$c = CompensatoryTimeoff::where('employee_id', '=', $row['employee_id'])
+						->where('type', '=', 'balance')->first();
+						
+			if ($c == null)
 			{
-				//echo 'cool';
-			}
-			else// Insert blank
-			{
+				$c = new CompensatoryTimeoff;
+				
 				$c->employee_id 	= $row['employee_id'];
 				$c->status 			= 'active';
 				$c->type 			= 'balance';
 				$c->save();
-				//echo 'not cool';
-			}
+			}			
+			
 		}
 		
 		return View::make('ajax/show_cto_balance', $data);

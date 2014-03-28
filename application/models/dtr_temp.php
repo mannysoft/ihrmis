@@ -72,8 +72,23 @@ class Dtr_temp extends CI_Model {
 	{
 		$data = array();
 		
+		// Lets check for double entries and delete it
+		$doubles = $this->double_entries();
+		
+		
+		foreach($doubles as $double)
+		{
+			$this->db->where('employee_id', $double['employee_id']);
+			$this->db->where('log_date', $double['log_date']);
+			$this->db->where('logs', $double['logs']);
+			$this->db->limit(abs(1-$double['double_entry']));
+			$this->db->delete('dtr_temp');
+		}
+		
 		//$this->db->where('date_extract', "'".date('Y-m-d')."'");
 		$this->db->where('employee_id !=', '');
+		$this->db->order_by('employee_id, id');
+		//$this->db->where('employee_id', '1414');
 		
 		$q = $this->db->get('dtr_temp');
 		
@@ -104,6 +119,33 @@ class Dtr_temp extends CI_Model {
 	{
 		$this->db->insert('dtr_temp', $data);
 		return $this->db->insert_id();
+	}
+	
+	// --------------------------------------------------------------------
+	function double_entries()
+	{	
+		$data = array();
+				
+		$this->db->select('employee_id, log_date, logs, COUNT( * ) as double_entry');
+		
+		$this->db->group_by('employee_id, log_date, logs'); 
+		$this->db->having("double_entry > 1");
+		
+		$q = $this->db->get('dtr_temp');
+		
+		echo $this->db->last_query();
+				
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result_array() as $row)
+			{
+				$data[]  = $row;
+			}
+		}
+		
+		return $data;
+		
+		$q->free_result();
 	}
 }
 

@@ -94,13 +94,13 @@
 <script>
 $('.select_all').click(function(){
 	
-	if ($(this).attr("checked") == true)
+	if ($(this).prop("checked") == true)
 	{
 		$('.'+$(this).attr("module")).attr("checked", "checked");
 	}
 	else
 	{
-		$('.'+$(this).attr("module")).attr("checked", "");
+		$('.'+$(this).attr("module")).attr("checked");
 	}
 	
 	

@@ -30,7 +30,6 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Setting' => $baseDir . '/application/models/eloquent/Setting.php',
     'Test' => $baseDir . '/application/models/eloquent/Test.php',
-    'User' => $baseDir . '/application/models/eloquent/User.php',
     'UserEloquent' => $baseDir . '/application/models/eloquent/UserEloquent.php',
     'Validator' => $baseDir . '/application/models/eloquent/connection.php',
     'View' => $baseDir . '/application/models/eloquent/View.php',

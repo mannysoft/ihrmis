@@ -101,6 +101,7 @@ class Login extends MX_Controller
 					
 													
 					$session_data = array(
+									'user_id'	=> $u->id, 
 									'username'	=> $u->username, 
 									'lname' 	=> $u->lname,
 									'office_id' => $u->office_id,

@@ -153,7 +153,17 @@ $(".approved_leave").click(function(){
 	$('#disapprove_link').hide();
 	$('#cancel_link').show();
 		
-	$('#messages').load("<?php echo base_url().('ajax/file_leave/'); ?>" + url);
+	//$('#messages').load("<?php echo base_url().('ajax/file_leave/'); ?>" + url);
+	
+	$.post( "<?php echo base_url().('ajax/file_leave/'); ?>",
+			{ 
+			employee_id: "approved_leave", 
+			leave_apps_id: $(this).attr("leave_apps_id")
+		})
+		
+		.done(function( data ) {
+			$('#messages').html(data);
+  		});
 	
 	$('#messages').show('fast');
 	

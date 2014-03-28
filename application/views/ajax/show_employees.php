@@ -40,13 +40,13 @@ foreach($rows as $row)
 <script>
 $('#checkall').click(function(){
 
-	if ($('#checkall').attr("checked") == "checked")
+	if ($('#checkall').prop("checked") == true)
 	{
-		$('.employee_checked').attr("checked", true);
+		$('.employee_checked').prop("checked", true);
 	}
 	else
 	{
-		$('.employee_checked').attr("checked", false);
+		$('.employee_checked').prop("checked", false);
 	}
 	
 });

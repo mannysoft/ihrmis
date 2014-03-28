@@ -141,13 +141,13 @@ if ($pop_up == 1){
     <?php $type_employment = $this->options->type_employment();?>
   <tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
     onmouseout ="this.bgColor = '<?php echo $bg;?>';">
-    <td><?php echo $row->id;?></td>
+    <td><?php echo $row->employee_id;?></td>
     <td><?php echo $row->lname.', '.$row->fname;?></td>
     <td><?php echo $row->sex;?></td>
     <td><?php echo $row->position;?></td>
     <td><?php echo $office->office_name;?></td>
     <td><?php echo $type_employment[$row->permanent];?></td>
-    <td><?php echo $row->salary_grade.'-'.$row->step;?></td>
+    <td><?php echo $row->salary_grade.'/'.$row->step;?></td>
     <td><?php echo $row->eligibility;?></td>
     <td><?php echo $row->course;?></td>
     <td><?php echo ($row->birth_date == '0000-00-00') ? '' :$row->birth_date ;?></td>

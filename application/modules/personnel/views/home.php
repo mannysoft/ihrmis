@@ -451,18 +451,18 @@ function jsUpload(upload_field)
 
 $('#radio').click(function(){
 
-	$('#ip').prop("disabled", true);
-	$('#com_no').prop("disabled", false);
-	$('#machine_no').prop("disabled", false);
+	$('#ip').attr("disabled", true);
+	$('#com_no').attr("disabled", false);
+	$('#machine_no').attr("disabled", false);
 	$('#com_no').val(1);
 	$('#machine_no').val(1);
 });
 
 $('#radiobutton').click(function(){
 
-	$('#ip').prop("disabled", false);
-	$('#com_no').prop("disabled", true);
-	$('#machine_no').prop("disabled", true);
+	$('#ip').attr("disabled", false);
+	$('#com_no').attr("disabled", true);
+	$('#machine_no').attr("disabled", true);
 	$('#com_no').val(0);
 	$('#machine_no').val(0);
 });

@@ -147,10 +147,11 @@ $('#myform').submit(function(){
 
 $('#multi_employee').click(function(){
 
+	//alert($('#multi_employee').attr("checked"))
 	$('#div15').html("Please wait...");
 	$('#permanent_only').attr("disabled", true);
 	 
-	if ($('#multi_employee').attr("checked") == "checked")
+	if ($('#multi_employee').prop("checked") == true)
 	{
 		$('#employee_id').val("check from list")
 		$('#employee_id').attr("disabled", true);

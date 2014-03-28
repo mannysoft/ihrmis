@@ -670,6 +670,8 @@ class Employees extends MX_Controller  {
 		//Shift List
 		$data['shifts_options'] 	= $this->options->shift();
 		
+		$data['shift2'] 	= $employee_info['shift_id'];
+		
 		if ($employee_info['pics'] == '' || !file_exists('pics/'.$employee_info['pics']))
 		{
 			$data['image_file_name'] = 'not_available.jpg';

@@ -326,7 +326,18 @@ function show_leave_details()
     
 	//alert(url) 
 	
-	$('#outputtime').load("<?php echo base_url().('ajax/file_leave/'); ?>" + url);
+	//$('#outputtime').load("<?php echo base_url().('ajax/file_leave/'); ?>" + url);
+	
+	$.post( "<?php echo base_url().('ajax/file_leave/'); ?>",
+			{ 
+			employee_id: employee_id, 
+			process: 0,
+		})
+		
+	.done(function( data ) {
+		$('#outputtime').html(data);
+		//alert(data)
+	});
 	
 	//ajax/file_leave/10-1/0/07/2011/1/07/2011/0/1/0/1
 	
@@ -336,14 +347,11 @@ function show_leave_details()
 	$('#leave_card').load("<?php echo base_url().('ajax/show_leave_card/'); ?>" + $('#employee_id').val());
 	<?php endif; ?>
 	
-	return
+	//return
 	//===============================================================================
 	
 	
-	if($('#multiple_check').attr("checked") == false)
-	{
-		return false;
-	}  
+	 
 }
 
 

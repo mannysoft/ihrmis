@@ -1,9 +1,3 @@
-<?php if (validation_errors()): ?>
-<div class="clean-red"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
-<?php elseif (Session::flashData('msg')): ?>
-<div class="clean-green"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
-<?php else: ?>
-<?php endif; ?>
 <form id="myform" method="post" action="" target="" enctype="multipart/form-data">
 <table width="100%" border="0" cellpadding="2">
     <tr>
@@ -58,7 +52,7 @@
       <td align="right" class="type-one">&nbsp;</td>
       <td align="left" class="type-one"><strong>
         <input type="submit" name="button2" id="button" value="Save" class="button"/>
-        </strong><a href="<?=base_url().'users'?>">Cancel</a></td>
+        </strong><a href="<?php echo Request::root().'/users'?>">Cancel</a></td>
       <td align="left">&nbsp;</td>
     </tr>
 </table>

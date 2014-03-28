@@ -357,6 +357,8 @@ $config['active_apps'] = "leave_only";
 $config['active_apps'] = "ats_only";
 $config['active_apps'] = "";
 
+$config['twitter_bootstrap_css'] = false;
+
 $config['mouseover_linecolor'] = "#FFFF99";
 
 //$config['active_apps'] = "hris";

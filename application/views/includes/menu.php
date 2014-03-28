@@ -13,7 +13,7 @@ $attributes = array('class' => 'list_modules');
 $user_management = array(
 						'users' 		=> $base.'users">'.$image.'Manage Users</a>',
 						'groups' 		=> $base.'groups">'.$image.'Groups</a>',
-						'permissions' 	=> $base.'permissions">'.$image.'Permissions</a>',
+						//'permissions' 	=> $base.'permissions">'.$image.'Permissions</a>',
             			);
 
 $employee_management = array(

@@ -89,6 +89,12 @@ $accept_late_ob2 = ($settings['accept_late_ob'] == 'no') ? $checked : '';
 $show_employee_number_dtr1 = ($settings['show_employee_number_dtr'] == 'yes') ? $checked : '';
 $show_employee_number_dtr2 = ($settings['show_employee_number_dtr'] == 'no') ? $checked : '';
 
+$last_name_first_dtr1 = ($settings['last_name_first_dtr'] == 'yes') ? $checked : '';
+$last_name_first_dtr2 = ($settings['last_name_first_dtr'] == 'no') ? $checked : '';
+
+
+$service_record_paper_size1 = ($settings['service_record_paper_size'] == 'Letter') ? $checked : '';
+$service_record_paper_size2 = ($settings['service_record_paper_size'] == 'Legal') ? $checked : '';
 
 
 
@@ -417,7 +423,7 @@ $(document).ready(function(){
 $('.click').click(function(){
 
 	var tab = $(this).attr("tab");
-	
+		
 	$('.settings_tab').hide('slow');
 	
 	$('#active_tab').val(tab);
@@ -569,6 +575,14 @@ $('.click').click(function(){
     <td>&nbsp;</td>
   </tr>
   <tr>
+    <td align="right">Service Record Paper Size</td>
+    <td><input name="service_record_paper_size" type="radio" value="Letter" id="radiobutton" <?php echo $service_record_paper_size1;?>/>
+      <label>Letter</label>
+      <input name="service_record_paper_size" type="radio" value="Legal" <?php echo $service_record_paper_size2;?> />
+      <label>Legal</label></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
     <td>&nbsp;</td>
     <td><input type="submit" name="button2" id="button2" value="Save" /></td>
     <td>&nbsp;</td>
@@ -701,6 +715,14 @@ $('.click').click(function(){
     <td><input name="show_employee_number_dtr" type="radio" value="yes" id="radiobutton" <?php echo $show_employee_number_dtr1;?>/>
       <label>Yes</label>
       <input name="show_employee_number_dtr" type="radio" id="radio" value="no" <?php echo $show_employee_number_dtr2;?> />
+      <label>No</label></td>
+    <td>&nbsp;</td>
+  </tr>
+ <tr>
+    <td align="right">Last Name first in DTR:</td>
+    <td><input name="last_name_first_dtr" type="radio" value="yes" id="radiobutton" <?php echo $last_name_first_dtr1;?>/>
+      <label>Yes</label>
+      <input name="last_name_first_dtr" type="radio" id="radio" value="no" <?php echo $last_name_first_dtr2;?> />
       <label>No</label></td>
     <td>&nbsp;</td>
   </tr>

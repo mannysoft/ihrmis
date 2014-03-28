@@ -161,7 +161,7 @@ class Leave {
 			if ( $CI->session->userdata('user_type') == 5)
   			{
 				// If the office is not equal to office id of user logged
-				if ($CI->session->userdata('office_id') != $name['office_id'])
+				if ($CI->session->userdata('office_id') != $name['office_id'] and $CI->session->userdata('office_id') != $name['detailed_office_id'])
 				{
 					$lgu_code = $CI->Settings->get_selected_field('lgu_code'); 
 					
@@ -226,7 +226,7 @@ class Leave {
 	
 	// ------------------------------------------------------------------------
 	
-	function multiple_months()
+	function multiple_months($days = 0)
 	{
 		$CI =& get_instance();
 		
@@ -254,6 +254,11 @@ class Leave {
 		{
 			$this->dates = array_unique($this->date_process);
 		}
+		
+		if($days != 0)
+		{
+			$this->count_leave = $days;
+		}
 	}
 	
 	// ------------------------------------------------------------------------
@@ -265,7 +270,6 @@ class Leave {
 		foreach ($this->dates as $date)
 		{
 			// ------------------------------------------------------------------------
-			
 			// If the date is like 25-26
 			
 			if (substr($date, 1, 1) == '-' or substr($date, 2, 1) == '-') 
@@ -299,8 +303,6 @@ class Leave {
 				
 				if (strlen($date) == 1 or strlen($date) == 2)
 				{
-					
-					
 					if (is_numeric($date))
 					{
 						$this->is_sat_sun = $CI->Helps->is_sat_sun($this->month, $date, $this->year);

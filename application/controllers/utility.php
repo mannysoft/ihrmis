@@ -51,6 +51,10 @@ class Utility extends MX_Controller {
 	
 	function manual_upload_data($file_type = 'xml')
 	{
+		
+		// Take note that to fixed the error file not allowed you need to
+		// enable extension=php_fileinfo.dll
+		
 		$config['upload_path'] 		= './logs/uploaded/';
 		$config['allowed_types'] 	= 'zip|jpg|png|txt|dat';
 		//$config['allowed_types'] = 'application/zip';
@@ -160,10 +164,13 @@ class Utility extends MX_Controller {
 								"log_type" 		=> $inout,
 								"date_extract" 	=> date('Y-m-d')
 								);
+								
+					// Dont include the old logs
+					if ($date > '2013-12-31')
+					{
+						$id = $this->Dtr_temp->insert_dtr_temp($info);
+					}	
 				
-					$id = $this->Dtr_temp->insert_dtr_temp($info);
-					
-					
 					
 					//echo( $time).'<br>';
 					//echo $line.'<br>';

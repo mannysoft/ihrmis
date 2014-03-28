@@ -15,7 +15,7 @@
     <td align="right">&nbsp;</td>
     <td align="right">&nbsp;</td>
     <td><?php $lgu_code = Setting::getField( 'lgu_code' );?></td>
-    <td colspan="2" rowspan="6" align="left"><div id="outputname">
+    <td colspan="2" rowspan="7" align="left"><div id="outputname">
       <input name="no_record2" type="hidden" id="no_record2" />
     </div></td>
     <td align="left"></td>
@@ -157,9 +157,15 @@
       </strong></td>
     <td align="left">&nbsp;</td>
   </tr>
-  
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td align="right">Post Date:</td>
+    <td><input type="text" name="date" id="date" /></td>
+    <td align="left">&nbsp;</td>
+  </tr>
   <?php $allow_encode_digit_undertime = Setting::getField( 'allow_encode_digit_undertime' );?>
   <?php if($allow_encode_digit_undertime == 'yes'): ?>
+  
   <tr>
     <td align="right">&nbsp;</td>
     <td align="right">Or VL Deduction Figure:</td>

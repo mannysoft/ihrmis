@@ -70,7 +70,7 @@
         $('#divTopLeft').html("Loading... Please wait...");
         
         //Add to session data
-        if ($(this).attr("checked") == "checked")
+        if ($(this).attr("checked") == true)
         {
             $('#divTopLeft').load("<?php echo base_url().('ajax/set_selected/'); ?>" + $(this).val() + "/1");
         }

@@ -36,7 +36,7 @@
     <th width="18%">History</th>
   </tr>
   <?php
-  
+  use Carbon\Carbon;
   $e = new Employee_m();
   
   if (!empty($rows))
@@ -47,8 +47,46 @@
 		$id 		= $row['id'];
 		$employee_id 		= $row['employee_id'];
 		
-		// total leave 
-		$total_leave = $this->Leave_card->get_total_leave_credits($employee_id);
+		$lgu_code = Setting::getField('lgu_code'); 
+		$dt = new Carbon();
+		// Quezon Province
+		if ( $lgu_code == 'quezon_province' )
+		{
+			$last_earn = $this->Leave_card->get_last_earn($rows['employee_id']);
+			
+			if ( $last_earn != '')
+			{
+				$record_limit_date = $last_earn;
+				
+				$last_earn = date('F d, Y', strtotime($last_earn));
+				
+				
+			}
+			else
+			{
+				
+				$dt = new Carbon();
+				$dt->subMonth();
+								
+				$date = new Carbon('last day of '. $this->Helps->get_month_name($dt->month).' '.$dt->year);
+				
+				$last_earn = $this->Helps->get_month_name($date->month).' '.$date->day.', '.$date->year;
+				
+				$record_limit_date = $date->year.'-'.$date->month.'-'.$date->day;
+				
+				$total_leave = $this->Leave_card->get_total_leave_credits($employee_id, $record_limit_date);
+			}
+			//$this->leave_certification_marinduque($vl, $sl, $employee_id);
+			
+			//return;
+		}
+		else
+		{
+			// total leave 
+			$total_leave = $this->Leave_card->get_total_leave_credits($employee_id);
+		}
+		
+		
 		
 		$office_name = $this->Office->get_office_name($row['office_id']);
 		

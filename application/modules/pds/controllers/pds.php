@@ -1121,8 +1121,12 @@ class Pds extends MX_Controller  {
 		
 		// Service Record====================================================
 		$service = new Service_record();
-		$service->order_by('date_from', 'DESC');
+		//$service->order_by('date_from');
 		
+		//http://stackoverflow.com/questions/7482594/weird-backticks-behaviour-in-active-record-in-code-igniter-2-0-3
+		$service->select('id, employee_id, date_from, date_to, designation, status, salary, office_entity, branch, remarks, lwop, separation_date, separation_cause, STR_TO_DATE(date_from,"%m/%d/%Y") as nice_date', false);
+		$service->order_by("nice_date");
+
 		$data['services'] = $service->get_by_employee_id($employee_id);
 		
 		if ($employee_id == '')
@@ -1521,10 +1525,12 @@ class Pds extends MX_Controller  {
 		
 		$lgu_code = Setting::getField('lgu_code'); 
 		
+		$logo = 'dtr/template/logo/logo.jpg';
+		
 		// Laguna Province
 		if ( $lgu_code == 'laguna_province' )
 		{
-			$logo = 'dtr/template/laguna_province/logo.jpg';			
+			$logo = 'dtr/template/laguna_province/logo.jpg';
 		}
 		
 		$employee = new Employee_m();
@@ -1534,6 +1540,8 @@ class Pds extends MX_Controller  {
 		$personal = new Personal();
 		
 		$personal->get_by_employee_id( $employee_id );
+		
+		// http://www.devrecipes.com/2009/05/08/how-to-create-a-table-with-a-thin-1-pixel-border/
 		
 		
 		// Signatories
@@ -1571,7 +1579,7 @@ $service = '<table width="100%" border="0" cellpadding="5" cellspacing="5">
 </table>
 
 
-<table width="100%" border="1">
+<table width="100%" class="mystyle" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2" align="center" valign="middle">SERVICE<br />
     (Inclusive Date)</td>
@@ -1597,6 +1605,13 @@ $service = '<table width="100%" border="0" cellpadding="5" cellspacing="5">
 
 ';
 
+$prepared = '';
+
+if ($sr_prepared != '')
+{
+	$prepared = 'PREPARED BY';
+}
+
 
 $html = '
 <!-- defines the headers/footers - this must occur before the headers/footers are set -->
@@ -1617,28 +1632,44 @@ $html = '
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td align="center">PREPARED BY</td>
+    <td align="center">'.$prepared.'</td>
     <td align="center">CERTIFIED CORRECT</td>
   </tr>
   <tr>
     <td align="center">'.date('F d, Y').'</td>
     <td align="center">&nbsp;</td>
     <td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
   </tr>
   <tr>
     <td align="center">Date</td>
     <td align="center">&nbsp;</td>
     <td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
   </tr>
   <tr>
     <td align="center">&nbsp;</td>
     <td align="center">'.$sr_prepared.'</td>
     <td align="center">'.$sr_certified .'</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
     <td align="center">'.$sr_prepared_position.'</td>
     <td align="center">'.$sr_certified_position.'</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
   </tr>
 </table></htmlpagefooter>
 
@@ -1685,6 +1716,23 @@ mpdf-->
 	left: 100px;
 	top: 55px;
 }
+
+table.mystyle
+{
+    border-width: 0 0 1px 1px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-style: solid;
+}
+
+.mystyle td, .mystyle th
+{
+    margin: 0;
+    padding: 4px;
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+}
+
 </style>
 <div id="apDiv1"><img src="'.base_url().$logo.'" alt="" name="logo" width="110" height="110"/></div>
 
@@ -1693,7 +1741,10 @@ mpdf-->
 		
 		$s = new Service_record();
 		
-		$s->order_by('date_from');
+		//$s->order_by('date_from');
+		
+		$s->select('id, employee_id, date_from, date_to, designation, status, salary, office_entity, branch, remarks, lwop, separation_date, separation_cause, STR_TO_DATE(date_from,"%m/%d/%Y") as nice_date', false);
+		$s->order_by("nice_date");
 		
 		$rows = $s->get_by_employee_id($employee_id);
 	
@@ -1715,10 +1766,10 @@ mpdf-->
 		$html .='<tr>
 				<td align="center">'.$row->date_from.'</td>
 				<td align="center">'.$row->date_to.'</td>
-				<td align="left">'.$row->designation.'</td>
-				<td align="left">'.$row->status.'</td>
+				<td align="center">'.$row->designation.'</td>
+				<td align="center">'.$row->status.'</td>
 				<td align="right">'.$row->salary.'</td>
-				<td align="left">'.$row->office_entity.'</td>
+				<td align="center">'.$row->office_entity.'</td>
 				<td align="left">'.$row->lwop.'</td>
 				<td align="left">'.$row->separation_date.'</td>
 				<td align="left" style="font-size:7">'.$row->separation_cause.'</td>
@@ -1768,6 +1819,11 @@ mpdf-->
 
 //';
 		$params = array('format' => 'Letter');
+		$params = array('format' => 'Legal');
+		
+		$params = array('format' => Setting::getField( 'service_record_paper_size' ));
+		
+		
 		
 		$this->load->library('mpdf', $params);
 		

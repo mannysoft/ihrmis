@@ -1,4 +1,4 @@
-<form action="<?php echo base_url()?>pds/employee_profile" method="post">
+<form action="<?php echo base_url()?>pds/employee_profile" method="post" class="myform">
 <table width="100%" border="0">
   <tr>
     <td align="right"><strong>Office:</strong></td>
@@ -10,7 +10,7 @@
     <td width="29%"><select name="employee_id" id="employee_id">
       <option value="0">--All--</option>
       </select>
-      <input type="submit" name="go" id="go" value="-- G O --" /></td>
+      <!--<input type="submit" name="go" id="go" value="-- G O --" />--></td>
     <td width="48%"></td>
   </tr>
 </table>
@@ -79,6 +79,19 @@ $('#go').click(function(){
 		alert("Please select employee");
 		return false
 	}
+
+});
+
+$('#employee_id').change(function(){
+
+	
+	if ($('#employee_id').val() == 0)
+	{
+		alert("Please select employee");
+		return false
+	}
+	
+	$('.myform').submit();
 
 });
 

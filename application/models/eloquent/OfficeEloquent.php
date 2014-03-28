@@ -4,14 +4,13 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 require_once('connection.php');
  
-class User extends BaseModel {
+class OfficeEloquent extends BaseModel {
 
-	public $timestamps = false;
+	//public $timestamps = false;
 	
-	protected $table = "users"; 
+	protected $table = "office"; 
 	
 	// --------------------------------------------------------------------
-	
 	
 	// Scopes method
 	public function scopeLine($query, $line)

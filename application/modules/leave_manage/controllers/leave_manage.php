@@ -96,6 +96,7 @@ class Leave_Manage extends MX_Controller {
 										'lname',
 										'fname',
 										'mname',
+										'extension',
 										'office_id',
 										'salary_grade',
 										'step'
@@ -427,6 +428,12 @@ class Leave_Manage extends MX_Controller {
 		//Use for office listbox
 		$data['options'] 			= $this->options->office_options();
 		$data['selected'] 			= Session::get('office_id');
+		
+		if ( Session::get('user_type') == 5)
+  		{
+			$office_name 		= $this->Office->get_office_name(Session::get('office_id'));
+			$data['options'] 	= array(Session::get('office_id') => $office_name);
+		}
 		
 		// If office id is selected
 		if (Input::get('office_id') != 0)
@@ -877,6 +884,9 @@ class Leave_Manage extends MX_Controller {
 						
 				$vl = $this->Leave_conversion_table->compute_hour_minute($total);
 				
+				//echo $total.'<br>';
+				//echo $vl;
+				
 				// If the user encode the v_abs in textbox
 				// use the value of textbox
 				if (Input::get('v_abs'))
@@ -892,6 +902,11 @@ class Leave_Manage extends MX_Controller {
 				 if ($enable_add_day_encode_tardy == 'yes')
 				 {
 					  $last_day = Input::get('year').'-'.Input::get('month').'-'.Input::get('day');
+				 }
+				 
+				 if (Input::get('date') != '')
+				 {
+					 $last_day = Input::get('date');
 				 }
 				
 								

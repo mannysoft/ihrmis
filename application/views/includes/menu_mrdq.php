@@ -86,10 +86,28 @@ if ( Session::get('user_type') == 3)
 						
 } 			
 
-				
+
+if ( Session::get('user_type') == 7)
+{
+	$employee_management = array(
+				//$base.'employees/add_employee">'.$image.'Add Employee</a>',
+				$base.'employees">'.$image.'Manage Employees</a>',
+				$base.'pds/personal_info">'.$image.'Personal Data Sheet</a>',
+				$base.'pds/service_record">'.$image.'Service Records</a>',
+				$base.'personnel/assets">'.$image.'Assets and Liabilities</a>',
+				//$base.'personnel/personnel_schedule">'.$image.'Personnel Schedule</a>',
+				$base.'personnel/plantilla">'.$image.'Plantilla of Personnel</a>',
+				$base.'appointment/issued">'.$image.'Appointment Issued</a>',
+				$base.'employees/step_increment">'.$image.'Employee Step Increment</a>',
+				$base.'pds/reports">'.$image.'Reports</a>'
+				);
+
+} 			
+			
 
 ?>
 <ul id="main_menu" class="main_menu_over"><!-- Main menu -->
+
 
 <li class="menu_close"><a class="first_line" href="<?php echo base_url();?>home/home_page"><img src="<?php echo base_url();?>/images/classroom_classroom.png" alt=".:" width="22" height="22" class="little_icon"><br>
   Home</a></li>
@@ -110,6 +128,16 @@ if ( Session::get('user_type') == 3)
   Leave <br /> Management</a>
   <?php echo ul($leave_management, $attributes);?>
   </li>
+  
+  
+  <?php if(Session::get('user_type') == 7):?>
+  		
+	  <li class="menu_close"><a class="first_line" href="#"><img src="<?php echo base_url();?>/images/directory_listgroup.png" width="22" height="22" class="little_icon"><br>
+          Employees<br /> </a>
+          <?php echo ul($employee_management, $attributes);?>
+          </li>
+  
+  <?php endif;?>
 
   </ul>
   <br />

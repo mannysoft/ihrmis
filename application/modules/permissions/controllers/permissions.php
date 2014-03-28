@@ -34,6 +34,8 @@
  */
 class Permissions extends MX_Controller {
 
+	protected $group;
+	
 	// --------------------------------------------------------------------
 	
 	function __construct()
@@ -41,6 +43,8 @@ class Permissions extends MX_Controller {
         parent::__construct();
 		
 		$this->load->model('options');
+		
+		$this->group = new GroupEloquent;
 		
 		//$this->output->enable_profiler(TRUE);
     }  
@@ -50,20 +54,12 @@ class Permissions extends MX_Controller {
 	function group($id = '', $back_from = '')
 	{
 		$data['page_name'] 	= '<b>Permissions</b>';
-		$data['legend'] 	= '<b>Add</b>';
+		$data['legend'] 	= '<b>Edit Permissions for Group</b>';
 		$data['focus_field'] 	= '';
 		
-		if ( $id != '' )
-		{
-			$data['legend'] 	= '<b>Edit Permissions for Group</b>';
-		}
-		
 		$data['msg'] = '';
-			
-		
-		$g = new Group_m();
-		
-		$data['row'] = $g->get_by_id( $id );
+					
+		$data['row'] = $g = $this->group->find($id);
 				
 		$data['legend'] .= ' "'.$g->name.'"';
 		
@@ -76,10 +72,6 @@ class Permissions extends MX_Controller {
 		if ($back_from == 'groups')
 		{
 			$data['back_from'] = 'groups';
-		}
-		if ($back_from == 'permissions')
-		{
-			$data['back_from'] = 'permissions';
 		}
 		
 		//print_r(array_combine($hours = range(0, 23), $hours));
@@ -111,10 +103,7 @@ class Permissions extends MX_Controller {
 				}
 				
 				$data['msg'] = 'Permissions has been saved!';
-			}
-					
-			//return Redirect::to('groups', 'refresh');
-			
+			}			
 		}
 	
 		$data['main_content'] = 'group';
@@ -123,42 +112,6 @@ class Permissions extends MX_Controller {
 	}
 	
 	// --------------------------------------------------------------------
-	
-	function index()
-	{
-		$data['page_name'] = '<b>Permissions</b>';
-		
-		$data['msg'] = '';
-		
-		$this->load->library('pagination');
-		
-		$s = new Group_m();
-		
-		$config['base_url'] = base_url().'groups/index';
-		$config['total_rows'] = $s->count();
-		$config['per_page'] = '15';
-		$config['full_tag_open'] = '<p>';
-	    $config['full_tag_close'] = '</p>';
-		
-		$this->pagination->initialize($config);
-		
-		// How many related records we want to limit ourselves to
-		$limit = $config['per_page'];
-		
-		// Set the offset for our paging
-		$offset = $this->uri->segment(3);
-		
-		$s->order_by('name');
-		
-		$data['rows'] = $s->get($limit, $offset);
-		
-		$data['page'] = $this->uri->segment(3);
-				
-		$data['main_content'] = 'index';
-		
-		return View::make('includes/template', $data);
-	
-	}
 }	
 
 /* End of file office_manage.php */

@@ -18,22 +18,7 @@ class CompensatoryTimeoff extends BaseModel {
 						'date_file',
 						'type',
 						'status',
-						/*
-						'received_csc',
-						'kss',
-						'pdf',
-						'pds',
-						'education',
-						'eligibility',
-						'nbi',
-						'oath',
-						'med_cert',
-						'saln',
-						'pes',
-						'remarks',
-						'year',
-						//'med_cert',
-						*/
+						
 						);
 						
 	protected static $rules = array(
@@ -182,10 +167,54 @@ class CompensatoryTimeoff extends BaseModel {
 		$q->free_result();
 	}
 	
-	public function set_approved($id = '')
+	public static function getEarnedSpent($employee_id, $earn = 'earn')
 	{
-		$data = array('status' => 'active');
-		$this->db->where('id', $id);
-		$this->db->update('compensatory_timeoffs', $data);
+		
+		
+		$days = CompensatoryTimeoff::where('employee_id', '=', $employee_id)
+				->where('type', '=', $earn)
+				->where('status', '=', 'active')
+				->sum('days');
+				//->first();
+				
+				//var_dump($days);
+				
+		if ($days == null)
+		{
+			return 0;
+		}
+		
+		return $days;
+		
+		
+		
+	}
+	
+	public static function getBalance($employee_id)
+	{
+		$days = CompensatoryTimeoff::where('employee_id', '=', $employee_id)
+				->where('type', '=', 'balance')->first();	
+				
+		if ($days == null)
+		{
+			return 0;
+		}
+		
+		return $days->days;			
+	}
+	
+	public static function getId($employee_id)
+	{
+		return CompensatoryTimeoff::where('employee_id', '=', $employee_id)
+				->where('type', '=', 'balance')->first();
+				
+				
+	}
+	
+	public static function setApproved($id = '')
+	{
+		$c = CompensatoryTimeoff::find($id);
+		$c->status = 'active';
+		$c->save();
 	}
 }

@@ -1,9 +1,3 @@
-<?php if (validation_errors()): ?>
-<div class="clean-red"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
-<?php elseif (Session::flashData('msg')): ?>
-<div class="clean-green"><?php echo validation_errors(); ?><?php echo Session::flashData('msg');?></div>
-<?php else: ?>
-<?php endif; ?>
 <form id="myform" method="post" action="" target="" enctype="multipart/form-data">
 <table width="100%" border="0">
   <tr>
@@ -12,7 +6,7 @@
       <input name="search_button" type="submit" id="search_button" value="Search" class="button"/>
       <div id="added"></div></td>
     <td width="1%">&nbsp;</td>
-    <td width="11%"><a href="<?php echo base_url();?>users/save">Add user</a> </td>
+    <td width="11%"><a href="<?php echo base_url();?>users/add">Add user</a> </td>
   </tr>
 </table>
 <table width="100%" border="0" class="type-one">
@@ -25,22 +19,16 @@
         <th width="16%" scope="col">Group</th>
         <th width="16%" scope="col">Action</th>
   </tr>
-  	<?php $o = new Office_m();?>
 	  <?php foreach( $users as $row ): ?>
-      	<?php 
-		$g = new Group_m();
-		$g->get_by_id($row->group_id);
-		$o->get_by_office_id($row->office_id);
-		?>
 		 <?php $bg 	= $this->Helps->set_line_colors();?>
 		<tr bgcolor="<?php echo $bg;?>" onmouseover="this.bgColor = '<?php echo $this->config->item('mouseover_linecolor')?>';" 
     onmouseout ="this.bgColor = '<?php echo $bg;?>';" style="border-bottom: 1px solid #999999;">
         <td bgcolor=""><input name="user[]" type="checkbox" value="<?php echo $row->id;?>" ONCLICK="highlightRow(this,'#ABC7E9');"/></td>
 		<td bgcolor=""><?php echo $row->username;?></td>
         <td bgcolor=""><strong><?php echo $row->fname.' '.$row->mname.' '.$row->lname;?></strong></td>
-        <td bgcolor=""><?php echo $o->office_name;?></td>
+        <td bgcolor=""><?php echo $row->office->office_name;?></td>
         <td bgcolor=""><?php echo $row->stat;?></td>
-        <td bgcolor=""><?php echo $g->name;?></td>
+        <td bgcolor=""><?php echo $row->group->name;?></td>
         <td bgcolor=""><?php //if(Session::get('user_type')==1){?>
           <a href="<?php echo base_url();?>users/save/<?php echo $row->id;?>">Edit</a> | 
 		  <a href="#" onclick="delete_user('<?php echo $row->username;?>','Delete User <?php echo $row->lname.', '.$row->fname;?>?', '<?php echo base_url();?>users/delete/<?php echo $row->id;?>')">Delete</a>

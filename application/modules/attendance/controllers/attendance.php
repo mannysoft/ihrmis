@@ -386,6 +386,7 @@ class Attendance extends MX_Controller {
 											'fname',
 											'mname', 
 											'lname', 
+											'extension',
 											'shift_type', 
 											'friday_exempted', 
 											'office_id',
@@ -417,6 +418,23 @@ class Attendance extends MX_Controller {
 				}
 				
 				$whole_name = $name['fname'].' '.$name['mname'].' '.$name['lname'];
+				
+				if ($name['extension'] != '')
+				{
+					$whole_name = $name['fname'].' '.$name['mname'].' '.$name['lname'].', '.$name['extension'];
+				}
+				
+				// If the LGU wants to see the last name in DTR first
+				if(Setting::getField( 'last_name_first_dtr' ) == 'yes')
+				{
+					$whole_name = $name['lname'].', '.$name['fname'].' '.$name['mname'];
+				
+					if ($name['extension'] != '')
+					{
+						//$whole_name = $name['fname'].' '.$name['mname'].' '.$name['lname'].', '.$name['extension'];
+						$whole_name = $name['lname'].', '.$name['fname'].' '.$name['extension'].' '.$name['mname'];
+					}
+				}
 			
 				$this->shift_type = $name['shift_type'];
 				
@@ -1388,6 +1406,13 @@ class Attendance extends MX_Controller {
 					{
 						$office['office_head'] 	= 'LUCILO BAYRON';
 						$office['position'] 	= 'Vice Mayor';
+					}
+					
+					// For Quirino Province
+					if ($this->employee_id == '122265')
+					{
+						$office['office_head'] 	= 'PELIGIO H. OBLIGACION, JR.';
+						$office['position'] 	= 'Supervising Administrative Officer';
 					}
 					
 					

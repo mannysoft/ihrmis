@@ -145,9 +145,18 @@ class Stand_alone extends CI_Model {
 			}
 			
 			$office_id = $this->Employee->get_single_field('office_id', $employee_id);
+			$shift_id = $this->Employee->get_single_field('shift_id', $employee_id);
 			
 			// Check if log exists
 			$log_exist	= $this->Dtr->is_log_date_exists($employee_id, $log_date);
+			
+			
+			if ($shift_id != '1')
+			{
+				
+				
+			}
+			
 			
 			//====================================================================================
 			// If AM
@@ -257,6 +266,41 @@ class Stand_alone extends CI_Model {
 				// IF OUT
 				if ($log_type == 1)
 				{
+					
+					// For hospital use and other shifting schedules ==========================
+					if ($shift_id != '1')
+					{
+						// If exists
+						if ($log_exist == TRUE)
+						{
+							// Update
+							$data = array('pm_logout' => $logs);
+							$this->Dtr->edit_dtr($data, $employee_id, $log_date);
+						}
+						else
+						{
+							// INSERT
+							$data = array(
+									'employee_id' 	=> $employee_id,
+									'pm_logout' 	=> $logs,
+									'office_id' 	=> $office_id,
+									'log_date' 		=> $log_date
+									);
+						
+							$this->Dtr->insert_dtr($data);
+						}
+						
+						
+						
+						// Lets iterate again the foreach and skip the code below
+						continue;
+					}
+					// =========================================================================
+					
+					
+					
+					
+					
 					if ($am_logout_temp != '')
 					{
 						$am_logout = $am_logout_temp;
@@ -265,10 +309,7 @@ class Stand_alone extends CI_Model {
 						// If exists
 						if ($log_exist == TRUE)
 						{
-							// Update
-							//$this->update_dtr($employee_id, $log_date, $am_logout, 'am_logout');
-							//$this->update_dtr($employee_id, $log_date, $pm_logout, 'pm_logout');
-							
+							// Update							
 							$data = array('am_logout' => $am_logout);
 						
 							$this->Dtr->edit_dtr($data, $employee_id, $log_date);
@@ -281,9 +322,6 @@ class Stand_alone extends CI_Model {
 						{
 							
 							// INSERT
-							//$this->insert_dtr($employee_id, $office_id, $log_date, $am_logout, 'am_logout');
-							//$this->insert_dtr($employee_id, $office_id, $log_date, $pm_logout, 'pm_logout');
-							
 							$data = array(
 									'employee_id' 	=> $employee_id,
 									'am_logout' 	=> $am_logout,
@@ -316,9 +354,7 @@ class Stand_alone extends CI_Model {
 						// If exists
 						if ($log_exist == TRUE)
 						{
-							//Update
-							//$this->update_dtr($employee_id, $log_date, $logs, 'am_logout');
-							
+							//Update							
 							$data = array('am_logout' => $logs);
 						
 							$this->Dtr->edit_dtr($data, $employee_id, $log_date);
@@ -326,7 +362,6 @@ class Stand_alone extends CI_Model {
 						else
 						{
 							// INSERT
-							//$this->insert_dtr($employee_id, $office_id, $log_date, $logs, 'am_logout');
 							$data = array(
 									'employee_id' 	=> $employee_id,
 									'am_logout' 	=> $logs,
@@ -338,6 +373,11 @@ class Stand_alone extends CI_Model {
 						}
 						
 					}
+					
+					
+					
+					
+					
 					
 				}// --------------------------------------------------------------------
 				

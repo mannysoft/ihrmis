@@ -261,7 +261,7 @@ class Leave_card extends CI_Model {
 		}
 
 		//$this->db->order_by('date, period'); old order by
-		$this->db->order_by('date, period DESC'); // change 5.3.2012
+		$this->db->order_by('date, period DESC, id'); // change 5.3.2012
 		$q = $this->db->get('leave_card');
 		
 		//echo $this->db->last_query();

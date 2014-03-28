@@ -1,15 +1,9 @@
-<?php if (validation_errors()): ?>
-<div class="clean-red"><?php echo validation_errors(); ?></div>
-<?php elseif (Session::flashData('msg')): ?>
-<div class="clean-green"><?php echo Session::flashData('msg');?></div>
-<?php else: ?>
-<?php endif; ?>
 <form action="" method="post">
 <table width="100%" border="0">
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td><?php echo anchor('groups/save', 'Add Group', 'class="btn-add-right"');?></td>
+    <td><?php echo anchor('groups/add', 'Add Group', 'class="btn-add-right"');?></td>
   </tr>
   <tr>
     <td width="9%">&nbsp;</td>
@@ -32,28 +26,13 @@
 	    <td align="right">
         	<a href="<?php echo base_url();?>groups/save/<?=$row->id;?>">Edit</a> |
             <a href="<?php echo base_url();?>permissions/group/<?=$row->id;?>/groups">Permissions</a>
-             <!--|
-       	  	<a href="<?php echo base_url();?>students/delete/<?=$row->id;?>" class="delete_office">Delete</a> |
-            <a href="<?php echo base_url();?>students/bill/<?=$row->id;?>" class="create_bill">Create Bill</a>-->
-       	  
         </td>
         </tr>
 		<?php endforeach;?>
         <tr>
-          <td><?php echo $this->pagination->create_links(); ?></td>
+          <td></td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
         </tr>
 </table>
 </form>
-<script>
-$('.delete_office').click(function(){
-
-	var answer = confirm("Are you sure?")
-	
-	if (!answer)
-	{
-		return false;
-	}
-});
-</script>
