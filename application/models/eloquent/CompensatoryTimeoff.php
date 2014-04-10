@@ -21,17 +21,9 @@ class CompensatoryTimeoff extends BaseModel {
 						
 						);
 						
-	protected static $rules = array(
-						//'user_id' 	=> 'required',
-						//'name' 		=> 'required',
-	);
+	protected static $rules = array();
 	
-	protected static $messages = array(
-			//'lname.required' => 'The Last Name field is required.',
-			//'fname.required' 	=> 'required|max:50',
-			//'email' 	=> 'required|email|unique:users,email,:id:',
-			//'password' 	=> 'required',
-	);					
+	protected static $messages = array();
 	
 	// --------------------------------------------------------------------
 	
@@ -106,71 +98,15 @@ class CompensatoryTimeoff extends BaseModel {
 	 * @param int $tracking_no
 	 * @return array
 	 */
-	public function search_cto_apps($tracking_no = '')
+	public function searchCtoApps($tracking_no = '')
 	{
-		$data = array();
-		
-		$this->db->select($this->fields);
-		
-		if ($tracking_no != '')
-		{
-			 $this->db->where('id', $tracking_no);
-		}	 
-		
-		if ( $this->office_id != '')
-		{
-			$this->db->where('office_id', $this->office_id);
-		}
-		
-		$this->db->where('type', 'spent');
-		
-		//$this->db->order_by('date_encode');
-		
-		$q = $this->db->get('compensatory_timeoffs');
-		
-		if ($q->num_rows() > 0)
-		{
-			foreach ($q->result_array() as $row)
-			{
-				$data[] = $row;	
-			}
-		}
-		
-		return $data;
-		
-		$q->free_result();
-		
+		return CompensatoryTimeoff::find($tracking_no);
 	}
 	
 	// --------------------------------------------------------------------
 	
-	
-	public function get_cto_apps_info($tracking_no)
-	{
-		$this->db->select($this->fields);
-		
-		$data = array();
-		
-		$this->db->where('id', $tracking_no);
-		$q = $this->db->get('compensatory_timeoffs');
-		
-		if ($q->num_rows() > 0)
-		{
-			foreach ($q->result_array() as $row)
-			{
-				$data = $row;	
-			}
-		}
-		
-		return $data;
-		
-		$q->free_result();
-	}
-	
 	public static function getEarnedSpent($employee_id, $earn = 'earn')
 	{
-		
-		
 		$days = CompensatoryTimeoff::where('employee_id', '=', $employee_id)
 				->where('type', '=', $earn)
 				->where('status', '=', 'active')

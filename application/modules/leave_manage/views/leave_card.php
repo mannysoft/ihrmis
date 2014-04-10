@@ -33,17 +33,13 @@ $lgu_code = Setting::getField( 'lgu_code' );
         <strong>BATARAZA, PALAWAN</strong><br />
         <br />
       <?php else:?>
-      
         <strong>Republika ng Pilipinas</strong><br />
         KOMISYON NG SERBISYO SIBIL<br />
         (Civil Service Commission)<br />
         <strong>REGIONAL OFFICE NO. 1V</strong><br />
         Quezon City <br />
         <br />
-      
       <?php endif;?>
-    
-        
         </td> 
     </tr>
     <tr>
@@ -110,7 +106,7 @@ WOP</td>
 		<?php $this->leave->initialize($card); ?>
 		<?php $this->leave->process_leave_card();?>
         <?php if($leave_card_print_period_from == ''):?>
-            <tr>
+            <tr onClick="openBrWindow('<?php echo base_url();?>leave_manage/reports/change_date/<?php echo $card['id']?>','','scrollbars=yes,width=400,height=250')">
               <td align="center"><?php echo $this->leave->period;?></td>
               <td align="center"><?php echo $this->leave->particulars;?></td>
               <td align="center"><?php echo ($this->leave->v_earned != '') ? number_format($this->leave->v_earned, 3) : $this->leave->v_earned;?></td>
@@ -157,11 +153,17 @@ WOP</td>
     </tr>
     <tr>
       <td colspan="11" align="center"><input name="button" type="button" onclick="javascript:window.close();" value="close" class="button"/>
+      <script>
+      function openBrWindow(theURL,winName,features) { //v2.0
+		 window.open(theURL,winName,features);
+		}
+      </script>
       <SCRIPT LANGUAGE="JavaScript"> 
 // This script was supplied free by Hypergurl // http://www.hypergurl.com <!-- 
 if (window.print) { document.write('<form>Click Here 
 To ' + '<input type=button name=print value="Print" ' + 'onClick="javascript:window.print()"> 
-This Page!</form>'); } // End hide --> </script>
+This Page!</form>'); } // End hide --> 
+</script>
       <input name="button2" type="button" onClick="javascript:window.print()" value="Print" class="button"/></td>
     </tr>
   </table>

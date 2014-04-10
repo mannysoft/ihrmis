@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Integrated Human Resource Management Information System
+ * Integrated Human Resource Management Information System 3.0dev
  *
  * An Open Source Application Software use by Government agencies for  
  * management of employees Attendance, Leave Administration, Payroll, 
@@ -10,7 +10,7 @@
  *
  * @package		iHRMIS
  * @author		Manny Isles
- * @copyright	Copyright (c) 2008 - 2014, Charliesoft
+ * @copyright	Copyright (c) 2008 - 2014, Isles Technologies
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
  * @github	    http://github.com/mannysoft/ihrmis
@@ -189,50 +189,9 @@ class Home extends MX_Controller
 		
 		//set the delete logs from machine to no
 		$this->Stand_alone->change_delete_status('no');
-		
-		//=========================================================================
-		
-		//Earn the leave credits if not yet earned
-		$month = date('m');
-		$year = date('Y');
-		
-		$isLastDayOfMonth   =  $this->Helps->is_last_day($month, $year, date('d'));
-		
-		$isLeaveMonthEarned = $this->Leave_earn_sched->is_leave_month_earned($month, $year);
-		
-		//Last day of the month
-		$lastDayOfMonth 	= $this->Helps->get_last_day($month, $year);
-		
-		//Determine if the last day of the month is Saturday or sunday or Holiday
-		$isSaturdaySunday 	= $this->Helps->is_sat_sun($month, $lastDayOfMonth, $year);
-		
-		//Determimine if last day of the month is holiday
-		$isHoliday 		  	= $this->Holiday->is_holiday($year.'-'.$month.'-'.$lastDayOfMonth);
-		
-		//If the last day is Sat or sun or Holiday
-		if ($isSaturdaySunday == 'Saturday' || $isSaturdaySunday == 'Sunday' || $isHoliday == TRUE)
-		{
-			$data['msg'] = 'The last day of the month is Saturday/Sunday/Holiday.<br>';
-			$data['msg'] .='The earnings of leave credits is always scheduled every last day <br>';
-			$data['msg'] .= 'of every month.<br>';
-			$data['msg'] .= 'We are going to schedule the earning of leave credits on the last friday of this month.<br>';
-		}
-		
-		
-		//if click the Perform leave earnings Now!
-		if (isset($_GET['perform_leave']) && $_GET['perform_leave'] == 1)
-		{
-			echo '<div id="mydiv"><img src="images/progress.gif"> Please wait... Leave earning on progress...</div>';
-			$Leave->process_leave_earnings($_GET['month'], $_GET['year'], $_GET['leave_earn']);
-			echo '<script>alert("Done leave earnings!")</script>';
-			echo '<script>window.location = "index.php?q=8"</script>';
-		}
-
-				
+			
 		$data['main_content'] = 'home';
-		
-		//return View::make('includes/template', $data);
-		
+				
 		return View::make('includes/template', $data);
 	}
 }

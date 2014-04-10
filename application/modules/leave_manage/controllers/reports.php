@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 use Carbon\Carbon;
 /**
- * Integrated Human Resource Management Information System
+ * Integrated Human Resource Management Information System 3.0dev
  *
  * An Open Source Application Software use by Government agencies for  
  * management of employees Attendance, Leave Administration, Payroll, 
@@ -10,7 +10,7 @@ use Carbon\Carbon;
  *
  * @package		iHRMIS
  * @author		Manny Isles
- * @copyright	Copyright (c) 2008 - 2014, Charliesoft
+ * @copyright	Copyright (c) 2008 - 2014, Isles Technologies
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
  * @github	    http://github.com/mannysoft/ihrmis
@@ -1684,6 +1684,28 @@ class Reports extends MX_Controller
 		$this->concat_pdf->Output("dtr/template/pds/archives/".$employee_id.".pdf", 'I');
 		
 		
+		
+	}
+	
+	function change_date($id = '')
+	{
+		$data = array();
+		$data['msg'] = '';
+		
+		$l = LeaveCardEloquent::find($id);
+
+		// View the form
+		if (!Input::get('op'))
+		{			
+			$data['date'] = $l->date;
+			
+			return View::make('change_date', $data);
+		}
+		
+		$l->date = Input::get('date');
+		$l->save();
+		
+		echo '<script>window.close();</script>';
 		
 	}
 	

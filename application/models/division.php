@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * Integrated Human Resource Management Information System
+ * Integrated Human Resource Management Information System 3.0dev
  *
  * An Open Source Application Software use by Government agencies for  
  * management of employees Attendance, Leave Administration, Payroll, 
@@ -9,7 +9,7 @@
  *
  * @package		iHRMIS
  * @author		Manny Isles
- * @copyright	Copyright (c) 2008 - 2014, Charliesoft
+ * @copyright	Copyright (c) 2008 - 2014, Isles Technologies
  * @license		http://charliesoft.net/ihrmis/license
  * @link		http://charliesoft.net
  * @github	    http://github.com/mannysoft/ihrmis
@@ -20,9 +20,9 @@
 // ------------------------------------------------------------------------
 
 /**
- * iHRMIS Clients Class
+ * iHRMIS Division Model Class
  *
- * This class use for managing workstations of iHRMIS
+ * This class use for managing data processing from table division
  *
  * @package		iHRMIS
  * @subpackage	Models

@@ -1,6 +1,6 @@
 <?php
 /**
- * Integrated Human Resource Management Information System
+ * Integrated Human Resource Management Information System 3.0dev
  *
  * An Application Software use by Government agencies for management
  * of employees Attendance, Leave Administration, Payroll, Personnel
@@ -8,7 +8,7 @@
  *
  * @package		iHRMIS
  * @author		Manny Isles
- * @copyright	Copyright (c) 2008 - 2012, Charliesoft
+ * @copyright	Copyright (c) 2008 - 2012, Isles Technologies
  * @license		http://charliesoft.net/hrmis/user_guide/license.html
  * @link		http://charliesoft.net
  * @github	    http://github.com/mannysoft/ihrmis

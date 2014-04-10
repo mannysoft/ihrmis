@@ -35,4 +35,9 @@ class AssetBusinessInterest extends BaseModel {
     {
 		return self::belongsTo('Employee');
     }
+	
+	public static function employee()
+    {
+		return self::belongsTo('Employee');
+    }
 }
