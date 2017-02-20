@@ -1,3 +1,7 @@
+> NOTE that this package is discontinued and will not be updated. Please see
+> https://github.com/Setasign/FPDF instead.
+
+
 FPDF
 ====
 [![Latest Stable Version](https://poser.pugx.org/itbz/fpdf/v/stable.png)](https://packagist.org/packages/itbz/fpdf)
@@ -13,7 +17,7 @@ This is version 1.7 with some minor changes:
 
 * directory structure follow the PSR-0 standard with src/ as root
 
-* on error a RuntimeException is thrown instead on lib dramatically dying 
+* on error a RuntimeException is thrown instead on lib dramatically dying
 
 * constructor is renamed `__construct` instead of `FPDF`
 
@@ -26,7 +30,7 @@ The package exists in the packagist repository as `itbz/fpdf`.
 FPDF_EXTENDED
 -------------
 This package also contains some extensions that break backwards compatibility.
-To access the enhanced functinality use `FPDF_EXTENDED` instead of `FPDF`.
+To access the enhanced functionality use `FPDF_EXTENDED` instead of `FPDF`.
 
 * FPDF_EXTENDED expects all input to be UTF-8 encoded. FPDF natively expects all
   input to be ISO-8859-1 encoded and recommends the use of utf8_decode() when
@@ -52,4 +56,3 @@ To access the enhanced functinality use `FPDF_EXTENDED` instead of `FPDF`.
 
 * AS of version 1.7.2 FPDF_EXTENDED defines WriteXY() for writing to a specified
   position.
-
