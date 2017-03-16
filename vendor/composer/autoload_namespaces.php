@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'fpdf' => array($vendorDir . '/itbz/fpdf/src'),
+    'Xethron\\MigrationsGenerator' => array($vendorDir . '/xethron/migrations-generator/src'),
+    'Way\\Generators' => array($vendorDir . '/xethron/laravel-4-generators/src'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),
     'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),

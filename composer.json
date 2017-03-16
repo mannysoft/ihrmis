@@ -5,21 +5,40 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.0.0",
+        "barryvdh/laravel-debugbar": "dev-master",
+        "barryvdh/laravel-snappy": "dev-master",
+        "doctrine/dbal": "v2.5.4",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
+        "intervention/image": "^2.3",
+        "itbz/fpdi": "^1.6",
+        "laracasts/flash": "^2.0",
+        "laravel/dusk": "~1.0",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/passport": "^2.0",
+        "laravel/tinker": "~1.0",
+        "laravelcollective/html": "5.4.*",
+        "laravelcollective/remote": "5.4.0",
+        "league/fractal": "^0.15.0",
+        "maatwebsite/excel": "~2.1.0",
+        "nwidart/laravel-modules": "^1.17",
+        "spatie/laravel-fractal": "^3.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7"
+        "phpunit/phpunit": "~5.7",
+        "xethron/migrations-generator": "^2.0"
     },
     "autoload": {
         "classmap": [
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Modules\\": "Modules/",
+            "Ihrmis\\": "ihrmis/"
         }
     },
     "autoload-dev": {
