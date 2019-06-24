@@ -68,6 +68,14 @@ $('#office_id').change(function(){
 			$('#employee_id').append("<option value='" + key + "'>" + val + "</option>");
 
 		});
+
+		var select = $('#employee_id');
+		  select.html(select.find('option').sort(function(x, y) {
+		    // to change to descending order switch "<" for ">"
+		    return $(x).text() > $(y).text() ? 1 : -1;
+		  }));
+
+		  $('#employee_id').get(0).selectedIndex = 0;
 	});
 
 });
@@ -122,6 +130,15 @@ $(document).ready(function(){
 			$('#employee_id').append("<option value='" + key + "' "+ selected +">" + val + "</option>");
 
 		});
+
+		var select = $('#employee_id');
+		  select.html(select.find('option').sort(function(x, y) {
+		    // to change to descending order switch "<" for ">"
+		    return $(x).text() > $(y).text() ? 1 : -1;
+		  }));
+
+		  // select default item after sorting (first item)
+  			$('#employee_id').val(<?php echo $employee->id;?>);
 	});
 	//alert("<?php echo $employee->id;?>")
 	
