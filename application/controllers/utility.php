@@ -147,7 +147,11 @@ class Utility extends MX_Controller {
 					
 					
 					$time = date('H:i', strtotime($time));
-				
+
+					// Dont process some old data
+					if ($date < '2019-06-30') {
+						continue;
+					}
 					//0 = in , 1 = out
 					
 					// get the office id of an employee
@@ -166,7 +170,7 @@ class Utility extends MX_Controller {
 								);
 								
 					// Dont include the old logs
-					if ($date > '2013-12-31')
+					if ($date > '2019-06-30')
 					{
 						$id = $this->Dtr_temp->insert_dtr_temp($info);
 					}	
