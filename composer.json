@@ -2,7 +2,7 @@
     "minimum-stability": "dev",
 
     "require": {
-        "laravel/framework": "4.1.*",
+        "laravel/framework": "6.20.*",
 	   "mannysoft/decoration": "*",
 	   "mannysoft/date": "*",
 	   "itbz/fpdi": "dev-master"
